@@ -1,0 +1,107 @@
+.navBar {
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
+  width: 160px;
+  color: #b5b5b7;
+  display: flex;
+  flex-direction: column;
+  padding: 0 8px;
+}
+
+.navBar__container {
+  height: 86px;
+  width: 144px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+  margin-bottom: 29px;
+}
+
+.navBar__profile {
+  display: flex;
+  height: 24px;
+}
+
+.navBar__avatar {
+  margin-top: 12px;
+  margin-left: 8px;
+  margin-right: 4px;
+  width: 24px;
+  height: 24px;
+}
+
+.navBar__name {
+  margin: 0;
+  color: #000;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 12px;
+  /* text-align: center; */
+}
+
+.navBar__profile-acseleration {
+  display: flex;
+  justify-content: space-between;
+}
+
+.navBar__arrow {
+  width: 16px;
+}
+
+.navBar__link {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  margin-bottom: 19px;
+  margin-top: 0;
+  cursor: pointer;
+}
+
+.navBar__link_type-line {
+  padding-bottom: 23px;
+  border-bottom: #fff solid 1px;
+}
+
+.navBar__link_type-bottom {
+  margin-bottom: 0;
+}
+
+.navBar__link_type-center {
+  text-align: center;
+}
+
+.navBar__button {
+  height: 36px;
+  width: 144px;
+  background-color: #fff;
+  border-radius: 6px;
+  margin-top: 227px;
+  margin-bottom: 35px;
+  color: #1d6bf3;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  padding: 8px 23px;
+  border: 1px solid #1d6bf3;
+  cursor: pointer;
+}
+
+.navBar__container-exit {
+  margin-bottom: 30px;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #1A1B22;
+  cursor: pointer;
+  border: none;
+  color: #B5B5B7;
+}
+
+.navBar__exit {
+  margin: 0 5px 0 0;
+
+}
