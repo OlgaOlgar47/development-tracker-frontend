@@ -10,14 +10,14 @@
 
 - ⚛️[React](https://ru.reactjs.org/)
 - 🔧[Redux Toolkit](https://redux-toolkit.js.org/)
-- [Material-UI](https://material-ui.com/)
-- [React Hook Form](https://react-hook-form.com/) (для работы с формами)
-- [Yup](https://github.com/jquense/yup) (для валидации)
+- ⚙️[Material-UI](https://material-ui.com/)
+- 🪝[React Hook Form](https://react-hook-form.com/) (для работы с формами)
+- ✔️[Yup](https://github.com/jquense/yup) (для валидации)
 
 ## Инструкции по установке и запуску
 
-1. Клонируйте репозиторий: `git clone https://github.com/your-username/your-repository.git`
-2. Перейдите в директорию проекта: `cd your-repository`
+1. Клонируйте репозиторий: `git clone git@github.com:OlgaOlgar47/development-tracker-frontend.git`
+2. Перейдите в директорию проекта: `cd development-tracker-frontend`
 3. Установите зависимости: `npm install`
 4. Запустите проект: `npm start`
 

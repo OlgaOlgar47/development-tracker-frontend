@@ -1,0 +1,14 @@
+.search-form__title {
+  padding: 0;
+  margin: 0 0 16px;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 32px;
+}
+
+.search-form__container {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
