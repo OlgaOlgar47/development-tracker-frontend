@@ -21,13 +21,11 @@
 
 .navBar__profile {
   display: flex;
-  height: 24px;
+  align-items: center;
 }
 
 .navBar__avatar {
-  margin-top: 12px;
-  margin-left: 8px;
-  margin-right: 4px;
+  padding: 12px 4px 10px 8px;
   width: 24px;
   height: 24px;
 }
@@ -38,7 +36,11 @@
   font-size: 11px;
   font-weight: 400;
   line-height: 12px;
-  /* text-align: center; */
+  cursor: pointer;
+}
+
+.navBar__name_type-margin {
+  margin-left: 8px;
 }
 
 .navBar__profile-acseleration {
@@ -46,8 +48,23 @@
   justify-content: space-between;
 }
 
+.navBar__acsseleration {
+  margin: 4px 0 0;
+  color: #5a9bff;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 12px;
+  cursor: pointer;
+}
+
+.navBar__acsseleration_type-margin {
+  margin-left: 8px;
+}
+
 .navBar__arrow {
   width: 16px;
+  margin-right: 12px;
+  cursor: pointer;
 }
 
 .navBar__link {
@@ -95,13 +112,12 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  background-color: #1A1B22;
+  background-color: #1a1b22;
   cursor: pointer;
   border: none;
-  color: #B5B5B7;
+  color: #b5b5b7;
 }
 
 .navBar__exit {
   margin: 0 5px 0 0;
-
 }

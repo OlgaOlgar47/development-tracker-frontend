@@ -2,7 +2,7 @@ import React from "react";
 import "./NavBar.css";
 import Avatar from "../../../images/avatar.svg";
 import Exit from "../../../images/exit.svg";
-// import Arrow from "../../../images/arrow.svg";
+import Arrow from "../../../images/arrow.svg";
 
 export default function NavBar() {
   return (
@@ -10,15 +10,15 @@ export default function NavBar() {
       <div className="navBar__container">
         <div className="navBar__profile">
           <img src={Avatar} className="navBar__avatar" alt="Фото профиля" />
-          {/* <h3 className="navBar__name">Имя</h3> */}
+          <h3 className="navBar__name">Имя</h3>
         </div>
-        {/* <div className="navBar__profile-acseleration">
-          <div>
-            <h3 className="navBar__name">Текущий этап</h3>
-            <h3 className="navBar__name">Акселерация</h3>
+        <div className="navBar__profile-acseleration">
+          <div className="navBar__profile-acseleration-container">
+            <h3 className="navBar__name navBar__name_type-margin">Текущий этап</h3>
+            <h3 className="navBar__acsseleration navBar__acsseleration_type-margin">Акселерация</h3>
           </div>
           <img src={Arrow} className="navBar__arrow" alt="стрелка вправо" />
-        </div> */}
+        </div>
       </div>
       <h2 className="navBar__link">Вакансии</h2>
       <h2 className="navBar__link navBar__link_type-line">Мастерская</h2>
