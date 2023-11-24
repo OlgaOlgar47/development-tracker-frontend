@@ -1,0 +1,17 @@
+.tracker {
+  font-family: "YS Display";
+  margin: 0 auto;
+  padding: 42px 32px;
+  box-sizing: border-box;
+  width: 100%;
+  background-color: #fff;
+}
+
+.tracker__title {
+  margin: 0 0 26px;
+  padding: 0;
+  font-size: 34px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 40px;
+}
