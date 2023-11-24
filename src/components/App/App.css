@@ -7,4 +7,10 @@
   box-sizing: border-box;
   font-family: 'Inter', 'Arial', sans-serif;
   font-style: normal;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
 }

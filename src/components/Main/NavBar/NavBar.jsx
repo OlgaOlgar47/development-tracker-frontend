@@ -1,8 +1,8 @@
 import React from "react";
 import "./NavBar.css";
-import Avatar from "../../../image/avatar.svg";
-import Exit from "../../../image/exit.svg";
-// import Arrow from "../../../image/arrow.svg";
+import Avatar from "../../../images/avatar.svg";
+import Exit from "../../../images/exit.svg";
+// import Arrow from "../../../images/arrow.svg";
 
 export default function NavBar() {
   return (
