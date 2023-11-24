@@ -3,7 +3,7 @@ import "./SearchForm.css";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
-const SearchForm = () => {
+export default function SearchForm() {
   const skills = [
     "HTML",
     "CSS",
@@ -74,20 +74,11 @@ const SearchForm = () => {
         </Button>
       </div>
       {searchText && (
-        <div sx={{ marginTop: "10px" }}>
+        <div className="search-form__results">
           {searchResults.map((result, index) => (
             <div
               key={index}
-              sx={{
-                padding: "8px",
-                border: "1px solid #ccc",
-                borderRadius: "4px",
-                marginBottom: "4px",
-                cursor: "pointer",
-                "&:hover": {
-                  backgroundColor: "#f5f5f5",
-                },
-              }}
+              className="search-form__result"
             >
               {result}
             </div>
@@ -97,5 +88,3 @@ const SearchForm = () => {
     </form>
   );
 };
-
-export default SearchForm;

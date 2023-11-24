@@ -1,0 +1,37 @@
+.skills-container {
+  margin: 0 0 40px;
+}
+
+.skills-container__title {
+  font-family: YS Display;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 32px;
+}
+
+.skills-container__list {
+  padding: 0;
+  width: 697px;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.skills-container__item {
+  text-decoration: none;
+  padding: 8px 20px;
+  border: 1px solid #dde0e4;
+  border-radius: 4px;
+  background: #f9fafb;
+}
+
+.skills-container__item_rated {
+  border-color: #87cc9e;
+  background: linear-gradient(
+    90deg,
+    #c2e5ce 41.15%,
+    rgba(194, 229, 206, 0) 41.16%
+  );
+}

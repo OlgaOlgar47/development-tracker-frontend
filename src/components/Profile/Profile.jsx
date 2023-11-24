@@ -49,65 +49,65 @@ export default function Profile() {
         </div>
       </div>
       <h3 className="profile__skills-title">Освоенные навыки</h3>
-      <div class="profile__skills-list">
-        <div class="profile__skill">
-          <p class="profile__skill-name">Figma</p>
+      <div className="profile__skills-list">
+        <div className="profile__skill">
+          <p className="profile__skill-name">Figma</p>
           <img className="profile__skill-checkmark" src={checkmark} alt="галочка"></img>
         </div>
-        <div class="profile__skill">
-          <p class="profile__skill-name">UX-копирайтинг</p>
+        <div className="profile__skill">
+          <p className="profile__skill-name">UX-копирайтинг</p>
           <img className="profile__skill-checkmark" src={checkmark} alt="галочка"></img>
         </div>
-        <div class="profile__skill">
-          <p class="profile__skill-name">Анимация</p>
+        <div className="profile__skill">
+          <p className="profile__skill-name">Анимация</p>
           <img className="profile__skill-checkmark" src={checkmark} alt="галочка"></img>
         </div>
-        <div class="profile__skill">
-          <p class="profile__skill-name">Исследования</p>
+        <div className="profile__skill">
+          <p className="profile__skill-name">Исследования</p>
           <img className="profile__skill-checkmark" src={checkmark} alt="галочка"></img>
         </div>
-        <div class="profile__skill">
-          <p class="profile__skill-name">Гайдлайны iOS</p>
+        <div className="profile__skill">
+          <p className="profile__skill-name">Гайдлайны iOS</p>
           <img className="profile__skill-checkmark" src={checkmark} alt="галочка"></img>
         </div>
-        <div class="profile__skill">
-          <p class="profile__skill-name">Вайрфреймы</p>
+        <div className="profile__skill">
+          <p className="profile__skill-name">Вайрфреймы</p>
           <img className="profile__skill-checkmark" src={checkmark} alt="галочка"></img>
         </div>
-        <div class="profile__skill">
-          <p class="profile__skill-name">Гипотезы</p>
+        <div className="profile__skill">
+          <p className="profile__skill-name">Гипотезы</p>
           <img className="profile__skill-checkmark" src={checkmark} alt="галочка"></img>
         </div>
-        <div class="profile__skill">
-          <p class="profile__skill-name">Анализ ЦА</p>
+        <div className="profile__skill">
+          <p className="profile__skill-name">Анализ ЦА</p>
           <img className="profile__skill-checkmark" src={checkmark} alt="галочка"></img>
         </div>
-        <div class="profile__skill">
-          <p class="profile__skill-name">Гайдлайны Android</p>
+        <div className="profile__skill">
+          <p className="profile__skill-name">Гайдлайны Android</p>
           <img className="profile__skill-checkmark" src={checkmark} alt="галочка"></img>
         </div>
-        <div class="profile__skill">
-          <p class="profile__skill-name">UX-Тестирования</p>
+        <div className="profile__skill">
+          <p className="profile__skill-name">UX-Тестирования</p>
           <img className="profile__skill-checkmark" src={checkmark} alt="галочка"></img>
         </div>
-        <div class="profile__skill">
-          <p class="profile__skill-name">UI-Kit</p>
+        <div className="profile__skill">
+          <p className="profile__skill-name">UI-Kit</p>
           <img className="profile__skill-checkmark" src={checkmark} alt="галочка"></img>
         </div>
-        <div class="profile__skill">
-          <p class="profile__skill-name">Конкурентный анализ</p>
+        <div className="profile__skill">
+          <p className="profile__skill-name">Конкурентный анализ</p>
           <img className="profile__skill-checkmark" src={checkmark} alt="галочка"></img>
         </div>
-        <div class="profile__skill">
-          <p class="profile__skill-name">Adobe Photoshop</p>
+        <div className="profile__skill">
+          <p className="profile__skill-name">Adobe Photoshop</p>
           <img className="profile__skill-checkmark" src={checkmark} alt="галочка"></img>
         </div>
-        <div class="profile__skill">
-          <p class="profile__skill-name">Аудит юзабилити</p>
+        <div className="profile__skill">
+          <p className="profile__skill-name">Аудит юзабилити</p>
           <img className="profile__skill-checkmark" src={checkmark} alt="галочка"></img>
         </div>
-        <div class="profile__skill">
-          <p class="profile__skill-name">JBTD и User Stories</p>
+        <div className="profile__skill">
+          <p className="profile__skill-name">JBTD и User Stories</p>
           <img className="profile__skill-checkmark" src={checkmark} alt="галочка"></img>
         </div>
       </div>
