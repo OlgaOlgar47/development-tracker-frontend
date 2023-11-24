@@ -23,6 +23,5 @@
 
 ## Скриншоты
 
-![Screenshot 1](url/to/your/screenshot1.png)
-![Screenshot 2](url/to/your/screenshot2.png)
+![Screenshot 1](./src/images/ScreenshotTracker.jpg)
 
