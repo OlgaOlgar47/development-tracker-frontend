@@ -1,18 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import './SkillsContainer.css';
 
-export default function SkillsContainer({title, isRated}) {
- const [skills, setSkills] = useState([
-    "HTML",
-    "CSS",
-    "JavaScript",
-    "Python",
-    "React",
-    "Node.js",
-    "SQL",
-    "Vue.js",
-    "Angular",
-  ])
+export default function SkillsContainer({title, isRated, skills}) {
+//  const [skills, setSkills] = useState([])
 
   return (
     <section className="skills-container">

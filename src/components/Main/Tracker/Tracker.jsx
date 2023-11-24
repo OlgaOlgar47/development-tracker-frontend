@@ -13,8 +13,32 @@ export default function Tracker() {
         для изучения.
       </p>
       <SearchForm />
-      <SkillsContainer title="Навыки, для изучения" isRated={false}/>
-      <SkillsContainer title="Навыки, которыми обладаешь" isRated={true}/>
+      <SkillsContainer
+        title="Навыки, для изучения"
+        isRated={false}
+        skills={[
+          "HTML",
+          "CSS",
+          "JavaScript",
+          "Python",
+          "React",
+          "Node.js",
+          "SQL",
+          "Vue.js",
+          "Angular",
+        ]}
+      />
+      <SkillsContainer title="Навыки, которыми обладаешь" isRated={true} skills={[
+          "Композиция и сетки",
+          "UX-копирайтинг",
+          "Анимация",
+          "Исследования",
+          "Гайдлайны iOS",
+          "Вайрфреймы",
+          "Гипотезы",
+          "Анализ ЦА",
+          "Adobe Photoshop",
+        ]}/>
     </section>
   );
 }
