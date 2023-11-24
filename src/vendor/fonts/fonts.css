@@ -12,11 +12,19 @@
   font-weight: 400;
 }
 
+
 @font-face {
   font-family: "YS Display";
   src: url(../fonts/YS/YS\ Display-Bold.ttf) format("truetype");
   font-style: normal;
   font-weight: 500;
+}
+
+@font-face {
+  font-family: "YS Text";
+  src: url(../fonts/YS/YS\ Text-Regular.ttf) format("truetype");
+  font-style: normal;
+  font-weight: 400;
 }
 
 /* Добавить отдельные @font-face правила для других стилей шрифта (bold, italic и т.д.) */
