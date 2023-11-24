@@ -1,6 +1,6 @@
 # Frontend для MVP трекера развития
 
-![Project Logo](url/to/your/project/logo.png)
+![Project Logo](./src/images/LogoDevTracker.svg)
 
 ## Описание проекта
 
