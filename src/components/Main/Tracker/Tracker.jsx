@@ -16,28 +16,28 @@ export default function Tracker() {
       <SkillsContainer
         title="Навыки, для изучения"
         isRated={false}
-        skills={[
-          "HTML",
-          "CSS",
-          "JavaScript",
-          "Python",
-          "React",
-          "Node.js",
-          "SQL",
-          "Vue.js",
-          "Angular",
+        skillsData={[
+          { name: "HTML"},
+          { name: "CSS"},
+          { name: "JavaScript"},
+          { name: "Python"},
+          { name: "React"},
+          { name: "Node.js"},
+          { name: "SQL"},
+          { name: "Vue.js"},
+          { name: "Angular"}
         ]}
       />
-      <SkillsContainer title="Навыки, которыми обладаешь" isRated={true} skills={[
-          "Композиция и сетки",
-          "UX-копирайтинг",
-          "Анимация",
-          "Исследования",
-          "Гайдлайны iOS",
-          "Вайрфреймы",
-          "Гипотезы",
-          "Анализ ЦА",
-          "Adobe Photoshop",
+      <SkillsContainer title="Навыки, которыми обладаешь" isRated={true} skillsData={[
+         { name: "Композиция и сетки", percentage: 60 },
+         { name: "UX-копирайтинг", percentage: 30 },
+         { name: "Анимация", percentage: 80 },
+         { name: "Исследования", percentage: 60 },
+         { name: "Гайдлайны iOS", percentage: 80 },
+         { name: "Вайрфреймы", percentage: 30 },
+         { name: "Анализ ЦА", percentage: 30 },
+         { name: "Гипотезы", percentage: 60 },
+         { name: "dobe Photoshop", percentage: 80 }
         ]}/>
     </section>
   );

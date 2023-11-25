@@ -27,6 +27,12 @@
   background: #f9fafb;
 }
 
+.skills-container__item:hover {
+  cursor: pointer;
+  color: #5a9bff;
+  border-color: #5a9bff;
+}
+
 .skills-container__item_rated {
   border-color: #87cc9e;
   background: linear-gradient(
@@ -34,4 +40,10 @@
     #c2e5ce 41.15%,
     rgba(194, 229, 206, 0) 41.16%
   );
+}
+
+.skills-container__item_rated:hover {
+  cursor: pointer;
+  color: black;
+  border-color: #87cc9e;
 }
