@@ -44,8 +44,8 @@ export default function SearchForm() {
           variant="outlined"
           value={searchText}
           onChange={handleInputChange}
+          size="small"
           sx={{
-            margin: "0 0 20px",
             width: "541px",
             height: "40px",
             fontFamily: "YS Text",
@@ -59,6 +59,7 @@ export default function SearchForm() {
           variant="contained"
           color="primary"
           onClick={handleAddButtonClick}
+          size="small"
           sx={{
             width: "148px",
             height: "40px",
