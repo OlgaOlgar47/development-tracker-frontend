@@ -39,7 +39,7 @@
   cursor: pointer;
 }
 
-.navBar__name_type-margin {
+.navBar__name_type_margin {
   margin-left: 8px;
 }
 
@@ -57,7 +57,7 @@
   cursor: pointer;
 }
 
-.navBar__acsseleration_type-margin {
+.navBar__acsseleration_type_margin {
   margin-left: 8px;
 }
 
@@ -65,6 +65,16 @@
   width: 16px;
   margin-right: 12px;
   cursor: pointer;
+}
+
+.navBar__container-menu {
+  display: flex;
+}
+
+.navBar__icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 6px;
 }
 
 .navBar__link {
@@ -76,16 +86,17 @@
   cursor: pointer;
 }
 
-.navBar__link_type-line {
+.navBar__link_type_line {
   padding-bottom: 23px;
   border-bottom: #fff solid 1px;
+  width: 100%;
 }
 
-.navBar__link_type-bottom {
+.navBar__link_type_bottom {
   margin-bottom: 0;
 }
 
-.navBar__link_type-center {
+.navBar__link_type_center {
   text-align: center;
 }
 
