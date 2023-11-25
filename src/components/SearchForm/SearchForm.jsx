@@ -44,31 +44,31 @@ export default function SearchForm() {
           variant="outlined"
           value={searchText}
           onChange={handleInputChange}
-          // sx={{
-          //   margin: "0 0 20px",
-          //   width: "541px",
-          //   height: "40px",
-          //   fontFamily: "YS Text",
-          //   fontSize: "14px",
-          //   fontStyle: "normal",
-          //   fontWeight: 400,
-          //   lineHeight: "20px",
-          // }}
+          sx={{
+            margin: "0 0 20px",
+            width: "541px",
+            height: "40px",
+            fontFamily: "YS Text",
+            fontSize: "14px",
+            fontStyle: "normal",
+            fontWeight: 400,
+            lineHeight: "20px",
+          }}
         />
         <Button
           variant="contained"
           color="primary"
           onClick={handleAddButtonClick}
-          // sx={{
-          //   width: "148px",
-          //   height: "40px",
-          //   padding: "10px 20px",
-          //   justifyContent: "center",
-          //   alignItems: "center",
-          //   gap: "10px",
-          //   borderRadius: "6px",
-          //   background: "#B5B5B7",
-          // }}
+          sx={{
+            width: "148px",
+            height: "40px",
+            padding: "10px 20px",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "10px",
+            borderRadius: "6px",
+            background: "#B5B5B7",
+          }}
         >
           Добавить
         </Button>
