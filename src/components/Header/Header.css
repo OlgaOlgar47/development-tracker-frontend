@@ -12,12 +12,13 @@
 
 .header__container {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 22px;
 }
 
 .header__nav {
   margin: 0;
+  padding: 0 10px 8px;
   color: #b5b5b7;
   font-size: 14px;
   font-weight: 400;
@@ -27,10 +28,9 @@
 }
 
 .header__nav_active {
-  padding-bottom: 8px;
   border-bottom: 3px solid #FFF;
   color: #FFF;
-  width: 67px;
+  width: 100%;
 }
 
 .header__logo {

@@ -3,6 +3,12 @@ import "./NavBar.css";
 import Avatar from "../../../images/avatar.svg";
 import Exit from "../../../images/exit.svg";
 import Arrow from "../../../images/arrow.svg";
+import Vacansi from "../../../images/vacansi.svg";
+import Masterskaya from "../../../images/masterskaya.svg";
+import Dnevnik from "../../../images/dnevnik.svg";
+import Tracker from "../../../images/tracker.svg";
+import Kontaktu from "../../../images/kontaktu.svg";
+import Lenta from "../../../images/lenta.svg";
 
 export default function NavBar() {
   return (
@@ -14,24 +20,51 @@ export default function NavBar() {
         </div>
         <div className="navBar__profile-acseleration">
           <div className="navBar__profile-acseleration-container">
-            <h3 className="navBar__name navBar__name_type-margin">Текущий этап</h3>
-            <h3 className="navBar__acsseleration navBar__acsseleration_type-margin">Акселерация</h3>
+            <h3 className="navBar__name navBar__name_type_margin">
+              Текущий этап
+            </h3>
+            <h3 className="navBar__acsseleration navBar__acsseleration_type_margin">
+              Акселерация
+            </h3>
           </div>
           <img src={Arrow} className="navBar__arrow" alt="стрелка вправо" />
         </div>
       </div>
-      <h2 className="navBar__link">Вакансии</h2>
-      <h2 className="navBar__link navBar__link_type-line">Мастерская</h2>
-      <h2 className="navBar__link navBar__link_type-line">Дневник</h2>
-      <h2 className="navBar__link navBar__link_type-line">Трекер развития</h2>
-      <h2 className="navBar__link">Контакты</h2>
-      <h2 className="navBar__link navBar__link_type-bottom">Лента</h2>
+
+      <div className="navBar__container-menu">
+        <img src={Vacansi} className="navBar__icon" alt="иконка пункта меню" />
+        <h2 className="navBar__link">Вакансии</h2>
+      </div>
+      <div className="navBar__container-menu">
+        <img
+          src={Masterskaya}
+          className="navBar__icon"
+          alt="иконка пункта меню"
+        />
+        <h2 className="navBar__link navBar__link_type_line">Мастерская</h2>
+      </div>
+      <div className="navBar__container-menu">
+        <img src={Dnevnik} className="navBar__icon" alt="иконка пункта меню" />
+        <h2 className="navBar__link navBar__link_type_line">Дневник</h2>
+      </div>
+      <div className="navBar__container-menu">
+        <img src={Tracker} className="navBar__icon" alt="иконка пункта меню" />
+        <h2 className="navBar__link navBar__link_type_line">Трекер развития</h2>
+      </div>
+     <div className="navBar__container-menu">
+        <img src={Kontaktu} className="navBar__icon" alt="иконка пункта меню" />
+        <h2 className="navBar__link">Контакты</h2>
+      </div>
+      <div className="navBar__container-menu">
+        <img src={Lenta} className="navBar__icon" alt="иконка пункта меню" />
+        <h2 className="navBar__link navBar__link_type_bottom">Лента</h2>
+      </div>
       <button className="navBar__button">Оффер&nbsp;принят</button>
-      <h2 className="navBar__link navBar__link_type-center">Уйти в отпуск</h2>
-      <h2 className="navBar__link navBar__link_type-center">Инфо профиля</h2>
+      <h2 className="navBar__link navBar__link_type_center">Уйти в отпуск</h2>
+      <h2 className="navBar__link navBar__link_type_center">Инфо профиля</h2>
       <button className="navBar__container-exit">
         <img src={Exit} className="navBar__exit" alt="иконка кнопки выхода" />
-        <h3 className="navBar__link navBar__link_type-bottom">Выход</h3>
+        <h3 className="navBar__link navBar__link_type_bottom">Выход</h3>
       </button>
     </section>
   );
