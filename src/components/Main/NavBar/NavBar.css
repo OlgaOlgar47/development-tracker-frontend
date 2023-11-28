@@ -71,6 +71,19 @@
   display: flex;
 }
 
+.navBar__container-menu_type_line {
+  border-bottom: #fff solid 1px;
+  border-top: #fff solid 1px;
+}
+
+.navBar__container-menu_type_margin {
+  margin: 24px 0;
+}
+
+.navBar__container-menu_type_padding {
+  padding: 24px 0;
+}
+
 .navBar__icon {
   width: 20px;
   height: 20px;
@@ -81,15 +94,8 @@
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
-  margin-bottom: 19px;
   margin-top: 0;
   cursor: pointer;
-}
-
-.navBar__link_type_line {
-  padding-bottom: 23px;
-  border-bottom: #fff solid 1px;
-  width: 100%;
 }
 
 .navBar__link_type_bottom {
@@ -105,7 +111,7 @@
   width: 144px;
   background-color: #fff;
   border-radius: 6px;
-  margin-top: 227px;
+  margin-top: 253px;
   margin-bottom: 35px;
   color: #1d6bf3;
   text-align: center;
