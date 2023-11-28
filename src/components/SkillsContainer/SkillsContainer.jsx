@@ -18,7 +18,7 @@ export default function SkillsContainer({ subtitleName, skillsData }) {
       console.log("maxItemsPerRow", maxItemsPerRow);
       
       const totalItems = skillsData.length;
-      const maxItems = maxItemsPerRow * 2; // Три строки
+      const maxItems = maxItemsPerRow * 2; // Три строки должно быть
       setMaxSkillsToShow(Math.min(totalItems, maxItems));
       console.log("maxItems", maxItems);
 

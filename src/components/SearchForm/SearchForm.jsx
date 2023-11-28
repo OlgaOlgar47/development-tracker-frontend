@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./SearchForm.css";
 import Subtitle from "../Subtitle/Subtitle";
-import ButtonTemplate from "../Button/Button";
+import ButtonTemplate from "../Button/ButtonTemplate";
 import TextField from "@mui/material/TextField";
 
 export default function SearchForm({ subtitleName, hasButton }) {
