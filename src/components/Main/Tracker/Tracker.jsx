@@ -4,13 +4,14 @@ import Title from "../../Title/Title";
 import Paragraph from "../../Paragraph/Paragraph";
 import SearchForm from "../../SearchForm/SearchForm";
 import SkillsContainer from "../../SkillsContainer/SkillsContainer";
+import Recommendations from "../../Recommendations/Recommendations";
 
 export default function Tracker() {
   return (
     <section className="tracker">
       <Title text="Трекер развития" />
       <div className="tracker__grid-container">
-        <div>
+        <div className="tracker__grid-item">
           <Paragraph
             text="Здесь ты&nbsp;можешь добавлять навыки, которые ты&nbsp;хочешь получить или
       которыми уже обладаешь. А&nbsp;мы&nbsp;подскажем полезные материалы для
@@ -41,16 +42,8 @@ export default function Tracker() {
             ]}
           />
         </div>
-        <div>
-          <h3 className="recommendations__title">Полезные ресурсы</h3>
-          <article className="card">
-            <div className="card__tag">Курс</div>
-            <h4 className="card__title">Как составить резюме</h4>
-            <img className="card__image" src="" alt=""></img>
-            <a href="https://practicum.yandex.ru/catalog" className="card__details-link">
-              Подробнее
-            </a>
-          </article>
+        <div className="tracker__grid-item">
+          <Recommendations />
         </div>
       </div>
     </section>
