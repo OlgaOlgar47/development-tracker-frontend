@@ -1,12 +1,13 @@
 import React from 'react';
 import './SkillsContainer.css';
+import Subtitle from '../Subtitle/Subtitle';
 
-export default function SkillsContainer({ title, skillsData }) {
+export default function SkillsContainer({ subtitleName, skillsData }) {
 //   const [skills, setSkills] = useState(skillsData);
 
   return (
     <section className="skills-container">
-      <h2 className="skills-container__title">{title}</h2>
+      <Subtitle subtitleName={subtitleName} />
       {skillsData ? (
         <ul className="skills-container__list">
           {skillsData.map((skill, index) => (
