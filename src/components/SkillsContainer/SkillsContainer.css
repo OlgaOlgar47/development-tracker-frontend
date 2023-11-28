@@ -18,7 +18,7 @@
 }
 
 .skills-container__list {
-  margin: 0;
+  margin: 0 0 12px;
   padding: 0;
   width: 697px;
   list-style: none;
@@ -60,6 +60,7 @@
 }
 
 .skills-container__item-count {
+  margin: 0;
   font-size: 16px;
   line-height: 20px;
   font-weight: 400;
@@ -80,7 +81,7 @@
   height: 24px;
   background-image: url(../../images/sortingBase.svg);
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
   background-color: transparent;
 }
 

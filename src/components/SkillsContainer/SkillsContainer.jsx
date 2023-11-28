@@ -3,38 +3,38 @@ import "./SkillsContainer.css";
 import Subtitle from "../Subtitle/Subtitle";
 
 export default function SkillsContainer({ subtitleName, skillsData }) {
-    const containerRef = useRef(null);
-    const [maxSkillsToShow, setMaxSkillsToShow] = useState(0);
-  
-    useEffect(() => {
-      if (containerRef.current) {
-        const containerHeight = containerRef.current.clientHeight;
-        
-        const itemHeight =
-          containerRef.current.querySelector(".skills-container__item")
-            ?.clientHeight || 0;
-        const maxItemsPerRow = Math.floor(containerHeight / itemHeight);
-        console.log("maxItemsPerRow", maxItemsPerRow)
-        const totalItems = skillsData.length;
-        const maxItems = maxItemsPerRow * 3; // Три строки
-        setMaxSkillsToShow(Math.min(totalItems, maxItems));
-      }
-    }, [skillsData]);
-  
-    let displayedSkills = skillsData.slice(0, maxSkillsToShow);
-    let hiddenSkillsCount = skillsData.length - maxSkillsToShow;
+  const containerRef = useRef(null);
+  const [maxSkillsToShow, setMaxSkillsToShow] = useState(0);
 
-    console.log("hiddenSkillsCount", hiddenSkillsCount)
-    console.log("displayedSkills", displayedSkills)
-    console.log("maxSkillsToShow", maxSkillsToShow)
-    console.log("maxSkillsToShow", maxSkillsToShow)
-    console.log("maxSkillsToShow", maxSkillsToShow)
-   
+  useEffect(() => {
+    if (containerRef.current) {
+      const containerHeight = containerRef.current.clientHeight;
+      const itemHeight =
+        containerRef.current.querySelector(".skills-container__item")
+          ?.clientHeight || 0;
+      const maxItemsPerRow = Math.floor(containerHeight / itemHeight);
+      console.log("containerHeight", containerHeight);
+      console.log("itemHeight", itemHeight);
+      console.log("maxItemsPerRow", maxItemsPerRow);
+      
+      const totalItems = skillsData.length;
+      const maxItems = maxItemsPerRow * 2; // Три строки
+      setMaxSkillsToShow(Math.min(totalItems, maxItems));
+      console.log("maxItems", maxItems);
 
+    }
+  }, [skillsData]);
+
+  let displayedSkills = skillsData.slice(0, maxSkillsToShow);
+  let hiddenSkillsCount = skillsData.length - maxSkillsToShow;
+
+  console.log("displayedSkills", displayedSkills);
+  console.log("hiddenSkillsCount", hiddenSkillsCount);
   
-    return (
-      <section className="skills-container" ref={containerRef}>
-        <div className="skills-container__header">
+
+  return (
+    <section className="skills-container" ref={containerRef}>
+      <div className="skills-container__header">
         <Subtitle subtitleName={subtitleName} />
         <div className="skills-container__buttons">
           <button
@@ -47,41 +47,41 @@ export default function SkillsContainer({ subtitleName, skillsData }) {
           ></button>
         </div>
       </div>
-        {skillsData && skillsData.length > 0 ? (
-          <>
-            <ul className="skills-container__list">
-              {displayedSkills.map((skill, index) => (
-                <li
-                  key={index}
-                  className="skills-container__item"
-                  style={{
-                    background: skill.percentage
-                      ? `linear-gradient(90deg, #c2e5ce ${
-                          skill.percentage
-                        }%, rgba(194, 229, 206, 0) ${skill.percentage + 0.01}%)`
-                      : "",
-                  }}
-                >
-                  {skill.name}
-                </li>
-              ))}
-            </ul>
-            {hiddenSkillsCount > 0 && (
-              <span className="skills-container__item-count">
-                + {hiddenSkillsCount}{" "}
-                {hiddenSkillsCount === 1
-                  ? "навык"
-                  : hiddenSkillsCount > 1 && hiddenSkillsCount < 5
-                  ? "навыка"
-                  : "навыков"}
-              </span>
-            )}
-          </>
-        ) : (
-          <p className="skills-container__text">
-            Ты пока не добавил ни одного навыка
-          </p>
-        )}
-      </section>
-    );
-  }
+      {skillsData && skillsData.length > 0 ? (
+        <>
+          <ul className="skills-container__list">
+            {displayedSkills.map((skill, index) => (
+              <li
+                key={index}
+                className="skills-container__item"
+                style={{
+                  background: skill.percentage
+                    ? `linear-gradient(90deg, #c2e5ce ${
+                        skill.percentage
+                      }%, rgba(194, 229, 206, 0) ${skill.percentage + 0.01}%)`
+                    : "",
+                }}
+              >
+                {skill.name}
+              </li>
+            ))}
+          </ul>
+          {hiddenSkillsCount > 0 && (
+            <span className="skills-container__item-count">
+              + {hiddenSkillsCount}{" "}
+              {hiddenSkillsCount === 1
+                ? "навык"
+                : hiddenSkillsCount > 1 && hiddenSkillsCount < 5
+                ? "навыка"
+                : "навыков"}
+            </span>
+          )}
+        </>
+      ) : (
+        <p className="skills-container__text">
+          Ты пока не добавил ни одного навыка
+        </p>
+      )}
+    </section>
+  );
+}
