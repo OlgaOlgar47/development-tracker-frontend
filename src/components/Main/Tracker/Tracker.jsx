@@ -43,7 +43,7 @@ export default function Tracker() {
           />
         </div>
         <div className="tracker__grid-item">
-          <Recommendations />
+          <Recommendations title="Полезные ресурсы"/>
         </div>
       </div>
     </section>
