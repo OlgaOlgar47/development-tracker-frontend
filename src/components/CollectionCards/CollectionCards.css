@@ -5,6 +5,16 @@
   box-sizing: border-box;
 }
 
+.collectionCards__link {
+  text-decoration: none;
+  color: #1a1b22;
+}
+
+.collectionCards__wpapper:hover {
+  transition: .4s;
+  transform: scale(1.3);
+}
+
 .collectionCards__wpapper {
   padding: 20px;
   border: 1px solid rgba(249, 250, 251, 1);
@@ -52,4 +62,8 @@
   color: #5a9bff;
   display: block;
   cursor: pointer;
+}
+
+.collectionCards__details-link:hover {
+  text-decoration: underline;
 }
