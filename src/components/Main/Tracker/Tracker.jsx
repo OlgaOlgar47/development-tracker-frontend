@@ -5,6 +5,7 @@ import Paragraph from "../../Paragraph/Paragraph";
 import SearchForm from "../../SearchForm/SearchForm";
 import SkillsContainer from "../../SkillsContainer/SkillsContainer";
 import Recommendations from "../../Recommendations/Recommendations";
+import ButtonsDeleteEdit from "../../Buttons/ButtonsDeleteEdit";
 
 export default function Tracker() {
   return (
@@ -41,6 +42,7 @@ export default function Tracker() {
               { name: "dobe Photoshop", percentage: 80 },
             ]}
           />
+          <ButtonsDeleteEdit disabledDelete={true} disabledEdit={true}/>
         </div>
         <div className="tracker__grid-item">
           <Recommendations title="Полезные ресурсы"/>
