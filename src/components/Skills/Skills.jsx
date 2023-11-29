@@ -4,13 +4,14 @@ import SkillsContainer from "../SkillsContainer/SkillsContainer";
 import ButtonsBackAdd from "../Buttons/ButtonsBackAdd";
 import Title from "../Title/Title";
 import "./Skills.css";
+import ButtonsDeleteEdit from "../Buttons/ButtonsDeleteEdit";
 
-export default function Skills({ name, image }) {
+export default function Skills() {
   return (
     <section className="skills">
       <Title text="Дизайнер интерфейсов" />
-      <div className="skills__grid-container">
-        <div className="skills__grid-item">
+      <div className="skills__container">
+        <div className="skills__items">
           <Paragraph text="Каждый день мы делаем покупки в интернете, заказываем доставку, читаем новости. UX/UI-дизайнеры делают так, чтобы всё это получалось легко и удобно." />
           <SkillsContainer
             isSkills={true}
@@ -41,12 +42,24 @@ export default function Skills({ name, image }) {
               { name: "Типографика" },
             ]}
           />
+          <ButtonsBackAdd disabledAdd={true} />
+          <SkillsContainer
+            margin-top="400px"
+            isSkills={true}
+            subtitleName="В твоих навыках"
+            skillsData={[
+              { name: "Анализ рынка" },
+              { name: "Продуктовые метрики" },
+              { name: "Юнит-экономика" },
+              { name: "Воронка AARRR" },
+            ]}
+          />
+          <ButtonsDeleteEdit />
         </div>
         <div className="tracker__grid-item">
           <Recommendations />
         </div>
       </div>
-      <ButtonsBackAdd disabledAdd={true}/>
     </section>
   );
 }

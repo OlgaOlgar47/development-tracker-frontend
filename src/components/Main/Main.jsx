@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import "./Main.css";
 import NavBar from "./NavBar/NavBar.jsx";
 import Tracker from "./Tracker/Tracker.jsx";
-import Professions from "../Professions/Professions.jsx";
+import Collections from "../Collections/Collections.jsx";
 import Skills from "../Skills/Skills.jsx";
 import SkillEditor from "../SkillEditor/SkilllEditor";
 
@@ -13,8 +13,8 @@ export default function Main() {
       <NavBar />
       <Routes>
         <Route path="/" element={<Tracker />} />
-        <Route path="/professions" element={<Professions />} />
-        <Route path="/professions/skills" element={<Skills />} />
+        <Route path="/collections" element={<Collections />} />
+        <Route path="/collections/skills" element={<Skills />} />
         <Route path="/skill-editor" element={<SkillEditor/>} />
       </Routes>
     </main>
