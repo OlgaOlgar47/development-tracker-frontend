@@ -13,10 +13,3 @@
   gap: 110px; /* Пример промежутка между столбцами */
 }
 
-.recommendations__title {
-  padding: 0;
-  margin: 0 0 16px;
-  font-size: 20px;
-  line-height: 24px;
-  font-weight: 500;
-}

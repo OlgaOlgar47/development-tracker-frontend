@@ -25,6 +25,11 @@
 
 .search-form__result:hover {
   cursor: pointer;
-  color: #5a9bff;
-  border-color: #5a9bff;
+  color: #5A9BFF;
+  border-color: #5A9BFF;
+}
+
+.search-form__result.selected {
+  color: #1D6BF3;
+  border-color: #1D6BF3;
 }

@@ -18,7 +18,7 @@ export default function SkillsContainer({ subtitleName, skillsData }) {
       console.log("maxItemsPerRow", maxItemsPerRow);
       
       const totalItems = skillsData.length;
-      const maxItems = maxItemsPerRow * 2; // Три строки
+      const maxItems = maxItemsPerRow * 2; // Три строки должно быть
       setMaxSkillsToShow(Math.min(totalItems, maxItems));
       console.log("maxItems", maxItems);
 
@@ -30,6 +30,9 @@ export default function SkillsContainer({ subtitleName, skillsData }) {
 
   console.log("displayedSkills", displayedSkills);
   console.log("hiddenSkillsCount", hiddenSkillsCount);
+
+  function Filter() {}
+  function showAll() {}
   
 
   return (
@@ -39,11 +42,11 @@ export default function SkillsContainer({ subtitleName, skillsData }) {
         <div className="skills-container__buttons">
           <button
             className="skills-container__sort-button"
-            onClick={1}
+            onClick={Filter}
           ></button>
           <button
             className="skills-container__showall-button"
-            onClick={1}
+            onClick={showAll}
           ></button>
         </div>
       </div>
