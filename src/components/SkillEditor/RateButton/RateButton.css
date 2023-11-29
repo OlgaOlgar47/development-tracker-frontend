@@ -18,6 +18,14 @@
   display: block;
 }
 
+.skill-editor__rate-button.selected {
+    background-color: #87CC9E;
+}
+
+
+
+
+
 .tooltip {
     display: none;
     position: absolute;

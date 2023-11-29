@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './RateButton.css'; 
 
-export default function RateButton({buttonId, text}) {
+export default function RateButton({buttonId, text, isSelected}) {
   const [isHovered, setIsHovered] = useState(false);
   const [content, setContent] = useState('');
 
@@ -19,7 +19,7 @@ export default function RateButton({buttonId, text}) {
     <button
       type="button"
       id={buttonId}
-      className={`skill-editor__rate-button ${isHovered ? 'hovered' : ''}`}
+      className={`skill-editor__rate-button ${isHovered ? 'hovered' : ''} ${isSelected ? 'selected' : ''}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >

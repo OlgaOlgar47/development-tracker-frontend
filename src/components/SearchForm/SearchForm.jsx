@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./SearchForm.css";
 import Subtitle from "../Subtitle/Subtitle";
-import ButtonTemplate from "../Button/ButtonTemplate";
+import ButtonTemplate from "../Buttons/ButtonTemplate";
 import TextField from "@mui/material/TextField";
 
 export default function SearchForm({ subtitleName, hasButton }) {
@@ -59,6 +59,11 @@ export default function SearchForm({ subtitleName, hasButton }) {
         {hasButton && (<ButtonTemplate
           handleButtonClick={handleButtonClick}
           buttonText="Добавить"
+          variant="contained"
+          color="primary"
+          width="148px"
+          height="40px"
+          gap="10px"
         />)}
       </div>
       {searchText && (
