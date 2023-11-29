@@ -61,7 +61,7 @@ export default function SkillsContainer({
       </div>
       {skillsData && skillsData.length > 0 ? (
         <>
-          <ul className="skills-container__list">
+          <ul className={isSkills ? "skills-container__list" : "skills-container__list skills-container__list-limited"}>
             {displayedSkills.map((skill, index) => (
               <li
                 key={index}

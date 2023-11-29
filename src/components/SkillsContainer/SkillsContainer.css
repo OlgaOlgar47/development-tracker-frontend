@@ -29,6 +29,10 @@
   overflow: hidden;
 }
 
+.skills-container__list-limited {
+  max-height: 160px;
+}
+
 .skills-container__item {
   text-decoration: none;
   padding: 12px 20px;
@@ -36,16 +40,6 @@
   border-radius: 4px;
   
 }
-
-/* .skills-container__item:hover {
-  cursor: pointer;
-  border-color: #87CC9E;
-  background-color: #F7FFFA;
-} */
-
-
-
-
 
 .skills-container__item-small {
   padding: 8px 20px;
