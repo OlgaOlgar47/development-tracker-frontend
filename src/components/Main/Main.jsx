@@ -14,6 +14,7 @@ export default function Main() {
         <Route path="/" element={<Tracker />} />
         <Route path="/professions" element={<Professions />} />
         <Route path="/professions/skills" element={<Skills />} />
+        <Route path="/" element={<Skills />} />
       </Routes>
     </main>
   );
