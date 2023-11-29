@@ -27,11 +27,13 @@
   flex-wrap: wrap;
   gap: 12px;
   overflow: hidden;
+  transition: transform 0.9s , ease-in-out;
 }
 
-.skills-container__list-limited {
+/* .skills-container__list-limited {
   max-height: 160px;
-}
+  overflow: hidden;
+} */
 
 .skills-container__item {
   text-decoration: none;
@@ -39,6 +41,11 @@
   border: 1px solid #87CC9E;
   border-radius: 4px;
   
+}
+
+.skills-container__item:hover {
+  cursor: pointer;
+  background-color: #F7FFFA;
 }
 
 .skills-container__item-small {
@@ -151,3 +158,4 @@
 .skills-container__showall-button:hover {
   cursor: pointer;
 }
+
