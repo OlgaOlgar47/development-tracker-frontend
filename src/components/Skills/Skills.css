@@ -7,6 +7,10 @@
   background-color: #fff;
 }
 
+.skills__grid-item {
+  
+}
+
 .skills__grid-container {
   display: grid;
   grid-template-columns: 2fr 1fr; /* Пропорции 2/3 и 1/3 */

@@ -1,7 +1,7 @@
 import Paragraph from "../Paragraph/Paragraph";
 import Recommendations from "../Recommendations/Recommendations";
 import SkillsContainer from "../SkillsContainer/SkillsContainer";
-// import Subtitle from "../Subtitle/Subtitle";
+import ButtonsBackAdd from "../Buttons/ButtonsBackAdd";
 import Title from "../Title/Title";
 import "./Skills.css";
 
@@ -21,7 +21,7 @@ export default function Skills({ name, image }) {
               { name: "Юнит-экономика" },
               { name: "Product growth" },
               { name: "Стратегия продукта" },
-              { name: "Воронка AARRR.js" },
+              { name: "Воронка AARRR" },
               { name: "Портфель продуктов" },
               { name: "Гайдлайны Android" },
               { name: "CSS" },
@@ -46,6 +46,7 @@ export default function Skills({ name, image }) {
           <Recommendations />
         </div>
       </div>
+      <ButtonsBackAdd disabledAdd={true}/>
     </section>
   );
 }
