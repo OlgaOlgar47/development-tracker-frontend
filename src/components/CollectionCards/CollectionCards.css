@@ -1,11 +1,16 @@
-.collectionCards {
+.collection-cards {
   display: grid;
   grid-template-columns: repeat(4, 210px);
   gap: 12px;
   box-sizing: border-box;
 }
 
-.collectionCards__wpapper {
+.collection-cards__link {
+  text-decoration: none;
+  color: #1a1b22;
+}
+
+.collection-cards__wpapper {
   padding: 20px;
   border: 1px solid rgba(249, 250, 251, 1);
   border-radius: 10px;
@@ -13,7 +18,12 @@
   box-shadow: 0px 0px 20px rgba(121, 121, 129, 0.15);
 }
 
-.collectionCards__title {
+.collection-cards__wpapper:hover {
+  transition: .4s;
+  transform: scale(1.2);
+}
+
+.collection-cards__title {
   font-size: 16px;
   line-height: 20px;
   font-weight: 500;
@@ -23,7 +33,7 @@
   min-height: 40px;
 }
 
-.collectionCards__image {
+.collection-cards__image {
   width: 117px;
   height: 117px;
   display: flex;
@@ -31,12 +41,12 @@
   cursor: pointer;
 }
 
-.collectionCards__container {
+.collection-cards__container {
   display: flex;
   justify-content: space-between;
 }
 
-.collectionCards__tag {
+.collection-cards__tag {
   margin: 0;
   background-color: rgba(249, 250, 251, 1);
   font-size: 13px;
@@ -44,12 +54,14 @@
   font-weight: 400;
 }
 
-.collectionCards__details-link {
-  text-decoration: none;
+.collection-cards__details-else {
   font-size: 14px;
   line-height: 20px;
   font-weight: 400;
   color: #5a9bff;
-  display: block;
-  cursor: pointer;
+  margin: 0;
+}
+
+.collection-cards__details-link:hover {
+  text-decoration: underline;
 }

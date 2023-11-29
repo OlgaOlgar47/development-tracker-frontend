@@ -17,9 +17,12 @@ export default function Header() {
           Трекер
         </Link>
         <Link
-          to={"/professions"}
+          to={"/collections"}
           className={`header__nav ${
-            location.pathname === "/professions"  ? "header__nav_active" : ""
+            location.pathname === "/collections" ||
+            location.pathname === "/collections/skills"
+              ? "header__nav_active"
+              : ""
           }`}
         >
           Подборки

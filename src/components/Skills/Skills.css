@@ -7,8 +7,8 @@
   background-color: #fff;
 }
 
-.skills__grid-container {
+.skills__container {
   display: grid;
   grid-template-columns: 2fr 1fr; /* Пропорции 2/3 и 1/3 */
-  gap: 110px; /* Пример промежутка между столбцами */
+  gap: 110px;
 }

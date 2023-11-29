@@ -1,30 +1,32 @@
 import React from "react";
 import "./CollectionCards.css";
-import { cards } from "../../utils/constants"
+import { cards } from "../../utils/constants";
+import { Link } from "react-router-dom";
 
 export default function CollectionCards() {
-
-return (
-  <article className="collectionCards">
+  return (
+    <article className="collection-cards">
       {cards.map((card, index) => (
-        <div key={index} className="collectionCards__wpapper">
-          <img
-            className="collectionCards__image"
-            src={card.src}
-            alt="картинка навыка"
-          ></img>
-          <h4 className="collectionCards__title">{card.title}</h4>
-          <div className="collectionCards__container">
-            <p className="collectionCards__tag">{card.time}</p>
-            <a
-              href="https://practicum.yandex.ru/catalog"
-              className="collectionCards__details-link"
-            >
-              Подробнее
-            </a>
-          </div>
+        <div key={index} className="collection-cards__wpapper">
+          <Link to={"/collections/skills"} className="collection-cards__link">
+            <img
+              className="collection-cards__image"
+              src={card.image}
+              onMouseEnter={(e) => (e.currentTarget.src = card.imageHover)}
+              onMouseLeave={(e) => (e.currentTarget.src = card.image)}
+              alt="картинка навыка"
+            ></img>
+            <h4 className="collection-cards__title">{card.name}</h4>
+            <div className="collection-cards__container">
+              <p className="collection-cards__tag">{card.count}</p>
+              <p className="collection-cards__details-else"
+              >
+                Подробнее
+              </p>
+            </div>
+          </Link>
         </div>
       ))}
-  </article>
-);
+    </article>
+  );
 }
