@@ -6,6 +6,7 @@ import SearchForm from "../../SearchForm/SearchForm";
 import SkillsContainer from "../../SkillsContainer/SkillsContainer";
 import Recommendations from "../../Recommendations/Recommendations";
 import ButtonsDeleteEdit from "../../Buttons/ButtonsDeleteEdit";
+import ButtonsBackAdd from "../../Buttons/ButtonsBackAdd";
 
 export default function Tracker() {
   return (

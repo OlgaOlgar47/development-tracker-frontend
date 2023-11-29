@@ -5,6 +5,7 @@ import NavBar from "./NavBar/NavBar.jsx";
 import Tracker from "./Tracker/Tracker.jsx";
 import Professions from "../Professions/Professions.jsx";
 import Skills from "../Skills/Skills.jsx";
+import SkillEditor from "../SkillEditor/SkilllEditor";
 
 export default function Main() {
   return (
@@ -14,7 +15,7 @@ export default function Main() {
         <Route path="/" element={<Tracker />} />
         <Route path="/professions" element={<Professions />} />
         <Route path="/professions/skills" element={<Skills />} />
-        <Route path="/" element={<Skills />} />
+        <Route path="/skill-editor" element={<SkillEditor/>} />
       </Routes>
     </main>
   );
