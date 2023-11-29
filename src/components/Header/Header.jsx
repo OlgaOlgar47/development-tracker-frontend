@@ -19,6 +19,7 @@ export default function Header() {
         <Link
           to={"/professions"}
           className={`header__nav ${
+            // ошибка
             location.pathname === "/professions"  ? "header__nav_active" : ""
           }`}
         >
