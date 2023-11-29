@@ -7,6 +7,7 @@
   display: flex;
   flex-direction: column;
   padding: 0 8px;
+  font-family: YS Text;
 }
 
 .navBar__container {
@@ -16,7 +17,7 @@
   display: flex;
   flex-direction: column;
   border-radius: 4px;
-  margin-bottom: 29px;
+  margin-bottom: 26px;
 }
 
 .navBar__profile {
@@ -94,7 +95,7 @@
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
-  margin-top: 0;
+  margin: 0 0 19px;
   cursor: pointer;
 }
 
@@ -108,10 +109,10 @@
 
 .navBar__button {
   height: 36px;
-  width: 144px;
+  width: 145px;
   background-color: #fff;
   border-radius: 6px;
-  margin-top: 253px;
+  margin-top: 251px;
   margin-bottom: 35px;
   color: #1d6bf3;
   text-align: center;
