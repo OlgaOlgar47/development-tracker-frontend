@@ -8,15 +8,15 @@ export default function SkillsContainer({
   isSkills,
 }) {
   const [sortedSkillsData, setSortedSkillsData] = useState([]);
-  const [isSortedAscending, setIsSortedAscending] = useState(true);
+  const [isSorted, setIsSorted] = useState(true);
 
   useEffect(() => {
     setSortedSkillsData([...skillsData]);
   }, [skillsData]);
 
-  function sortSkillsByPercentage() {
+  function sortSkills() {
     let sortedSkills;
-    if (isSortedAscending) {
+    if (isSorted) {
       sortedSkills = [...skillsData].sort(
         (a, b) => a.percentage - b.percentage
       );
@@ -25,7 +25,7 @@ export default function SkillsContainer({
         (a, b) => b.percentage - a.percentage
       );
     }
-    setIsSortedAscending(!isSortedAscending);
+    setIsSorted(!isSorted);
 
     setTimeout(() => {
       setSortedSkillsData(sortedSkills);
@@ -50,7 +50,7 @@ export default function SkillsContainer({
           <div className="skills-container__buttons">
             <button
               className="skills-container__button"
-              onClick={sortSkillsByPercentage}
+              onClick={sortSkills}
             >
               <p className="skills-container__button-text">Сортировка</p>
               <div className="skills-container__sort-icon"></div>
