@@ -13,6 +13,7 @@ export default function Skills({ name, image }) {
         <div className="skills__grid-item">
           <Paragraph text="Каждый день мы делаем покупки в интернете, заказываем доставку, читаем новости. UX/UI-дизайнеры делают так, чтобы всё это получалось легко и удобно." />
           <SkillsContainer
+            isSkills={true}
             subtitleName="Навыки дизайнера интерфейсов"
             skillsData={[
               { name: "Анализ рынка" },
