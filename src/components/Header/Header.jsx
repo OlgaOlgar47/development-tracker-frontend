@@ -1,13 +1,29 @@
 import React from "react";
 import "./Header.css";
 import logo from "../../images/logo.svg";
+import { Link, useLocation } from "react-router-dom";
 
 export default function Header() {
+  const location = useLocation();
   return (
     <header className="header">
       <div className="header__container">
-        <h2 className="header__nav header__nav_active">Трекер</h2>
-        <h2 className="header__nav">Подборки</h2>
+        <Link
+          to={"/"}
+          className={`header__nav ${
+            location.pathname === "/" ? "header__nav_active" : ""
+          }`}
+        >
+          Трекер
+        </Link>
+        <Link
+          to={"/professions"}
+          className={`header__nav ${
+            location.pathname === "/professions"  ? "header__nav_active" : ""
+          }`}
+        >
+          Подборки
+        </Link>
       </div>
       <img src={logo} className="header__logo" alt="логотип" />
     </header>
