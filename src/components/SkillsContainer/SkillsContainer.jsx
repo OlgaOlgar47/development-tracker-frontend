@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import "./SkillsContainer.css";
 import Subtitle from "../Subtitle/Subtitle";
 
-export default function SkillsContainer({ subtitleName, skillsData }) {
+export default function SkillsContainer({ subtitleName, skillsData, isSkills }) {
   const containerRef = useRef(null);
   const [maxSkillsToShow, setMaxSkillsToShow] = useState(0);
 
@@ -39,7 +39,7 @@ export default function SkillsContainer({ subtitleName, skillsData }) {
     <section className="skills-container" ref={containerRef}>
       <div className="skills-container__header">
         <Subtitle subtitleName={subtitleName} />
-        <div className="skills-container__buttons">
+        {!isSkills && (<div className="skills-container__buttons">
           <button
             className="skills-container__sort-button"
             onClick={Filter}
@@ -48,7 +48,7 @@ export default function SkillsContainer({ subtitleName, skillsData }) {
             className="skills-container__showall-button"
             onClick={showAll}
           ></button>
-        </div>
+        </div>)}
       </div>
       {skillsData && skillsData.length > 0 ? (
         <>
@@ -56,7 +56,7 @@ export default function SkillsContainer({ subtitleName, skillsData }) {
             {displayedSkills.map((skill, index) => (
               <li
                 key={index}
-                className="skills-container__item"
+                className={isSkills ? "skills-container__item-small" : "skills-container__item"}
                 style={{
                   background: skill.percentage
                     ? `linear-gradient(90deg, #c2e5ce ${
