@@ -15,10 +15,30 @@ export default function SearchForm({ subtitleName, hasButton }) {
     "SQL",
     "Vue.js",
     "Angular",
+    "Типографика",
+    "Композиция",
+    "Генерация идей",
+    "Tilda",
+    "Figma",
+    "Adobe Photoshop",
+    "Анализ ЦА",
+    "Гипотезы",
+    "Исследования",
+    "UX-копирайтинг",
+    "UX-тестирование",
+    "Конкурентный анализ",
+    "JTBD и User Stories",
+    "Анимация",
+    "Вайрфреймы",
+    "UI-Kit",
+    "Аудит юзабилити"
   ];
 
   const [searchText, setSearchText] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [selectedItem, setSelectedItem] = useState(null); //Переменная состояния для хранения выбранного элемента
+
+  const disabledAdd = searchText.length === 0;
 
   const handleInputChange = (event) => {
     const { value } = event.target;
@@ -29,11 +49,18 @@ export default function SearchForm({ subtitleName, hasButton }) {
     setSearchResults(filteredResults);
   };
 
+
   const handleButtonClick = () => {
     // Добавить здесь логику для обработки добавления выбранного навыка
     // Например, можно сохранить выбранный навык в состоянии или выполнить другие действия
     console.log("Выбранный навык:", searchText);
     setSearchText("");
+  };
+
+
+  const handleResultClick = (index) => {
+    // Установить индекс выбранного элемента
+    setSelectedItem(index === selectedItem ? null : index);
   };
 
   return (
@@ -64,12 +91,24 @@ export default function SearchForm({ subtitleName, hasButton }) {
           width="148px"
           height="40px"
           gap="10px"
+          disabled={disabledAdd}
+          disabledColor="#FFF"
+          disableBackground="#B5B5B7"
+          textColor="white"
+          hoverBackground="#1D6BF3"
+          hoverTextColor="#FFFFFF"
         />)}
       </div>
       {searchText && (
         <div className="search-form__results">
           {searchResults.map((result, index) => (
-            <div key={index} className="search-form__result">
+            <div
+              key={index}
+              className={`search-form__result ${
+                index === selectedItem ? 'selected' : ''
+              }`}
+              onClick={() => handleResultClick(index)}
+            >
               {result}
             </div>
           ))}
