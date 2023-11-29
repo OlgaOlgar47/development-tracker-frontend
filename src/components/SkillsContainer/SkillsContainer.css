@@ -25,9 +25,6 @@
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  max-height: calc(
-    3 * (44px + 20px + 2 * 8px) + 2 * 10px
-  ); /* 32px - высота элемента, 16px - line-height, 2 * 8px - padding */
   overflow: hidden;
 }
 
