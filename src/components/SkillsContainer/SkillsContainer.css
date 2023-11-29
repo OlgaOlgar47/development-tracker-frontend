@@ -1,4 +1,5 @@
 .skills-container {
+  font-family: 'YS Text';
   max-width: 697px;
   margin: 0 0 40px;
 }
@@ -10,7 +11,7 @@
 }
 
 .skills-container__title {
-  font-family: YS Display;
+  font-family: 'YS Display';
   font-size: 24px;
   font-style: normal;
   font-weight: 500;
@@ -31,15 +32,20 @@
 .skills-container__item {
   text-decoration: none;
   padding: 12px 20px;
-  border: 1px solid #87cc9e;
+  border: 1px solid #87CC9E;
   border-radius: 4px;
+  
 }
 
-.skills-container__item:hover {
+/* .skills-container__item:hover {
   cursor: pointer;
   border-color: #87CC9E;
-  background-color: #87CC9E;
-}
+  background-color: #F7FFFA;
+} */
+
+
+
+
 
 .skills-container__item-small {
   padding: 8px 20px;
@@ -72,26 +78,68 @@
 
 .skills-container__buttons {
   display: flex;
+  gap: 20px;
   align-items: center;
 }
 
-.skills-container__sort-button {
+.skills-container__button {
+  background: transparent;
+  color: #5A9BFF;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   padding: 0;
-  margin: 0 20px 0 0;
+  margin: 0;
   border: none;
   text-decoration: none;
   outline: none;
   width: 107px;
   height: 24px;
-  background-image: url(../../images/sortingBase.svg);
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-color: transparent;
 }
 
-.skills-container__sort-button:hover {
- cursor: pointer;
+.skills-container__button:hover {
+  cursor: pointer;
 }
+
+.skills-container__button-text {
+  font-size: 13px;
+  line-height: 16px;
+  font-weight: 500;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap; 
+}
+
+/* Изображение по умолчанию для иконки */
+.skills-container__sort-icon {
+  width: 24px;
+  height: 24px;
+  background-image: url('../../images/sortblue.svg');
+}
+
+.skills-container__arrow-icon {
+  width: 24px;
+  height: 24px;
+  background-image: url('../../images/arrow-down-blue.svg');
+  background-size: cover; 
+  background-repeat: no-repeat;
+  background-position: center; 
+}
+
+/* Изменение цвета текста при наведении на кнопку */
+.skills-container__button:hover .skills-container__button-text {
+  color: #1d6bf3;
+}
+
+/* Изменение изображения при наведении на кнопку */
+.skills-container__button:hover .skills-container__sort-icon {
+  background-image: url('../../images/sort-dark-blue.svg');
+}
+
+.skills-container__button:hover .skills-container__arrow-icon {
+  background-image: url('../../images/arrow-down-darkblue.svg');
+}
+
 
 .skills-container__showall-button {
   padding: 0;

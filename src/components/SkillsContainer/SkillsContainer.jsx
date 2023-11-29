@@ -2,9 +2,14 @@ import { useEffect, useRef, useState } from "react";
 import "./SkillsContainer.css";
 import Subtitle from "../Subtitle/Subtitle";
 
-export default function SkillsContainer({ subtitleName, skillsData, isSkills }) {
+export default function SkillsContainer({
+  subtitleName,
+  skillsData,
+  isSkills,
+}) {
   const containerRef = useRef(null);
   const [maxSkillsToShow, setMaxSkillsToShow] = useState(0);
+  const [sortedSkillsData, setSortedSkillsData] = useState([]);
 
   useEffect(() => {
     if (containerRef.current) {
@@ -13,42 +18,46 @@ export default function SkillsContainer({ subtitleName, skillsData, isSkills }) 
         containerRef.current.querySelector(".skills-container__item")
           ?.clientHeight || 0;
       const maxItemsPerRow = Math.floor(containerHeight / itemHeight);
-      console.log("containerHeight", containerHeight);
-      console.log("itemHeight", itemHeight);
-      console.log("maxItemsPerRow", maxItemsPerRow);
-      
+
       const totalItems = skillsData.length;
       const maxItems = maxItemsPerRow * 2; // Три строки должно быть
       setMaxSkillsToShow(Math.min(totalItems, maxItems));
       console.log("maxItems", maxItems);
-
     }
   }, [skillsData]);
 
-  let displayedSkills = skillsData.slice(0, maxSkillsToShow);
+  useEffect(() => {
+    setSortedSkillsData([...skillsData]);
+  }, [skillsData]);
+
+  let displayedSkills = sortedSkillsData.slice(0, maxSkillsToShow);
   let hiddenSkillsCount = skillsData.length - maxSkillsToShow;
 
-  console.log("displayedSkills", displayedSkills);
-  console.log("hiddenSkillsCount", hiddenSkillsCount);
-
-  function Filter() {}
+  function sortSkillsByPercentage() {
+    const sortedSkills = [...skillsData].sort((a, b) => a.percentage - b.percentage);
+    setSortedSkillsData(sortedSkills);
+  }
   function showAll() {}
-  
 
   return (
     <section className="skills-container" ref={containerRef}>
       <div className="skills-container__header">
         <Subtitle subtitleName={subtitleName} />
-        {!isSkills && (<div className="skills-container__buttons">
-          <button
-            className="skills-container__sort-button"
-            onClick={Filter}
-          ></button>
-          <button
-            className="skills-container__showall-button"
-            onClick={showAll}
-          ></button>
-        </div>)}
+        {!isSkills && (
+          <div className="skills-container__buttons">
+            <button className="skills-container__button" onClick={sortSkillsByPercentage}>
+              <p className="skills-container__button-text">Сортировка</p>
+              <div className="skills-container__sort-icon"></div>
+            </button>
+            <button
+              className="skills-container__button"
+              onClick={showAll}
+            >
+              <p className="skills-container__button-text">Смотреть все</p>
+              <div className="skills-container__arrow-icon"></div>
+            </button>
+          </div>
+        )}
       </div>
       {skillsData && skillsData.length > 0 ? (
         <>
@@ -56,7 +65,11 @@ export default function SkillsContainer({ subtitleName, skillsData, isSkills }) 
             {displayedSkills.map((skill, index) => (
               <li
                 key={index}
-                className={isSkills ? "skills-container__item-small" : "skills-container__item"}
+                className={
+                  isSkills
+                    ? "skills-container__item-small"
+                    : "skills-container__item"
+                }
                 style={{
                   background: skill.percentage
                     ? `linear-gradient(90deg, #c2e5ce ${
