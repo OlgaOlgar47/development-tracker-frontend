@@ -1,12 +1,8 @@
 import { useState, useEffect } from "react";
-import "./SkillsContainer.css";
+import "./UserSkillsContainer.css";
 import Subtitle from "../Subtitle/Subtitle";
 
-export default function SkillsContainer({
-  subtitleName,
-  skillsData,
-  isSkills,
-}) {
+export default function SkillsContainer({ subtitleName, skillsData }) {
   const [sortedSkillsData, setSortedSkillsData] = useState([]);
   const [isSorted, setIsSorted] = useState(false);
 
@@ -43,18 +39,17 @@ export default function SkillsContainer({
     <section className="skills-container">
       <div className="skills-container__header">
         <Subtitle subtitleName={subtitleName} />
-        {!isSkills && (
-          <div className="skills-container__buttons">
-            <button className="skills-container__button" onClick={sortSkills}>
-              <p className="skills-container__button-text">Сортировка</p>
-              <div className="skills-container__sort-icon"></div>
-            </button>
-            <button className="skills-container__button" onClick={showAll}>
-              <p className="skills-container__button-text">Смотреть все</p>
-              <div className="skills-container__arrow-icon"></div>
-            </button>
-          </div>
-        )}
+
+        <div className="skills-container__buttons">
+          <button className="skills-container__button" onClick={sortSkills}>
+            <p className="skills-container__button-text">Сортировка</p>
+            <div className="skills-container__sort-icon"></div>
+          </button>
+          <button className="skills-container__button" onClick={showAll}>
+            <p className="skills-container__button-text">Смотреть все</p>
+            <div className="skills-container__arrow-icon"></div>
+          </button>
+        </div>
       </div>
       {skillsData && skillsData.length > 0 ? (
         <>
@@ -62,11 +57,7 @@ export default function SkillsContainer({
             {sortedSkillsData.map((skill, index) => (
               <li
                 key={index}
-                className={
-                  isSkills
-                    ? "skills-container__item-small"
-                    : "skills-container__item"
-                }
+                className="skills-container__item"
                 style={{
                   background: generateGradient(
                     skill.percentage,

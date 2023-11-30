@@ -1,6 +1,6 @@
 import Paragraph from "../Paragraph/Paragraph";
 import Recommendations from "../Recommendations/Recommendations";
-import SkillsContainer from "../SkillsContainer/SkillsContainer";
+import SkillsContainer from "../UserSkillsContainer/UserSkillsContainer";
 import ButtonsBackAdd from "../Buttons/ButtonsBackAdd";
 import Title from "../Title/Title";
 import "./Skills.css";
@@ -42,9 +42,9 @@ export default function Skills() {
               { name: "Типографика" },
             ]}
           />
-          <ButtonsBackAdd disabledAdd={true} />
+          <ButtonsBackAdd disabledAdd={true} 
+          />
           <SkillsContainer
-            margin-top="400px"
             isSkills={true}
             subtitleName="В твоих навыках"
             skillsData={[
