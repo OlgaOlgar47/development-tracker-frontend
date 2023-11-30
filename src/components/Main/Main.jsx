@@ -7,7 +7,7 @@ import Collections from "../Collections/Collections.jsx";
 import Skills from "../Skills/Skills.jsx";
 import SkillEditor from "../SkillEditor/SkilllEditor";
 
-export default function Main({ skillsData, coursesData,  }) {
+export default function Main({ skillsData, coursesData, handleAddSkill }) {
   return (
     <main className="main">
       <NavBar />
