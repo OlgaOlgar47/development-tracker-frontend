@@ -9,7 +9,7 @@ function App() {
   const [coursesData, setCoursesData] = useState({});
 
   useEffect(() => {
-      Promise.all([Api.getUserData(), Api.getCourses()])
+      Promise.all([Api.getSkills(), Api.getCourses()])
         .then(([coursesData, skillsData]) => {
           setCoursesData(coursesData);
           setSkillsData(skillsData);
