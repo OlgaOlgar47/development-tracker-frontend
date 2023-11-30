@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from 'react-router-dom';
+import React, { useState } from "react";
 import "./SkillEditor.css";
 import Title from "../Title/Title";
 import Subtitle from "../Subtitle/Subtitle";
@@ -8,32 +7,14 @@ import Recommendations from "../Recommendations/Recommendations";
 import ButtonsBackSaveDel from "../Buttons/ButtonsBackSaveDel";
 import TextField from "@mui/material/TextField";
 
-export default function SkillEditor({ handleEditSkill, skillsData }) {
-  // const [value, setValue] = useState(""); // Состояние для хранения значения ввода
-  const { skillId } = useParams(); // Получаем параметр из URL
-  const [skillInfo, setSkillInfo] = useState(null);
-
-  useEffect(() => {
-    // Преобразуем skillId в число, так как он, вероятно, строка
-    const id = parseInt(skillId, 10);
-
-    // Найти объект навыка по его id
-    const foundSkill = skillsData.find(skill => skill.id === id);
-    console.log(foundSkill, skillsData)
-
-    // Установить найденный навык в состояние для отображения на странице
-    setSkillInfo(foundSkill);
-  }, [skillId, skillsData]);
+export default function SkillEditor({ skillName }) {
+  const [value, setValue] = useState(""); // Состояние для хранения значения ввода
 
   const handleInputChange = (event) => {
-    // const newValue = event.target.value;
-    // setValue(newValue);
+    const newValue = event.target.value;
+    setValue(newValue);
     // Здесь вы можете добавить логику для сохранения изменений в базе данных или другом месте
   };
-
-  if (!skillInfo) {
-    return <div>Loading...</div>; // Отобразить загрузку, пока данные не загружены
-  }
 
   return (
     <section className="skill-editor">
@@ -41,7 +22,7 @@ export default function SkillEditor({ handleEditSkill, skillsData }) {
       <div className="skill-editor__grid-container">
         <div className="skill-editor__grid-item">
           <p className="skill-editor__tag">Навык</p>
-          <Subtitle subtitleName={skillInfo.name} />
+          <Subtitle subtitleName={skillName} />
           <p className="skill-editor__tag">Уровень владения навыком</p>
           <div className="skill-editor__rate">
             <RateButton
@@ -52,11 +33,11 @@ export default function SkillEditor({ handleEditSkill, skillsData }) {
                   в&nbsp;вопросе
                 </>
               }
-              isSelected={false}
+              isSelected={true}
             />
             <RateButton
               text="Могу выполнить простую задачу"
-              isSelected={false}
+              isSelected={true}
             />
             <RateButton
               text={
@@ -92,7 +73,7 @@ export default function SkillEditor({ handleEditSkill, skillsData }) {
           <TextField
             multiline // Разрешить многострочный ввод
             rows={4} // Количество строк в поле ввода
-            value={skillInfo.nates}
+            value={value}
             onChange={handleInputChange}
             variant="outlined"
             placeholder="Например, ссылка на туториал или статью"
@@ -102,7 +83,7 @@ export default function SkillEditor({ handleEditSkill, skillsData }) {
               borderRadius: "4px",
             }}
           />
-          <ButtonsBackSaveDel handleSave={handleEditSkill} />
+          <ButtonsBackSaveDel />
         </div>
         <div className="tracker__grid-item">
           <Recommendations isSkillsEditor={true} />
