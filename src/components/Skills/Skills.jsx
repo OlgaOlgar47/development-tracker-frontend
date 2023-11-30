@@ -1,10 +1,9 @@
 import Paragraph from "../Paragraph/Paragraph";
 import Recommendations from "../Recommendations/Recommendations";
 import SkillsContainer from "../SkillsContainer/SkillsContainer";
-import ButtonsBackAdd from "../Buttons/ButtonsBackAdd";
 import Title from "../Title/Title";
 import "./Skills.css";
-import ButtonsDeleteEdit from "../Buttons/ButtonsDeleteEdit";
+import UserSkillsContainer from "../UserSkillsContainer/UserSkillsContainer";
 
 export default function Skills() {
   return (
@@ -41,9 +40,7 @@ export default function Skills() {
               { name: "Типографика" },
             ]}
           />
-          <ButtonsBackAdd disabledAdd={true} 
-          />
-          <SkillsContainer
+           <UserSkillsContainer
             subtitleName="В твоих навыках"
             skillsData={[
               { name: "Анализ рынка" },
@@ -52,7 +49,6 @@ export default function Skills() {
               { name: "Воронка AARRR" },
             ]}
           />
-          <ButtonsDeleteEdit />
         </div>
         <div className="tracker__grid-item">
           <Recommendations />
