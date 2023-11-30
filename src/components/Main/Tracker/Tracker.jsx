@@ -18,7 +18,7 @@ export default function Tracker({skillsData}) {
       которыми уже обладаешь. А&nbsp;мы&nbsp;подскажем полезные материалы для
       изучения."
           />
-          <SearchForm subtitleName="Поиск навыков" hasButton={true} skillsData={skillsData}/>
+          <SearchForm subtitleName="Поиск навыков" hasButton={true} skillsData={skillsData} handleAddSkill />
           <SkillsContainer
             subtitleName="Твои навыки"
             skillsData={[

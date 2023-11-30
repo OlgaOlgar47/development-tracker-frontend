@@ -12,7 +12,7 @@ export default function Main({ skillsData, coursesData }) {
     <main className="main">
       <NavBar />
       <Routes>
-        <Route path="/" element={<Tracker skillsData={skillsData} coursesData={coursesData}/>} />
+        <Route path="/" element={<Tracker skillsData={skillsData} coursesData={coursesData} handleAddSkill/>} />
         <Route path="/collections" element={<Collections />} />
         <Route path="/collections/skills" element={<Skills />} />
         <Route path="/skill-editor" element={<SkillEditor />} />

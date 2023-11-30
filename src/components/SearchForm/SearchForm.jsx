@@ -4,40 +4,40 @@ import Subtitle from "../Subtitle/Subtitle";
 import ButtonTemplate from "../Buttons/ButtonTemplate";
 import TextField from "@mui/material/TextField";
 
-export default function SearchForm({ subtitleName, hasButton, skillsData }) {
-  const skills={skillsData}
-  // const skills = [
-  //   "HTML",
-  //   "CSS",
-  //   "JavaScript",
-  //   "Python",
-  //   "React",
-  //   "Node.js",
-  //   "SQL",
-  //   "Vue.js",
-  //   "Angular",
-  //   "Типографика",
-  //   "Композиция",
-  //   "Генерация идей",
-  //   "Tilda",
-  //   "Figma",
-  //   "Adobe Photoshop",
-  //   "Анализ ЦА",
-  //   "Гипотезы",
-  //   "Исследования",
-  //   "UX-копирайтинг",
-  //   "UX-тестирование",
-  //   "Конкурентный анализ",
-  //   "JTBD и User Stories",
-  //   "Анимация",
-  //   "Вайрфреймы",
-  //   "UI-Kit",
-  //   "Аудит юзабилити"
-  // ];
+export default function SearchForm({ subtitleName, hasButton, skillsData, handleAddSkill}) {
+  // const skills={skillsData}
+  const skills = [
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "Python",
+    "React",
+    "Node.js",
+    "SQL",
+    "Vue.js",
+    "Angular",
+    "Типографика",
+    "Композиция",
+    "Генерация идей",
+    "Tilda",
+    "Figma",
+    "Adobe Photoshop",
+    "Анализ ЦА",
+    "Гипотезы",
+    "Исследования",
+    "UX-копирайтинг",
+    "UX-тестирование",
+    "Конкурентный анализ",
+    "JTBD и User Stories",
+    "Анимация",
+    "Вайрфреймы",
+    "UI-Kit",
+    "Аудит юзабилити"
+  ];
 
-  const [searchText, setSearchText] = useState("");
+  const [searchText, setSearchText] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-  const [selectedItem, setSelectedItem] = useState(null); //Переменная состояния для хранения выбранного элемента
+  const [selectedItems, setSelectedItems] = useState([]);
 
   const disabledAdd = searchText.length === 0;
 
@@ -50,19 +50,26 @@ export default function SearchForm({ subtitleName, hasButton, skillsData }) {
     setSearchResults(filteredResults);
   };
 
-
   const handleButtonClick = () => {
-    // Добавить здесь логику для обработки добавления выбранного навыка
-    // Например, можно сохранить выбранный навык в состоянии или выполнить другие действия
-    console.log("Выбранный навык:", searchText);
-    setSearchText("");
+    // Добавить выбранный навык в список выбранных элементов
+    if (searchText && !selectedItems.includes(searchText)) {
+      setSelectedItems([...selectedItems, searchText]);
+      setSearchText('');
+    }
   };
-
 
   const handleResultClick = (index) => {
-    // Установить индекс выбранного элемента
-    setSelectedItem(index === selectedItem ? null : index);
+    // Добавить или удалить элемент из списка выбранных элементов
+    const selectedItem = searchResults[index];
+    setSelectedItems((prevItems) => {
+      if (prevItems.includes(selectedItem)) {
+        return prevItems.filter((item) => item !== selectedItem);
+      } else {
+        return [...prevItems, selectedItem];
+      }
+    });
   };
+
 
   return (
     <form className="search-form">
@@ -106,7 +113,7 @@ export default function SearchForm({ subtitleName, hasButton, skillsData }) {
             <div
               key={index}
               className={`search-form__result ${
-                index === selectedItem ? 'selected' : ''
+                selectedItems.includes(result) ? 'selected' : ''
               }`}
               onClick={() => handleResultClick(index)}
             >

@@ -5,6 +5,7 @@ import Main from "../Main/Main";
 import * as Api from "../../utils/api";
 
 function App() {
+  const [userData, setUserData] = useState({})
   const [skillsData, setSkillsData] = useState([]);
   const [coursesData, setCoursesData] = useState({});
 
@@ -19,10 +20,20 @@ function App() {
         });
   }, [skillsData]);
 
+  function handleAddSkill(name) {
+    Api.addSkill(name)
+    .then((res) => {
+       setUserData([res, ...userData])
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+
   return (
     <div className="page">
       <Header />
-      <Main skillsData={skillsData} coursesData={coursesData}/>
+      <Main skillsData={skillsData} coursesData={coursesData} handleAddSkill={handleAddSkill}/>
     </div>
   );
 }
