@@ -48,23 +48,10 @@
   background-color: #F7FFFA;
 }
 
-.skills-container__item-small {
-  padding: 8px 20px;
-  border: 1px solid #dde0e4;
-  border-radius: 4px;
-  background: #f9fafb;
+.skills-container__item.selected {
+  border: 1px solid #1A1B22;
 }
 
-.skills-container__item-small:hover {
-  cursor: pointer;
-  color: #5A9BFF;
-  border-color: #5A9BFF;
-}
-
-.skills-container__item-small.selected {
-  color: #1D6BF3;
-  border-color: #1D6BF3;
-}
 
 .skills-container__item-count {
   margin: 0;

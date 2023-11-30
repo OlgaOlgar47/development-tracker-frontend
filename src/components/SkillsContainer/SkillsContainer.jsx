@@ -17,6 +17,7 @@ export default function SkillsContainer({ skillsData }) {
     setSortedSkillsData([...skillsData]);
   }, [skillsData]);
 
+
   return (
     <section className="skills-container">
       <ul className="skills-container__list">

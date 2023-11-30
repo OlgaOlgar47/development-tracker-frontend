@@ -76,7 +76,6 @@ export default function SearchForm({ subtitleName, hasButton, skillsData, handle
     });
   };
 
-
   return (
     <form className="search-form">
       <Subtitle subtitleName={subtitleName} />
