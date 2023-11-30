@@ -1,6 +1,6 @@
 import Paragraph from "../Paragraph/Paragraph";
 import Recommendations from "../Recommendations/Recommendations";
-import SkillsContainer from "../SkillsContainer/SkillsContainer";
+import SkillsContainer from "../UserSkillsContainer/UserSkillsContainer";
 import ButtonsBackAdd from "../Buttons/ButtonsBackAdd";
 import Title from "../Title/Title";
 import "./Skills.css";

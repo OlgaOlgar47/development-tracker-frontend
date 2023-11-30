@@ -3,7 +3,7 @@ import "./Tracker.css";
 import Title from "../../Title/Title";
 import Paragraph from "../../Paragraph/Paragraph";
 import SearchForm from "../../SearchForm/SearchForm";
-import SkillsContainer from "../../SkillsContainer/SkillsContainer";
+import SkillsContainer from "../../UserSkillsContainer/UserSkillsContainer";
 import Recommendations from "../../Recommendations/Recommendations";
 import ButtonsDeleteEdit from "../../Buttons/ButtonsDeleteEdit";
 

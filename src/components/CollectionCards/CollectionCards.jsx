@@ -3,7 +3,7 @@ import "./CollectionCards.css";
 import { cards } from "../../utils/constants";
 import { Link } from "react-router-dom";
 
-export default function CollectionCards() {
+export default function CollectionCards({collectionsData}) {
   // const [selectedCard, setSelectedCard] = useState(null);
 
   // const handleImageClick = (index) => {
