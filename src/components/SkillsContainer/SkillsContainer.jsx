@@ -26,10 +26,7 @@ export default function SkillsContainer({
       );
     }
     setIsSorted(!isSorted);
-
-    setTimeout(() => {
-      setSortedSkillsData(sortedSkills);
-    }, 100);
+    setSortedSkillsData(sortedSkills)
   }
   function showAll() {}
 

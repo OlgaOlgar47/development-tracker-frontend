@@ -19,7 +19,7 @@ export const cards = [
   {name: "Графический дизайнер", count: "10 навыков", image: Desiner, imageHover: DesinerHover},
   {name: "Топ 5 навыков в дизайне в 2023 году", count: "5 навыков", image: Top5, imageHover: Top5hover},
   {name: "Аналитик данных", count: "12 навыков", image: Analitic, imageHover: AnaliticHover},
-  {name: "Дизайнер интерфейсов", count: "23 навыков", image: DesinerInerfase, imageHover: DesinerInerfaseHover},
+  {name: "Дизайнер интерфейсов", count: "23 навыка", image: DesinerInerfase, imageHover: DesinerInerfaseHover},
   {name: "Инженер по тестированию", count: "15 навыков", image: Tester, imageHover: TesterHover},
   {name: "Менеджер проектов", count: "18 навыков", image: ManagerProgect, imageHover: ManagerProgectHover},
   {name: "Контент менеджер", count: "8 навыков", image: ContentManager, imageHover: ContentManagerHover},
