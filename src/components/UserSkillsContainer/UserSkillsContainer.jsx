@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 import "./UserSkillsContainer.css";
 import Subtitle from "../Subtitle/Subtitle";
 import ButtonsDeleteEdit from "../../components/Buttons/ButtonsDeleteEdit";
@@ -11,15 +12,25 @@ export default function UserSkillsContainer({
 }) {
   const [sortedSkillsData, setSortedSkillsData] = useState([]);
   const [isSorted, setIsSorted] = useState(false);
-  const [selectedSkills, setSelectedSkills] = useState([]);
+  const [selectedSkill, setSelectedSkills] = useState([]);
+
+  const navigate = useNavigate();
+
+  function handleEdit() {
+    if (selectedSkill.length === 1) {
+      const skillId = selectedSkill[0]; // Предположим, что selectedSkill содержит индекс выбранного навыка
+      navigate(`/skill-editor/${skillId}`); // Переход на страницу редактирования с id выбранного навыка
+    }
+  }
 
   const handleSkillClick = (index) => {
-    if (selectedSkills.includes(index)) {
-      setSelectedSkills(selectedSkills.filter((item) => item !== index));
+    if (selectedSkill.includes(index)) {
+      setSelectedSkills([]);
     } else {
-      setSelectedSkills([...selectedSkills, index]);
+      setSelectedSkills([index]);
     }
   };
+  
 
   useEffect(() => {
     setSortedSkillsData([...skillsData]);
@@ -51,7 +62,7 @@ export default function UserSkillsContainer({
   };
 
   function handleDelete() {
-    handleDeleteSkill(selectedSkills);
+    handleDeleteSkill(selectedSkill);
   }
 
   return (
@@ -79,7 +90,7 @@ export default function UserSkillsContainer({
               <li
                 key={index}
                 className={`skills-container__item ${
-                  selectedSkills.includes(index) ? "selected" : ""
+                  selectedSkill.includes(index) ? "selected" : ""
                 }`}
                 onClick={() => handleSkillClick(index)}
                 style={{
@@ -115,9 +126,10 @@ export default function UserSkillsContainer({
         </p>
       )}
       <ButtonsDeleteEdit
-        disabledDelete={true}
-        disabledEdit={selectedSkills.length === 0}
+        disabledDelete={selectedSkill.length === 0}
+        disabledEdit={selectedSkill.length === 0}
         handleDelete={handleDelete}
+        handleEdit={handleEdit}
       />
     </section>
   );
