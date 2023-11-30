@@ -8,14 +8,14 @@ function App() {
   const [userData, setUserData] = useState({});
   const [skillsData, setSkillsData] = useState([]);
   const [coursesData, setCoursesData] = useState({});
-  const [collectionsData, setCollectionsData] = useState({});
+  const [collectionData, setCollectionData] = useState({});
 
   useEffect(() => {
     Promise.all([Api.getSkills(), Api.getCourses(), Api.getCollections()])
-      .then(([coursesData, skillsData, collectionsData]) => {
+      .then(([coursesData, skillsData, collectionData]) => {
         setCoursesData(coursesData);
         setSkillsData(skillsData);
-        setCollectionsData(collectionsData);
+        setCollectionData(collectionData);
       })
       .catch((err) => {
         console.log(err);
@@ -25,6 +25,17 @@ function App() {
   function handleAddSkill(name) {
     console.log(name);
     Api.addSkill(name)
+      .then((res) => {
+        setUserData([res, ...userData]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function handleEditSkill(values) {
+    console.log(values);
+    Api.editSkill(values)
       .then((res) => {
         setUserData([res, ...userData]);
       })
@@ -55,7 +66,8 @@ function App() {
         coursesData={coursesData}
         handleAddSkill={handleAddSkill}
         handleDeleteSkill={handleDeleteSkill}
-        collectionsData={collectionsData}
+        collectionData={collectionData}
+        handleEditSkill={handleEditSkill}
       />
     </div>
   );

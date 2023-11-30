@@ -1,7 +1,6 @@
 import React from "react";
 import "./Buttons.css";
 import ButtonTemplate from "./ButtonTemplate";
-import { Link } from "react-router-dom";
 
 export default function ButtonsDeleteEdit({ handleDelete, handleEdit, disabledDelete, disabledEdit }) {
   return (
@@ -18,7 +17,6 @@ export default function ButtonsDeleteEdit({ handleDelete, handleEdit, disabledDe
         disabledColor="#B5B5B7"
         disableBackground="white"
       />
-      <Link to="/skill-editor">
       <ButtonTemplate
         handleButtonClick={handleEdit}
         buttonText="Редактировать"
@@ -34,7 +32,6 @@ export default function ButtonsDeleteEdit({ handleDelete, handleEdit, disabledDe
         hoverBackground="#1D6BF3"
         hoverTextColor="#FFFFFF"
       />
-      </Link>
     </div>
   );
 }

@@ -9,7 +9,9 @@ import SkillEditor from "../SkillEditor/SkilllEditor";
 
 export default function Main({
   skillsData,
+  collectionData,
   coursesData,
+  handleEditSkill,
   handleAddSkill,
   handleDeleteSkill,
   collectionsData,
