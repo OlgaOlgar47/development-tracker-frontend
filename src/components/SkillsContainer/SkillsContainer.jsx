@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import "./SkillsContainer.css";
+import ButtonsBackAdd from "../Buttons/ButtonsBackAdd";
 
-export default function SkillsContainer({ skillsData }) {
+export default function SkillsContainer({ skillsData, handleAddSkill }) {
   const [sortedSkillsData, setSortedSkillsData] = useState([]);
   const [selectedCards, setSelectedCards] = useState([]);
 
@@ -17,6 +18,9 @@ export default function SkillsContainer({ skillsData }) {
     setSortedSkillsData([...skillsData]);
   }, [skillsData]);
 
+  function handleAdd() {
+    handleAddSkill(selectedCards);
+  }
 
   return (
     <section className="skills-container">
@@ -33,6 +37,7 @@ export default function SkillsContainer({ skillsData }) {
           </li>
         ))}
       </ul>
+      <ButtonsBackAdd handleAdd={handleAdd} disabledAdd={selectedCards.length === 0} />
     </section>
   );
 }
