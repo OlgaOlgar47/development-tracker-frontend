@@ -4,35 +4,36 @@ import Subtitle from "../Subtitle/Subtitle";
 import ButtonTemplate from "../Buttons/ButtonTemplate";
 import TextField from "@mui/material/TextField";
 
-export default function SearchForm({ subtitleName, hasButton }) {
-  const skills = [
-    "HTML",
-    "CSS",
-    "JavaScript",
-    "Python",
-    "React",
-    "Node.js",
-    "SQL",
-    "Vue.js",
-    "Angular",
-    "Типографика",
-    "Композиция",
-    "Генерация идей",
-    "Tilda",
-    "Figma",
-    "Adobe Photoshop",
-    "Анализ ЦА",
-    "Гипотезы",
-    "Исследования",
-    "UX-копирайтинг",
-    "UX-тестирование",
-    "Конкурентный анализ",
-    "JTBD и User Stories",
-    "Анимация",
-    "Вайрфреймы",
-    "UI-Kit",
-    "Аудит юзабилити"
-  ];
+export default function SearchForm({ subtitleName, hasButton, skillsData }) {
+  const skills={skillsData}
+  // const skills = [
+  //   "HTML",
+  //   "CSS",
+  //   "JavaScript",
+  //   "Python",
+  //   "React",
+  //   "Node.js",
+  //   "SQL",
+  //   "Vue.js",
+  //   "Angular",
+  //   "Типографика",
+  //   "Композиция",
+  //   "Генерация идей",
+  //   "Tilda",
+  //   "Figma",
+  //   "Adobe Photoshop",
+  //   "Анализ ЦА",
+  //   "Гипотезы",
+  //   "Исследования",
+  //   "UX-копирайтинг",
+  //   "UX-тестирование",
+  //   "Конкурентный анализ",
+  //   "JTBD и User Stories",
+  //   "Анимация",
+  //   "Вайрфреймы",
+  //   "UI-Kit",
+  //   "Аудит юзабилити"
+  // ];
 
   const [searchText, setSearchText] = useState("");
   const [searchResults, setSearchResults] = useState([]);
