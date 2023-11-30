@@ -7,13 +7,13 @@ import Collections from "../Collections/Collections.jsx";
 import Skills from "../Skills/Skills.jsx";
 import SkillEditor from "../SkillEditor/SkilllEditor";
 
-export default function Main({ skillsData, coursesData }) {
+export default function Main({ skillsData, coursesData, collectionsData }) {
   return (
     <main className="main">
       <NavBar />
       <Routes>
         <Route path="/" element={<Tracker skillsData={skillsData} coursesData={coursesData} handleAddSkill/>} />
-        <Route path="/collections" element={<Collections collectionsData/>} />
+        <Route path="/collections" element={<Collections collectionsData={collectionsData}/>} />
         <Route path="/collections/skills" element={<Skills />} />
         <Route path="/skill-editor" element={<SkillEditor />} />
       </Routes>
