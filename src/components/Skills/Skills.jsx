@@ -42,9 +42,9 @@ export default function Skills() {
               { name: "Типографика" },
             ]}
           />
-          <ButtonsBackAdd disabledAdd={true} />
+          <ButtonsBackAdd disabledAdd={true} 
+          />
           <SkillsContainer
-            margin-top="400px"
             isSkills={true}
             subtitleName="В твоих навыках"
             skillsData={[
