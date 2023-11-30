@@ -32,6 +32,7 @@ export default function Tracker({
             handleDeleteSkill={handleDeleteSkill}
             subtitleName="Твои навыки"
             skillsData={[
+              { id: 0, name: "HTML", percentage: 0, rate: 1, notes: "kakaka" },
               { id: 1, name: "HTML", percentage: 0, rate: 1, notes: "kakaka" },
               { id: 2, name: "CSS", percentage: 0 },
               { id: 3, name: "JavaScript", percentage: 0 },
