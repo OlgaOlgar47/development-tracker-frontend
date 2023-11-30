@@ -12,6 +12,7 @@ export default function Main({
   coursesData,
   handleAddSkill,
   handleDeleteSkill,
+  collectionsData,
 }) {
   return (
     <main className="main">
@@ -28,8 +29,9 @@ export default function Main({
             />
           }
         />
-        <Route path="/collections" element={<Collections collectionsData />} />
-        <Route path="/collections/skills" element={<Skills />} />
+        <Route path="/collections" element={<Collections collectionsData={collectionsData}
+          />} />
+        <Route path="/collections/skills" element={<Skills handleAddSkill={handleAddSkill}/>} />
         <Route path="/skill-editor" element={<SkillEditor />} />
       </Routes>
     </main>

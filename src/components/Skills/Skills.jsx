@@ -5,14 +5,14 @@ import Title from "../Title/Title";
 import "./Skills.css";
 import UserSkillsContainer from "../UserSkillsContainer/UserSkillsContainer";
 
-export default function Skills() {
+export default function Skills({ handleAddSkill }) {
   return (
     <section className="skills">
       <Title text="Дизайнер интерфейсов" />
       <div className="skills__container">
         <div className="skills__items">
           <Paragraph text="Каждый день мы делаем покупки в интернете, заказываем доставку, читаем новости. UX/UI-дизайнеры делают так, чтобы всё это получалось легко и удобно." />
-          <SkillsContainer
+          <SkillsContainer handleAddSkill={handleAddSkill}
             subtitleName="Навыки дизайнера интерфейсов"
             skillsData={[
               { name: "Анализ рынка" },
@@ -42,12 +42,7 @@ export default function Skills() {
           />
            <UserSkillsContainer
             subtitleName="В твоих навыках"
-            skillsData={[
-              { name: "Анализ рынка" },
-              { name: "Продуктовые метрики" },
-              { name: "Юнит-экономика" },
-              { name: "Воронка AARRR" },
-            ]}
+            skillsData={[]}
           />
         </div>
         <div className="tracker__grid-item">
