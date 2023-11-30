@@ -3,11 +3,10 @@ import "./Tracker.css";
 import Title from "../../Title/Title";
 import Paragraph from "../../Paragraph/Paragraph";
 import SearchForm from "../../SearchForm/SearchForm";
-import SkillsContainer from "../../UserSkillsContainer/UserSkillsContainer";
+import UserSkillsContainer from "../../UserSkillsContainer/UserSkillsContainer";
 import Recommendations from "../../Recommendations/Recommendations";
-import ButtonsDeleteEdit from "../../Buttons/ButtonsDeleteEdit";
 
-export default function Tracker({skillsData, handleAddSkill}) {
+export default function Tracker({skillsData, handleAddSkill, handleDeleteSkill}) {
   return (
     <section className="tracker">
       <Title text="Трекер развития" />
@@ -19,7 +18,8 @@ export default function Tracker({skillsData, handleAddSkill}) {
       изучения."
           />
           <SearchForm subtitleName="Поиск навыков" hasButton={true} skillsData={skillsData} handleAddSkill={handleAddSkill}/>
-          <SkillsContainer
+          <UserSkillsContainer
+          handleDeleteSkill={handleDeleteSkill}
             subtitleName="Твои навыки"
             skillsData={[
               { name: "HTML", percentage: 0 },
@@ -42,7 +42,6 @@ export default function Tracker({skillsData, handleAddSkill}) {
               { name: "dobe Photoshop", percentage: 80 },
             ]}
           />
-          <ButtonsDeleteEdit disabledDelete={true} disabledEdit={true} />
         </div>
         <div className="tracker__grid-item">
           <Recommendations title="Полезные ресурсы" />
