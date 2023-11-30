@@ -1,8 +1,11 @@
 import React from "react";
 import "./Buttons.css";
 import ButtonTemplate from "./ButtonTemplate";
+import { useNavigate } from "react-router-dom";
 
-export default function ButtonsBackAdd({ goBack, handleAdd, disabledAdd }) {
+export default function ButtonsBackAdd({ handleAdd, disabledAdd }) {
+  const navigate = useNavigate();
+  const goBack = () => navigate(-1);
   return (
     <div className="buttons-group">
       <ButtonTemplate
