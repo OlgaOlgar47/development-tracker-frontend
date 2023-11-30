@@ -62,6 +62,6 @@
   margin: 0;
 }
 
-.collection-cards__details-link:hover {
+.collection-cards__details-else:hover {
   text-decoration: underline;
 }
