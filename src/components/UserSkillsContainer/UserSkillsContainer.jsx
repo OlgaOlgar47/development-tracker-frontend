@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "./SkillsContainer.css";
+import "./UserSkillsContainer.css";
 import Subtitle from "../Subtitle/Subtitle";
 
 export default function SkillsContainer({
