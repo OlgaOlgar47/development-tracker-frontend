@@ -1,4 +1,4 @@
-import {  useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./SkillsContainer.css";
 import Subtitle from "../Subtitle/Subtitle";
 
@@ -8,7 +8,7 @@ export default function SkillsContainer({
   isSkills,
 }) {
   const [sortedSkillsData, setSortedSkillsData] = useState([]);
-  const [isSorted, setIsSorted] = useState(true);
+  const [isSorted, setIsSorted] = useState(false);
 
   useEffect(() => {
     setSortedSkillsData([...skillsData]);
@@ -26,7 +26,7 @@ export default function SkillsContainer({
       );
     }
     setIsSorted(!isSorted);
-    setSortedSkillsData(sortedSkills)
+    setSortedSkillsData(sortedSkills);
   }
   function showAll() {}
 
@@ -45,10 +45,7 @@ export default function SkillsContainer({
         <Subtitle subtitleName={subtitleName} />
         {!isSkills && (
           <div className="skills-container__buttons">
-            <button
-              className="skills-container__button"
-              onClick={sortSkills}
-            >
+            <button className="skills-container__button" onClick={sortSkills}>
               <p className="skills-container__button-text">Сортировка</p>
               <div className="skills-container__sort-icon"></div>
             </button>
@@ -61,13 +58,7 @@ export default function SkillsContainer({
       </div>
       {skillsData && skillsData.length > 0 ? (
         <>
-          <ul
-            className={
-              isSkills
-                ? "skills-container__list"
-                : "skills-container__list skills-container__list-limited"
-            }
-          >
+          <ul className="skills-container__list">
             {sortedSkillsData.map((skill, index) => (
               <li
                 key={index}
@@ -102,16 +93,6 @@ export default function SkillsContainer({
               </li>
             ))}
           </ul>
-          {/* {hiddenSkillsCount > 0 && (
-            <span className="skills-container__item-count">
-              + {hiddenSkillsCount}{" "}
-              {hiddenSkillsCount === 1
-                ? "навык"
-                : hiddenSkillsCount > 1 && hiddenSkillsCount < 5
-                ? "навыка"
-                : "навыков"}
-            </span>
-          )} */}
         </>
       ) : (
         <p className="skills-container__text">

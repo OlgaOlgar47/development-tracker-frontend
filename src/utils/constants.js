@@ -25,3 +25,26 @@ export const cards = [
   {name: "Контент менеджер", count: "8 навыков", image: ContentManager, imageHover: ContentManagerHover},
   {name: "Фронтенд-разработчик", count: "14 навыков", image: Frontend, imageHover: FrontendHover},
   ]  
+
+
+  export const skillsData=[
+    { name: "HTML", percentage: 0 },
+    { name: "CSS", percentage: 0 },
+    { name: "JavaScript", percentage: 0 },
+    { name: "Python", percentage: 0 },
+    { name: "React", percentage: 0 },
+    { name: "Node.js", percentage: 0 },
+    { name: "SQL", percentage: 0 },
+    { name: "Vue.js", percentage: 0 },
+    { name: "Angular", percentage: 0 },
+    { name: "Композиция и сетки", percentage: 80 },
+    { name: "UX-копирайтинг", percentage: 20 },
+    { name: "Анимация", percentage: 40 },
+    { name: "Исследования", percentage: 80 },
+    { name: "Гайдлайны iOS", percentage: 100 },
+    { name: "Вайрфреймы", percentage: 20 },
+    { name: "Анализ ЦА", percentage: 20 },
+    { name: "Гипотезы", percentage: 60 },
+    { name: "dobe Photoshop", percentage: 80 },
+  ]
+  
