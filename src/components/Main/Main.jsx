@@ -35,7 +35,7 @@ export default function Main({
           />} />
         <Route path="/collections/skills" element={<Skills handleAddSkill={handleAddSkill}/>} />
         <Route path="/skill-editor/:skillId" element={<SkillEditor skillsData={[
-              { id: 0, name: "HTML", percentage: 0, rate: 1, notes: "kakaka" },
+              { id: 0, name: "мой классный навык", percentage: 0, rate: 1, notes: "kakaka" },
               { id: 1, name: "HTML", percentage: 0, rate: 1, notes: "kakaka" },
               { id: 2, name: "CSS", percentage: 0 },
               { id: 3, name: "JavaScript", percentage: 0 },

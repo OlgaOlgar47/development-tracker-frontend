@@ -52,11 +52,11 @@ export default function SkillEditor({ handleEditSkill, skillsData }) {
                   в&nbsp;вопросе
                 </>
               }
-              isSelected={false}
+              isSelected={skillInfo.percentage >= 20}
             />
             <RateButton
               text="Могу выполнить простую задачу"
-              isSelected={false}
+              isSelected={skillInfo.percentage >= 40}
             />
             <RateButton
               text={
@@ -66,6 +66,7 @@ export default function SkillEditor({ handleEditSkill, skillsData }) {
                   сложные задачи
                 </>
               }
+              isSelected={skillInfo.percentage >= 60}
             />
             <RateButton
               text={
@@ -75,6 +76,7 @@ export default function SkillEditor({ handleEditSkill, skillsData }) {
                   но&nbsp;нуждаюсь в&nbsp;обратной связи
                 </>
               }
+              isSelected={skillInfo.percentage >= 80}
             />
             <RateButton
               text={
@@ -86,6 +88,7 @@ export default function SkillEditor({ handleEditSkill, skillsData }) {
                   без подсказок и&nbsp;обратной связи
                 </>
               }
+              isSelected={skillInfo.percentage >= 100}
             />
           </div>
           <p className="skill-editor__tag">Заметки</p>
