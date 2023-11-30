@@ -33,9 +33,9 @@ function App() {
       });
   }
 
-  function handleEditSkill(values) {
-    console.log(values);
-    Api.editSkill(values)
+  function handleEditSkill(skillData) {
+    console.log(skillData);
+    Api.editSkill(skillData)
       .then((res) => {
         setUserData([res, ...userData]);
       })

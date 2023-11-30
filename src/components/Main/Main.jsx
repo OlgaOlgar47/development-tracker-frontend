@@ -52,9 +52,9 @@ export default function Main({
               { id: 14, name: "Гайдлайны iOS", percentage: 100 },
               { id: 15, name: "Вайрфреймы", percentage: 20 },
               { id: 16, name: "Анализ ЦА", percentage: 20 },
-              { id: 17, name: "Гипотезы", percentage: 60 },
+              { id: 17, name: "Гипотезы", percentage: 60, notes: "kakaka" },
               { id: 18, name: "dobe Photoshop", percentage: 80 },
-            ]}/>} />
+            ]}handleEditSkill={handleEditSkill} />}  />
       </Routes>
     </main>
   );
