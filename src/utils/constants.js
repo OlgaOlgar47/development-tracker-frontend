@@ -15,6 +15,7 @@ import ManagerProgectHover from "../../src/images/prodject-manager-hover.svg";
 import ContentManagerHover from "../../src/images/kontent0manager-hover.svg";
 import FrontendHover from "../../src/images/frontend developer-hover.svg";
 
+
 export const cards = [
   {
     name: "Графический дизайнер",

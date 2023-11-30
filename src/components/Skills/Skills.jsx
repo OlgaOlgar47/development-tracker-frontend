@@ -1,6 +1,6 @@
 import Paragraph from "../Paragraph/Paragraph";
 import Recommendations from "../Recommendations/Recommendations";
-import SkillsContainer from "../UserSkillsContainer/UserSkillsContainer";
+import SkillsContainer from "../SkillsContainer/SkillsContainer";
 import ButtonsBackAdd from "../Buttons/ButtonsBackAdd";
 import Title from "../Title/Title";
 import "./Skills.css";
@@ -14,7 +14,6 @@ export default function Skills() {
         <div className="skills__items">
           <Paragraph text="Каждый день мы делаем покупки в интернете, заказываем доставку, читаем новости. UX/UI-дизайнеры делают так, чтобы всё это получалось легко и удобно." />
           <SkillsContainer
-            isSkills={true}
             subtitleName="Навыки дизайнера интерфейсов"
             skillsData={[
               { name: "Анализ рынка" },
@@ -45,7 +44,6 @@ export default function Skills() {
           <ButtonsBackAdd disabledAdd={true} 
           />
           <SkillsContainer
-            isSkills={true}
             subtitleName="В твоих навыках"
             skillsData={[
               { name: "Анализ рынка" },
