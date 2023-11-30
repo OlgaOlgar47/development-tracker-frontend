@@ -49,14 +49,23 @@ export default function SearchForm({ subtitleName, hasButton, skillsData, handle
     setSearchText(value);
     setSearchResults(filteredResults);
   };
-
   const handleButtonClick = () => {
-    // Добавить выбранный навык в список выбранных элементов
+    let itemsToAdd = selectedItems.length > 0 ? selectedItems.slice() : [];
+  
     if (searchText && !selectedItems.includes(searchText)) {
-      setSelectedItems([...selectedItems, searchText]);
+      itemsToAdd.push(searchText);
       setSearchText('');
     }
+  
+    setSelectedItems(prevItems => {
+      const filteredItems = prevItems.filter(item => !itemsToAdd.includes(item));
+      return [...filteredItems, ...itemsToAdd];
+    });
+  
+    handleAddSkill(itemsToAdd);
   };
+  
+  
 
   const handleResultClick = (index) => {
     // Добавить или удалить элемент из списка выбранных элементов

@@ -7,7 +7,7 @@ import SkillsContainer from "../../UserSkillsContainer/UserSkillsContainer";
 import Recommendations from "../../Recommendations/Recommendations";
 import ButtonsDeleteEdit from "../../Buttons/ButtonsDeleteEdit";
 
-export default function Tracker({skillsData}) {
+export default function Tracker({skillsData, handleAddSkill}) {
   return (
     <section className="tracker">
       <Title text="Трекер развития" />
@@ -18,7 +18,7 @@ export default function Tracker({skillsData}) {
       которыми уже обладаешь. А&nbsp;мы&nbsp;подскажем полезные материалы для
       изучения."
           />
-          <SearchForm subtitleName="Поиск навыков" hasButton={true} skillsData={skillsData} handleAddSkill />
+          <SearchForm subtitleName="Поиск навыков" hasButton={true} skillsData={skillsData} handleAddSkill={handleAddSkill}/>
           <SkillsContainer
             subtitleName="Твои навыки"
             skillsData={[
