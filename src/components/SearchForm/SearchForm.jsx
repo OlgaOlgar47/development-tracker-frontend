@@ -54,6 +54,7 @@ export default function SearchForm({ subtitleName, hasButton, skillsData, handle
     // Добавить выбранный навык в список выбранных элементов
     if (searchText && !selectedItems.includes(searchText)) {
       setSelectedItems([...selectedItems, searchText]);
+      handleAddSkill(selectedItems)
       setSearchText('');
     }
   };

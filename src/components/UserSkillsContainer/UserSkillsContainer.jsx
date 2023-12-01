@@ -36,8 +36,6 @@ export default function UserSkillsContainer({
   useEffect(() => {
     setSortedSkillsData(Array.isArray(userData) ? [...userData] : [...userDataConst]);
   }, [userData]);
-
-  console.log("sortedSkillsData", sortedSkillsData)
   
 
   function sortSkills() {

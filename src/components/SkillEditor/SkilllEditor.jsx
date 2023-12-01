@@ -34,7 +34,6 @@ export default function SkillEditor({ handleEditSkill, userData }) {
   };
 
   useEffect(() => {
-    console.log("FOUNDSKILL");
     const id = parseInt(skillId, 10);
 
     if (Array.isArray(userData)) {

@@ -58,8 +58,6 @@ export default function Recommendations({isSkillsEditor, userData}) {
     const topRecommendedCourses = sortedCourses.slice(0, 2).map((courseName) => {
       return coursesList.find((course) => course.name === courseName);
     });
-  
-    console.log(topRecommendedCourses);
     return topRecommendedCourses;
   }  
   
