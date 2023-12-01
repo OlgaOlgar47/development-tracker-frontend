@@ -33,6 +33,7 @@ function App() {
   function handleAddSkill(name) {
     Api.addSkill(name)
       .then((res) => {
+        console.log("ответ сервера:", res)
         setUserData([res, ...userData]);
       })
       .catch((err) => {
