@@ -11,8 +11,9 @@ function App() {
   const [collectionData, setCollectionData] = useState({});
 
   useEffect(() => {
-    Promise.all([Api.getSkills(), Api.getCourses(), Api.getCollections()])
-      .then(([coursesData, skillsData, collectionData]) => {
+    Promise.all([Api.getUserData(), Api.getSkills(), Api.getCourses(), Api.getCollections()])
+      .then(([userData, coursesData, skillsData, collectionData]) => {
+        setUserData(userData)
         setCoursesData(coursesData);
         setSkillsData(skillsData);
         setCollectionData(collectionData);
