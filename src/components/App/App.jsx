@@ -24,7 +24,6 @@ function App() {
   }, [skillsData]);
 
   function handleAddSkill(name) {
-    console.log(name);
     Api.addSkill(name)
       .then((res) => {
         setUserData([res, ...userData]);
