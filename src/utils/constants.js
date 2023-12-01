@@ -15,6 +15,28 @@ import ManagerProgectHover from "../../src/images/prodject-manager-hover.svg";
 import ContentManagerHover from "../../src/images/kontent0manager-hover.svg";
 import FrontendHover from "../../src/images/frontend developer-hover.svg";
 
+export const userDataConst = [
+  { id: 0, name: "мой классный навык", rate: 0, notes: "kakaka", editable: true },
+  { id: 1, name: "HTML", rate: 0, notes: "", editable: false },
+  { id: 2, name: "CSS", rate: 0, notes: "", editable: false },
+  { id: 3, name: "JavaScript", rate: 0, notes: "", editable: false },
+  { id: 4, name: "Python", rate: 0, notes: "", editable: false },
+  { id: 5, name: "React", rate: 0, notes: "", editable: false },
+  { id: 6, name: "Node.js", rate: 0, notes: "", editable: false },
+  { id: 7, name: "SQL", rate: 0, notes: "", editable: false },
+  { id: 8, name: "Vue.js", rate: 0, notes: "", editable: false },
+  { id: 9, name: "Angular", rate: 0, notes: "", editable: false },
+  { id: 10, name: "Композиция и сетки", rate: 80, notes: "", editable: false },
+  { id: 11, name: "UX-копирайтинг", rate: 20, notes: "", editable: false },
+  { id: 12, name: "Анимация", rate: 40, notes: "", editable: false },
+  { id: 13, name: "Исследования", rate: 80, notes: "", editable: false },
+  { id: 14, name: "Гайдлайны iOS", rate: 100, notes: "", editable: false },
+  { id: 15, name: "Вайрфреймы", rate: 20, notes: "", editable: false },
+  { id: 16, name: "Анализ ЦА", rate: 20, notes: "", editable: false },
+  { id: 17, name: "Гипотезы", rate: 60, notes: "", editable: false },
+  { id: 18, name: "Adobe Photoshop", rate: 80, notes: "", editable: false },
+];
+
 
 export const cards = [
   {

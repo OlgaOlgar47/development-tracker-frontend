@@ -42,7 +42,7 @@ export default function Skills({ handleAddSkill }) {
           />
            <UserSkillsContainer
             subtitleName="В твоих навыках"
-            skillsData={[]}
+            userData={[]}
           />
         </div>
         <div className="tracker__grid-item">
