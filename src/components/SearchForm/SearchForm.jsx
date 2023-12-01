@@ -51,13 +51,16 @@ export default function SearchForm({ subtitleName, hasButton, skillsData, handle
   };
 
   const handleButtonClick = () => {
-    // Добавить выбранный навык в список выбранных элементов
-    if (searchText && !selectedItems.includes(searchText)) {
-      setSelectedItems([...selectedItems, searchText]);
-      handleAddSkill(selectedItems)
-      setSearchText('');
-      console.log(selectedItems)
+    let skillsToAdd = [];
+    if (selectedItems.length > 0) {
+      skillsToAdd = selectedItems.slice();
+      setSelectedItems([]); // Очищаем selectedItems
+    } else if (searchText) {
+      skillsToAdd = [searchText];
+      setSearchText(''); // Очищаем searchText
     }
+     console.log("skills To Add:", skillsToAdd)
+    handleAddSkill(skillsToAdd);
   };
 
   const handleResultClick = (index) => {
