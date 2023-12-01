@@ -4,6 +4,7 @@ import "./UserSkillsContainer.css";
 import Subtitle from "../Subtitle/Subtitle";
 import ButtonsDeleteEdit from "../../components/Buttons/ButtonsDeleteEdit";
 import iconLink from "../../images/link.svg";
+import { userDataConst } from "../../utils/constants";
 
 export default function UserSkillsContainer({
   hasBlueButons,
@@ -33,8 +34,9 @@ export default function UserSkillsContainer({
   };
 
   useEffect(() => {
-    setSortedSkillsData([...userData]);
+    setSortedSkillsData(Array.isArray(userData) ? [...userData] : [...userDataConst]);
   }, [userData]);
+  
 
   function sortSkills() {
     let sortedSkills;
@@ -69,7 +71,7 @@ export default function UserSkillsContainer({
     <section className="skills-container">
       <div className="skills-container__header">
         <Subtitle subtitleName={subtitleName} />
-        {hasBlueButons && (
+        {hasBlueButons && userData.length !==0  && (
           <div className="skills-container__buttons">
             <button className="skills-container__button" onClick={sortSkills}>
               <p className="skills-container__button-text">Сортировка</p>
