@@ -9,24 +9,31 @@ function App() {
   const [skillsData, setSkillsData] = useState([]);
   const [coursesData, setCoursesData] = useState({});
   const [collectionData, setCollectionData] = useState({});
+  const [ServerError, setServerError] = useState({})
 
   useEffect(() => {
-    Promise.all([Api.getUserData(), Api.getSkills(), Api.getCourses(), Api.getCollections()])
+    Promise.all([
+      Api.getUserData(),
+      Api.getSkills(),
+      Api.getCourses(),
+      Api.getCollections(),
+    ])
       .then(([userData, coursesData, skillsData, collectionData]) => {
-        setUserData(userData)
+        setUserData(userData);
         setCoursesData(coursesData);
         setSkillsData(skillsData);
         setCollectionData(collectionData);
       })
       .catch((err) => {
+        setServerError(true);
         console.log(err);
       });
   }, [skillsData]);
 
   function handleAddSkill(name) {
-    console.log(name);
     Api.addSkill(name)
       .then((res) => {
+        console.log("ответ сервера:", res)
         setUserData([res, ...userData]);
       })
       .catch((err) => {
@@ -63,6 +70,8 @@ function App() {
     <div className="page">
       <Header />
       <Main
+        ServerError={ServerError}
+        userData={userData}
         skillsData={skillsData}
         coursesData={coursesData}
         handleAddSkill={handleAddSkill}

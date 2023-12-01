@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from 'react-router-dom';
 import "./SkillEditor.css";
 import Title from "../Title/Title";
 import Subtitle from "../Subtitle/Subtitle";
@@ -6,47 +7,72 @@ import RateButton from "./RateButton/RateButton";
 import Recommendations from "../Recommendations/Recommendations";
 import ButtonsBackSaveDel from "../Buttons/ButtonsBackSaveDel";
 import TextField from "@mui/material/TextField";
+import { userDataConst } from "../../utils/constants";
 
-export default function SkillEditor({ handleEditSkill, skillsData }) {
+export default function SkillEditor({ handleEditSkill, userData }) {
   const { skillId } = useParams(); // Получаем параметр из URL
   const [skillInfo, setSkillInfo] = useState(null);
   const [selectedPercentage, setSelectedPercentage] = useState(0);
-  const [notes, setNotes] = useState(''); 
-
+  const [notes, setNotes] = useState("");
 
   const handleRateButtonClick = (percentage) => {
-    console.log('rrrr')
+    console.log("rrrr");
     setSelectedPercentage(percentage); // Обновление выбранного процента
-    setSkillInfo(prevSkillInfo => ({
+    setSkillInfo((prevSkillInfo) => ({
       ...prevSkillInfo,
-      percentage: percentage
+      percentage: percentage,
     }));
   };
 
   const handleSaveSkill = () => {
-    setSkillInfo(prevSkillInfo => ({
+    setSkillInfo((prevSkillInfo) => ({
       ...prevSkillInfo,
-      notes: notes
+      notes: notes,
     }));
     handleEditSkill(skillInfo);
-    console.log(skillInfo, "skillinfo")
+    console.log(skillInfo, "skillinfo");
   };
 
   useEffect(() => {
-    // Преобразуем skillId в число, так как он, вероятно, строка
     const id = parseInt(skillId, 10);
-    const foundSkill = skillsData.find(skill => skill.id === id);
-    console.log(foundSkill, skillsData)
-    setSelectedPercentage(foundSkill.percentage)
-    setSkillInfo(foundSkill);
-    setNotes(foundSkill.notes);
-  }, [skillId, skillsData]);
 
+    if (Array.isArray(userData)) {
+      const foundSkill = userData.find((skill) => skill.id === id);
+      if (foundSkill) {
+        setSelectedPercentage(foundSkill.rate);
+        setSkillInfo(foundSkill);
+        setNotes(foundSkill.notes);
+      }
+    } else if (userData === null) {
+      const foundSkill = userDataConst.find((skill) => skill.id === id);
+      setSelectedPercentage(foundSkill.rate);
+      setSkillInfo(foundSkill);
+      setNotes(foundSkill.notes);
+      console.log("FOUNDSKILL", foundSkill);
+    }
+  }, [skillId, userData]);
+
+  // console.log("skillinfo", skillInfo)
+  // console.log("userData", userData)
 
   const handleInputChange = (event) => {
     const newValue = event.target.value;
     setNotes(newValue); // Обновление состояния заметок
   };
+
+  const handleNameChange = (event) => {
+    if (skillInfo.editable) {
+      const newName = event.target.value;
+      setSkillInfo((prevSkillInfo) => ({
+        ...prevSkillInfo,
+        name: newName,
+      }));
+    }
+  };
+
+  // if (!skillInfo) {
+  //   return <div>Loading...</div>; // Отобразить загрузку, пока данные не загружены
+  // }
 
   return (
     <section className="skill-editor">
@@ -54,7 +80,16 @@ export default function SkillEditor({ handleEditSkill, skillsData }) {
       <div className="skill-editor__grid-container">
         <div className="skill-editor__grid-item">
           <p className="skill-editor__tag">Навык</p>
-          <Subtitle subtitleName={skillName} />
+          {/* Условный рендеринг для Subtitle на основе информации о редактируемости */}
+          {skillInfo && skillInfo.editable ? (
+            <input
+              type="text"
+              value={skillInfo.name}
+              onChange={handleNameChange}
+            />
+          ) : (
+            <Subtitle subtitleName={skillInfo ? skillInfo.name : ""} />
+          )}
           <p className="skill-editor__tag">Уровень владения навыком</p>
           <div className="skill-editor__rate">
             <RateButton

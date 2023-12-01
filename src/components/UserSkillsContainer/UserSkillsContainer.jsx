@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import "./UserSkillsContainer.css";
 import Subtitle from "../Subtitle/Subtitle";
 import ButtonsDeleteEdit from "../../components/Buttons/ButtonsDeleteEdit";
+import iconLink from "../../images/link.svg";
+import { userDataConst } from "../../utils/constants";
 
 export default function UserSkillsContainer({
   hasBlueButons,
   subtitleName,
-  skillsData,
+  userData,
   handleDeleteSkill,
 }) {
   const [sortedSkillsData, setSortedSkillsData] = useState([]);
@@ -30,21 +32,21 @@ export default function UserSkillsContainer({
       setSelectedSkills([index]);
     }
   };
-  
 
   useEffect(() => {
-    setSortedSkillsData([...skillsData]);
-  }, [skillsData]);
+    setSortedSkillsData(Array.isArray(userData) ? [...userData] : [...userDataConst]);
+  }, [userData]);
+  
 
   function sortSkills() {
     let sortedSkills;
     if (isSorted) {
-      sortedSkills = [...skillsData].sort(
-        (a, b) => a.percentage - b.percentage
+      sortedSkills = [...userData].sort(
+        (a, b) => a.rate - b.rate
       );
     } else {
-      sortedSkills = [...skillsData].sort(
-        (a, b) => b.percentage - a.percentage
+      sortedSkills = [...userData].sort(
+        (a, b) => b.rate - a.rate
       );
     }
     setIsSorted(!isSorted);
@@ -52,10 +54,10 @@ export default function UserSkillsContainer({
   }
   function showAll() {}
 
-  const generateGradient = (percentage, colorStart, colorEnd) => {
-    if (percentage) {
-      return `linear-gradient(90deg, ${colorStart} ${percentage}%, ${colorEnd} ${
-        percentage + 0.01
+  const generateGradient = (rate, colorStart, colorEnd) => {
+    if (rate) {
+      return `linear-gradient(90deg, ${colorStart} ${rate}%, ${colorEnd} ${
+        rate + 0.01
       }%)`;
     }
     return "";
@@ -69,8 +71,7 @@ export default function UserSkillsContainer({
     <section className="skills-container">
       <div className="skills-container__header">
         <Subtitle subtitleName={subtitleName} />
-
-        {hasBlueButons && (
+        {((hasBlueButons && (userData.length > 0)) || userDataConst)? (
           <div className="skills-container__buttons">
             <button className="skills-container__button" onClick={sortSkills}>
               <p className="skills-container__button-text">Сортировка</p>
@@ -81,9 +82,9 @@ export default function UserSkillsContainer({
               <div className="skills-container__arrow-icon"></div>
             </button>
           </div>
-        )}
+        ) : ("")}
       </div>
-      {skillsData && skillsData.length > 0 ? (
+      {((userData && userData.length > 0) || userDataConst) ? (
         <>
           <ul className="skills-container__list">
             {sortedSkillsData.map((skill, index) => (
@@ -95,27 +96,34 @@ export default function UserSkillsContainer({
                 onClick={() => handleSkillClick(index)}
                 style={{
                   background: generateGradient(
-                    skill.percentage,
+                    skill.rate,
                     "#c2e5ce",
                     "#c2e5ce00"
                   ),
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.background = generateGradient(
-                    skill.percentage,
+                    skill.rate,
                     "#87CC9E",
                     "#F7FFFA"
                   );
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.background = generateGradient(
-                    skill.percentage,
+                    skill.rate,
                     "#c2e5ce",
                     "#c2e5ce00"
                   );
                 }}
               >
                 {skill.name}
+                {skill.notes && (
+                  <img
+                    src={iconLink}
+                    alt="иконка линк"
+                    className="skills-container__icon-link"
+                  />
+                )}
               </li>
             ))}
           </ul>
