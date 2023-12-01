@@ -7,6 +7,7 @@ import RateButton from "./RateButton/RateButton";
 import Recommendations from "../Recommendations/Recommendations";
 import ButtonsBackSaveDel from "../Buttons/ButtonsBackSaveDel";
 import TextField from "@mui/material/TextField";
+import { userDataConst } from "../../utils/constants";
 
 export default function SkillEditor({ handleEditSkill, userData }) {
   const { skillId } = useParams(); // Получаем параметр из URL
@@ -34,13 +35,22 @@ export default function SkillEditor({ handleEditSkill, userData }) {
 
   useEffect(() => {
     console.log("FOUNDSKILL");
-    // Преобразуем skillId в число, так как он, вероятно, строка
     const id = parseInt(skillId, 10);
-    const foundSkill = userData.find((skill) => skill.id === id);
-    console.log("FOUNDSKILL", foundSkill);
-    setSelectedPercentage(foundSkill.percentage);
-    setSkillInfo(foundSkill);
-    setNotes(foundSkill.notes);
+
+    if (Array.isArray(userData)) {
+      const foundSkill = userData.find((skill) => skill.id === id);
+      if (foundSkill) {
+        setSelectedPercentage(foundSkill.rate);
+        setSkillInfo(foundSkill);
+        setNotes(foundSkill.notes);
+      }
+    } else if (userData === null) {
+      const foundSkill = userDataConst.find((skill) => skill.id === id);
+      setSelectedPercentage(foundSkill.rate);
+      setSkillInfo(foundSkill);
+      setNotes(foundSkill.notes);
+      console.log("FOUNDSKILL", foundSkill);
+    }
   }, [skillId, userData]);
 
   // console.log("skillinfo", skillInfo)

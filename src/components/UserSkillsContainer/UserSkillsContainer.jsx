@@ -36,6 +36,8 @@ export default function UserSkillsContainer({
   useEffect(() => {
     setSortedSkillsData(Array.isArray(userData) ? [...userData] : [...userDataConst]);
   }, [userData]);
+
+  console.log("sortedSkillsData", sortedSkillsData)
   
 
   function sortSkills() {
@@ -71,7 +73,7 @@ export default function UserSkillsContainer({
     <section className="skills-container">
       <div className="skills-container__header">
         <Subtitle subtitleName={subtitleName} />
-        {hasBlueButons && userData.length !==0  && (
+        {((hasBlueButons && (userData.length > 0)) || userDataConst)? (
           <div className="skills-container__buttons">
             <button className="skills-container__button" onClick={sortSkills}>
               <p className="skills-container__button-text">Сортировка</p>
@@ -82,9 +84,9 @@ export default function UserSkillsContainer({
               <div className="skills-container__arrow-icon"></div>
             </button>
           </div>
-        )}
+        ) : ("")}
       </div>
-      {userData && userData.length > 0 ? (
+      {((userData && userData.length > 0) || userDataConst) ? (
         <>
           <ul className="skills-container__list">
             {sortedSkillsData.map((skill, index) => (

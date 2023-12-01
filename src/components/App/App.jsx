@@ -9,6 +9,7 @@ function App() {
   const [skillsData, setSkillsData] = useState([]);
   const [coursesData, setCoursesData] = useState({});
   const [collectionData, setCollectionData] = useState({});
+  const [ServerError, setServerError] = useState({})
 
   useEffect(() => {
     Promise.all([
@@ -24,6 +25,7 @@ function App() {
         setCollectionData(collectionData);
       })
       .catch((err) => {
+        setServerError(true);
         console.log(err);
       });
   }, [skillsData]);
@@ -67,6 +69,7 @@ function App() {
     <div className="page">
       <Header />
       <Main
+        ServerError={ServerError}
         userData={userData}
         skillsData={skillsData}
         coursesData={coursesData}
