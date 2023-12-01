@@ -55,7 +55,18 @@ export default function Tracker({
           />
         </div>
         <div className="tracker__grid-item">
-          <Recommendations title="Полезные ресурсы" />
+          <Recommendations title="Полезные ресурсы" userData={[
+              { id: 0, name: "HTML", percentage: 0, rate: 1, notes: "kakaka" },
+              { id: 1, name: "HTML", percentage: 0, rate: 1, notes: "kakaka" },
+              { id: 2, name: "CSS", percentage: 0 },
+              { id: 3, name: "JavaScript", percentage: 0 },
+              { id: 13, name: "Исследования", percentage: 80 },
+              { id: 14, name: "Гайдлайны iOS", percentage: 100 },
+              { id: 15, name: "Вайрфреймы", percentage: 20 },
+              { id: 16, name: "Анализ ЦА", percentage: 20 },
+              { id: 17, name: "Гипотезы", percentage: 60 },
+              { id: 18, name: "dobe Photoshop", percentage: 80 },
+            ]} />
         </div>
       </div>
     </section>

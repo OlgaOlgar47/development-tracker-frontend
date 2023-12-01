@@ -35,7 +35,7 @@ export default function Main({
           />} />
         <Route path="/collections/skills" element={<Skills handleAddSkill={handleAddSkill}/>} />
         <Route path="/skill-editor/:skillId" element={<SkillEditor skillsData={[
-              { id: 0, name: "HTML", percentage: 0, rate: 1, notes: "kakaka" },
+              { id: 0, name: "мой классный навык", percentage: 0, rate: 1, notes: "kakaka" },
               { id: 1, name: "HTML", percentage: 0, rate: 1, notes: "kakaka" },
               { id: 2, name: "CSS", percentage: 0 },
               { id: 3, name: "JavaScript", percentage: 0 },
@@ -52,9 +52,9 @@ export default function Main({
               { id: 14, name: "Гайдлайны iOS", percentage: 100 },
               { id: 15, name: "Вайрфреймы", percentage: 20 },
               { id: 16, name: "Анализ ЦА", percentage: 20 },
-              { id: 17, name: "Гипотезы", percentage: 60 },
+              { id: 17, name: "Гипотезы", percentage: 60, notes: "kakaka" },
               { id: 18, name: "dobe Photoshop", percentage: 80 },
-            ]}/>} />
+            ]}handleEditSkill={handleEditSkill} />}  />
       </Routes>
     </main>
   );
