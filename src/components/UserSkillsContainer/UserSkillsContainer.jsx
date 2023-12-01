@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import "./UserSkillsContainer.css";
 import Subtitle from "../Subtitle/Subtitle";
 import ButtonsDeleteEdit from "../../components/Buttons/ButtonsDeleteEdit";
@@ -30,6 +30,7 @@ export default function UserSkillsContainer({
       setSelectedSkills([index]);
     }
   };
+  
 
   useEffect(() => {
     setSortedSkillsData([...skillsData]);
@@ -51,10 +52,6 @@ export default function UserSkillsContainer({
   }
   function showAll() {}
 
-  function handleDelete() {
-    handleDeleteSkill(selectedSkill);
-  }
-
   const generateGradient = (percentage, colorStart, colorEnd) => {
     if (percentage) {
       return `linear-gradient(90deg, ${colorStart} ${percentage}%, ${colorEnd} ${
@@ -63,6 +60,10 @@ export default function UserSkillsContainer({
     }
     return "";
   };
+
+  function handleDelete() {
+    handleDeleteSkill(selectedSkill);
+  }
 
   return (
     <section className="skills-container">
@@ -85,52 +86,38 @@ export default function UserSkillsContainer({
       {skillsData && skillsData.length > 0 ? (
         <>
           <ul className="skills-container__list">
-            {sortedSkillsData.map((skill, index) => {
-              const isSkillSelected = selectedSkill.includes(skill.id);
-              return (
-                <li
-                  key={index}
-                  className={`skills-container__item ${
-                    isSkillSelected ? "selected" : ""
-                  }`}
-                  onClick={() => handleSkillClick(skill.id)}
-                  style={{
-                    ...(isSkillSelected
-                      ? {
-                          background: generateGradient(
-                            skill.percentage,
-                            "#87CC9E",
-                            "#F7FFFA"
-                          ),
-                          border: "1px solid #1A1B22",
-                        }
-                      : {
-                          background: generateGradient(
-                            skill.percentage,
-                            "#c2e5ce",
-                            "#c2e5ce00"
-                          ),
-                        }),
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = generateGradient(
-                      skill.percentage,
-                      isSkillSelected ? "#87CC9E" : "#c2e5ce",
-                      isSkillSelected ? "#F7FFFA" : "#c2e5ce00"
-                    );
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = generateGradient(
-                      skill.percentage,
-                      isSkillSelected ? "#c2e5ce" : "#c2e5ce",
-                      isSkillSelected ? "#c2e5ce00" : "#c2e5ce00"
-                    );
-                  }}
-                >
-                  {skill.name}
-                </li>
-              );
-            })}
+            {sortedSkillsData.map((skill, index) => (
+              <li
+                key={index}
+                className={`skills-container__item ${
+                  selectedSkill.includes(index) ? "selected" : ""
+                }`}
+                onClick={() => handleSkillClick(index)}
+                style={{
+                  background: generateGradient(
+                    skill.percentage,
+                    "#c2e5ce",
+                    "#c2e5ce00"
+                  ),
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = generateGradient(
+                    skill.percentage,
+                    "#87CC9E",
+                    "#F7FFFA"
+                  );
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = generateGradient(
+                    skill.percentage,
+                    "#c2e5ce",
+                    "#c2e5ce00"
+                  );
+                }}
+              >
+                {skill.name}
+              </li>
+            ))}
           </ul>
         </>
       ) : (
