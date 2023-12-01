@@ -56,6 +56,7 @@ export default function SearchForm({ subtitleName, hasButton, skillsData, handle
       setSelectedItems([...selectedItems, searchText]);
       handleAddSkill(selectedItems)
       setSearchText('');
+      console.log(selectedItems)
     }
   };
 
