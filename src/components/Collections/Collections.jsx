@@ -10,7 +10,7 @@ export default function Collections({ collectionsData }) {
     <section className="collections">
       <Title text="Подборки навыков" />
       <Paragraph text="Здесь ты можешь посмотреть, какие навыки работодатели ожидают от кандидата на определенную профессию, и добавить их к изучению." />
-      <SearchForm subtitleName="Поиск по подборкам" hasButton={true} />
+      <SearchForm subtitleName="Поиск по подборкам" hasButton={false} />
       <CollectionCards collectionsData={collectionsData} />
     </section>
   );

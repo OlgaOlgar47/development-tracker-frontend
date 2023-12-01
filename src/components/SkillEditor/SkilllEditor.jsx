@@ -9,26 +9,44 @@ import ButtonsBackSaveDel from "../Buttons/ButtonsBackSaveDel";
 import TextField from "@mui/material/TextField";
 
 export default function SkillEditor({ handleEditSkill, skillsData }) {
-  // const [value, setValue] = useState(""); // Состояние для хранения значения ввода
   const { skillId } = useParams(); // Получаем параметр из URL
   const [skillInfo, setSkillInfo] = useState(null);
+  const [selectedPercentage, setSelectedPercentage] = useState(0);
+  const [notes, setNotes] = useState(''); 
+
+
+  const handleRateButtonClick = (percentage) => {
+    console.log('rrrr')
+    setSelectedPercentage(percentage); // Обновление выбранного процента
+    setSkillInfo(prevSkillInfo => ({
+      ...prevSkillInfo,
+      percentage: percentage
+    }));
+  };
+
+  const handleSaveSkill = () => {
+    setSkillInfo(prevSkillInfo => ({
+      ...prevSkillInfo,
+      notes: notes
+    }));
+    handleEditSkill(skillInfo);
+    console.log(skillInfo, "skillinfo")
+  };
 
   useEffect(() => {
     // Преобразуем skillId в число, так как он, вероятно, строка
     const id = parseInt(skillId, 10);
-
-    // Найти объект навыка по его id
     const foundSkill = skillsData.find(skill => skill.id === id);
     console.log(foundSkill, skillsData)
-
-    // Установить найденный навык в состояние для отображения на странице
+    setSelectedPercentage(foundSkill.percentage)
     setSkillInfo(foundSkill);
+    setNotes(foundSkill.notes);
   }, [skillId, skillsData]);
 
+
   const handleInputChange = (event) => {
-    // const newValue = event.target.value;
-    // setValue(newValue);
-    // Здесь вы можете добавить логику для сохранения изменений в базе данных или другом месте
+    const newValue = event.target.value;
+    setNotes(newValue); // Обновление состояния заметок
   };
 
   if (!skillInfo) {
@@ -52,11 +70,13 @@ export default function SkillEditor({ handleEditSkill, skillsData }) {
                   в&nbsp;вопросе
                 </>
               }
-              isSelected={false}
+              isSelected={selectedPercentage >= 20}
+              onRate={() => handleRateButtonClick(20)}
             />
             <RateButton
               text="Могу выполнить простую задачу"
-              isSelected={false}
+              isSelected={selectedPercentage >= 40}
+              onRate={() => handleRateButtonClick(40)}
             />
             <RateButton
               text={
@@ -66,6 +86,8 @@ export default function SkillEditor({ handleEditSkill, skillsData }) {
                   сложные задачи
                 </>
               }
+              isSelected={selectedPercentage >= 60}
+              onRate={() => handleRateButtonClick(60)}
             />
             <RateButton
               text={
@@ -75,6 +97,8 @@ export default function SkillEditor({ handleEditSkill, skillsData }) {
                   но&nbsp;нуждаюсь в&nbsp;обратной связи
                 </>
               }
+              isSelected={selectedPercentage >= 80}
+              onRate={() => handleRateButtonClick(80)}
             />
             <RateButton
               text={
@@ -86,13 +110,15 @@ export default function SkillEditor({ handleEditSkill, skillsData }) {
                   без подсказок и&nbsp;обратной связи
                 </>
               }
+              isSelected={selectedPercentage >= 100}
+              onRate={() => handleRateButtonClick(100)}
             />
           </div>
           <p className="skill-editor__tag">Заметки</p>
           <TextField
             multiline // Разрешить многострочный ввод
             rows={4} // Количество строк в поле ввода
-            value={skillInfo.nates}
+            value={notes}
             onChange={handleInputChange}
             variant="outlined"
             placeholder="Например, ссылка на туториал или статью"
@@ -102,7 +128,7 @@ export default function SkillEditor({ handleEditSkill, skillsData }) {
               borderRadius: "4px",
             }}
           />
-          <ButtonsBackSaveDel handleSave={handleEditSkill} />
+          <ButtonsBackSaveDel handleSave={handleSaveSkill} />
         </div>
         <div className="tracker__grid-item">
           <Recommendations isSkillsEditor={true} />
