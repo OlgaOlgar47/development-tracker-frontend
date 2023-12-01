@@ -6,9 +6,10 @@ import Tracker from "./Tracker/Tracker.jsx";
 import Collections from "../Collections/Collections.jsx";
 import Skills from "../Skills/Skills.jsx";
 import SkillEditor from "../SkillEditor/SkilllEditor";
-import { userDataConst } from "../../utils/constants";
+// import { userDataConst } from "../../utils/constants";
 
 export default function Main({
+  serverError,
   userData,
   skillsData,
   collectionData,
@@ -25,7 +26,8 @@ export default function Main({
           path="/"
           element={
             <Tracker
-            userData={userData}
+              serverError={serverError}
+              userData={userData}
               skillsData={skillsData}
               coursesData={coursesData}
               handleAddSkill={handleAddSkill}
@@ -33,10 +35,23 @@ export default function Main({
             />
           }
         />
-        <Route path="/collections" element={<Collections collectionData={collectionData}
-          />} />
-        <Route path="/collections/skills" element={<Skills handleAddSkill={handleAddSkill}/>} />
-        <Route path="/skill-editor/:skillId" element={<SkillEditor userData={userData} handleEditSkill={handleEditSkill} />}  />
+        <Route
+          path="/collections"
+          element={<Collections collectionData={collectionData} />}
+        />
+        <Route
+          path="/collections/skills"
+          element={<Skills handleAddSkill={handleAddSkill} />}
+        />
+        <Route
+          path="/skill-editor/:skillId"
+          element={
+            <SkillEditor
+              userData={userData}
+              handleEditSkill={handleEditSkill}
+            />
+          }
+        />
       </Routes>
     </main>
   );

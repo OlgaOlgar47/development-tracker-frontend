@@ -148,3 +148,8 @@
 .skills-container__showall-button:hover {
   cursor: pointer;
 }
+
+.skills-container__server-error {
+  text-align: center;
+  align-self: center;
+}

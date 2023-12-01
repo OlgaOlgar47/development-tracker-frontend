@@ -11,6 +11,7 @@ export default function UserSkillsContainer({
   subtitleName,
   userData,
   handleDeleteSkill,
+  serverError
 }) {
   const [sortedSkillsData, setSortedSkillsData] = useState([]);
   const [isSorted, setIsSorted] = useState(false);
@@ -65,6 +66,17 @@ export default function UserSkillsContainer({
 
   function handleDelete() {
     handleDeleteSkill(selectedSkill);
+  }
+
+
+  
+  if (serverError) {
+    return (
+      <p className="skills-container__server-error">
+        «Во время запроса произошла ошибка. Возможно, проблема с соединением
+        или сервер недоступен. Подождите немного и попробуйте ещё раз»"
+      </p>
+    );
   }
 
   return (

@@ -3,32 +3,46 @@ import "./App.css";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import * as Api from "../../utils/api";
+import { useLocation } from 'react-router-dom';
 
 function App() {
+  const location = useLocation();
   const [userData, setUserData] = useState({});
   const [skillsData, setSkillsData] = useState([]);
   const [coursesData, setCoursesData] = useState({});
   const [collectionData, setCollectionData] = useState({});
-  const [ServerError, setServerError] = useState({})
+  const [serverError, setServerError] = useState({})
 
   useEffect(() => {
     Promise.all([
       Api.getUserData(),
       Api.getSkills(),
-      Api.getCourses(),
-      Api.getCollections(),
+      Api.getCourses()
     ])
       .then(([userData, coursesData, skillsData, collectionData]) => {
         setUserData(userData);
         setCoursesData(coursesData);
         setSkillsData(skillsData);
-        setCollectionData(collectionData);
       })
       .catch((err) => {
         setServerError(true);
         console.log(err);
       });
   }, [skillsData]);
+
+  useEffect(() => {
+    if (location.pathname === '/collections') {
+      // Выполняем запрос только если мы находимся на нужном роуте
+      Api.getCollections()
+        .then(collectionData => {
+          setCollectionData(collectionData);
+        })
+        .catch(err => {
+          setServerError(true);
+          console.log(err);
+        });
+    }
+  }, [location.pathname]);
 
   function handleAddSkill(name) {
     Api.addSkill(name)
@@ -70,7 +84,7 @@ function App() {
     <div className="page">
       <Header />
       <Main
-        ServerError={ServerError}
+        serverError={serverError}
         userData={userData}
         skillsData={skillsData}
         coursesData={coursesData}
