@@ -5,6 +5,7 @@ import Main from "../Main/Main";
 import * as Api from "../../utils/api";
 import { useLocation } from 'react-router-dom';
 import { userDataConst } from "../../utils/constants";
+import InfoToolTip from "../InfoToolTip/InfoToolTip";
 
 function App() {
   const location = useLocation();
@@ -127,6 +128,7 @@ function App() {
         collectionData={collectionData}
         handleEditSkill={handleEditSkill}
       />
+      <InfoToolTip />
     </div>
   );
 }
