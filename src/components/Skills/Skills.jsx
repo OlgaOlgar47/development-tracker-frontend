@@ -44,6 +44,9 @@ export default function Skills({ handleAddSkill }) {
            <UserSkillsContainer
             subtitleName="В твоих навыках"
             userData={[]}
+            skillsData={[
+              { name: "Product growth" }
+            ]}
           />
         </div>
         <div className="tracker__grid-item">
