@@ -35,6 +35,23 @@
 }
 
 
+.skills-editor__subtitle {
+  border: 1px solid #DDE0E4;
+  border-radius: 4px;
+  padding: 10px 12px;
+  font-family: 'YS Display';
+  margin: 0 0 16px;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 32px;
+}
+
+.skills-editor__subtitle:focus {
+  border: 2px solid #5A9BFF;
+  outline: none;
+}
+
   
 
 

@@ -4,7 +4,7 @@ import resumeCreation from "../../images/resume-creation.svg";
 import english from "../../images/english.svg";
 import CourseCard from "../CourseCard/CourseCard";
 
-export default function Recommendations({isSkillsEditor, userData}) {
+export default function Recommendations({isSkillsEditor, userData, userDataToRender}) {
   const coursesList = [
     { name: "Как составить резюме", image: resumeCreation, skills: ["HTML",
     "CSS",
@@ -41,7 +41,7 @@ export default function Recommendations({isSkillsEditor, userData}) {
   function getRecommendedCourses(userData, coursesList) {
     const skillsCount = {};
   
-    userData.forEach((skillData) => {
+    userDataToRender.forEach((skillData) => {
       const { name } = skillData;
   
       coursesList.forEach((course) => {
@@ -58,8 +58,6 @@ export default function Recommendations({isSkillsEditor, userData}) {
     const topRecommendedCourses = sortedCourses.slice(0, 2).map((courseName) => {
       return coursesList.find((course) => course.name === courseName);
     });
-  
-    console.log(topRecommendedCourses);
     return topRecommendedCourses;
   }  
   

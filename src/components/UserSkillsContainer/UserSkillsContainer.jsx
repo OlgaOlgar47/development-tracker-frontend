@@ -1,14 +1,18 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import "./UserSkillsContainer.css";
 import Subtitle from "../Subtitle/Subtitle";
 import ButtonsDeleteEdit from "../../components/Buttons/ButtonsDeleteEdit";
+import iconLink from "../../images/link.svg";
+import { userDataConst } from "../../utils/constants";
 
 export default function UserSkillsContainer({
+  userDataToRender,
   hasBlueButons,
   subtitleName,
-  skillsData,
+  userData,
   handleDeleteSkill,
+  serverError
 }) {
   const [sortedSkillsData, setSortedSkillsData] = useState([]);
   const [isSorted, setIsSorted] = useState(false);
@@ -18,33 +22,33 @@ export default function UserSkillsContainer({
 
   function handleEdit() {
     if (selectedSkill.length === 1) {
-      const skillId = selectedSkill[0]; // Предположим, что selectedSkill содержит индекс выбранного навыка
-      navigate(`/skill-editor/${skillId}`); // Переход на страницу редактирования с id выбранного навыка
+      const skillId = selectedSkill[0]; 
+      navigate(`/skill-editor/${skillId}`);
     }
   }
 
-  const handleSkillClick = (index) => {
-    if (selectedSkill.includes(index)) {
+  const handleSkillClick = (id) => {
+    if (selectedSkill.includes(id)) {
       setSelectedSkills([]);
     } else {
-      setSelectedSkills([index]);
+      setSelectedSkills([id]);
     }
   };
-  
 
   useEffect(() => {
-    setSortedSkillsData([...skillsData]);
-  }, [skillsData]);
+    setSortedSkillsData([...userDataToRender]);
+  }, [userDataToRender]);
+  
 
   function sortSkills() {
     let sortedSkills;
     if (isSorted) {
-      sortedSkills = [...skillsData].sort(
-        (a, b) => a.percentage - b.percentage
+      sortedSkills = [...userDataToRender].sort(
+        (a, b) => a.rate - b.rate
       );
     } else {
-      sortedSkills = [...skillsData].sort(
-        (a, b) => b.percentage - a.percentage
+      sortedSkills = [...userDataToRender].sort(
+        (a, b) => b.rate - a.rate
       );
     }
     setIsSorted(!isSorted);
@@ -52,25 +56,38 @@ export default function UserSkillsContainer({
   }
   function showAll() {}
 
-  const generateGradient = (percentage, colorStart, colorEnd) => {
-    if (percentage) {
-      return `linear-gradient(90deg, ${colorStart} ${percentage}%, ${colorEnd} ${
-        percentage + 0.01
+  const generateGradient = (rate, colorStart, colorEnd) => {
+    if (rate) {
+      return `linear-gradient(90deg, ${colorStart} ${rate}%, ${colorEnd} ${
+        rate + 0.01
       }%)`;
     }
     return "";
   };
 
   function handleDelete() {
-    handleDeleteSkill(selectedSkill);
+    const selectedSkillNumber = parseInt(selectedSkill, 10);
+    handleDeleteSkill(selectedSkillNumber); // Передача числа в функцию обработки удаления
+  }
+  
+  
+
+
+  
+  if (serverError) {
+    return (
+      <p className="skills-container__server-error">
+        «Во время запроса произошла ошибка. Возможно, проблема с соединением
+        или сервер недоступен. Подождите немного и попробуйте ещё раз»"
+      </p>
+    );
   }
 
   return (
     <section className="skills-container">
       <div className="skills-container__header">
         <Subtitle subtitleName={subtitleName} />
-
-        {hasBlueButons && (
+        {((hasBlueButons && (userDataToRender.length > 0)) || userDataConst)? (
           <div className="skills-container__buttons">
             <button className="skills-container__button" onClick={sortSkills}>
               <p className="skills-container__button-text">Сортировка</p>
@@ -81,41 +98,48 @@ export default function UserSkillsContainer({
               <div className="skills-container__arrow-icon"></div>
             </button>
           </div>
-        )}
+        ) : ("")}
       </div>
-      {skillsData && skillsData.length > 0 ? (
+      {((userData && userData.length > 0) || userDataConst) ? (
         <>
           <ul className="skills-container__list">
             {sortedSkillsData.map((skill, index) => (
               <li
-                key={index}
+                key={skill.id}
                 className={`skills-container__item ${
-                  selectedSkill.includes(index) ? "selected" : ""
+                  selectedSkill.includes(skill.id) ? "selected" : ""
                 }`}
-                onClick={() => handleSkillClick(index)}
+                onClick={() => handleSkillClick(skill.id)}
                 style={{
                   background: generateGradient(
-                    skill.percentage,
+                    skill.rate,
                     "#c2e5ce",
                     "#c2e5ce00"
                   ),
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.background = generateGradient(
-                    skill.percentage,
+                    skill.rate,
                     "#87CC9E",
                     "#F7FFFA"
                   );
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.background = generateGradient(
-                    skill.percentage,
+                    skill.rate,
                     "#c2e5ce",
                     "#c2e5ce00"
                   );
                 }}
               >
                 {skill.name}
+                {skill.notes && (
+                  <img
+                    src={iconLink}
+                    alt="иконка линк"
+                    className="skills-container__icon-link"
+                  />
+                )}
               </li>
             ))}
           </ul>

@@ -1,5 +1,5 @@
 .skills-container {
-  font-family: 'YS Text';
+  font-family: "YS Text";
   max-width: 697px;
   margin: 0 0 40px;
 }
@@ -11,7 +11,7 @@
 }
 
 .skills-container__title {
-  font-family: 'YS Display';
+  font-family: "YS Display";
   font-size: 24px;
   font-style: normal;
   font-weight: 500;
@@ -35,23 +35,27 @@
   overflow: hidden;
 } */
 
+.skills-container__icon-link {
+  height: 12px;
+  width: 12px;
+  margin-left: 12px;
+}
+
 .skills-container__item {
   text-decoration: none;
   padding: 12px 20px;
-  border: 1px solid #87CC9E;
+  border: 1px solid #87cc9e;
   border-radius: 4px;
-  
 }
 
 .skills-container__item:hover {
   cursor: pointer;
-  background-color: #F7FFFA;
+  background-color: #f7fffa;
 }
 
 .skills-container__item.selected {
-  border: 1px solid #1A1B22;
+  border: 1px solid #1a1b22;
 }
-
 
 .skills-container__item-count {
   margin: 0;
@@ -72,7 +76,7 @@
 
 .skills-container__button {
   background: transparent;
-  color: #5A9BFF;
+  color: #5a9bff;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -95,23 +99,23 @@
   font-weight: 500;
   padding: 0;
   margin: 0;
-  white-space: nowrap; 
+  white-space: nowrap;
 }
 
 /* Изображение по умолчанию для иконки */
 .skills-container__sort-icon {
   width: 24px;
   height: 24px;
-  background-image: url('../../images/sortblue.svg');
+  background-image: url("../../images/sortblue.svg");
 }
 
 .skills-container__arrow-icon {
   width: 24px;
   height: 24px;
-  background-image: url('../../images/arrow-down-blue.svg');
-  background-size: cover; 
+  background-image: url("../../images/arrow-down-blue.svg");
+  background-size: cover;
   background-repeat: no-repeat;
-  background-position: center; 
+  background-position: center;
 }
 
 /* Изменение цвета текста при наведении на кнопку */
@@ -121,13 +125,12 @@
 
 /* Изменение изображения при наведении на кнопку */
 .skills-container__button:hover .skills-container__sort-icon {
-  background-image: url('../../images/sort-dark-blue.svg');
+  background-image: url("../../images/sort-dark-blue.svg");
 }
 
 .skills-container__button:hover .skills-container__arrow-icon {
-  background-image: url('../../images/arrow-down-darkblue.svg');
+  background-image: url("../../images/arrow-down-darkblue.svg");
 }
-
 
 .skills-container__showall-button {
   padding: 0;
@@ -146,3 +149,7 @@
   cursor: pointer;
 }
 
+.skills-container__server-error {
+  text-align: center;
+  align-self: center;
+}

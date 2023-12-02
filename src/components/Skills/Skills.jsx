@@ -4,6 +4,7 @@ import SkillsContainer from "../SkillsContainer/SkillsContainer";
 import Title from "../Title/Title";
 import "./Skills.css";
 import UserSkillsContainer from "../UserSkillsContainer/UserSkillsContainer";
+import { userDataConst } from "../../utils/constants";
 
 export default function Skills({ handleAddSkill }) {
   return (
@@ -42,11 +43,11 @@ export default function Skills({ handleAddSkill }) {
           />
            <UserSkillsContainer
             subtitleName="В твоих навыках"
-            skillsData={[]}
+            userData={[]}
           />
         </div>
         <div className="tracker__grid-item">
-          <Recommendations />
+          <Recommendations userData={userDataConst} />
         </div>
       </div>
     </section>

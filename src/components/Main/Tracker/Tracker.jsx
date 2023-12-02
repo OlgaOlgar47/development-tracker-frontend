@@ -5,8 +5,12 @@ import Paragraph from "../../Paragraph/Paragraph";
 import SearchForm from "../../SearchForm/SearchForm";
 import UserSkillsContainer from "../../UserSkillsContainer/UserSkillsContainer";
 import Recommendations from "../../Recommendations/Recommendations";
+// import { userDataConst } from "../../../utils/constants";
 
 export default function Tracker({
+  userDataToRender,
+  serverError,
+  userData,
   skillsData,
   handleAddSkill,
   handleDeleteSkill,
@@ -26,47 +30,24 @@ export default function Tracker({
             hasButton={true}
             skillsData={skillsData}
             handleAddSkill={handleAddSkill}
+            serverError={serverError}
           />
           <UserSkillsContainer
+            userDataToRender={userDataToRender}
             hasBlueButons={true}
             handleDeleteSkill={handleDeleteSkill}
             subtitleName="Твои навыки"
-            skillsData={[
-              { id: 0, name: "HTML", percentage: 0, rate: 1, notes: "kakaka" },
-              { id: 1, name: "HTML", percentage: 0, rate: 1, notes: "kakaka" },
-              { id: 2, name: "CSS", percentage: 0 },
-              { id: 3, name: "JavaScript", percentage: 0 },
-              { id: 4, name: "Python", percentage: 0 },
-              { id: 5, name: "React", percentage: 0 },
-              { id: 6, name: "Node.js", percentage: 0 },
-              { id: 7, name: "SQL", percentage: 0 },
-              { id: 8, name: "Vue.js", percentage: 0 },
-              { id: 9, name: "Angular", percentage: 0 },
-              { id: 10, name: "Композиция и сетки", percentage: 80 },
-              { id: 11, name: "UX-копирайтинг", percentage: 20 },
-              { id: 12, name: "Анимация", percentage: 40 },
-              { id: 13, name: "Исследования", percentage: 80 },
-              { id: 14, name: "Гайдлайны iOS", percentage: 100 },
-              { id: 15, name: "Вайрфреймы", percentage: 20 },
-              { id: 16, name: "Анализ ЦА", percentage: 20 },
-              { id: 17, name: "Гипотезы", percentage: 60 },
-              { id: 18, name: "dobe Photoshop", percentage: 80 },
-            ]}
+            userData={userData}
+            serverError={false}
           />
         </div>
         <div className="tracker__grid-item">
-          <Recommendations title="Полезные ресурсы" userData={[
-              { id: 0, name: "HTML", percentage: 0, rate: 1, notes: "kakaka" },
-              { id: 1, name: "HTML", percentage: 0, rate: 1, notes: "kakaka" },
-              { id: 2, name: "CSS", percentage: 0 },
-              { id: 3, name: "JavaScript", percentage: 0 },
-              { id: 13, name: "Исследования", percentage: 80 },
-              { id: 14, name: "Гайдлайны iOS", percentage: 100 },
-              { id: 15, name: "Вайрфреймы", percentage: 20 },
-              { id: 16, name: "Анализ ЦА", percentage: 20 },
-              { id: 17, name: "Гипотезы", percentage: 60 },
-              { id: 18, name: "dobe Photoshop", percentage: 80 },
-            ]} />
+          <Recommendations
+            title="Полезные ресурсы"
+            // userData={userData}
+            userDataToRender={userDataToRender}
+            serverError={serverError}
+          />
         </div>
       </div>
     </section>
