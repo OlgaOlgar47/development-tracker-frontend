@@ -59,7 +59,6 @@ export default function SearchForm({ subtitleName, hasButton, skillsData, handle
       skillsToAdd = [searchText];
       setSearchText(''); // Очищаем searchText
     }
-     console.log("skills To Add:", skillsToAdd)
     handleAddSkill(skillsToAdd);
   };
 

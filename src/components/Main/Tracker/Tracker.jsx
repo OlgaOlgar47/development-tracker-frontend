@@ -5,9 +5,10 @@ import Paragraph from "../../Paragraph/Paragraph";
 import SearchForm from "../../SearchForm/SearchForm";
 import UserSkillsContainer from "../../UserSkillsContainer/UserSkillsContainer";
 import Recommendations from "../../Recommendations/Recommendations";
-import { userDataConst } from "../../../utils/constants";
+// import { userDataConst } from "../../../utils/constants";
 
 export default function Tracker({
+  userDataToRender,
   serverError,
   userData,
   skillsData,
@@ -31,18 +32,20 @@ export default function Tracker({
             handleAddSkill={handleAddSkill}
             serverError={serverError}
           />
-          <UserSkillsContainer        
+          <UserSkillsContainer
+            userDataToRender={userDataToRender}
             hasBlueButons={true}
             handleDeleteSkill={handleDeleteSkill}
             subtitleName="Твои навыки"
             userData={userData}
-            serverError={serverError}
+            serverError={false}
           />
         </div>
         <div className="tracker__grid-item">
           <Recommendations
             title="Полезные ресурсы"
-            userData={userDataConst}
+            // userData={userData}
+            userDataToRender={userDataToRender}
             serverError={serverError}
           />
         </div>

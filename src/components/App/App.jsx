@@ -4,6 +4,7 @@ import Header from "../Header/Header";
 import Main from "../Main/Main";
 import * as Api from "../../utils/api";
 import { useLocation } from 'react-router-dom';
+import { userDataConst } from "../../utils/constants";
 
 function App() {
   const location = useLocation();
@@ -12,6 +13,7 @@ function App() {
   const [coursesData, setCoursesData] = useState({});
   const [collectionData, setCollectionData] = useState({});
   const [serverError, setServerError] = useState({})
+  const [userDataToRender, setUserDataToRender] = useState(userDataConst)
 
   useEffect(() => {
     Promise.all([
@@ -45,18 +47,43 @@ function App() {
   }, [location.pathname]);
 
   function handleAddSkill(name) {
+    let idRandom = Math.floor(Math.random() * 1000) + 1;
+    console.log('idrandom', idRandom)
+    const newSkill = { id: idRandom, name: name, rate: 0, notes: '', editable: true };
+    setUserDataToRender([newSkill, ...userDataToRender]);
     Api.addSkill(name)
       .then((res) => {
-        console.log("ответ сервера:", res)
-        setUserData([res, ...userData]);
+        setUserData([...userData, res]);
       })
       .catch((err) => {
         console.log(err);
       });
   }
 
+  useEffect(() => {
+    console.log("userDataToRender", userDataToRender); // Отслеживаем изменения skillInfo
+  }, [userDataToRender]);
+  
+
   function handleEditSkill(skillData) {
-    console.log(skillData);
+    console.log('handleEditSkill работает')
+    const updatedUserDataToRender = userDataToRender.map(skill => {
+      if (skill.id === skillData.id) {
+        return {
+          ...skill,
+          name: skillData.name !== undefined ? skillData.name : skill.name,
+          rate: skillData.rate !== undefined ? skillData.rate : skill.rate,
+          notes: skillData.notes !== undefined ? skillData.notes : skill.notes,
+        };
+      }
+      return skill;
+    });
+    console.log("slillData:", skillData)
+    console.log("updatedUserDataToRender:", updatedUserDataToRender)
+
+    setUserDataToRender(updatedUserDataToRender);
+    
+  
     Api.editSkill(skillData)
       .then((res) => {
         setUserData([res, ...userData]);
@@ -65,8 +92,15 @@ function App() {
         console.log(err);
       });
   }
+  
 
   function handleDeleteSkill(id) {
+    setUserDataToRender(
+      userDataToRender.filter((skill) => {
+        return skill.id !== id;
+      })
+    );
+
     Api.deleteSkill(id)
       .then(() => {
         setUserData(
@@ -85,7 +119,7 @@ function App() {
       <Header />
       <Main
         serverError={serverError}
-        userData={userData}
+        userDataToRender={userDataToRender}
         skillsData={skillsData}
         coursesData={coursesData}
         handleAddSkill={handleAddSkill}
