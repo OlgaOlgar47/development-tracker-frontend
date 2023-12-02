@@ -5,7 +5,7 @@ import Paragraph from "../../Paragraph/Paragraph";
 import SearchForm from "../../SearchForm/SearchForm";
 import UserSkillsContainer from "../../UserSkillsContainer/UserSkillsContainer";
 import Recommendations from "../../Recommendations/Recommendations";
-import { userDataConst } from "../../../utils/constants";
+// import { userDataConst } from "../../../utils/constants";
 
 export default function Tracker({
   serverError,
@@ -42,7 +42,7 @@ export default function Tracker({
         <div className="tracker__grid-item">
           <Recommendations
             title="Полезные ресурсы"
-            userData={userDataConst}
+            userData={userData}
             serverError={serverError}
           />
         </div>

@@ -41,15 +41,20 @@ export default function Recommendations({isSkillsEditor, userData}) {
   function getRecommendedCourses(userData, coursesList) {
     const skillsCount = {};
   
-    userData.forEach((skillData) => {
-      const { name } = skillData;
+    if (Array.isArray(userData)) {
+      userData.forEach((skillData) => {
+        const { name } = skillData;
   
-      coursesList.forEach((course) => {
-        if (course.skills && course.skills.includes(name)) {
-          skillsCount[course.name] = (skillsCount[course.name] || 0) + 1;
-        }
+        coursesList.forEach((course) => {
+          if (course.skills && course.skills.includes(name)) {
+            skillsCount[course.name] = (skillsCount[course.name] || 0) + 1;
+          }
+        });
       });
-    });
+    } else {
+      console.error('userData is not an array.');
+      return []; // Возвращаем пустой массив или обработку ошибки
+    }
   
     const sortedCourses = Object.keys(skillsCount).sort(
       (a, b) => skillsCount[b] - skillsCount[a]
@@ -59,7 +64,8 @@ export default function Recommendations({isSkillsEditor, userData}) {
       return coursesList.find((course) => course.name === courseName);
     });
     return topRecommendedCourses;
-  }  
+  }
+  
   
 
   if (isSkillsEditor) {

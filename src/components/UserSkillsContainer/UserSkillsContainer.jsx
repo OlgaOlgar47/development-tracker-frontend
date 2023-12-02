@@ -73,8 +73,7 @@ export default function UserSkillsContainer({
   if (serverError) {
     return (
       <p className="skills-container__server-error">
-        «Во время запроса произошла ошибка. Возможно, проблема с соединением
-        или сервер недоступен. Подождите немного и попробуйте ещё раз»"
+        «Сюда должна придти userData, но не пришла»"
       </p>
     );
   }
