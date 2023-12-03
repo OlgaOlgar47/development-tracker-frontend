@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams } from 'react-router-dom';
 import "./SkillEditor.css";
 import Title from "../Title/Title";
 import Subtitle from "../Subtitle/Subtitle";
@@ -7,62 +7,76 @@ import RateButton from "./RateButton/RateButton";
 import Recommendations from "../Recommendations/Recommendations";
 import ButtonsBackSaveDel from "../Buttons/ButtonsBackSaveDel";
 import TextField from "@mui/material/TextField";
-import { userDataConst } from "../../utils/constants";
+// import { userDataConst } from "../../utils/constants";
 
-export default function SkillEditor({ handleEditSkill, userData }) {
-  const { skillId } = useParams(); // Получаем параметр из URL
-  const [skillInfo, setSkillInfo] = useState(null);
+export default function SkillEditor({
+  handleEditSkill,
+  userData,
+  userDataToRender,
+}) {
+  const { skillId } = useParams();
+  const [skillInfo, setSkillInfo] = useState({});
   const [selectedPercentage, setSelectedPercentage] = useState(0);
-  const [notes, setNotes] = useState("");
-
-  const handleRateButtonClick = (percentage) => {
-    console.log("rrrr");
-    setSelectedPercentage(percentage); // Обновление выбранного процента
-    setSkillInfo((prevSkillInfo) => ({
-      ...prevSkillInfo,
-      percentage: percentage,
-    }));
-  };
-
-  const handleSaveSkill = () => {
-    setSkillInfo((prevSkillInfo) => ({
-      ...prevSkillInfo,
-      notes: notes,
-    }));
-    handleEditSkill(skillInfo);
-    console.log(skillInfo, "skillinfo");
-  };
+  const [notes, setNotes] = useState(skillInfo.notes || "");
 
   useEffect(() => {
-    const id = parseInt(skillId, 10);
+    setSelectedPercentage(skillInfo.rate);
+    setNotes(skillInfo.notes)
+  }, [skillInfo.rate, skillInfo.notes]);
+  
 
-    if (Array.isArray(userData)) {
-      const foundSkill = userData.find((skill) => skill.id === id);
-      if (foundSkill) {
-        setSelectedPercentage(foundSkill.rate);
-        setSkillInfo(foundSkill);
-        setNotes(foundSkill.notes);
-      }
-    } else if (userData === null) {
-      const foundSkill = userDataConst.find((skill) => skill.id === id);
-      setSelectedPercentage(foundSkill.rate);
-      setSkillInfo(foundSkill);
-      setNotes(foundSkill.notes);
-      console.log("FOUNDSKILL", foundSkill);
+  useEffect(() => {
+    setSkillInfo((prevSkillInfo) => ({
+      ...prevSkillInfo,
+      name: skillInfo.name,
+      rate: skillInfo.rate,
+      notes: skillInfo.notes,
+    }));
+  }, [skillInfo.name, skillInfo.rate, skillInfo.notes]);
+
+  const handleRateButtonClick = (rate) => {
+    if (rate === 20 && selectedPercentage === rate) {
+      setSelectedPercentage(0);
+      setSkillInfo((prevSkillInfo) => ({
+        ...prevSkillInfo,
+        rate: 0,
+      }));
+    } else {
+      setSelectedPercentage(rate);
+      setSkillInfo((prevSkillInfo) => ({
+        ...prevSkillInfo,
+        rate: rate,
+      }));
     }
-  }, [skillId, userData]);
-
-  // console.log("skillinfo", skillInfo)
-  // console.log("userData", userData)
+  };
+  
 
   const handleInputChange = (event) => {
     const newValue = event.target.value;
-    setNotes(newValue); // Обновление состояния заметок
+    setNotes(newValue);
+    setSkillInfo((prevSkillInfo) => ({
+      ...prevSkillInfo,
+      notes: newValue,
+    }));
   };
+
+  function handleSaveSkill() {
+    handleEditSkill(skillInfo);
+  }
+
+  useEffect(() => {
+    const id = parseInt(skillId, 10);
+    const foundSkill = userDataToRender.find((skill) => skill.id === id);
+    setSkillInfo(foundSkill);
+  }, [skillId, userDataToRender]);
+
+  useEffect(() => {
+    console.log("skillinfo:", skillInfo); // Отслеживаем изменения skillInfo
+  }, [skillInfo]);
 
   const handleNameChange = (event) => {
     if (skillInfo.editable) {
-      const newName = event.target.value;
+      const newName = event.target.value.toString();
       setSkillInfo((prevSkillInfo) => ({
         ...prevSkillInfo,
         name: newName,
@@ -81,8 +95,9 @@ export default function SkillEditor({ handleEditSkill, userData }) {
         <div className="skill-editor__grid-item">
           <p className="skill-editor__tag">Навык</p>
           {/* Условный рендеринг для Subtitle на основе информации о редактируемости */}
-          {skillInfo && skillInfo.editable ? (
+          {skillInfo.editable ? (
             <input
+              className="skills-editor__subtitle"
               type="text"
               value={skillInfo.name}
               onChange={handleNameChange}

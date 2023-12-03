@@ -11,7 +11,7 @@ export default function UserSkillsContainer({
   subtitleName,
   userData,
   handleDeleteSkill,
-  serverError
+  serverError,
 }) {
   const [sortedSkillsData, setSortedSkillsData] = useState([]);
   const [isSorted, setIsSorted] = useState(false);
@@ -21,39 +21,41 @@ export default function UserSkillsContainer({
 
   function handleEdit() {
     if (selectedSkill.length === 1) {
-      const skillId = selectedSkill[0]; // Предположим, что selectedSkill содержит индекс выбранного навыка
-      navigate(`/skill-editor/${skillId}`); // Переход на страницу редактирования с id выбранного навыка
+      const skillId = selectedSkill[0];
+      navigate(`/skill-editor/${skillId}`);
     }
   }
 
-  const handleSkillClick = (index) => {
-    if (selectedSkill.includes(index)) {
+  const handleSkillClick = (id) => {
+    if (selectedSkill.includes(id)) {
       setSelectedSkills([]);
     } else {
-      setSelectedSkills([index]);
+      setSelectedSkills([id]);
     }
   };
 
   useEffect(() => {
-    setSortedSkillsData(Array.isArray(userData) ? [...userData] : [...userDataConst]);
+    if (Array.isArray(userData)) {
+      setSortedSkillsData([...userData]);
+    }
   }, [userData]);
   
 
   function sortSkills() {
     let sortedSkills;
     if (isSorted) {
-      sortedSkills = [...userData].sort(
-        (a, b) => a.rate - b.rate
-      );
+      sortedSkills = [...userData].sort((a, b) => a.rate - b.rate);
     } else {
-      sortedSkills = [...userData].sort(
-        (a, b) => b.rate - a.rate
-      );
+      sortedSkills = [...userData].sort((a, b) => b.rate - a.rate);
     }
     setIsSorted(!isSorted);
     setSortedSkillsData(sortedSkills);
   }
-  function showAll() {}
+
+  const showAll = () => {
+    const skillsContainer = document.querySelector(".skills-container__list");
+    skillsContainer.classList.toggle("skills-container__list_type_all");
+  };
 
   const generateGradient = (rate, colorStart, colorEnd) => {
     if (rate) {
@@ -65,15 +67,14 @@ export default function UserSkillsContainer({
   };
 
   function handleDelete() {
-    handleDeleteSkill(selectedSkill);
+    const selectedSkillNumber = parseInt(selectedSkill, 10);
+    handleDeleteSkill(selectedSkillNumber); // Передача числа в функцию обработки удаления
   }
 
-
-  
-  if (serverError) {
+  if (!userData || !userData.length ) {
     return (
       <p className="skills-container__server-error">
-        «Сюда должна придти userData, но не пришла»"
+        {!userData ? "Данные не были получены с сервера" : "Нет данных UserData для отображения"}
       </p>
     );
   }
@@ -82,7 +83,7 @@ export default function UserSkillsContainer({
     <section className="skills-container">
       <div className="skills-container__header">
         <Subtitle subtitleName={subtitleName} />
-        {((hasBlueButons && (userData.length > 0)) || userDataConst)? (
+        {(hasBlueButons && userData.length > 0) || userDataConst ? (
           <div className="skills-container__buttons">
             <button className="skills-container__button" onClick={sortSkills}>
               <p className="skills-container__button-text">Сортировка</p>
@@ -93,18 +94,20 @@ export default function UserSkillsContainer({
               <div className="skills-container__arrow-icon"></div>
             </button>
           </div>
-        ) : ("")}
+        ) : (
+          ""
+        )}
       </div>
-      {((userData && userData.length > 0) || userDataConst) ? (
+      {(userData && userData.length > 0) || userDataConst ? (
         <>
           <ul className="skills-container__list">
             {sortedSkillsData.map((skill, index) => (
               <li
-                key={index}
+                key={skill.id}
                 className={`skills-container__item ${
-                  selectedSkill.includes(index) ? "selected" : ""
+                  selectedSkill.includes(skill.id) ? "selected" : ""
                 }`}
-                onClick={() => handleSkillClick(index)}
+                onClick={() => handleSkillClick(skill.id)}
                 style={{
                   background: generateGradient(
                     skill.rate,

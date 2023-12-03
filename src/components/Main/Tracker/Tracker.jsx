@@ -8,6 +8,7 @@ import Recommendations from "../../Recommendations/Recommendations";
 // import { userDataConst } from "../../../utils/constants";
 
 export default function Tracker({
+  coursesData,
   serverError,
   userData,
   skillsData,
@@ -31,12 +32,12 @@ export default function Tracker({
             handleAddSkill={handleAddSkill}
             serverError={serverError}
           />
-          <UserSkillsContainer        
+          <UserSkillsContainer
             hasBlueButons={true}
             handleDeleteSkill={handleDeleteSkill}
             subtitleName="Твои навыки"
             userData={userData}
-            serverError={serverError}
+            serverError={false}
           />
         </div>
         <div className="tracker__grid-item">
@@ -44,6 +45,7 @@ export default function Tracker({
             title="Полезные ресурсы"
             userData={userData}
             serverError={serverError}
+            coursesData={coursesData}
           />
         </div>
       </div>

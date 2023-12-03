@@ -6,34 +6,34 @@ import TextField from "@mui/material/TextField";
 
 export default function SearchForm({ subtitleName, hasButton, skillsData, handleAddSkill, serverError}) {
   // const skills={skillsData}
-  // const skills = [
-  //   "HTML",
-  //   "CSS",
-  //   "JavaScript",
-  //   "Python",
-  //   "React",
-  //   "Node.js",
-  //   "SQL",
-  //   "Vue.js",
-  //   "Angular",
-  //   "Типографика",
-  //   "Композиция",
-  //   "Генерация идей",
-  //   "Tilda",
-  //   "Figma",
-  //   "Adobe Photoshop",
-  //   "Анализ ЦА",
-  //   "Гипотезы",
-  //   "Исследования",
-  //   "UX-копирайтинг",
-  //   "UX-тестирование",
-  //   "Конкурентный анализ",
-  //   "JTBD и User Stories",
-  //   "Анимация",
-  //   "Вайрфреймы",
-  //   "UI-Kit",
-  //   "Аудит юзабилити"
-  // ];
+  const skills = [
+    { name: 'HTML' },
+    { name: 'CSS' },
+    { name: 'JavaScript' },
+    { name: 'Python' },
+    { name: 'React' },
+    { name: 'Node.js' },
+    { name: 'SQL' },
+    { name: 'Vue.js' },
+    { name: 'Angular' },
+    { name: 'Типографика' },
+    { name: 'Композиция' },
+    { name: 'Генерация идей' },
+    { name: 'Tilda' },
+    { name: 'Figma' },
+    { name: 'Adobe Photoshop' },
+    { name: 'Анализ ЦА' },
+    { name: 'Гипотезы' },
+    { name: 'Исследования' },
+    { name: 'UX-копирайтинг' },
+    { name: 'UX-тестирование' },
+    { name: 'Конкурентный анализ' },
+    { name: 'JTBD и User Stories' },
+    { name: 'Анимация' },
+    { name: 'Вайрфреймы' },
+    { name: 'UI-Kit' },
+    { name: 'Аудит юзабилити' }
+  ];
 
   const [searchText, setSearchText] = useState('');
   const [searchResults, setSearchResults] = useState([]);
@@ -43,8 +43,8 @@ export default function SearchForm({ subtitleName, hasButton, skillsData, handle
 
   const handleInputChange = (event) => {
     const { value } = event.target;
-    const filteredResults = skillsData.filter((skill) =>
-      skill.toLowerCase().includes(value.toLowerCase())
+    const filteredResults = skills.filter((skill) =>
+      skill.name.toLowerCase().includes(value.toLowerCase())
     );
     setSearchText(value);
     setSearchResults(filteredResults);
@@ -56,12 +56,16 @@ export default function SearchForm({ subtitleName, hasButton, skillsData, handle
       skillsToAdd = selectedItems.slice();
       setSelectedItems([]); // Очищаем selectedItems
     } else if (searchText) {
-      skillsToAdd = [searchText];
+      skillsToAdd = [{name: searchText}];
       setSearchText(''); // Очищаем searchText
     }
-     console.log("skills To Add:", skillsToAdd)
+    console.log("skills to add:", skillsToAdd)
     handleAddSkill(skillsToAdd);
   };
+
+  // useEffect(() => {
+  //   console.log("skillsToAdd", skillsToAdd);
+  // }, [skillsToAdd]);
 
   const handleResultClick = (index) => {
     // Добавить или удалить элемент из списка выбранных элементов
@@ -126,7 +130,7 @@ export default function SearchForm({ subtitleName, hasButton, skillsData, handle
               }`}
               onClick={() => handleResultClick(index)}
             >
-              {result}
+               {result.name}
             </div>
           ))}
         </div>

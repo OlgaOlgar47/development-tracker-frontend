@@ -4,6 +4,7 @@ import Header from "../Header/Header";
 import Main from "../Main/Main";
 import * as Api from "../../utils/api";
 import { useLocation } from 'react-router-dom';
+import InfoTooltip from "../InfoTooltip/InfoTooltip";
 
 function App() {
   const location = useLocation();
@@ -11,8 +12,15 @@ function App() {
   const [skillsData, setSkillsData] = useState([]);
   const [coursesData, setCoursesData] = useState({});
   const [collectionData, setCollectionData] = useState({});
-  const [serverError, setServerError] = useState({})
+  const [serverError, setServerError] = useState({});
+  const [isVisible, setIsVisible] = useState(false);
+  const [isInfoTooltip, setIsInfoTooltip] = useState({ isSucessfull: false });
 
+ // Логика для управления значением isInfoTooltip
+ function handleInfoTooltip(effect) {
+  setIsInfoTooltip({ ...isInfoTooltip, isSucessfull: effect });
+}
+  
   useEffect(() => {
     Promise.all([
       Api.getUserData(),
@@ -44,27 +52,39 @@ function App() {
     }
   }, [location.pathname]);
 
-  function handleAddSkill(name) {
-    Api.addSkill(name)
+  const toggleVisibility = () => {
+    setIsVisible(true); // Показываем элемент
+    setTimeout(() => {
+      setIsVisible(false); // Скрываем элемент через 3 секунды
+    }, 3000);
+  };
+
+  function handleAddSkill(data) {
+    Api.addSkill(data)
       .then((res) => {
-        console.log("ответ сервера:", res)
-        setUserData([res, ...userData]);
+        setUserData([...userData, res]);
       })
       .catch((err) => {
         console.log(err);
       });
   }
+  
 
   function handleEditSkill(skillData) {
-    console.log(skillData);
+    console.log('handleEditSkill работает')
     Api.editSkill(skillData)
       .then((res) => {
         setUserData([res, ...userData]);
+        toggleVisibility();
+        handleInfoTooltip(true);
       })
       .catch((err) => {
         console.log(err);
+        toggleVisibility();
+        handleInfoTooltip(false);
       });
   }
+  
 
   function handleDeleteSkill(id) {
     Api.deleteSkill(id)
@@ -93,6 +113,7 @@ function App() {
         collectionData={collectionData}
         handleEditSkill={handleEditSkill}
       />
+      <InfoTooltip effect={isInfoTooltip} isVisible={isVisible} />
     </div>
   );
 }

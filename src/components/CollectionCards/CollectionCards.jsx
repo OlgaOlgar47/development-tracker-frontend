@@ -1,15 +1,19 @@
 import "./CollectionCards.css";
-import { cards } from "../../utils/constants";
 import { Link } from "react-router-dom";
 
 export default function CollectionCards({ collectionData }) {
+  // Проверяем, есть ли данные в коллекции перед их использованием
+  if (!collectionData || !collectionData.length) {
+    return <p className="collection-cards__error">Данные о подборках не пришли с сервера</p>;
+  }
+
   return (
     <article className="collection-cards">
-      {cards.map((card, index) => (
+      {collectionData.map((card, index) => (
         <div key={index} className="collection-cards__wpapper">
-          <Link to={"/collections/skills"} className="collection-cards__link">
+          <Link to={`/collections/skills/${card.name}`} className="collection-cards__link">
             <img
-              className="collection-cards__image collection-cards__image_active"
+              className="collection-cards__image"
               src={card.image}
               onMouseEnter={(e) => (e.currentTarget.src = card.imageHover)}
               onMouseLeave={(e) => (e.currentTarget.src = card.image)}
@@ -26,3 +30,4 @@ export default function CollectionCards({ collectionData }) {
     </article>
   );
 }
+
