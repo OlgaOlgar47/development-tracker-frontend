@@ -1,24 +1,25 @@
 import "./InfoTooltip.css";
-import iconLink from "../../images/infoTooltip.svg";
+import iconOK from "../../images/infoTooltip.svg";
+import iconX from "../../images/RedX.svg";
 
-export default function InfoTooltip({isVisible}) {
-
-  
-  // const [showSuccessTooltip, setShowSuccessTooltip] = useState(false);
-  // const [showErrorTooltip, setShowErrorTooltip] = useState(false);
-
+export default function InfoTooltip({ isVisible, effect: { isSucessfull } }) {
   return (
-    <section className={`info-tooltip ${isVisible ? 'visible' : ''}`}>
+    <section className={`info-tooltip ${isVisible ? "visible" : ""}`}>
       <img
-        src={iconLink}
+        src={isSucessfull ? iconOK : iconX}
         className="info-tooltip__img"
         alt="Результат регистрации"
       />
       <div>
-        <h3 className="info-tooltip__tittle">Изменения сохранены</h3>
-        <p className="info-tooltip__paragraph">Проверь на главном экране</p>
+        <h3 className="info-tooltip__tittle">
+          {isSucessfull ? "Изменения сохранены" : "Ошибка сохранения"}
+        </h3>
+        <p className="info-tooltip__paragraph">
+          {isSucessfull
+            ? "Проверь на главном экране"
+            : "Попробуй сохранить ещё раз."}
+        </p>
       </div>
     </section>
   );
 }
-

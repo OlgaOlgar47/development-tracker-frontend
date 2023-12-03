@@ -17,7 +17,7 @@ export default function SkillsContainer({ skillsData, handleAddSkill }) {
     console.log(selectedCards)
     handleAddSkill(selectedCards);
   }
-
+    
   return (
     <section className="skills-container">
       <ul className="skills-container__list">

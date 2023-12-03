@@ -16,8 +16,13 @@ function App() {
   const [serverError, setServerError] = useState({});
   const [userDataToRender, setUserDataToRender] = useState(userDataConst);
   const [isVisible, setIsVisible] = useState(false);
+  const [isInfoTooltip, setIsInfoTooltip] = useState({ isSucessfull: false });
 
-
+ // Логика для управления значением isInfoTooltip
+ function handleInfoTooltip(effect) {
+  setIsInfoTooltip({ ...isInfoTooltip, isSucessfull: effect });
+}
+  
   useEffect(() => {
     Promise.all([
       Api.getUserData(),
@@ -52,7 +57,7 @@ function App() {
   const toggleVisibility = () => {
     setIsVisible(true); // Показываем элемент
     setTimeout(() => {
-      setIsVisible(false); // Скрываем элемент через 3 секунды
+      setIsVisible(false); // Скрываем элемент через 5 секунды
     }, 5000);
   };
 
@@ -64,8 +69,10 @@ function App() {
     Api.addSkill(name)
       .then((res) => {
         setUserData([...userData, res]);
+        handleInfoTooltip(true);
       })
       .catch((err) => {
+        handleInfoTooltip(false);
         console.log(err);
       });
   }
@@ -96,9 +103,11 @@ function App() {
     Api.editSkill(skillData)
       .then((res) => {
         setUserData([res, ...userData]);
+        handleInfoTooltip(true);
       })
       .catch((err) => {
         console.log(err);
+        handleInfoTooltip(false);
       });
   }
   
@@ -117,9 +126,11 @@ function App() {
             return skill.id !== id;
           })
         );
+        handleInfoTooltip(true);
       })
       .catch((err) => {
         console.log(err);
+        handleInfoTooltip(false);
       });
   }
 
@@ -136,7 +147,7 @@ function App() {
         collectionData={collectionData}
         handleEditSkill={handleEditSkill}
       />
-      <InfoTooltip isVisible={isVisible} />
+      <InfoTooltip effect={isInfoTooltip} isVisible={isVisible} />
     </div>
   );
 }

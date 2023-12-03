@@ -12,7 +12,7 @@ export default function UserSkillsContainer({
   subtitleName,
   userData,
   handleDeleteSkill,
-  serverError
+  serverError,
 }) {
   const [sortedSkillsData, setSortedSkillsData] = useState([]);
   const [isSorted, setIsSorted] = useState(false);
@@ -22,7 +22,7 @@ export default function UserSkillsContainer({
 
   function handleEdit() {
     if (selectedSkill.length === 1) {
-      const skillId = selectedSkill[0]; 
+      const skillId = selectedSkill[0];
       navigate(`/skill-editor/${skillId}`);
     }
   }
@@ -38,23 +38,22 @@ export default function UserSkillsContainer({
   useEffect(() => {
     setSortedSkillsData([...userDataToRender]);
   }, [userDataToRender]);
-  
 
   function sortSkills() {
     let sortedSkills;
     if (isSorted) {
-      sortedSkills = [...userDataToRender].sort(
-        (a, b) => a.rate - b.rate
-      );
+      sortedSkills = [...userDataToRender].sort((a, b) => a.rate - b.rate);
     } else {
-      sortedSkills = [...userDataToRender].sort(
-        (a, b) => b.rate - a.rate
-      );
+      sortedSkills = [...userDataToRender].sort((a, b) => b.rate - a.rate);
     }
     setIsSorted(!isSorted);
     setSortedSkillsData(sortedSkills);
   }
-  function showAll() {}
+
+  const showAll = () => {
+    const skillsContainer = document.querySelector(".skills-container__list");
+    skillsContainer.classList.toggle("skills-container__list_type_all");
+  };
 
   const generateGradient = (rate, colorStart, colorEnd) => {
     if (rate) {
@@ -69,16 +68,12 @@ export default function UserSkillsContainer({
     const selectedSkillNumber = parseInt(selectedSkill, 10);
     handleDeleteSkill(selectedSkillNumber); // Передача числа в функцию обработки удаления
   }
-  
-  
 
-
-  
   if (serverError) {
     return (
       <p className="skills-container__server-error">
-        «Во время запроса произошла ошибка. Возможно, проблема с соединением
-        или сервер недоступен. Подождите немного и попробуйте ещё раз»"
+        «Во время запроса произошла ошибка. Возможно, проблема с соединением или
+        сервер недоступен. Подождите немного и попробуйте ещё раз»"
       </p>
     );
   }
@@ -87,7 +82,7 @@ export default function UserSkillsContainer({
     <section className="skills-container">
       <div className="skills-container__header">
         <Subtitle subtitleName={subtitleName} />
-        {((hasBlueButons && (userDataToRender.length > 0)) || userDataConst)? (
+        {(hasBlueButons && userDataToRender.length > 0) || userDataConst ? (
           <div className="skills-container__buttons">
             <button className="skills-container__button" onClick={sortSkills}>
               <p className="skills-container__button-text">Сортировка</p>
@@ -98,9 +93,11 @@ export default function UserSkillsContainer({
               <div className="skills-container__arrow-icon"></div>
             </button>
           </div>
-        ) : ("")}
+        ) : (
+          ""
+        )}
       </div>
-      {((userData && userData.length > 0) || userDataConst) ? (
+      {(userData && userData.length > 0) || userDataConst ? (
         <>
           <ul className="skills-container__list">
             {sortedSkillsData.map((skill, index) => (
