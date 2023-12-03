@@ -5,9 +5,11 @@ import Paragraph from "../../Paragraph/Paragraph";
 import SearchForm from "../../SearchForm/SearchForm";
 import UserSkillsContainer from "../../UserSkillsContainer/UserSkillsContainer";
 import Recommendations from "../../Recommendations/Recommendations";
-import { userDataConst } from "../../../utils/constants";
+// import { userDataConst } from "../../../utils/constants";
 
 export default function Tracker({
+  userDataToRender,
+  serverError,
   userData,
   skillsData,
   handleAddSkill,
@@ -28,27 +30,24 @@ export default function Tracker({
             hasButton={true}
             skillsData={skillsData}
             handleAddSkill={handleAddSkill}
+            serverError={serverError}
           />
           <UserSkillsContainer
+            userDataToRender={userDataToRender}
             hasBlueButons={true}
             handleDeleteSkill={handleDeleteSkill}
             subtitleName="Твои навыки"
             userData={userData}
+            serverError={false}
           />
         </div>
         <div className="tracker__grid-item">
-          <Recommendations title="Полезные ресурсы" userData={[
-              { id: 0, name: "HTML", rate: 0, notes: "kakaka" },
-              { id: 1, name: "HTML", rate: 0, notes: "kakaka" },
-              { id: 2, name: "CSS", rate: 0 },
-              { id: 3, name: "JavaScript", rate: 0 },
-              { id: 13, name: "Исследования", rate: 80 },
-              { id: 14, name: "Гайдлайны iOS", rate: 100 },
-              { id: 15, name: "Вайрфреймы", rate: 20 },
-              { id: 16, name: "Анализ ЦА", rate: 20 },
-              { id: 17, name: "Гипотезы", rate: 60 },
-              { id: 18, name: "dobe Photoshop", rate: 80 },
-            ]} />
+          <Recommendations
+            title="Полезные ресурсы"
+            // userData={userData}
+            userDataToRender={userDataToRender}
+            serverError={serverError}
+          />
         </div>
       </div>
     </section>
