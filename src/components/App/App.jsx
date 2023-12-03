@@ -57,29 +57,26 @@ function App() {
   const toggleVisibility = () => {
     setIsVisible(true); // Показываем элемент
     setTimeout(() => {
-      setIsVisible(false); // Скрываем элемент через 5 секунды
-    }, 5000);
+      setIsVisible(false); // Скрываем элемент через 3 секунды
+    }, 3000);
   };
 
-  function handleAddSkill(name) {
-    let idRandom = Math.floor(Math.random() * 1000) + 1;
-    console.log('idrandom', idRandom)
-    const newSkill = { id: idRandom, name: name, rate: 0, notes: '', editable: true };
-    setUserDataToRender([newSkill, ...userDataToRender]);
-    Api.addSkill(name)
+  function handleAddSkill(data) {
+    const newSkills = data.map(item => {
+      let idRandom = Math.floor(Math.random() * 1000) + 1;
+      return { id: idRandom, name: item.name, rate: 0, notes: '', editable: true };
+    });
+  
+    setUserDataToRender(prevData => [...newSkills, ...prevData]);
+    
+    Api.addSkill(data)
       .then((res) => {
         setUserData([...userData, res]);
-        handleInfoTooltip(true);
       })
       .catch((err) => {
-        handleInfoTooltip(false);
         console.log(err);
       });
   }
-
-  useEffect(() => {
-    console.log("userDataToRender", userDataToRender); // Отслеживаем изменения skillInfo
-  }, [userDataToRender]);
   
 
   function handleEditSkill(skillData) {
@@ -98,16 +95,17 @@ function App() {
 
     setUserDataToRender(updatedUserDataToRender);
     toggleVisibility();
+    handleInfoTooltip(true);
     
   
     Api.editSkill(skillData)
       .then((res) => {
         setUserData([res, ...userData]);
-        handleInfoTooltip(true);
+        // handleInfoTooltip(true);
       })
       .catch((err) => {
         console.log(err);
-        handleInfoTooltip(false);
+        // handleInfoTooltip(false);
       });
   }
   
@@ -126,11 +124,9 @@ function App() {
             return skill.id !== id;
           })
         );
-        handleInfoTooltip(true);
       })
       .catch((err) => {
         console.log(err);
-        handleInfoTooltip(false);
       });
   }
 
