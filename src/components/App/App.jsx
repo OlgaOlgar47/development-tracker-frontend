@@ -5,7 +5,6 @@ import Main from "../Main/Main";
 import * as Api from "../../utils/api";
 import { useLocation } from 'react-router-dom';
 import { userDataConst } from "../../utils/constants";
-import InfoToolTip from "../InfoToolTip/InfoToolTip";
 
 function App() {
   const location = useLocation();
@@ -13,8 +12,9 @@ function App() {
   const [skillsData, setSkillsData] = useState([]);
   const [coursesData, setCoursesData] = useState({});
   const [collectionData, setCollectionData] = useState({});
-  const [serverError, setServerError] = useState({})
-  const [userDataToRender, setUserDataToRender] = useState(userDataConst)
+  const [serverError, setServerError] = useState({});
+  const [userDataToRender, setUserDataToRender] = useState(userDataConst);
+
 
   useEffect(() => {
     Promise.all([
@@ -79,8 +79,6 @@ function App() {
       }
       return skill;
     });
-    console.log("slillData:", skillData)
-    console.log("updatedUserDataToRender:", updatedUserDataToRender)
 
     setUserDataToRender(updatedUserDataToRender);
     
@@ -128,7 +126,6 @@ function App() {
         collectionData={collectionData}
         handleEditSkill={handleEditSkill}
       />
-      <InfoToolTip />
     </div>
   );
 }
