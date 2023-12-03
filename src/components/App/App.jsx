@@ -5,6 +5,7 @@ import Main from "../Main/Main";
 import * as Api from "../../utils/api";
 import { useLocation } from 'react-router-dom';
 import { userDataConst } from "../../utils/constants";
+import InfoTooltip from "../InfoTooltip/InfoTooltip";
 
 function App() {
   const location = useLocation();
@@ -12,9 +13,16 @@ function App() {
   const [skillsData, setSkillsData] = useState([]);
   const [coursesData, setCoursesData] = useState({});
   const [collectionData, setCollectionData] = useState({});
-  const [serverError, setServerError] = useState({})
-  const [userDataToRender, setUserDataToRender] = useState(userDataConst)
+  const [serverError, setServerError] = useState({});
+  const [userDataToRender, setUserDataToRender] = useState(userDataConst);
+  const [isVisible, setIsVisible] = useState(false);
+  const [isInfoTooltip, setIsInfoTooltip] = useState({ isSucessfull: false });
 
+ // Логика для управления значением isInfoTooltip
+ function handleInfoTooltip(effect) {
+  setIsInfoTooltip({ ...isInfoTooltip, isSucessfull: effect });
+}
+  
   useEffect(() => {
     Promise.all([
       Api.getUserData(),
@@ -46,12 +54,22 @@ function App() {
     }
   }, [location.pathname]);
 
-  function handleAddSkill(name) {
-    let idRandom = Math.floor(Math.random() * 1000) + 1;
-    console.log('idrandom', idRandom)
-    const newSkill = { id: idRandom, name: name, rate: 0, notes: '', editable: true };
-    setUserDataToRender([newSkill, ...userDataToRender]);
-    Api.addSkill(name)
+  const toggleVisibility = () => {
+    setIsVisible(true); // Показываем элемент
+    setTimeout(() => {
+      setIsVisible(false); // Скрываем элемент через 3 секунды
+    }, 3000);
+  };
+
+  function handleAddSkill(data) {
+    const newSkills = data.map(item => {
+      let idRandom = Math.floor(Math.random() * 1000) + 1;
+      return { id: idRandom, name: item.name, rate: 0, notes: '', editable: true };
+    });
+  
+    setUserDataToRender(prevData => [...newSkills, ...prevData]);
+    
+    Api.addSkill(data)
       .then((res) => {
         setUserData([...userData, res]);
       })
@@ -59,10 +77,6 @@ function App() {
         console.log(err);
       });
   }
-
-  useEffect(() => {
-    console.log("userDataToRender", userDataToRender); // Отслеживаем изменения skillInfo
-  }, [userDataToRender]);
   
 
   function handleEditSkill(skillData) {
@@ -78,18 +92,20 @@ function App() {
       }
       return skill;
     });
-    console.log("slillData:", skillData)
-    console.log("updatedUserDataToRender:", updatedUserDataToRender)
 
     setUserDataToRender(updatedUserDataToRender);
+    toggleVisibility();
+    handleInfoTooltip(true);
     
   
     Api.editSkill(skillData)
       .then((res) => {
         setUserData([res, ...userData]);
+        // handleInfoTooltip(true);
       })
       .catch((err) => {
         console.log(err);
+        // handleInfoTooltip(false);
       });
   }
   
@@ -127,6 +143,7 @@ function App() {
         collectionData={collectionData}
         handleEditSkill={handleEditSkill}
       />
+      <InfoTooltip effect={isInfoTooltip} isVisible={isVisible} />
     </div>
   );
 }

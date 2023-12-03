@@ -3,13 +3,15 @@ import { cards } from "../../utils/constants";
 import { Link } from "react-router-dom";
 
 export default function CollectionCards({ collectionData }) {
+  
   return (
     <article className="collection-cards">
       {cards.map((card, index) => (
         <div key={index} className="collection-cards__wpapper">
-          <Link to={"/collections/skills"} className="collection-cards__link">
+          <Link to={`/collections/skills/${card.name}`} className="collection-cards__link"
+          >
             <img
-              className="collection-cards__image collection-cards__image_active"
+              className="collection-cards__image"
               src={card.image}
               onMouseEnter={(e) => (e.currentTarget.src = card.imageHover)}
               onMouseLeave={(e) => (e.currentTarget.src = card.image)}

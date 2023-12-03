@@ -1,9 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "./SkillsContainer.css";
 import ButtonsBackAdd from "../Buttons/ButtonsBackAdd";
 
 export default function SkillsContainer({ skillsData, handleAddSkill }) {
-  const [sortedSkillsData, setSortedSkillsData] = useState([]);
   const [selectedCards, setSelectedCards] = useState([]);
 
   const handleImageClick = (index) => {
@@ -14,18 +13,15 @@ export default function SkillsContainer({ skillsData, handleAddSkill }) {
     }
   };
 
-  useEffect(() => {
-    setSortedSkillsData([...skillsData]);
-  }, [skillsData]);
-
   function handleAdd() {
+    console.log(selectedCards)
     handleAddSkill(selectedCards);
   }
-
+    
   return (
     <section className="skills-container">
       <ul className="skills-container__list">
-        {sortedSkillsData.map((skill, index) => (
+        {skillsData.map((skill, index) => (
           <li
             key={index}
             className={`skills-container__item-small ${

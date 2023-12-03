@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams } from 'react-router-dom';
 import "./SkillEditor.css";
 import Title from "../Title/Title";
 import Subtitle from "../Subtitle/Subtitle";
@@ -35,12 +35,21 @@ export default function SkillEditor({
   }, [skillInfo.name, skillInfo.rate, skillInfo.notes]);
 
   const handleRateButtonClick = (rate) => {
-    setSelectedPercentage(rate);
-    setSkillInfo((prevSkillInfo) => ({
-      ...prevSkillInfo,
-      rate: rate,
-    }));
+    if (rate === 20 && selectedPercentage === rate) {
+      setSelectedPercentage(0);
+      setSkillInfo((prevSkillInfo) => ({
+        ...prevSkillInfo,
+        rate: 0,
+      }));
+    } else {
+      setSelectedPercentage(rate);
+      setSkillInfo((prevSkillInfo) => ({
+        ...prevSkillInfo,
+        rate: rate,
+      }));
+    }
   };
+  
 
   const handleInputChange = (event) => {
     const newValue = event.target.value;
