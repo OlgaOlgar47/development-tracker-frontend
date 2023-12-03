@@ -8,9 +8,11 @@
   background-color: #5A9BFF;
   color: #FFF;
   border-radius: 12px;
-  position: relative;
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
 }
 
 .info-tooltip::before {
@@ -24,7 +26,7 @@
   border-radius: 0 0 12px 12px;
 }
 
-.info-tool-tip.visible {
+.info-tooltip.visible {
   opacity: 1;
 }
 

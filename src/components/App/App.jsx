@@ -136,7 +136,7 @@ function App() {
         collectionData={collectionData}
         handleEditSkill={handleEditSkill}
       />
-      <InfoTooltip isVisiBle={isVisible} />
+      <InfoTooltip isVisible={isVisible} />
     </div>
   );
 }
