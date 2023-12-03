@@ -12,8 +12,9 @@ function App() {
   const [skillsData, setSkillsData] = useState([]);
   const [coursesData, setCoursesData] = useState({});
   const [collectionData, setCollectionData] = useState({});
-  const [serverError, setServerError] = useState({})
-  const [userDataToRender, setUserDataToRender] = useState(userDataConst)
+  const [serverError, setServerError] = useState({});
+  const [userDataToRender, setUserDataToRender] = useState(userDataConst);
+
 
   useEffect(() => {
     Promise.all([
@@ -78,8 +79,6 @@ function App() {
       }
       return skill;
     });
-    console.log("slillData:", skillData)
-    console.log("updatedUserDataToRender:", updatedUserDataToRender)
 
     setUserDataToRender(updatedUserDataToRender);
     

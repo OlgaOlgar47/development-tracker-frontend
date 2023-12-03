@@ -4,7 +4,7 @@ import resumeCreation from "../../images/resume-creation.svg";
 import english from "../../images/english.svg";
 import CourseCard from "../CourseCard/CourseCard";
 
-export default function Recommendations({isSkillsEditor, userData, userDataToRender}) {
+export default function Recommendations({isSkillsEditor, userData, serverError, userDataToRender}) {
   const coursesList = [
     { name: "Как составить резюме", image: resumeCreation, skills: ["HTML",
     "CSS",
@@ -38,18 +38,23 @@ export default function Recommendations({isSkillsEditor, userData, userDataToRen
     { name: "Как составить резюме", image: english }
   ];
 
-  function getRecommendedCourses(userData, coursesList) {
+  function getRecommendedCourses(userDataToRender, coursesList) {
     const skillsCount = {};
   
-    userDataToRender.forEach((skillData) => {
-      const { name } = skillData;
+    if (Array.isArray(userDataToRender)) {
+      userDataToRender.forEach((skillData) => {
+        const { name } = skillData;
   
-      coursesList.forEach((course) => {
-        if (course.skills && course.skills.includes(name)) {
-          skillsCount[course.name] = (skillsCount[course.name] || 0) + 1;
-        }
+        coursesList.forEach((course) => {
+          if (course.skills && course.skills.includes(name)) {
+            skillsCount[course.name] = (skillsCount[course.name] || 0) + 1;
+          }
+        });
       });
-    });
+    } else {
+      console.error('userData is not an array.');
+      return []; // Возвращаем пустой массив или обработку ошибки
+    }
   
     const sortedCourses = Object.keys(skillsCount).sort(
       (a, b) => skillsCount[b] - skillsCount[a]
@@ -59,7 +64,8 @@ export default function Recommendations({isSkillsEditor, userData, userDataToRen
       return coursesList.find((course) => course.name === courseName);
     });
     return topRecommendedCourses;
-  }  
+  }
+  
   
 
   if (isSkillsEditor) {
@@ -73,7 +79,7 @@ export default function Recommendations({isSkillsEditor, userData, userDataToRen
       );
       
   } else {
-    const recommendedCourses = getRecommendedCourses(userData, coursesList);
+    const recommendedCourses = getRecommendedCourses(userDataToRender, coursesList);
     return (
         <div className="recommendations">
           <h3 className="recommendations__title">Полезные ресурсы</h3>
