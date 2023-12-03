@@ -5,48 +5,58 @@ import Title from "../Title/Title";
 import "./Skills.css";
 import UserSkillsContainer from "../UserSkillsContainer/UserSkillsContainer";
 import { userDataConst } from "../../utils/constants";
+import { useParams } from "react-router-dom";
 
 export default function Skills({ handleAddSkill }) {
+  const skillsData=[
+    { name: "Анализ рынка" },
+    { name: "Продуктовые метрики" },
+    { name: "Юнит-экономика" },
+    { name: "Product growth" },
+    { name: "Стратегия продукта" },
+    { name: "Воронка AARRR" },
+    { name: "Портфель продуктов" },
+    { name: "Гайдлайны Android" },
+    { name: "CSS" },
+    { name: "HTML" },
+    { name: "Grid Layout" },
+    { name: "Гайдлайны IOS" },
+    { name: "Adobe Photoshop" },
+    { name: "Анимация" },
+    { name: "Гипотезы" },
+    { name: "Анализ ЦА" },
+    { name: "Вайрфреймы" },
+    { name: "Гайдлайны iOS" },
+    { name: "UX-копирайтинг" },
+    { name: "Композиция и сетки" },
+    { name: "Основы Figma" },
+    { name: "Tilda" },
+    { name: "Типографика" },
+  ]
+
+  const { name } = useParams();
+
+   const matchingSkills = skillsData.filter((skill) => {
+    return userDataConst.some((userSkill) => userSkill.name === skill.name)
+  }
+
+);
   return (
     <section className="skills">
-      <Title text="Дизайнер интерфейсов" />
+      {/* <Title text="Дизайнер"/> */}
+      <Title text={name}/>
       <div className="skills__container">
         <div className="skills__items">
           <Paragraph text="Каждый день мы делаем покупки в интернете, заказываем доставку, читаем новости. UX/UI-дизайнеры делают так, чтобы всё это получалось легко и удобно." />
           <SkillsContainer handleAddSkill={handleAddSkill}
             subtitleName="Навыки дизайнера интерфейсов"
-            skillsData={[
-              { name: "Анализ рынка" },
-              { name: "Продуктовые метрики" },
-              { name: "Юнит-экономика" },
-              { name: "Product growth" },
-              { name: "Стратегия продукта" },
-              { name: "Воронка AARRR" },
-              { name: "Портфель продуктов" },
-              { name: "Гайдлайны Android" },
-              { name: "CSS" },
-              { name: "HTML" },
-              { name: "Grid Layout" },
-              { name: "Гайдлайны IOS" },
-              { name: "Adobe Photoshop" },
-              { name: "Анимация" },
-              { name: "Гипотезы" },
-              { name: "Анализ ЦА" },
-              { name: "Вайрфреймы" },
-              { name: "Гайдлайны iOS" },
-              { name: "UX-копирайтинг" },
-              { name: "Композиция и сетки" },
-              { name: "Основы Figma" },
-              { name: "Tilda" },
-              { name: "Типографика" },
-            ]}
+            skillsData={skillsData}
           />
            <UserSkillsContainer
             subtitleName="В твоих навыках"
-            userData={[]}
-            skillsData={[
-              { name: "Product growth" }
-            ]}
+            // hasBlueButons убрать кнопки сортировки
+            hasBlueButons={false}
+            userData={matchingSkills}
           />
         </div>
         <div className="tracker__grid-item">

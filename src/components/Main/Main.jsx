@@ -25,7 +25,7 @@ export default function Main({
           path="/"
           element={
             <Tracker
-            userData={userData}
+              userData={userData}
               skillsData={skillsData}
               coursesData={coursesData}
               handleAddSkill={handleAddSkill}
@@ -33,10 +33,23 @@ export default function Main({
             />
           }
         />
-        <Route path="/collections" element={<Collections collectionData={collectionData}
-          />} />
-        <Route path="/collections/skills" element={<Skills handleAddSkill={handleAddSkill}/>} />
-        <Route path="/skill-editor/:skillId" element={<SkillEditor userData={userData} handleEditSkill={handleEditSkill} />}  />
+        <Route
+          path="/collections"
+          element={<Collections collectionData={collectionData} />}
+        />
+        <Route
+          path="/collections/skills/:name"
+          element={<Skills handleAddSkill={handleAddSkill} />}
+        />
+        <Route
+          path="/skill-editor/:skillId"
+          element={
+            <SkillEditor
+              userData={userData}
+              handleEditSkill={handleEditSkill}
+            />
+          }
+        />
       </Routes>
     </main>
   );

@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "./SkillsContainer.css";
 import ButtonsBackAdd from "../Buttons/ButtonsBackAdd";
+import InfoTooltip from "../InfoTooltip/InfoTooltip"
 
 export default function SkillsContainer({ skillsData, handleAddSkill }) {
-  const [sortedSkillsData, setSortedSkillsData] = useState([]);
   const [selectedCards, setSelectedCards] = useState([]);
 
   const handleImageClick = (index) => {
@@ -14,10 +14,6 @@ export default function SkillsContainer({ skillsData, handleAddSkill }) {
     }
   };
 
-  useEffect(() => {
-    setSortedSkillsData([...skillsData]);
-  }, [skillsData]);
-
   function handleAdd() {
     handleAddSkill(selectedCards);
   }
@@ -25,7 +21,7 @@ export default function SkillsContainer({ skillsData, handleAddSkill }) {
   return (
     <section className="skills-container">
       <ul className="skills-container__list">
-        {sortedSkillsData.map((skill, index) => (
+        {skillsData.map((skill, index) => (
           <li
             key={index}
             className={`skills-container__item-small ${
@@ -38,6 +34,7 @@ export default function SkillsContainer({ skillsData, handleAddSkill }) {
         ))}
       </ul>
       <ButtonsBackAdd handleAdd={handleAdd} disabledAdd={selectedCards.length === 0} />
+      <InfoTooltip />
     </section>
   );
 }
