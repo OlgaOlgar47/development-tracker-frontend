@@ -2,6 +2,7 @@ import "./InfoTooltip.css";
 import iconLink from "../../images/infoTooltip.svg";
 
 export default function InfoTooltip() {
+
   
   // const [showSuccessTooltip, setShowSuccessTooltip] = useState(false);
   // const [showErrorTooltip, setShowErrorTooltip] = useState(false);
