@@ -4,10 +4,9 @@ import SkillsContainer from "../SkillsContainer/SkillsContainer";
 import Title from "../Title/Title";
 import "./Skills.css";
 import UserSkillsContainer from "../UserSkillsContainer/UserSkillsContainer";
-import { userDataConst } from "../../utils/constants";
 import { useParams } from "react-router-dom";
 
-export default function Skills({ handleAddSkill }) {
+export default function Skills({ handleAddSkill, userDataToRender }) {
   const skillsData=[
     { name: "Анализ рынка" },
     { name: "Продуктовые метрики" },
@@ -37,7 +36,7 @@ export default function Skills({ handleAddSkill }) {
   const { name } = useParams();
 
    const matchingSkills = skillsData.filter((skill) => {
-    return userDataConst.some((userSkill) => userSkill.name === skill.name)
+    return userDataToRender.some((userSkill) => userSkill.name === skill.name)
   }
 
 );
@@ -56,11 +55,11 @@ export default function Skills({ handleAddSkill }) {
             subtitleName="В твоих навыках"
             // hasBlueButons убрать кнопки сортировки
             hasBlueButons={false}
-            userData={matchingSkills}
+            userDataToRender={matchingSkills}
           />
         </div>
         <div className="tracker__grid-item">
-          <Recommendations userData={userDataConst} />
+          <Recommendations userDataToRender={userDataToRender} />
         </div>
       </div>
     </section>
