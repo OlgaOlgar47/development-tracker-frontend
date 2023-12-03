@@ -28,7 +28,7 @@ function App() {
         setServerError(true);
         console.log(err);
       });
-  }, [skillsData]);
+  }, []);
 
   useEffect(() => {
     if (location.pathname === '/collections') {
