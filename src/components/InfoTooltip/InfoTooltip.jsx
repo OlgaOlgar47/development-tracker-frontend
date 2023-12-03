@@ -1,14 +1,14 @@
 import "./InfoTooltip.css";
 import iconLink from "../../images/infoTooltip.svg";
 
-export default function InfoTooltip() {
+export default function InfoTooltip({isVisible}) {
 
   
   // const [showSuccessTooltip, setShowSuccessTooltip] = useState(false);
   // const [showErrorTooltip, setShowErrorTooltip] = useState(false);
 
   return (
-    <section className="info-tooltip">
+    <section className={`info-tooltip ${isVisible ? 'visible' : ''}`}>
       <img
         src={iconLink}
         className="info-tooltip__img"

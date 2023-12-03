@@ -5,6 +5,7 @@ import Main from "../Main/Main";
 import * as Api from "../../utils/api";
 import { useLocation } from 'react-router-dom';
 import { userDataConst } from "../../utils/constants";
+import InfoTooltip from "../InfoTooltip/InfoTooltip";
 
 function App() {
   const location = useLocation();
@@ -14,6 +15,7 @@ function App() {
   const [collectionData, setCollectionData] = useState({});
   const [serverError, setServerError] = useState({});
   const [userDataToRender, setUserDataToRender] = useState(userDataConst);
+  const [isVisible, setIsVisible] = useState(false);
 
 
   useEffect(() => {
@@ -46,6 +48,13 @@ function App() {
         });
     }
   }, [location.pathname]);
+
+  const toggleVisibility = () => {
+    setIsVisible(true); // Показываем элемент
+    setTimeout(() => {
+      setIsVisible(false); // Скрываем элемент через 3 секунды
+    }, 5000);
+  };
 
   function handleAddSkill(name) {
     let idRandom = Math.floor(Math.random() * 1000) + 1;
@@ -81,6 +90,7 @@ function App() {
     });
 
     setUserDataToRender(updatedUserDataToRender);
+    toggleVisibility();
     
   
     Api.editSkill(skillData)
@@ -126,6 +136,7 @@ function App() {
         collectionData={collectionData}
         handleEditSkill={handleEditSkill}
       />
+      <InfoTooltip isVisiBle={isVisible} />
     </div>
   );
 }
