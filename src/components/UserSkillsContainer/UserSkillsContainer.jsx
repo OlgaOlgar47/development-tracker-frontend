@@ -17,8 +17,13 @@ export default function UserSkillsContainer({
   const [sortedSkillsData, setSortedSkillsData] = useState([]);
   const [isSorted, setIsSorted] = useState(false);
   const [selectedSkill, setSelectedSkills] = useState([]);
+  const [showAllSkills, setShowAllSkills] = useState(false);
   const { pathname } = useLocation();
   const navigate = useNavigate();
+
+  const toggleShowAllSkills = () => {
+    setShowAllSkills(!showAllSkills);
+  };
 
   function handleEdit() {
     if (selectedSkill.length === 1) {
@@ -39,6 +44,10 @@ export default function UserSkillsContainer({
     setSortedSkillsData([...userDataToRender]);
   }, [userDataToRender]);
 
+  const visibleSkills = showAllSkills
+    ? sortedSkillsData
+    : sortedSkillsData.slice(0, 12); // покажем только 12 навыков
+
   function sortSkills() {
     let sortedSkills;
     if (isSorted) {
@@ -51,8 +60,7 @@ export default function UserSkillsContainer({
   }
 
   const showAll = () => {
-    const skillsContainer = document.querySelector(".skills-container__list");
-    skillsContainer.classList.toggle("skills-container__list_type_all");
+    toggleShowAllSkills();
   };
 
   const generateGradient = (rate, colorStart, colorEnd) => {
@@ -83,7 +91,12 @@ export default function UserSkillsContainer({
       <div className="skills-container__header">
         <Subtitle subtitleName={subtitleName} />
         {(hasBlueButons && userDataToRender.length > 0) || userDataConst ? (
-          <div className={pathname === "/" ? "skills-container__buttons" : "skills-container__buttons_type_none"}     
+          <div
+            className={
+              pathname === "/"
+                ? "skills-container__buttons"
+                : "skills-container__buttons_type_none"
+            }
           >
             <button className="skills-container__button" onClick={sortSkills}>
               <p className="skills-container__button-text">Сортировка</p>
@@ -101,7 +114,7 @@ export default function UserSkillsContainer({
       {(userData && userData.length > 0) || userDataConst ? (
         <>
           <ul className="skills-container__list">
-            {sortedSkillsData.map((skill, index) => (
+            {visibleSkills.map((skill, index) => (
               <li
                 key={skill.id}
                 className={`skills-container__item ${
@@ -141,6 +154,15 @@ export default function UserSkillsContainer({
               </li>
             ))}
           </ul>
+          {!showAllSkills && sortedSkillsData.length > 12 && (
+            <p className="skills-container__item-count">
+              + {sortedSkillsData.length - 12}  {(sortedSkillsData.length - 12) === 1
+                ? "навык"
+                : (sortedSkillsData.length - 12) > 1 && (sortedSkillsData.length - 12) < 5
+                ? "навыка"
+                : "навыков"}
+            </p>
+          )}
         </>
       ) : (
         <p className="skills-container__text">

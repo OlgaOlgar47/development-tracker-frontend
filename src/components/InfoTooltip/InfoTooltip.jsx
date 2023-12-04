@@ -6,7 +6,7 @@ export default function InfoTooltip({ isVisible, effect: { isSucessfull } }) {
   return (
     <section
       className={`info-tooltip ${isVisible ? "visible" : ""} ${
-        isSucessfull ? "" : "info-tooltip_type_false"
+        isSucessfull ? "" : "info-tooltip__type_false"
       }`}
     >
       <img

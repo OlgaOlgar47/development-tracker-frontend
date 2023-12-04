@@ -30,11 +30,6 @@
   transition: transform 0.9s ease-in-out;
 }
 
-/* .skills-container__list-limited {
-  max-height: 160px;
-  overflow: hidden;
-} */
-
 .skills-container__icon-link {
   height: 12px;
   width: 12px;
