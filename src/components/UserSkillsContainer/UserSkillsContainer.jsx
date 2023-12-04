@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./UserSkillsContainer.css";
 import Subtitle from "../Subtitle/Subtitle";
 import ButtonsDeleteEdit from "../../components/Buttons/ButtonsDeleteEdit";
@@ -17,7 +17,7 @@ export default function UserSkillsContainer({
   const [sortedSkillsData, setSortedSkillsData] = useState([]);
   const [isSorted, setIsSorted] = useState(false);
   const [selectedSkill, setSelectedSkills] = useState([]);
-
+  const { pathname } = useLocation();
   const navigate = useNavigate();
 
   function handleEdit() {
@@ -83,7 +83,8 @@ export default function UserSkillsContainer({
       <div className="skills-container__header">
         <Subtitle subtitleName={subtitleName} />
         {(hasBlueButons && userDataToRender.length > 0) || userDataConst ? (
-          <div className="skills-container__buttons">
+          <div className={pathname === "/" ? "skills-container__buttons" : "skills-container__buttons_type_none"}     
+          >
             <button className="skills-container__button" onClick={sortSkills}>
               <p className="skills-container__button-text">Сортировка</p>
               <div className="skills-container__sort-icon"></div>

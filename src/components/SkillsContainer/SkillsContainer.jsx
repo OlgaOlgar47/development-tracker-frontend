@@ -1,9 +1,11 @@
 import { useState } from "react";
 import "./SkillsContainer.css";
 import ButtonsBackAdd from "../Buttons/ButtonsBackAdd";
+import { useLocation } from "react-router-dom";
 
 export default function SkillsContainer({ skillsData, handleAddSkill }) {
   const [selectedCards, setSelectedCards] = useState([]);
+  const { pathname } = useLocation();
 
   const handleImageClick = (index) => {
     if (selectedCards.includes(index)) {
@@ -14,13 +16,19 @@ export default function SkillsContainer({ skillsData, handleAddSkill }) {
   };
 
   function handleAdd() {
-    console.log(selectedCards)
+    console.log(selectedCards);
     handleAddSkill(selectedCards);
   }
-    
+
   return (
     <section className="skills-container">
-      <ul className="skills-container__list">
+      <ul
+        className={
+          pathname === "/"
+            ? "skills-container__list"
+            : "skills-container__list skills-container__list_type_all"
+        }
+      >
         {skillsData.map((skill, index) => (
           <li
             key={index}
@@ -33,7 +41,10 @@ export default function SkillsContainer({ skillsData, handleAddSkill }) {
           </li>
         ))}
       </ul>
-      <ButtonsBackAdd handleAdd={handleAdd} disabledAdd={selectedCards.length === 0} />
+      <ButtonsBackAdd
+        handleAdd={handleAdd}
+        disabledAdd={selectedCards.length === 0}
+      />
     </section>
   );
 }

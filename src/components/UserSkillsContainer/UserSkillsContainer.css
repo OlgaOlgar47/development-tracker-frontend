@@ -74,6 +74,10 @@
   align-items: center;
 }
 
+.skills-container__buttons_type_none {
+  display: none;
+}
+
 .skills-container__button {
   background: transparent;
   color: #5a9bff;
