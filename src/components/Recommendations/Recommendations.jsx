@@ -4,7 +4,7 @@ import CourseCard from "../CourseCard/CourseCard";
 
 export default function Recommendations({ isSkillsEditor, userData, coursesData }) {
 
-  function getRecommendedCourses(userData, coursesList) {
+  function getRecommendedCourses(userData, coursesData) {
     const skillsCount = {};
 
     if (Array.isArray(userData)) {
@@ -27,7 +27,7 @@ export default function Recommendations({ isSkillsEditor, userData, coursesData 
     );
 
     const topRecommendedCourses = sortedCourses.slice(0, 2).map((courseName) => {
-      return coursesList.find((course) => course.name === courseName);
+      return coursesData.find((course) => course.name === courseName);
     });
     return topRecommendedCourses;
   }
