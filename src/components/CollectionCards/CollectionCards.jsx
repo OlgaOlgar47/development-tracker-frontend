@@ -8,7 +8,7 @@ export default function CollectionCards({ collectionData }) {
     <article className="collection-cards">
       {cards.map((card, index) => (
         <div key={index} className="collection-cards__wpapper">
-          <Link to={`/collections/skills/${card.name}`} className="collection-cards__link"
+          <Link to={`/collections/skills/${card.id}`} className="collection-cards__link"
           >
             <img
               className="collection-cards__image"
