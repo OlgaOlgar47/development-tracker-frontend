@@ -53,7 +53,23 @@ export const getCollections = () => {
 };
 
 export const getCourses = () => {
-  return fetch(`${BASE_URL}/api/v1/courses/`, {
+  return fetch(`${BASE_URL}api/v1/recommended-courses-tracker/`, {
+    method: "GET",
+    headers: {
+      authorization: "Token 2ce61160f6f0b226cd9260699515dd85cf198229",
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => {
+      return getResponseData(res);
+    })
+    .then((data) => data);
+};
+
+
+export const getCoursesForCollection = (id) => {
+  return fetch(`${BASE_URL}api/v1/recommended-courses-collection/${id}/`, {
     method: "GET",
     headers: {
       authorization: "Token 2ce61160f6f0b226cd9260699515dd85cf198229",
@@ -83,7 +99,7 @@ export const addSkill = (data) => {
 };
 
 export const editSkill = (values) => {
-  return fetch(`${BASE_URL}/api/v1/skills/`, {
+  return fetch(`${BASE_URL}/api/v1/skills/${values.id}/`, {
     method: "PATCH",
     headers: {
       authorization: "Token 2ce61160f6f0b226cd9260699515dd85cf198229",
