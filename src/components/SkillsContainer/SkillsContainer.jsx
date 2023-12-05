@@ -7,26 +7,27 @@ export default function SkillsContainer({ skillsData, handleAddSkill }) {
   const [selectedCards, setSelectedCards] = useState([]);
   const { pathname } = useLocation();
 
-  // const handleImageClick = (index) => {
-  //   if (selectedCards.includes(index)) {
-  //     setSelectedCards(selectedCards.filter((item) => item !== index));
-  //   } else {
-  //     setSelectedCards([...selectedCards, index]);
-  //   }
-  // };
-
   const handleImageClick = (index) => {
-    const selectedSkill = skillsData[index]; // Получение объекта из skillsData по индексу
-    if (selectedCards.includes(selectedSkill)) {
-      setSelectedCards(selectedCards.filter((item) => item !== selectedSkill));
-    } else {
-      setSelectedCards([...selectedCards, selectedSkill]);
-    }
+    const selectedItem = skillsData[index];
+    setSelectedCards((prevItems) => {
+      if (prevItems.some((item) => item === selectedItem)) {
+        // Убираем элемент из массива, если он уже был выбран
+        return prevItems.filter((item) => item !== selectedItem);
+      } else {
+        // Добавляем элемент в массив, если он не был выбран
+        return [...prevItems, selectedItem];
+      }
+    });
   };
 
   function handleAdd() {
-    console.log(selectedCards);
-    handleAddSkill(selectedCards);
+    let skillsToAdd = [];
+    if (selectedCards.length > 0) {
+      skillsToAdd = selectedCards.slice();
+      setSelectedCards([]); // Очищаем selectedCards
+      console.log("skillsToAdd", skillsToAdd);
+      handleAddSkill(skillsToAdd);
+    }
   }
 
   return (
@@ -42,7 +43,7 @@ export default function SkillsContainer({ skillsData, handleAddSkill }) {
           <li
             key={index}
             className={`skills-container__item-small ${
-              selectedCards.includes(index) ? "selected" : ""
+              selectedCards.includes(skill) ? "selected" : ""
             }`}
             onClick={() => handleImageClick(index)}
           >
