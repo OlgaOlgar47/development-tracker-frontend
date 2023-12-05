@@ -27,7 +27,11 @@
   flex-wrap: wrap;
   gap: 12px;
   overflow: hidden;
-  transition: transform 0.9s ease-in-out;
+  transition: transform 0.5s ease-in-out;
+}
+
+.skills-container__list.animated {
+  transition: transform 3s ease-in-out;
 }
 
 .skills-container__icon-link {
@@ -53,6 +57,8 @@
 }
 
 .skills-container__item-count {
+  border: none;
+  background: transparent;
   margin: 0;
   font-size: 16px;
   line-height: 20px;
@@ -117,6 +123,15 @@
   background-position: center;
 }
 
+.skills-container__arrow-icon-up {
+  width: 24px;
+  height: 24px;
+  background-image: url("../../images/arrow_up_blue.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 /* Изменение цвета текста при наведении на кнопку */
 .skills-container__button:hover .skills-container__button-text {
   color: #1d6bf3;
@@ -130,6 +145,12 @@
 .skills-container__button:hover .skills-container__arrow-icon {
   background-image: url("../../images/arrow-down-darkblue.svg");
 }
+
+.skills-container__button:hover .skills-container__arrow-icon-up {
+  background-image: url("../../images/arrow_up_darkblue.svg");
+}
+
+
 
 .skills-container__showall-button {
   padding: 0;
