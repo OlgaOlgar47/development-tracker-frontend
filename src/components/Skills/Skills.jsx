@@ -12,31 +12,32 @@ export default function Skills({
   userDataToRender,
   coursesDataForCollection,
   collectionData,
+  handleDeleteSkill,
 }) {
   const skillsData = [
-    { name: "Анализ рынка" },
-    { name: "Продуктовые метрики" },
-    { name: "Юнит-экономика" },
-    { name: "Product growth" },
-    { name: "Стратегия продукта" },
-    { name: "Воронка AARRR" },
-    { name: "Портфель продуктов" },
-    { name: "Гайдлайны Android" },
-    { name: "CSS" },
-    { name: "HTML" },
-    { name: "Grid Layout" },
-    { name: "Гайдлайны IOS" },
-    { name: "Adobe Photoshop" },
-    { name: "Анимация" },
-    { name: "Гипотезы" },
-    { name: "Анализ ЦА" },
-    { name: "Вайрфреймы" },
-    { name: "Гайдлайны iOS" },
-    { name: "UX-копирайтинг" },
-    { name: "Композиция и сетки" },
-    { name: "Основы Figma" },
-    { name: "Tilda" },
-    { name: "Типографика" },
+    { id: 1, name: "Анализ рынка" },
+    { id: 2, name: "Продуктовые метрики" },
+    { id: 3, name: "Юнит-экономика" },
+    { id: 4, name: "Product growth" },
+    { id: 5, name: "Стратегия продукта" },
+    { id: 6, name: "Воронка AARRR" },
+    { id: 7, name: "Портфель продуктов" },
+    { id: 8, name: "Гайдлайны Android" },
+    { id: 9, name: "CSS" },
+    { id: 10, name: "HTML" },
+    { id: 11, name: "Grid Layout" },
+    { id: 12, name: "Гайдлайны IOS" },
+    { id: 13, name: "Adobe Photoshop" },
+    { id: 14, name: "Анимация" },
+    { id: 15, name: "Гипотезы" },
+    { id: 16, name: "Анализ ЦА" },
+    { id: 17, name: "Вайрфреймы" },
+    { id: 18, name: "Гайдлайны iOS" },
+    { id: 19, name: "UX-копирайтинг" },
+    { id: 20, name: "Композиция и сетки" },
+    { id: 21, name: "Основы Figma" },
+    { id: 22, name: "Tilda" },
+    { id: 23, name: "Типографика" },
   ];
 
   const { collectionId } = useParams();
@@ -57,14 +58,14 @@ export default function Skills({
     }
   }, [collectionId, collection, collectionData]);
 
-  const matchingSkills = skillsData.filter((skill) => {
-    return userDataToRender.some((userSkill) => userSkill.name === skill.name);
+  const matchingSkills = userDataToRender.filter((skill) => {
+    return skillsData.some((userSkill) => userSkill.name === skill.name);
   });
 
   return (
     <section className="skills">
-      {/* <Title text="Дизайнер"/> */}
-      <Title text={collection.name} />
+      <Title text="Дизайнер"/>
+      {/* <Title text={collection.name} /> */}
       <div className="skills__container">
         <div className="skills__items">
           <Paragraph text="Каждый день мы делаем покупки в интернете, заказываем доставку, читаем новости. UX/UI-дизайнеры делают так, чтобы всё это получалось легко и удобно." />
@@ -76,6 +77,7 @@ export default function Skills({
           <UserSkillsContainer
             subtitleName="В твоих навыках"
             userDataToRender={matchingSkills}
+            handleDeleteSkill={handleDeleteSkill}
           />
         </div>
         <div className="tracker__grid-item">

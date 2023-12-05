@@ -5,7 +5,7 @@ import TextField from "@mui/material/TextField";
 import { cards } from "../../utils/constants"
 import { useNavigate } from "react-router-dom";
 
-export default function SearchFormCollection({ subtitleName, hasButton, handleAddSkill}) {
+export default function SearchFormCollection({ subtitleName }) {
   const [searchText, setSearchText] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const navigate = useNavigate();

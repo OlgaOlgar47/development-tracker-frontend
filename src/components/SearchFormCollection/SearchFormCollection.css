@@ -15,6 +15,7 @@
   flex-wrap: wrap;
   margin: 0;
   gap: 14px;
+  width: 697px;
 }
 
 .search-form-collection__result {
