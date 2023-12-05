@@ -1,0 +1,36 @@
+.search-form-collection {
+  margin: 0 0 40px;
+}
+
+.search-form-collection__container {
+  margin: 16px 0;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.search-form-collection__results {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  gap: 14px;
+}
+
+.search-form-collection__result {
+  padding: 8px 20px;
+  border: 1px solid #dde0e4;
+  border-radius: 4px;
+  background: #f9fafb;
+}
+
+.search-form-collection__result:hover {
+  cursor: pointer;
+  color: #5a9bff;
+  border-color: #5a9bff;
+}
+
+.search-form-collection__result.selected {
+  color: #1d6bf3;
+  border-color: #1d6bf3;
+}

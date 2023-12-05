@@ -7,8 +7,13 @@ import "./Skills.css";
 import UserSkillsContainer from "../UserSkillsContainer/UserSkillsContainer";
 import { useParams } from "react-router-dom";
 
-export default function Skills({ handleAddSkill, userDataToRender, coursesDataForCollection, collectionData }) {
-  const skillsData=[
+export default function Skills({
+  handleAddSkill,
+  userDataToRender,
+  coursesDataForCollection,
+  collectionData,
+}) {
+  const skillsData = [
     { name: "Анализ рынка" },
     { name: "Продуктовые метрики" },
     { name: "Юнит-экономика" },
@@ -32,15 +37,17 @@ export default function Skills({ handleAddSkill, userDataToRender, coursesDataFo
     { name: "Основы Figma" },
     { name: "Tilda" },
     { name: "Типографика" },
-  ]
+  ];
 
   const { collectionId } = useParams();
   const [collection, setCollection] = useState({});
-  
+
   useEffect(() => {
     if (collectionData && collectionData.length > 0) {
       const id = parseInt(collectionId, 10);
-      const foundCollection = collectionData.find((collection) => collection.id === id);
+      const foundCollection = collectionData.find(
+        (collection) => collection.id === id
+      );
       if (foundCollection) {
         setCollection(foundCollection);
       } else {
@@ -49,33 +56,33 @@ export default function Skills({ handleAddSkill, userDataToRender, coursesDataFo
       }
     }
   }, [collectionId, collection, collectionData]);
-  
 
-   const matchingSkills = skillsData.filter((skill) => {
-    return userDataToRender.some((userSkill) => userSkill.name === skill.name)
-  }
+  const matchingSkills = skillsData.filter((skill) => {
+    return userDataToRender.some((userSkill) => userSkill.name === skill.name);
+  });
 
-);
   return (
     <section className="skills">
       {/* <Title text="Дизайнер"/> */}
-      <Title text={collection.name}/>
+      <Title text={collection.name} />
       <div className="skills__container">
         <div className="skills__items">
           <Paragraph text="Каждый день мы делаем покупки в интернете, заказываем доставку, читаем новости. UX/UI-дизайнеры делают так, чтобы всё это получалось легко и удобно." />
-          <SkillsContainer handleAddSkill={handleAddSkill}
+          <SkillsContainer
+            handleAddSkill={handleAddSkill}
             subtitleName="Навыки дизайнера интерфейсов"
             skillsData={skillsData}
           />
-           <UserSkillsContainer
+          <UserSkillsContainer
             subtitleName="В твоих навыках"
-            // hasBlueButons убрать кнопки сортировки
-            hasBlueButons={false}
             userDataToRender={matchingSkills}
           />
         </div>
         <div className="tracker__grid-item">
-          <Recommendations userDataToRender={userDataToRender} coursesDataForCollection={coursesDataForCollection}/>
+          <Recommendations
+            userDataToRender={userDataToRender}
+            coursesDataForCollection={coursesDataForCollection}
+          />
         </div>
       </div>
     </section>
