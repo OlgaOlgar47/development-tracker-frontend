@@ -4,17 +4,33 @@ import iconX from "../../images/RedX.svg";
 
 export default function InfoTooltip({ isVisible, effect: { isSucessfull } }) {
   return (
-    <section className={`info-tooltip ${isVisible ? "visible" : ""}`}>
+    <section
+      className={`info-tooltip ${isVisible ? "visible" : ""} ${
+        isSucessfull ? "" : "info-tooltip__type_false"
+      }`}
+    >
       <img
         src={isSucessfull ? iconOK : iconX}
         className="info-tooltip__img"
         alt="Результат регистрации"
       />
       <div>
-        <h3 className="info-tooltip__tittle">
+        <h3
+          className={`${
+            isSucessfull
+              ? "info-tooltip__tittle-true"
+              : "info-tooltip__tittle-false"
+          }`}
+        >
           {isSucessfull ? "Изменения сохранены" : "Ошибка сохранения"}
         </h3>
-        <p className="info-tooltip__paragraph">
+        <p
+          className={`${
+            isSucessfull
+              ? "info-tooltip__paragraph-true"
+              : "info-tooltip__paragraph-false"
+          }`}
+        >
           {isSucessfull
             ? "Проверь на главном экране"
             : "Попробуй сохранить ещё раз."}

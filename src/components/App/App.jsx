@@ -6,17 +6,20 @@ import * as Api from "../../utils/api";
 import { useLocation } from 'react-router-dom';
 import { userDataConst } from "../../utils/constants";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
+import { useParams } from "react-router-dom";
 
 function App() {
   const location = useLocation();
   const [userData, setUserData] = useState({});
   const [skillsData, setSkillsData] = useState([]);
   const [coursesData, setCoursesData] = useState({});
+  const [coursesDataForCollection, setCoursesDataForCollection] = useState({})
   const [collectionData, setCollectionData] = useState({});
   const [serverError, setServerError] = useState({});
   const [userDataToRender, setUserDataToRender] = useState(userDataConst);
   const [isVisible, setIsVisible] = useState(false);
   const [isInfoTooltip, setIsInfoTooltip] = useState({ isSucessfull: false });
+  const { collectionId } = useParams();
 
  // Логика для управления значением isInfoTooltip
  function handleInfoTooltip(effect) {
@@ -53,6 +56,21 @@ function App() {
         });
     }
   }, [location.pathname]);
+
+
+  useEffect(() => {
+    if (location.pathname === '/collections/skills/:collectionId') {
+      // Выполняем запрос только если мы находимся на нужном роуте
+      Api.getCoursesForCollection(collectionId)
+        .then(res => {
+          setCoursesDataForCollection(res);
+        })
+        .catch(err => {
+          setServerError(true);
+          console.log(err);
+        });
+    }
+  }, [collectionId, location.pathname]);
 
   const toggleVisibility = () => {
     setIsVisible(true); // Показываем элемент
@@ -95,17 +113,17 @@ function App() {
 
     setUserDataToRender(updatedUserDataToRender);
     toggleVisibility();
-    handleInfoTooltip(true);
+    handleInfoTooltip(false);
     
   
     Api.editSkill(skillData)
       .then((res) => {
         setUserData([res, ...userData]);
-        // handleInfoTooltip(true);
+
       })
       .catch((err) => {
         console.log(err);
-        // handleInfoTooltip(false);
+
       });
   }
   
@@ -138,6 +156,7 @@ function App() {
         userDataToRender={userDataToRender}
         skillsData={skillsData}
         coursesData={coursesData}
+        coursesDataForCollection={coursesDataForCollection}
         handleAddSkill={handleAddSkill}
         handleDeleteSkill={handleDeleteSkill}
         collectionData={collectionData}

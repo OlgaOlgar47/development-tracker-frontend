@@ -40,48 +40,56 @@ export const userDataConst = [
 
 export const cards = [
   {
+    id: 1,
     name: "Графический дизайнер",
     count: "10 навыков",
     image: Desiner,
     imageHover: DesinerHover,
   },
   {
+    id: 2,
     name: "Топ 5 навыков в дизайне в 2023 году",
     count: "5 навыков",
     image: Top5,
     imageHover: Top5hover,
   },
   {
+    id: 3,
     name: "Аналитик данных",
     count: "12 навыков",
     image: Analitic,
     imageHover: AnaliticHover,
   },
   {
+    id: 4,
     name: "Дизайнер интерфейсов",
     count: "23 навыка",
     image: DesinerInerfase,
     imageHover: DesinerInerfaseHover,
   },
   {
+    id: 5,
     name: "Инженер по тестированию",
     count: "15 навыков",
     image: Tester,
     imageHover: TesterHover,
   },
   {
+    id: 6,
     name: "Менеджер проектов",
     count: "18 навыков",
     image: ManagerProgect,
     imageHover: ManagerProgectHover,
   },
   {
+    id: 7,
     name: "Контент менеджер",
     count: "8 навыков",
     image: ContentManager,
     imageHover: ContentManagerHover,
   },
   {
+    id: 8,
     name: "Фронтенд-разработчик",
     count: "14 навыков",
     image: Frontend,
