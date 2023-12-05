@@ -113,7 +113,7 @@ function App() {
 
     setUserDataToRender(updatedUserDataToRender);
     toggleVisibility();
-    handleInfoTooltip(false);
+    handleInfoTooltip(true);
     
   
     Api.editSkill(skillData)
