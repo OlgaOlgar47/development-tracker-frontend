@@ -7,11 +7,20 @@ export default function SkillsContainer({ skillsData, handleAddSkill }) {
   const [selectedCards, setSelectedCards] = useState([]);
   const { pathname } = useLocation();
 
+  // const handleImageClick = (index) => {
+  //   if (selectedCards.includes(index)) {
+  //     setSelectedCards(selectedCards.filter((item) => item !== index));
+  //   } else {
+  //     setSelectedCards([...selectedCards, index]);
+  //   }
+  // };
+
   const handleImageClick = (index) => {
-    if (selectedCards.includes(index)) {
-      setSelectedCards(selectedCards.filter((item) => item !== index));
+    const selectedSkill = skillsData[index]; // Получение объекта из skillsData по индексу
+    if (selectedCards.includes(selectedSkill)) {
+      setSelectedCards(selectedCards.filter((item) => item !== selectedSkill));
     } else {
-      setSelectedCards([...selectedCards, index]);
+      setSelectedCards([...selectedCards, selectedSkill]);
     }
   };
 
