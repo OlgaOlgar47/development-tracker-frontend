@@ -128,10 +128,7 @@ export default function UserSkillsContainer({
           <ul className="skills-container__list">
             {visibleSkills.map((skill, index) => (
               <li
-                key={skill.id}
-                className={`skills-container__item ${
-                  selectedSkill.includes(skill.id) ? "selected" : ""
-                }`}
+              key={skill.id}
                 onClick={() => handleSkillClick(skill.id)}
                 style={{
                   background: generateGradient(
@@ -154,6 +151,15 @@ export default function UserSkillsContainer({
                     "#c2e5ce00"
                   );
                 }}
+                className={`skills-container__item 
+             
+                ${skill.rate === 0 && selectedSkill.includes(skill.id) ? "selected-0" : ""}
+                ${skill.rate === 20 && selectedSkill.includes(skill.id) ? "selected-20" : ""}
+                ${skill.rate === 40 && selectedSkill.includes(skill.id) ? "selected-40" : ""}
+                ${skill.rate === 60 && selectedSkill.includes(skill.id) ? "selected-60" : ""}
+                ${skill.rate === 80 && selectedSkill.includes(skill.id) ? "selected-80" : ""}
+                ${skill.rate === 100 && selectedSkill.includes(skill.id) ? "selected-100" : ""}
+              `}
               >
                 {skill.name}
                 {skill.notes && (
