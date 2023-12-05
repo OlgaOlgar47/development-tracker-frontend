@@ -37,7 +37,6 @@ export const userDataConst = [
   { id: 18, name: "Adobe Photoshop", rate: 80, notes: "", editable: false },
 ];
 
-
 export const cards = [
   {
     id: 1,
