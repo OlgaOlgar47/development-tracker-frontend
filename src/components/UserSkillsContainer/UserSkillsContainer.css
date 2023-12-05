@@ -52,11 +52,11 @@
   background-color: #f7fffa;
 }
 
-/* .skills-container__item.selected {
+.skills-container__item.selected {
   border: 1px solid #1a1b22;
-} */
+}
 
-.selected-0 {
+/* .selected-0 {
   background: linear-gradient(90deg, #87CC9E 0%, #F7FFFA 0.01%);
   border: 1px solid #1a1b22;
 }
@@ -84,7 +84,7 @@
 .selected-100 {
   background: linear-gradient(90deg, #87CC9E 100%, #F7FFFA 100.01%);
   border: 1px solid #1a1b22;
-}
+} */
 
 
 .skills-container__item-count {
@@ -203,4 +203,23 @@
 .skills-container__server-error {
   text-align: center;
   align-self: center;
+}
+
+
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 700ms ease-in-out;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 700ms ease-in-out;
 }

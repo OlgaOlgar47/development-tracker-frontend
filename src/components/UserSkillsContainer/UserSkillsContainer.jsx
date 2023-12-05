@@ -5,6 +5,7 @@ import Subtitle from "../Subtitle/Subtitle";
 import ButtonsDeleteEdit from "../../components/Buttons/ButtonsDeleteEdit";
 import iconLink from "../../images/link.svg";
 import { userDataConst } from "../../utils/constants";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 export default function UserSkillsContainer({
   userDataToRender,
@@ -115,8 +116,16 @@ export default function UserSkillsContainer({
               <div className="skills-container__sort-icon"></div>
             </button>
             <button className="skills-container__button" onClick={showAll}>
-              <p className="skills-container__button-text">{showAllSkills ? 'Свернуть' : 'Смотреть все'}</p>
-              <div className={showAllSkills ? "skills-container__arrow-icon-up" : "skills-container__arrow-icon"}></div>
+              <p className="skills-container__button-text">
+                {showAllSkills ? "Свернуть" : "Смотреть все"}
+              </p>
+              <div
+                className={
+                  showAllSkills
+                    ? "skills-container__arrow-icon-up"
+                    : "skills-container__arrow-icon"
+                }
+              ></div>
             </button>
           </div>
         ) : (
@@ -125,58 +134,59 @@ export default function UserSkillsContainer({
       </div>
       {(userData && userData.length > 0) || userDataConst ? (
         <>
-          <ul className="skills-container__list">
+          <TransitionGroup className="skills-container__list">
             {visibleSkills.map((skill, index) => (
-              <li
-              key={skill.id}
-                onClick={() => handleSkillClick(skill.id)}
-                style={{
-                  background: generateGradient(
-                    skill.rate,
-                    "#c2e5ce",
-                    "#c2e5ce00"
-                  ),
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = generateGradient(
-                    skill.rate,
-                    "#87CC9E",
-                    "#F7FFFA"
-                  );
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = generateGradient(
-                    skill.rate,
-                    "#c2e5ce",
-                    "#c2e5ce00"
-                  );
-                }}
-                className={`skills-container__item 
-             
-                ${skill.rate === 0 && selectedSkill.includes(skill.id) ? "selected-0" : ""}
-                ${skill.rate === 20 && selectedSkill.includes(skill.id) ? "selected-20" : ""}
-                ${skill.rate === 40 && selectedSkill.includes(skill.id) ? "selected-40" : ""}
-                ${skill.rate === 60 && selectedSkill.includes(skill.id) ? "selected-60" : ""}
-                ${skill.rate === 80 && selectedSkill.includes(skill.id) ? "selected-80" : ""}
-                ${skill.rate === 100 && selectedSkill.includes(skill.id) ? "selected-100" : ""}
-              `}
-              >
-                {skill.name}
-                {skill.notes && (
-                  <img
-                    src={iconLink}
-                    alt="иконка линк"
-                    className="skills-container__icon-link"
-                  />
-                )}
-              </li>
+              <CSSTransition key={skill.id} timeout={500} classNames="fade">
+                <li
+                  onClick={() => handleSkillClick(skill.id)}
+                  style={{
+                    background: generateGradient(
+                      skill.rate,
+                      "#c2e5ce",
+                      "#c2e5ce00"
+                    ),
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = generateGradient(
+                      skill.rate,
+                      "#87CC9E",
+                      "#F7FFFA"
+                    );
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = generateGradient(
+                      skill.rate,
+                      "#c2e5ce",
+                      "#c2e5ce00"
+                    );
+                  }}
+                  className={`skills-container__item ${
+                    selectedSkill.includes(skill.id) ? "selected" : ""
+                  }`}
+                >
+                  {skill.name}
+                  {skill.notes && (
+                    <img
+                      src={iconLink}
+                      alt="иконка линк"
+                      className="skills-container__icon-link"
+                    />
+                  )}
+                </li>
+              </CSSTransition>
             ))}
-          </ul>
+          </TransitionGroup>
           {!showAllSkills && sortedSkillsData.length > 12 && (
-            <button type="button" className="skills-container__item-count" onClick={showAll}>
-              + {sortedSkillsData.length - 12}  {(sortedSkillsData.length - 12) === 1
+            <button
+              type="button"
+              className="skills-container__item-count"
+              onClick={showAll}
+            >
+              + {sortedSkillsData.length - 12}{" "}
+              {sortedSkillsData.length - 12 === 1
                 ? "навык"
-                : (sortedSkillsData.length - 12) > 1 && (sortedSkillsData.length - 12) < 5
+                : sortedSkillsData.length - 12 > 1 &&
+                  sortedSkillsData.length - 12 < 5
                 ? "навыка"
                 : "навыков"}
             </button>
