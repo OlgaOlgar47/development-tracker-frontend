@@ -46,7 +46,8 @@ export default function Main({
           path="/collections/skills/:collectionId"
           element={<Skills collectionData={collectionData} handleAddSkill={handleAddSkill} 
           coursesDataForCollection={coursesDataForCollection}
-          userDataToRender={userDataToRender}/>}
+          userDataToRender={userDataToRender}
+          handleDeleteSkill={handleDeleteSkill} />}
         />
         <Route
           path="/skill-editor/:skillId"

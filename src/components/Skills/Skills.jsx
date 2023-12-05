@@ -12,6 +12,7 @@ export default function Skills({
   userDataToRender,
   coursesDataForCollection,
   collectionData,
+  handleDeleteSkill,
 }) {
   const skillsData = [
     { id: 1, name: "Анализ рынка" },
@@ -76,6 +77,7 @@ export default function Skills({
           <UserSkillsContainer
             subtitleName="В твоих навыках"
             userDataToRender={matchingSkills}
+            handleDeleteSkill={handleDeleteSkill}
           />
         </div>
         <div className="tracker__grid-item">
