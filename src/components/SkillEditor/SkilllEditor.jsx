@@ -11,8 +11,7 @@ import TextField from "@mui/material/TextField";
 
 export default function SkillEditor({
   handleEditSkill,
-  userData,
-  userDataToRender,
+  userData
 }) {
   const { skillId } = useParams();
   const [skillInfo, setSkillInfo] = useState({});
@@ -66,9 +65,9 @@ export default function SkillEditor({
 
   useEffect(() => {
     const id = parseInt(skillId, 10);
-    const foundSkill = userDataToRender.find((skill) => skill.id === id);
+    const foundSkill = userData.find((skill) => skill.id === id);
     setSkillInfo(foundSkill);
-  }, [skillId, userDataToRender]);
+  }, [skillId, userData]);
 
   useEffect(() => {
     console.log("skillinfo:", skillInfo); // Отслеживаем изменения skillInfo

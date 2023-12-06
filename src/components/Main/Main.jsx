@@ -9,7 +9,6 @@ import SkillEditor from "../SkillEditor/SkilllEditor";
 // import { userDataConst } from "../../utils/constants";
 
 export default function Main({
-  userDataToRender,
   serverError,
   userData,
   skillsData,
@@ -30,7 +29,6 @@ export default function Main({
           path="/"
           element={
             <Tracker
-              userDataToRender={userDataToRender}
               serverError={serverError}
               userData={userData}
               skillsData={skillsData}
@@ -49,15 +47,15 @@ export default function Main({
         <Route
           path="/collections/skills/:collectionId"
           element={<Skills collectionData={collectionData} handleAddSkill={handleAddSkill} 
+          skillsData={skillsData}
           coursesDataForCollection={coursesDataForCollection}
-          userDataToRender={userDataToRender}
+          userData={userData}
           handleDeleteSkill={handleDeleteSkill} />}
         />
         <Route
           path="/skill-editor/:skillId"
           element={
             <SkillEditor
-              userDataToRender={userDataToRender}
               userData={userData}
               handleEditSkill={handleEditSkill}
             />

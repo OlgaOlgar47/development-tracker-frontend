@@ -1,11 +1,10 @@
 import "./CollectionCards.css";
-import { cards } from "../../utils/constants";
 import { Link } from "react-router-dom";
 
 export default function CollectionCards({ collectionData }) {
   return (
     <article className="collection-cards">
-      {cards.map((card, index) => (
+      {collectionData.map((card, index) => (
         <div key={index} className="collection-cards__wpapper">
           <Link
             to={`/collections/skills/${card.id}`}

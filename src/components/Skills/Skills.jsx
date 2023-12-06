@@ -8,37 +8,38 @@ import UserSkillsContainer from "../UserSkillsContainer/UserSkillsContainer";
 import { useParams } from "react-router-dom";
 
 export default function Skills({
-  handleAddSkill,
-  userDataToRender,
   coursesDataForCollection,
+  skillsData,
+  handleAddSkill,
+  userData,
   collectionData,
   handleDeleteSkill,
 }) {
-  const skillsData = [
-    { id: 1, name: "Анализ рынка" },
-    { id: 2, name: "Продуктовые метрики" },
-    { id: 3, name: "Юнит-экономика" },
-    { id: 4, name: "Product growth" },
-    { id: 5, name: "Стратегия продукта" },
-    { id: 6, name: "Воронка AARRR" },
-    { id: 7, name: "Портфель продуктов" },
-    { id: 8, name: "Гайдлайны Android" },
-    { id: 9, name: "CSS" },
-    { id: 10, name: "HTML" },
-    { id: 11, name: "Grid Layout" },
-    { id: 12, name: "Гайдлайны IOS" },
-    { id: 13, name: "Adobe Photoshop" },
-    { id: 14, name: "Анимация" },
-    { id: 15, name: "Гипотезы" },
-    { id: 16, name: "Анализ ЦА" },
-    { id: 17, name: "Вайрфреймы" },
-    { id: 18, name: "Гайдлайны iOS" },
-    { id: 19, name: "UX-копирайтинг" },
-    { id: 20, name: "Композиция и сетки" },
-    { id: 21, name: "Основы Figma" },
-    { id: 22, name: "Tilda" },
-    { id: 23, name: "Типографика" },
-  ];
+  // const skillsData = [
+  //   { id: 1, name: "Анализ рынка" },
+  //   { id: 2, name: "Продуктовые метрики" },
+  //   { id: 3, name: "Юнит-экономика" },
+  //   { id: 4, name: "Product growth" },
+  //   { id: 5, name: "Стратегия продукта" },
+  //   { id: 6, name: "Воронка AARRR" },
+  //   { id: 7, name: "Портфель продуктов" },
+  //   { id: 8, name: "Гайдлайны Android" },
+  //   { id: 9, name: "CSS" },
+  //   { id: 10, name: "HTML" },
+  //   { id: 11, name: "Grid Layout" },
+  //   { id: 12, name: "Гайдлайны IOS" },
+  //   { id: 13, name: "Adobe Photoshop" },
+  //   { id: 14, name: "Анимация" },
+  //   { id: 15, name: "Гипотезы" },
+  //   { id: 16, name: "Анализ ЦА" },
+  //   { id: 17, name: "Вайрфреймы" },
+  //   { id: 18, name: "Гайдлайны iOS" },
+  //   { id: 19, name: "UX-копирайтинг" },
+  //   { id: 20, name: "Композиция и сетки" },
+  //   { id: 21, name: "Основы Figma" },
+  //   { id: 22, name: "Tilda" },
+  //   { id: 23, name: "Типографика" },
+  // ];
 
   const { collectionId } = useParams();
   const [collection, setCollection] = useState({});
@@ -58,7 +59,7 @@ export default function Skills({
     }
   }, [collectionId, collection, collectionData]);
 
-  const matchingSkills = userDataToRender.filter((skill) => {
+  const matchingSkills = userData.filter((skill) => {
     return skillsData.some((userSkill) => userSkill.name === skill.name);
   });
 
@@ -82,8 +83,8 @@ export default function Skills({
         </div>
         <div className="tracker__grid-item">
           <Recommendations
-            userDataToRender={userDataToRender}
-            coursesDataForCollection={coursesDataForCollection}
+            userData={userData}
+            coursesData={coursesDataForCollection}
           />
         </div>
       </div>

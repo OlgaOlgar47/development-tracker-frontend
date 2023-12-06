@@ -8,7 +8,6 @@ import { userDataConst } from "../../utils/constants";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 export default function UserSkillsContainer({
-  userDataToRender,
   hasBlueButons,
   subtitleName,
   userData,
@@ -42,8 +41,8 @@ export default function UserSkillsContainer({
   };
 
   useEffect(() => {
-    setSortedSkillsData([...userDataToRender]);
-  }, [userDataToRender]);
+    setSortedSkillsData([...userData]);
+  }, [userData]);
 
   const visibleSkills = showAllSkills
     ? sortedSkillsData
@@ -52,9 +51,9 @@ export default function UserSkillsContainer({
   function sortSkills() {
     let sortedSkills;
     if (isSorted) {
-      sortedSkills = [...userDataToRender].sort((a, b) => a.rate - b.rate);
+      sortedSkills = [...userData].sort((a, b) => a.rate - b.rate);
     } else {
-      sortedSkills = [...userDataToRender].sort((a, b) => b.rate - a.rate);
+      sortedSkills = [...userData].sort((a, b) => b.rate - a.rate);
     }
     setIsSorted(!isSorted);
     setSortedSkillsData(sortedSkills);
@@ -91,7 +90,7 @@ export default function UserSkillsContainer({
     <section className="skills-container">
       <div className="skills-container__header">
         <Subtitle subtitleName={subtitleName} />
-        {(hasBlueButons && userDataToRender.length > 0) || userDataConst ? (
+        {(hasBlueButons && userData.length > 0) || userDataConst ? (
           <div
             className={
               pathname === "/"
