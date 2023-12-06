@@ -10,6 +10,8 @@ export default function CollectionCards({ collectionData }) {
           <Link
             to={`/collections/skills/${card.id}`}
             className="collection-cards__link"
+            onMouseEnter={(e) => (e.currentTarget.src = card.imageHover)}
+
           >
             <img
               className="collection-cards__image"
