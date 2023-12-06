@@ -120,7 +120,11 @@ function App() {
 
     Api.editSkill(skillData)
       .then((res) => {
+        console.log('res: ', res);
+        
         setUserData([res, ...userData]);
+        console.log('userData: ', userData);
+        
       })
       .catch((err) => {
         console.log(err);
