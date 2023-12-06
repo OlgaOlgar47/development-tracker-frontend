@@ -30,8 +30,8 @@ function App() {
     Promise.all([Api.getUserData(), Api.getSkills(), Api.getCourses()])
       .then(([userData, skillsData, coursesData]) => {
         setUserData(userData);
-        console.log('userData: ', userData);
         setCoursesData(coursesData);
+        console.log('coursesData пришла с сервера: ', coursesData);
         setSkillsData(skillsData);
       })
       .catch((err) => {
@@ -59,8 +59,6 @@ function App() {
       // Выполняем запрос только если мы находимся на нужном роуте
       Api.getCoursesForCollection(collectionId)
         .then((res) => {
-          console.log('res: ', res);
-
           setCoursesDataForCollection(res);
         })
         .catch((err) => {
@@ -120,10 +118,10 @@ function App() {
 
     Api.editSkill(skillData)
       .then((res) => {
-        console.log('res: ', res);
+        console.log('res After Edit: ', res);
         
         setUserData([res, ...userData]);
-        console.log('userData: ', userData);
+        console.log('userData After Edit: ', userData);
         
       })
       .catch((err) => {
@@ -152,9 +150,9 @@ function App() {
   }
 
 
-    useEffect(() => {
-    console.log("userDataApp", userData);
-  }, [userData]);
+  //   useEffect(() => {
+  //   console.log("userDataApp", userData);
+  // }, [userData]);
 
   return (
     <div className="page">

@@ -69,10 +69,6 @@ export default function SkillEditor({
     setSkillInfo(foundSkill);
   }, [skillId, userData]);
 
-  useEffect(() => {
-    console.log("skillinfo:", skillInfo); // Отслеживаем изменения skillInfo
-  }, [skillInfo]);
-
   const handleNameChange = (event) => {
     if (skillInfo.editable) {
       const newName = event.target.value.toString();

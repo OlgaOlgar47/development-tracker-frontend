@@ -2,23 +2,20 @@ import React from "react";
 import "./Recommendations.css";
 import CourseCard from "../CourseCard/CourseCard";
 
-export default function Recommendations({ coursesData }) {
-  console.log('coursesData: ', coursesData);
-  let limitedCoursesData = [];
+export default function Recommendations({coursesData}) {
+  console.log('coursesData in Recomendations: ', coursesData);
 
-  if (Array.isArray(coursesData)) {
-    limitedCoursesData = coursesData.slice(0, 2); // Выбираем первые два элемента
-  } else {
-    // Если coursesData не является массивом, выводим сообщение об ошибке или предпринимаем другие действия
-    console.error("Ошибка: coursesData не является массивом");
-    // Или предпримите другие действия, которые нужны в вашем случае
-  }
+  // Преобразуем coursesData в массив, если оно не является массивом
+  const dataArray = Array.isArray(coursesData) ? coursesData : Array.from(coursesData);
+
+
+  const limitedCoursesData = dataArray.slice(0, 2); // Выбираем первые два элемента
 
   return (
     <div className="recommendations">
       <h3 className="recommendations__title">Полезные ресурсы</h3>
       {limitedCoursesData.map((course, index) => (
-        <CourseCard key={index} name={course.name} image={course.image} />
+        <CourseCard key={index} name={course.name} image={`http://localhost:8000${course.image}`} />
       ))}
     </div>
   );

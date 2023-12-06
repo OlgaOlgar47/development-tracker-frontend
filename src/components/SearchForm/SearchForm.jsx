@@ -66,7 +66,6 @@ export default function SearchForm({
       skillsToAdd = [{ name: searchText }];
       setSearchText(""); // Очищаем searchText
     }
-    console.log("skills", skillsData);
     handleAddSkill(skillsToAdd);
   };
 

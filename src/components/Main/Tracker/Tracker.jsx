@@ -17,6 +17,7 @@ export default function Tracker({
   toggleVisibility,
   handleInfoTooltip
 }) {
+  console.log("couirsesData в Трекер пришла:", coursesData)
   return (
     <section className="tracker">
       <Title text="Трекер развития" />
