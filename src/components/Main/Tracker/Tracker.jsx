@@ -14,6 +14,8 @@ export default function Tracker({
   skillsData,
   handleAddSkill,
   handleDeleteSkill,
+  toggleVisibility,
+  handleInfoTooltip
 }) {
   return (
     <section className="tracker">
@@ -26,11 +28,14 @@ export default function Tracker({
       изучения."
           />
           <SearchForm
+            userDataToRender={userDataToRender}
             subtitleName="Поиск навыков"
             hasButton={true}
             skillsData={skillsData}
             handleAddSkill={handleAddSkill}
             serverError={serverError}
+            toggleVisibility={toggleVisibility}
+            handleInfoTooltip={handleInfoTooltip}
           />
           <UserSkillsContainer
             userDataToRender={userDataToRender}

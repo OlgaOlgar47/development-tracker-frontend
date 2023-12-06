@@ -4,41 +4,49 @@ import Subtitle from "../Subtitle/Subtitle";
 import ButtonTemplate from "../Buttons/ButtonTemplate";
 import TextField from "@mui/material/TextField";
 
-export default function SearchForm({ subtitleName, hasButton, skillsData, handleAddSkill}) {
+export default function SearchForm({
+  subtitleName,
+  hasButton,
+  skillsData,
+  handleAddSkill,
+  userDataToRender,
+  toggleVisibility,
+  handleInfoTooltip
+}) {
   // const skills={skillsData}
   const skills = [
-    { name: 'HTML' },
-    { name: 'CSS' },
-    { name: 'JavaScript' },
-    { name: 'Python' },
-    { name: 'React' },
-    { name: 'Node.js' },
-    { name: 'SQL' },
-    { name: 'Vue.js' },
-    { name: 'Angular' },
-    { name: 'Типографика' },
-    { name: 'Композиция' },
-    { name: 'Генерация идей' },
-    { name: 'Tilda' },
-    { name: 'Figma' },
-    { name: 'Adobe Photoshop' },
-    { name: 'Анализ ЦА' },
-    { name: 'Гипотезы' },
-    { name: 'Исследования' },
-    { name: 'UX-копирайтинг' },
-    { name: 'UX-тестирование' },
-    { name: 'Конкурентный анализ' },
-    { name: 'JTBD и User Stories' },
-    { name: 'Анимация' },
-    { name: 'Вайрфреймы' },
-    { name: 'UI-Kit' },
-    { name: 'Аудит юзабилити' }
+    { name: "HTML" },
+    { name: "CSS" },
+    { name: "JavaScript" },
+    { name: "Python" },
+    { name: "React" },
+    { name: "Node.js" },
+    { name: "SQL" },
+    { name: "Vue.js" },
+    { name: "Angular" },
+    { name: "Типографика" },
+    { name: "Композиция" },
+    { name: "Генерация идей" },
+    { name: "Tilda" },
+    { name: "Figma" },
+    { name: "Adobe Photoshop" },
+    { name: "Анализ ЦА" },
+    { name: "Гипотезы" },
+    { name: "Исследования" },
+    { name: "UX-копирайтинг" },
+    { name: "UX-тестирование" },
+    { name: "Конкурентный анализ" },
+    { name: "JTBD и User Stories" },
+    { name: "Анимация" },
+    { name: "Вайрфреймы" },
+    { name: "UI-Kit" },
+    { name: "Аудит юзабилити" },
   ];
 
-  const [searchText, setSearchText] = useState('');
+  const [searchText, setSearchText] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
-
+  
   const disabledAdd = searchText.length === 0;
 
   const handleInputChange = (event) => {
@@ -56,10 +64,10 @@ export default function SearchForm({ subtitleName, hasButton, skillsData, handle
       skillsToAdd = selectedItems.slice();
       setSelectedItems([]); // Очищаем selectedItems
     } else if (searchText) {
-      skillsToAdd = [{name: searchText}];
-      setSearchText(''); // Очищаем searchText
+      skillsToAdd = [{ name: searchText }];
+      setSearchText(""); // Очищаем searchText
     }
-    console.log("skills to add:", skillsToAdd)
+    console.log("skills to add:", skillsToAdd);
     handleAddSkill(skillsToAdd);
   };
 
@@ -68,8 +76,17 @@ export default function SearchForm({ subtitleName, hasButton, skillsData, handle
   // }, [skillsToAdd]);
 
   const handleResultClick = (index) => {
-    // Добавить или удалить элемент из списка выбранных элементов
     const selectedItem = searchResults[index];
+
+    const isAlreadyAdded = userDataToRender.some(
+      (item) => item.name === selectedItem.name
+    );
+
+    if (isAlreadyAdded) {
+   toggleVisibility();
+   handleInfoTooltip(false)
+    }
+
     setSelectedItems((prevItems) => {
       if (prevItems.includes(selectedItem)) {
         return prevItems.filter((item) => item !== selectedItem);
@@ -99,21 +116,23 @@ export default function SearchForm({ subtitleName, hasButton, skillsData, handle
             lineHeight: "20px",
           }}
         />
-        {hasButton && (<ButtonTemplate
-          handleButtonClick={handleButtonClick}
-          buttonText="Добавить"
-          variant="contained"
-          color="primary"
-          width="148px"
-          height="40px"
-          gap="10px"
-          disabled={disabledAdd}
-          disabledColor="#FFF"
-          disableBackground="#B5B5B7"
-          textColor="white"
-          hoverBackground="#1D6BF3"
-          hoverTextColor="#FFFFFF"
-        />)}
+        {hasButton && (
+          <ButtonTemplate
+            handleButtonClick={handleButtonClick}
+            buttonText="Добавить"
+            variant="contained"
+            color="primary"
+            width="148px"
+            height="40px"
+            gap="10px"
+            disabled={disabledAdd}
+            disabledColor="#FFF"
+            disableBackground="#B5B5B7"
+            textColor="white"
+            hoverBackground="#1D6BF3"
+            hoverTextColor="#FFFFFF"
+          />
+        )}
       </div>
       {searchText && (
         <div className="search-form__results">
@@ -121,11 +140,11 @@ export default function SearchForm({ subtitleName, hasButton, skillsData, handle
             <div
               key={index}
               className={`search-form__result ${
-                selectedItems.includes(result) ? 'selected' : ''
+                selectedItems.includes(result) ? "selected" : ""
               }`}
               onClick={() => handleResultClick(index)}
             >
-               {result.name}
+              {result.name}
             </div>
           ))}
         </div>

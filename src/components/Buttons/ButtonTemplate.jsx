@@ -36,6 +36,7 @@ export default function ButtonTemplate({
           border: "1px solid #B5B5B7",
         },
         "&.MuiButton-root": {
+          boxShadow: "none",
           color:textColor,
         },
         "&:hover": {

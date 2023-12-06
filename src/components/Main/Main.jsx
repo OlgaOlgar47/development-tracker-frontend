@@ -19,6 +19,8 @@ export default function Main({
   handleEditSkill,
   handleAddSkill,
   handleDeleteSkill,
+  toggleVisibility,
+  handleInfoTooltip
 }) {
   return (
     <main className="main">
@@ -35,6 +37,8 @@ export default function Main({
               coursesData={coursesData}
               handleAddSkill={handleAddSkill}
               handleDeleteSkill={handleDeleteSkill}
+              toggleVisibility={toggleVisibility}
+              handleInfoTooltip={handleInfoTooltip}
             />
           }
         />

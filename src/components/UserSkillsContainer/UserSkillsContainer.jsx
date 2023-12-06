@@ -5,6 +5,7 @@ import Subtitle from "../Subtitle/Subtitle";
 import ButtonsDeleteEdit from "../../components/Buttons/ButtonsDeleteEdit";
 import iconLink from "../../images/link.svg";
 import { userDataConst } from "../../utils/constants";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 export default function UserSkillsContainer({
   userDataToRender,
@@ -18,19 +19,8 @@ export default function UserSkillsContainer({
   const [isSorted, setIsSorted] = useState(false);
   const [selectedSkill, setSelectedSkills] = useState([]);
   const [showAllSkills, setShowAllSkills] = useState(false);
-  // const [animateSort, setAnimateSort] = useState(false);
   const { pathname } = useLocation();
   const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   if (animateSort) {
-  //     const timeout = setTimeout(() => {
-  //       setAnimateSort(false);
-  //     }, 3000); // Время анимации в миллисекундах
-
-  //     return () => clearTimeout(timeout);
-  //   }
-  // }, [animateSort]);
 
   const toggleShowAllSkills = () => {
     setShowAllSkills(!showAllSkills);
@@ -57,7 +47,7 @@ export default function UserSkillsContainer({
 
   const visibleSkills = showAllSkills
     ? sortedSkillsData
-    : sortedSkillsData.slice(0, 12); // покажем только 12 навыков
+    : sortedSkillsData.slice(0, 15); // покажем только 15 навыков
 
   function sortSkills() {
     let sortedSkills;
@@ -68,7 +58,6 @@ export default function UserSkillsContainer({
     }
     setIsSorted(!isSorted);
     setSortedSkillsData(sortedSkills);
-    // setAnimateSort(true);
   }
 
   const showAll = () => {
@@ -115,8 +104,16 @@ export default function UserSkillsContainer({
               <div className="skills-container__sort-icon"></div>
             </button>
             <button className="skills-container__button" onClick={showAll}>
-              <p className="skills-container__button-text">{showAllSkills ? 'Свернуть' : 'Смотреть все'}</p>
-              <div className={showAllSkills ? "skills-container__arrow-icon-up" : "skills-container__arrow-icon"}></div>
+              <p className="skills-container__button-text">
+                {showAllSkills ? "Свернуть" : "Смотреть все"}
+              </p>
+              <div
+                className={
+                  showAllSkills
+                    ? "skills-container__arrow-icon-up"
+                    : "skills-container__arrow-icon"
+                }
+              ></div>
             </button>
           </div>
         ) : (
@@ -125,52 +122,59 @@ export default function UserSkillsContainer({
       </div>
       {(userData && userData.length > 0) || userDataConst ? (
         <>
-          <ul className="skills-container__list">
+          <TransitionGroup className="skills-container__list">
             {visibleSkills.map((skill, index) => (
-              <li
-                key={skill.id}
-                className={`skills-container__item ${
-                  selectedSkill.includes(skill.id) ? "selected" : ""
-                }`}
-                onClick={() => handleSkillClick(skill.id)}
-                style={{
-                  background: generateGradient(
-                    skill.rate,
-                    "#c2e5ce",
-                    "#c2e5ce00"
-                  ),
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = generateGradient(
-                    skill.rate,
-                    "#87CC9E",
-                    "#F7FFFA"
-                  );
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = generateGradient(
-                    skill.rate,
-                    "#c2e5ce",
-                    "#c2e5ce00"
-                  );
-                }}
-              >
-                {skill.name}
-                {skill.notes && (
-                  <img
-                    src={iconLink}
-                    alt="иконка линк"
-                    className="skills-container__icon-link"
-                  />
-                )}
-              </li>
+              <CSSTransition key={skill.id} timeout={500} classNames="fade">
+                <li
+                  className={`skills-container__item ${
+                    selectedSkill.includes(skill.id) ? "selected" : ""
+                  }`}
+                  onClick={() => handleSkillClick(skill.id)}
+                  style={{
+                    background: generateGradient(
+                      skill.rate,
+                      "#c2e5ce",
+                      "#c2e5ce00"
+                    ),
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = generateGradient(
+                      skill.rate,
+                      "#87CC9E",
+                      "#F7FFFA"
+                    );
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = generateGradient(
+                      skill.rate,
+                      "#c2e5ce",
+                      "#c2e5ce00"
+                    );
+                  }}
+                >
+                  {skill.name}
+                  {skill.notes && (
+                    <img
+                      src={iconLink}
+                      alt="иконка линк"
+                      className="skills-container__icon-link"
+                    />
+                  )}
+                </li>
+              </CSSTransition>
             ))}
-          </ul>
-          {!showAllSkills && sortedSkillsData.length > 12 && (
-            <button type="button" className="skills-container__item-count" onClick={showAll}>
-              + {sortedSkillsData.length - 12}  {(sortedSkillsData.length - 12) === 1
+          </TransitionGroup>
+          {!showAllSkills && sortedSkillsData.length > 15 && (
+            <button
+              type="button"
+              className="skills-container__item-count"
+              onClick={showAll}
+            >
+              + {sortedSkillsData.length - 15}{" "}
+              {sortedSkillsData.length - 15 === 1
                 ? "навык"
-                : (sortedSkillsData.length - 12) > 1 && (sortedSkillsData.length - 12) < 5
+                : sortedSkillsData.length - 15 > 1 &&
+                  sortedSkillsData.length - 15 < 5
                 ? "навыка"
                 : "навыков"}
             </button>
