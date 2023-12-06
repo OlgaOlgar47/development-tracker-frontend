@@ -26,6 +26,7 @@ export default function Tracker({
       изучения."
           />
           <SearchForm
+            userDataToRender={userDataToRender}
             subtitleName="Поиск навыков"
             hasButton={true}
             skillsData={skillsData}

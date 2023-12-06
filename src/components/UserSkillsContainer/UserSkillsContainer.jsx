@@ -49,15 +49,15 @@ export default function UserSkillsContainer({
     ? sortedSkillsData
     : sortedSkillsData.slice(0, 15); // покажем только 15 навыков
 
-function sortSkills() {
-        let sortedSkills;
-        if (isSorted) {
-          sortedSkills = [...userDataToRender].sort((a, b) => a.rate - b.rate);
-        } else {
-          sortedSkills = [...userDataToRender].sort((a, b) => b.rate - a.rate);
-        }
-        setIsSorted(!isSorted);
-        setSortedSkillsData(sortedSkills);
+  function sortSkills() {
+    let sortedSkills;
+    if (isSorted) {
+      sortedSkills = [...userDataToRender].sort((a, b) => a.rate - b.rate);
+    } else {
+      sortedSkills = [...userDataToRender].sort((a, b) => b.rate - a.rate);
+    }
+    setIsSorted(!isSorted);
+    setSortedSkillsData(sortedSkills);
   }
 
   const showAll = () => {
@@ -126,6 +126,9 @@ function sortSkills() {
             {visibleSkills.map((skill, index) => (
               <CSSTransition key={skill.id} timeout={500} classNames="fade">
                 <li
+                  className={`skills-container__item ${
+                    selectedSkill.includes(skill.id) ? "selected" : ""
+                  }`}
                   onClick={() => handleSkillClick(skill.id)}
                   style={{
                     background: generateGradient(
@@ -148,9 +151,6 @@ function sortSkills() {
                       "#c2e5ce00"
                     );
                   }}
-                  className={`skills-container__item ${
-                    selectedSkill.includes(skill.id) ? "selected" : ""
-                  }`}
                 >
                   {skill.name}
                   {skill.notes && (
