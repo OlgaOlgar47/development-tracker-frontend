@@ -19,19 +19,8 @@ export default function UserSkillsContainer({
   const [isSorted, setIsSorted] = useState(false);
   const [selectedSkill, setSelectedSkills] = useState([]);
   const [showAllSkills, setShowAllSkills] = useState(false);
-  // const [animateSort, setAnimateSort] = useState(false);
   const { pathname } = useLocation();
   const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   if (animateSort) {
-  //     const timeout = setTimeout(() => {
-  //       setAnimateSort(false);
-  //     }, 3000); // Время анимации в миллисекундах
-
-  //     return () => clearTimeout(timeout);
-  //   }
-  // }, [animateSort]);
 
   const toggleShowAllSkills = () => {
     setShowAllSkills(!showAllSkills);
@@ -58,18 +47,17 @@ export default function UserSkillsContainer({
 
   const visibleSkills = showAllSkills
     ? sortedSkillsData
-    : sortedSkillsData.slice(0, 12); // покажем только 12 навыков
+    : sortedSkillsData.slice(0, 15); // покажем только 15 навыков
 
-  function sortSkills() {
-    let sortedSkills;
-    if (isSorted) {
-      sortedSkills = [...userDataToRender].sort((a, b) => a.rate - b.rate);
-    } else {
-      sortedSkills = [...userDataToRender].sort((a, b) => b.rate - a.rate);
-    }
-    setIsSorted(!isSorted);
-    setSortedSkillsData(sortedSkills);
-    // setAnimateSort(true);
+function sortSkills() {
+        let sortedSkills;
+        if (isSorted) {
+          sortedSkills = [...userDataToRender].sort((a, b) => a.rate - b.rate);
+        } else {
+          sortedSkills = [...userDataToRender].sort((a, b) => b.rate - a.rate);
+        }
+        setIsSorted(!isSorted);
+        setSortedSkillsData(sortedSkills);
   }
 
   const showAll = () => {
@@ -176,17 +164,17 @@ export default function UserSkillsContainer({
               </CSSTransition>
             ))}
           </TransitionGroup>
-          {!showAllSkills && sortedSkillsData.length > 12 && (
+          {!showAllSkills && sortedSkillsData.length > 15 && (
             <button
               type="button"
               className="skills-container__item-count"
               onClick={showAll}
             >
-              + {sortedSkillsData.length - 12}{" "}
-              {sortedSkillsData.length - 12 === 1
+              + {sortedSkillsData.length - 15}{" "}
+              {sortedSkillsData.length - 15 === 1
                 ? "навык"
-                : sortedSkillsData.length - 12 > 1 &&
-                  sortedSkillsData.length - 12 < 5
+                : sortedSkillsData.length - 15 > 1 &&
+                  sortedSkillsData.length - 15 < 5
                 ? "навыка"
                 : "навыков"}
             </button>
