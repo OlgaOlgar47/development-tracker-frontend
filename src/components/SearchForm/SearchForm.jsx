@@ -3,8 +3,6 @@ import "./SearchForm.css";
 import Subtitle from "../Subtitle/Subtitle";
 import ButtonTemplate from "../Buttons/ButtonTemplate";
 import TextField from "@mui/material/TextField";
-import Snackbar from "@mui/material/Snackbar";
-import MuiAlert from "@mui/material/Alert";
 
 export default function SearchForm({
   subtitleName,
@@ -12,6 +10,8 @@ export default function SearchForm({
   skillsData,
   handleAddSkill,
   userDataToRender,
+  toggleVisibility,
+  handleInfoTooltip
 }) {
   // const skills={skillsData}
   const skills = [
@@ -46,11 +46,7 @@ export default function SearchForm({
   const [searchText, setSearchText] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
-  const [notification, setNotification] = useState({
-    open: false,
-    message: "",
-  });
-
+  
   const disabledAdd = searchText.length === 0;
 
   const handleInputChange = (event) => {
@@ -87,11 +83,8 @@ export default function SearchForm({
     );
 
     if (isAlreadyAdded) {
-      setNotification({
-        open: true,
-        message: "Такой навык у вас уже есть",
-      });
-      return;
+   toggleVisibility();
+   handleInfoTooltip(false)
     }
 
     setSelectedItems((prevItems) => {
@@ -100,13 +93,6 @@ export default function SearchForm({
       } else {
         return [...prevItems, selectedItem];
       }
-    });
-  };
-
-  const handleCloseNotification = () => {
-    setNotification({
-      ...notification,
-      open: false,
     });
   };
 
@@ -163,21 +149,6 @@ export default function SearchForm({
           ))}
         </div>
       )}
-      <Snackbar
-        open={notification.open}
-        autoHideDuration={4000}
-        onClose={handleCloseNotification}
-      >
-        <MuiAlert
-          elevation={6}
-          variant="filled"
-          color="secondary"
-          onClose={handleCloseNotification}
-          severity="warning"
-        >
-          {notification.message}
-        </MuiAlert>
-      </Snackbar>
     </form>
   );
 }

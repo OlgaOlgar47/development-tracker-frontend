@@ -161,6 +161,8 @@ function App() {
         handleDeleteSkill={handleDeleteSkill}
         collectionData={collectionData}
         handleEditSkill={handleEditSkill}
+        toggleVisibility={toggleVisibility}
+        handleInfoTooltip={handleInfoTooltip}
       />
       <InfoTooltip effect={isInfoTooltip} isVisible={isVisible} />
     </div>
