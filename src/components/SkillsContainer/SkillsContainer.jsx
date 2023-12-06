@@ -29,6 +29,8 @@ export default function SkillsContainer({ skillsData, handleAddSkill }) {
       handleAddSkill(skillsToAdd);
     }
   }
+  console.log('skillsContainer говорит: ', skillsData);
+
 
   return (
     <section className="skills-container">

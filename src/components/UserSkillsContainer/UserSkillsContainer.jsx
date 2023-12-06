@@ -43,6 +43,14 @@ export default function UserSkillsContainer({
   useEffect(() => {
     setSortedSkillsData([...userData]);
   }, [userData]);
+  console.log('userData: ', userData);
+
+  // useEffect(() => {
+  //   if (Array.isArray(userData)) {
+  //     setSortedSkillsData([...userData]);
+  //   }
+  // }, [userData]);
+  
 
   const visibleSkills = showAllSkills
     ? sortedSkillsData
