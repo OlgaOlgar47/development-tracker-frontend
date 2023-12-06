@@ -29,8 +29,8 @@ function App() {
   useEffect(() => {
     Promise.all([Api.getUserData(), Api.getSkills(), Api.getCourses()])
       .then(([userData, skillsData, coursesData]) => {
-        
         setUserData(userData);
+        console.log('userData: ', userData);
         setCoursesData(coursesData);
         setSkillsData(skillsData);
       })

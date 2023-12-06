@@ -19,7 +19,7 @@ export default function Main({
   handleAddSkill,
   handleDeleteSkill,
   toggleVisibility,
-  handleInfoTooltip
+  handleInfoTooltip,
 }) {
   return (
     <main className="main">
@@ -46,11 +46,18 @@ export default function Main({
         />
         <Route
           path="/collections/skills/:collectionId"
-          element={<Skills collectionData={collectionData} handleAddSkill={handleAddSkill} 
-          skillsData={skillsData}
-          coursesDataForCollection={coursesDataForCollection}
-          userData={userData}
-          handleDeleteSkill={handleDeleteSkill} />}
+          element={
+            <Skills
+              collectionData={collectionData}
+              handleAddSkill={handleAddSkill}
+              skillsData={skillsData}
+              coursesDataForCollection={coursesDataForCollection}
+              userData={userData}
+              coursesData={coursesData}
+
+              handleDeleteSkill={handleDeleteSkill}
+            />
+          }
         />
         <Route
           path="/skill-editor/:skillId"

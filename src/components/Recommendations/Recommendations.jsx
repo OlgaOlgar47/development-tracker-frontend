@@ -3,6 +3,7 @@ import "./Recommendations.css";
 import CourseCard from "../CourseCard/CourseCard";
 
 export default function Recommendations({ coursesData }) {
+  console.log('coursesData: ', coursesData);
   let limitedCoursesData = [];
 
   if (Array.isArray(coursesData)) {
