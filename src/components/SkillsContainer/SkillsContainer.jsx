@@ -9,23 +9,17 @@ export default function SkillsContainer({ skillsData, handleAddSkill }) {
 
   const handleImageClick = (index) => {
     const selectedItem = skillsData[index];
-    setSelectedCards((prevItems) => {
-      if (prevItems.some((item) => item === selectedItem)) {
-        // Убираем элемент из массива, если он уже был выбран
-        return prevItems.filter((item) => item !== selectedItem);
-      } else {
-        // Добавляем элемент в массив, если он не был выбран
-        return [...prevItems, selectedItem];
-      }
-    });
+  
+    setSelectedCards([selectedItem]); // можно выбрать только один элемент
   };
+  
 
   function handleAdd() {
-    let skillsToAdd = [];
+    let skillToAdd = [];
     if (selectedCards.length > 0) {
-      skillsToAdd = selectedCards.slice();
+      skillToAdd = selectedCards.slice();
       setSelectedCards([]); // Очищаем selectedCards
-      handleAddSkill(skillsToAdd);
+      handleAddSkill(skillToAdd);
     }
   }
   console.log('skillsContainer говорит: ', skillsData);

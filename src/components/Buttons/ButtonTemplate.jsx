@@ -23,7 +23,7 @@ export default function ButtonTemplate({
       onClick={handleButtonClick}
       size="small"
       sx={{
-        fontSize: "14px", // Добавляем стиль fontSize
+        fontSize: "11px", // Добавляем стиль fontSize
         fontFamily: "YS Text",
         width: width,
         height: height,
@@ -32,6 +32,8 @@ export default function ButtonTemplate({
         alignItems: "center",
         gap: gap,
         borderRadius: "6px",
+        textAlign: "center",
+        lineHeight: "normal",
         "&:disabled": {
           background: disableBackground,
           color: disabledColor,

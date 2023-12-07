@@ -9,38 +9,10 @@ export default function SearchForm({
   hasButton,
   skillsData,
   handleAddSkill,
-  userDataToRender,
+  userData,
   toggleVisibility,
   handleInfoTooltip
 }) {
-  // const skills = [
-  //   { name: "HTML" },
-  //   { name: "CSS" },
-  //   { name: "JavaScript" },
-  //   { name: "Python" },
-  //   { name: "React" },
-  //   { name: "Node.js" },
-  //   { name: "SQL" },
-  //   { name: "Vue.js" },
-  //   { name: "Angular" },
-  //   { name: "Типографика" },
-  //   { name: "Композиция" },
-  //   { name: "Генерация идей" },
-  //   { name: "Tilda" },
-  //   { name: "Figma" },
-  //   { name: "Adobe Photoshop" },
-  //   { name: "Анализ ЦА" },
-  //   { name: "Гипотезы" },
-  //   { name: "Исследования" },
-  //   { name: "UX-копирайтинг" },
-  //   { name: "UX-тестирование" },
-  //   { name: "Конкурентный анализ" },
-  //   { name: "JTBD и User Stories" },
-  //   { name: "Анимация" },
-  //   { name: "Вайрфреймы" },
-  //   { name: "UI-Kit" },
-  //   { name: "Аудит юзабилити" },
-  // ];
   const skills=[...skillsData]
   const [searchText, setSearchText] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -71,24 +43,22 @@ export default function SearchForm({
 
   const handleResultClick = (index) => {
     const selectedItem = searchResults[index];
-
-    const isAlreadyAdded = userDataToRender.some(
+  
+    const isAlreadyAdded = userData.some(
       (item) => item.name === selectedItem.name
     );
-
+  
     if (isAlreadyAdded) {
-   toggleVisibility();
-   handleInfoTooltip(false)
+      toggleVisibility();
+      handleInfoTooltip(false);
     }
-
-    setSelectedItems((prevItems) => {
-      if (prevItems.includes(selectedItem)) {
-        return prevItems.filter((item) => item !== selectedItem);
-      } else {
-        return [...prevItems, selectedItem];
-      }
-    });
+  
+    // Clear all selections before setting the new selection
+    const updatedSelectedItems = [selectedItem];
+  
+    setSelectedItems(updatedSelectedItems);
   };
+  
 
   return (
     <form className="search-form">

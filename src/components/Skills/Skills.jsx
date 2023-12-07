@@ -9,7 +9,6 @@ import { useParams } from "react-router-dom";
 
 export default function Skills({
   coursesDataForCollection,
-  coursesData,
   skillsData,
   handleAddSkill,
   userData,
@@ -62,8 +61,7 @@ export default function Skills({
           />
           <UserSkillsContainer
             subtitleName="В твоих навыках"
-            userData={userData}
-            userDataToRender={matchingSkills}
+            userData={matchingSkills}
             handleDeleteSkill={handleDeleteSkill}
           />
         </div>
