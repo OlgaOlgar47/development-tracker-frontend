@@ -89,6 +89,120 @@ export default function SkillEditor({
   //   return <div>Loading...</div>; // Отобразить загрузку, пока данные не загружены
   // }
 
+  // для кнопки 5
+  useEffect(() => {
+    const buttonFive = document.querySelector(".button-five");
+    const buttonFour = document.querySelector(".button-four");
+    const buttonThree = document.querySelector(".button-three");
+    const buttonTwo = document.querySelector(".button-two");
+    const buttonOne = document.querySelector(".button-one");
+
+    const handleHover = () => {
+      buttonFive.classList.add("skill-editor__type-green");
+      buttonFour.classList.add("skill-editor__type-green");
+      buttonThree.classList.add("skill-editor__type-green");
+      buttonTwo.classList.add("skill-editor__type-green");
+      buttonOne.classList.add("skill-editor__type-green");
+    };
+
+    const handleMouseLeave = () => {
+      buttonFive.classList.remove("skill-editor__type-green");
+      buttonFour.classList.remove("skill-editor__type-green");
+      buttonThree.classList.remove("skill-editor__type-green");
+      buttonTwo.classList.remove("skill-editor__type-green");
+      buttonOne.classList.remove("skill-editor__type-green");
+    };
+
+    buttonFive.addEventListener("mouseenter", handleHover);
+    buttonFive.addEventListener("mouseleave", handleMouseLeave);
+
+    return () => {
+      buttonFive.removeEventListener("mouseenter", handleHover);
+      buttonFive.removeEventListener("mouseleave", handleMouseLeave);
+    };
+  }, []);
+
+  // для кнопки 4
+  useEffect(() => {
+    const buttonFour = document.querySelector(".button-four");
+    const buttonThree = document.querySelector(".button-three");
+    const buttonTwo = document.querySelector(".button-two");
+    const buttonOne = document.querySelector(".button-one");
+
+    const handleHover = () => {
+      buttonFour.classList.add("skill-editor__type-green");
+      buttonThree.classList.add("skill-editor__type-green");
+      buttonTwo.classList.add("skill-editor__type-green");
+      buttonOne.classList.add("skill-editor__type-green");
+    };
+
+    const handleMouseLeave = () => {
+      buttonFour.classList.remove("skill-editor__type-green");
+      buttonThree.classList.remove("skill-editor__type-green");
+      buttonTwo.classList.remove("skill-editor__type-green");
+      buttonOne.classList.remove("skill-editor__type-green");
+    };
+
+    buttonFour.addEventListener("mouseenter", handleHover);
+    buttonFour.addEventListener("mouseleave", handleMouseLeave);
+
+    return () => {
+      buttonFour.removeEventListener("mouseenter", handleHover);
+      buttonFour.removeEventListener("mouseleave", handleMouseLeave);
+    };
+  }, []);
+
+  // для кнопки 3
+  useEffect(() => {
+    const buttonThree = document.querySelector(".button-three");
+    const buttonTwo = document.querySelector(".button-two");
+    const buttonOne = document.querySelector(".button-one");
+
+    const handleHover = () => {
+      buttonThree.classList.add("skill-editor__type-green");
+      buttonTwo.classList.add("skill-editor__type-green");
+      buttonOne.classList.add("skill-editor__type-green");
+    };
+
+    const handleMouseLeave = () => {
+      buttonThree.classList.remove("skill-editor__type-green");
+      buttonTwo.classList.remove("skill-editor__type-green");
+      buttonOne.classList.remove("skill-editor__type-green");
+    };
+
+    buttonThree.addEventListener("mouseenter", handleHover);
+    buttonThree.addEventListener("mouseleave", handleMouseLeave);
+
+    return () => {
+      buttonThree.removeEventListener("mouseenter", handleHover);
+      buttonThree.removeEventListener("mouseleave", handleMouseLeave);
+    };
+  }, []);
+
+  // для кнопки 2
+  useEffect(() => {
+    const buttonTwo = document.querySelector(".button-two");
+    const buttonOne = document.querySelector(".button-one");
+
+    const handleHover = () => {
+      buttonTwo.classList.add("skill-editor__type-green");
+      buttonOne.classList.add("skill-editor__type-green");
+    };
+
+    const handleMouseLeave = () => {
+      buttonTwo.classList.remove("skill-editor__type-green");
+      buttonOne.classList.remove("skill-editor__type-green");
+    };
+
+    buttonTwo.addEventListener("mouseenter", handleHover);
+    buttonTwo.addEventListener("mouseleave", handleMouseLeave);
+
+    return () => {
+      buttonTwo.removeEventListener("mouseenter", handleHover);
+      buttonTwo.removeEventListener("mouseleave", handleMouseLeave);
+    };
+  }, []);
+
   return (
     <section className="skill-editor">
       <Title text="Редактор навыка" isEdit={true} />
@@ -121,13 +235,13 @@ export default function SkillEditor({
               onRate={() => handleRateButtonClick(20)}
             />
             <RateButton
-            className="button-two"
+              className="button-two"
               text="Могу выполнить простую задачу"
               isSelected={selectedPercentage >= 40}
               onRate={() => handleRateButtonClick(40)}
             />
             <RateButton
-            className="button-three"
+              className="button-three"
               text={
                 <>
                   Решаю с&nbsp;подсказкой и&nbsp;ошибками
@@ -139,7 +253,7 @@ export default function SkillEditor({
               onRate={() => handleRateButtonClick(60)}
             />
             <RateButton
-            className="button-four"
+              className="button-four"
               text={
                 <>
                   Решаю сложные задачи,
@@ -151,7 +265,7 @@ export default function SkillEditor({
               onRate={() => handleRateButtonClick(80)}
             />
             <RateButton
-            className="button-five"
+              className="button-five"
               text={
                 <>
                   Владею на&nbsp;отлично, решаю сложные

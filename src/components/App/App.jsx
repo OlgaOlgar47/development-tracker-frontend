@@ -54,7 +54,7 @@ export default function App() {
       // Выполняем запрос только если мы находимся на нужном роуте
       Api.getCollections()
         .then((collectionData) => {
-          console.log('collectionData: ', collectionData);
+          console.log('collectionData пришла в App: ', collectionData);
 
           setCollectionData(collectionData);
         })
@@ -74,7 +74,6 @@ export default function App() {
       // Выполняем запрос только если мы находимся на нужном роуте с collectionId
       Api.getCoursesForCollection(collectionId)
         .then((res) => {
-          console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", res);
           setCoursesDataForCollection(res);
         })
         .catch((err) => {

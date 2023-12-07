@@ -4,25 +4,28 @@ import ButtonsBackAdd from "../Buttons/ButtonsBackAdd";
 import { useLocation } from "react-router-dom";
 
 export default function SkillsContainer({ skillsData, handleAddSkill }) {
+  console.log('skillsData пришла в SkillsContainer: ', skillsData);
   const [selectedCards, setSelectedCards] = useState([]);
   const { pathname } = useLocation();
 
+  const skills = skillsData ? skillsData : []; 
+
+
   const handleImageClick = (index) => {
-    const selectedItem = skillsData[index];
-  
-    setSelectedCards([selectedItem]); // можно выбрать только один элемент
+    const selectedItem = skills[index];
+    setSelectedCards([selectedItem]); // Выбор только одного элемента
   };
+  
   
 
   function handleAdd() {
     let skillToAdd = [];
     if (selectedCards.length > 0) {
       skillToAdd = selectedCards.slice();
-      setSelectedCards([]); // Очищаем selectedCards
+      setSelectedCards([]);
       handleAddSkill(skillToAdd);
     }
   }
-  console.log('skillsData в skillsContainer : ', skillsData);
 
 
   return (
@@ -34,7 +37,7 @@ export default function SkillsContainer({ skillsData, handleAddSkill }) {
             : "skills-container__list skills-container__list_type_all"
         }
       >
-        {skillsData.map((skill, index) => (
+        {skills.map((skill, index) => (
           <li
             key={index}
             className={`skills-container__item-small ${

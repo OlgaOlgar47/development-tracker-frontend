@@ -9,7 +9,6 @@ import { useParams } from "react-router-dom";
 
 export default function Skills({
   coursesDataForCollection,
-  skillsData,
   handleAddSkill,
   userData,
   collectionData,
@@ -17,13 +16,14 @@ export default function Skills({
 }) {
   const { collectionId } = useParams();
   const [collection, setCollection] = useState([]);
-  console.log('collectionData в Skills: ', collectionData);
+  console.log('collectionData пришла в Skills: ', collectionData);
 
   useEffect(() => {
     console.log("useEffect вызван");
     console.log('collectionData в useEffect: ', collectionData);
 
     if (collectionData && collectionData.length > 0) {
+      console.log("useEffect called", collectionData);
       const id = parseInt(collectionId, 10);
       const foundCollection = collectionData.find((item) => item.id === id);
       
@@ -34,7 +34,7 @@ export default function Skills({
       }
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [collectionId]);
 
 
   let collectionSkills = [];
@@ -47,7 +47,8 @@ export default function Skills({
     return collectionSkills.some((userSkill) => userSkill.name === skill.name);
   });
 
-  const subtitleName = `Навыки ` + collection.name;
+  // const subtitleName = `Навыки ` + collection.name;
+  console.log("collection", collection)
 
 
   return (
@@ -57,13 +58,9 @@ export default function Skills({
         <div className="skills__items">
           <Paragraph text={collection.description} />
           <SkillsContainer
-            // - нет этой записи:
-            subtitleName={subtitleName}
+            // subtitleName={subtitleName}
             handleAddSkill={handleAddSkill}
-            // скилы
-            skillsData={collectionSkills}
-            // skillsData={collection.skills}
-            // skillsData={skillsData.skills}
+            skillsData={collection.skills}
           />
           <UserSkillsContainer
             subtitleName="В твоих навыках"
@@ -72,9 +69,7 @@ export default function Skills({
           />
         </div>
         <div className="tracker__grid-item">
-          <Recommendations
-            coursesData={coursesDataForCollection}
-          />
+          <Recommendations coursesData={coursesDataForCollection} />
         </div>
       </div>
     </section>
