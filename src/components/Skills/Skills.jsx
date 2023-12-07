@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import Paragraph from "../Paragraph/Paragraph";
 import Recommendations from "../Recommendations/Recommendations";
 import SkillsContainer from "../SkillsContainer/SkillsContainer";
@@ -16,32 +16,39 @@ export default function Skills({
   handleDeleteSkill,
 }) {
   const { collectionId } = useParams();
-  const [collection, setCollection] = useState({});
+  const [collection, setCollection] = useState([]);
+  console.log('collectionData в Skills: ', collectionData);
 
   useEffect(() => {
+    console.log("useEffect вызван");
+    console.log('collectionData в useEffect: ', collectionData);
+
     if (collectionData && collectionData.length > 0) {
       const id = parseInt(collectionId, 10);
-      const foundCollection = collectionData.find(
-        (collection) => collection.id === id
-      );
+      const foundCollection = collectionData.find((item) => item.id === id);
+      
+      console.log('foundCollection: ', foundCollection);
+
       if (foundCollection) {
         setCollection(foundCollection);
-      } else {
-        // Handle the case when the collection with the given ID is not found
-        // You might want to set an appropriate state or perform other actions
       }
     }
-  }, [collectionId, collection, collectionData]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+
+  let collectionSkills = [];
+  if (collection && collection.skills) {
+    collectionSkills = [...collection.skills];
+  }
+  
 
   const matchingSkills = userData.filter((skill) => {
-    return skillsData.some((userSkill) => userSkill.name === skill.name);
+    return collectionSkills.some((userSkill) => userSkill.name === skill.name);
   });
 
   const subtitleName = `Навыки ` + collection.name;
 
-  const collectionSkills = [...collection.skills]
-
-  console.log('skills говорит collectionData: ', collectionData);
 
   return (
     <section className="skills">

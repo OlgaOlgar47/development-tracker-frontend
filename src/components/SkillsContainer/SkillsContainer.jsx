@@ -22,7 +22,7 @@ export default function SkillsContainer({ skillsData, handleAddSkill }) {
       handleAddSkill(skillToAdd);
     }
   }
-  console.log('skillsContainer говорит: ', skillsData);
+  console.log('skillsData в skillsContainer : ', skillsData);
 
 
   return (

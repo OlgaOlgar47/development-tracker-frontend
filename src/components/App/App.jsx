@@ -41,7 +41,6 @@ export default function App() {
       .then(([userData, skillsData, coursesData]) => {
         setUserData(userData);
         setCoursesData(coursesData);
-        console.log("coursesData пришли в Апп: ", coursesData);
         setSkillsData(skillsData);
       })
       .catch((err) => {
