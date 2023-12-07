@@ -20,6 +20,7 @@ export default function Skills({
 
   useEffect(() => {
     if (collectionData && collectionData.length > 0) {
+      console.log("useEffect called", collectionData);
       const id = parseInt(collectionId, 10);
       const foundCollection = collectionData.find(
         (collection) => collection.id === id
@@ -37,11 +38,13 @@ export default function Skills({
     return skillsData.some((userSkill) => userSkill.name === skill.name);
   });
 
-  const subtitleName = `Навыки ` + collection.name;
+  // const subtitleName = `Навыки ` + collection.name;
 
-  const collectionSkills = [...collection.skills]
+  // const collectionSkills = [...collection.skills];
+  // console.log("skills говорит collectionSkills: ", collectionSkills);
+  console.log('collection.name: ', collection.name);
 
-  console.log('skills говорит collectionData: ', collectionData);
+  console.log("skills говорит collectionData: ", collectionData);
 
   return (
     <section className="skills">
@@ -51,10 +54,10 @@ export default function Skills({
           <Paragraph text={collection.description} />
           <SkillsContainer
             // - нет этой записи:
-            subtitleName={subtitleName}
+            // subtitleName={subtitleName}
             handleAddSkill={handleAddSkill}
             // скилы
-            skillsData={collectionSkills}
+            skillsData={skillsData}
             // skillsData={collection.skills}
             // skillsData={skillsData.skills}
           />
@@ -65,9 +68,7 @@ export default function Skills({
           />
         </div>
         <div className="tracker__grid-item">
-          <Recommendations
-            coursesData={coursesDataForCollection}
-          />
+          <Recommendations coursesData={coursesDataForCollection} />
         </div>
       </div>
     </section>
