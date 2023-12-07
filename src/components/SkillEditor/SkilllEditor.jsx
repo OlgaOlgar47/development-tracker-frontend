@@ -12,6 +12,7 @@ import TextField from "@mui/material/TextField";
 export default function SkillEditor({
   coursesData,
   handleEditSkill,
+  handleDeleteSkill,
   userData
 }) {
   const { skillId } = useParams();
@@ -63,6 +64,11 @@ export default function SkillEditor({
   function handleSaveSkill() {
     handleEditSkill(skillInfo);
     console.log('skillInfo: ', skillInfo);
+  }
+
+  function handleDelete() {
+    console.log('skillInfo for Delete: ', skillInfo);
+    handleDeleteSkill(skillInfo.id)
   }
 
   useEffect(() => {
@@ -170,7 +176,7 @@ export default function SkillEditor({
               borderRadius: "4px",
             }}
           />
-          <ButtonsBackSaveDel handleSave={handleSaveSkill} />
+          <ButtonsBackSaveDel handleSave={handleSaveSkill} handleDelete={handleDelete}/>
         </div>
         <div className="tracker__grid-item">
           <Recommendations isSkillsEditor={true} coursesData={coursesData}/>

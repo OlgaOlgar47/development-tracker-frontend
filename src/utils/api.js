@@ -1,4 +1,4 @@
-export const BASE_URL = "http://localhost:8000/";
+export const BASE_URL = "http://localhost:8000";
 
 const getResponseData = (res) => {
   if (!res.ok) {
@@ -53,7 +53,7 @@ export const getCollections = () => {
 };
 
 export const getCourses = () => {
-  return fetch(`${BASE_URL}api/v1/recommended-courses-tracker/`, {
+  return fetch(`${BASE_URL}/api/v1/recommended-courses-tracker/`, {
     method: "GET",
     headers: {
       authorization: "Token 4fec03972264016ae2c6c0070b62f4abe0acace6",
@@ -69,7 +69,7 @@ export const getCourses = () => {
 
 
 export const getCoursesForCollection = (id) => {
-  return fetch(`${BASE_URL}api/v1/recommended-courses-collection/${id}/`, {
+  return fetch(`${BASE_URL}/api/v1/recommended-courses-collection/${id}/`, {
     method: "GET",
     headers: {
       authorization: "Token 4fec03972264016ae2c6c0070b62f4abe0acace6",

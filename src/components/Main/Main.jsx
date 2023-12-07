@@ -54,7 +54,6 @@ export default function Main({
               coursesDataForCollection={coursesDataForCollection}
               userData={userData}
               coursesData={coursesData}
-
               handleDeleteSkill={handleDeleteSkill}
             />
           }
@@ -66,6 +65,7 @@ export default function Main({
               userData={userData}
               handleEditSkill={handleEditSkill}
               coursesData={coursesData}
+              handleDeleteSkill={handleDeleteSkill}
             />
           }
         />
