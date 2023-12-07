@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./UserSkillsContainer.css";
 import Subtitle from "../Subtitle/Subtitle";
@@ -20,6 +20,7 @@ export default function UserSkillsContainer({
   const [showAllSkills, setShowAllSkills] = useState(false);
   const { pathname } = useLocation();
   const navigate = useNavigate();
+  const skillItemRef = useRef(null);
 
   const toggleShowAllSkills = () => {
     setShowAllSkills(!showAllSkills);
@@ -87,6 +88,17 @@ export default function UserSkillsContainer({
     );
   }
 
+  const handleFocus = (skill) => {
+    const refButton = skillItemRef.current;
+    if (refButton) {
+      refButton.style.background = generateGradient(
+        skill.rate,
+        "#87CC9E",
+        "#F7FFFA"
+      );
+    }
+  };
+
   return (
     <section className="skills-container">
       <div className="skills-container__header">
@@ -151,6 +163,7 @@ export default function UserSkillsContainer({
                       "#c2e5ce00"
                     );
                   }}
+                  onFocus={handleFocus(skill)} // Добавляем обработчик фокуса на элементе
                 >
                   {skill.name}
                   {skill.notes && (
