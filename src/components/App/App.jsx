@@ -55,6 +55,8 @@ export default function App() {
       // Выполняем запрос только если мы находимся на нужном роуте
       Api.getCollections()
         .then((collectionData) => {
+          console.log('collectionData: ', collectionData);
+
           setCollectionData(collectionData);
         })
         .catch((err) => {

@@ -15,7 +15,6 @@ export default function Skills({
   collectionData,
   handleDeleteSkill,
 }) {
-  console.log('coursesDataForCollection: ', coursesDataForCollection);
   const { collectionId } = useParams();
   const [collection, setCollection] = useState({});
 
@@ -34,17 +33,15 @@ export default function Skills({
     }
   }, [collectionId, collection, collectionData]);
 
-  const collectionSkills = [...collection.skills]
-
   const matchingSkills = userData.filter((skill) => {
-    return collectionSkills.some((userSkill) => userSkill.name === skill.name);
+    return skillsData.some((userSkill) => userSkill.name === skill.name);
   });
 
   const subtitleName = `Навыки ` + collection.name;
 
-  console.log("skills говорит skillsData: ", skillsData);
+  const collectionSkills = [...collection.skills]
+
   console.log('skills говорит collectionData: ', collectionData);
-  console.log('skills говорит collection: ', collection);
 
   return (
     <section className="skills">
