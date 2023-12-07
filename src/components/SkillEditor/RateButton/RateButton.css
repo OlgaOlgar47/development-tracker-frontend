@@ -8,10 +8,31 @@
   background-color: #dde0e4;
 }
 
-.skill-editor__rate-button.hovered {
-  background-color: #c2e5ce;
+.skill-editor__rate-button:hover {
   cursor: pointer;
 }
+
+.button-one:hover {
+  background-color: #c2e5ce;
+}
+
+.button-two:hover .button-one {
+  background-color: #c2e5ce;
+}
+
+.button-three:hover .button-one .button-two {
+  background-color: #c2e5ce;
+}
+
+.button-four:hover .button-one .button-two .button-three {
+  background-color: #c2e5ce;
+}
+
+.button-five:hover .button-one .button-two .button-three .button-four {
+  background-color: #c2e5ce;
+}
+
+
 
 .skill-editor__rate-button.hovered .tooltip {
   display: block;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 import "./SkillEditor.css";
 import Title from "../Title/Title";
 import Subtitle from "../Subtitle/Subtitle";
@@ -13,7 +13,7 @@ export default function SkillEditor({
   coursesData,
   handleEditSkill,
   handleDeleteSkill,
-  userData
+  userData,
 }) {
   const { skillId } = useParams();
   const [skillInfo, setSkillInfo] = useState({});
@@ -22,9 +22,8 @@ export default function SkillEditor({
 
   useEffect(() => {
     setSelectedPercentage(skillInfo.rate);
-    setNotes(skillInfo.notes)
+    setNotes(skillInfo.notes);
   }, [skillInfo.rate, skillInfo.notes]);
-  
 
   useEffect(() => {
     setSkillInfo((prevSkillInfo) => ({
@@ -50,7 +49,6 @@ export default function SkillEditor({
       }));
     }
   };
-  
 
   const handleInputChange = (event) => {
     const newValue = event.target.value;
@@ -63,12 +61,12 @@ export default function SkillEditor({
 
   function handleSaveSkill() {
     handleEditSkill(skillInfo);
-    console.log('skillInfo: ', skillInfo);
+    console.log("skillInfo: ", skillInfo);
   }
 
   function handleDelete() {
-    console.log('skillInfo for Delete: ', skillInfo);
-    handleDeleteSkill(skillInfo.id)
+    console.log("skillInfo for Delete: ", skillInfo);
+    handleDeleteSkill(skillInfo.id);
   }
 
   useEffect(() => {
@@ -111,6 +109,7 @@ export default function SkillEditor({
           <p className="skill-editor__tag">Уровень владения навыком</p>
           <div className="skill-editor__rate">
             <RateButton
+              className="button-one"
               text={
                 <>
                   Только начинаю разбираться
@@ -122,11 +121,13 @@ export default function SkillEditor({
               onRate={() => handleRateButtonClick(20)}
             />
             <RateButton
+            className="button-two"
               text="Могу выполнить простую задачу"
               isSelected={selectedPercentage >= 40}
               onRate={() => handleRateButtonClick(40)}
             />
             <RateButton
+            className="button-three"
               text={
                 <>
                   Решаю с&nbsp;подсказкой и&nbsp;ошибками
@@ -138,6 +139,7 @@ export default function SkillEditor({
               onRate={() => handleRateButtonClick(60)}
             />
             <RateButton
+            className="button-four"
               text={
                 <>
                   Решаю сложные задачи,
@@ -149,6 +151,7 @@ export default function SkillEditor({
               onRate={() => handleRateButtonClick(80)}
             />
             <RateButton
+            className="button-five"
               text={
                 <>
                   Владею на&nbsp;отлично, решаю сложные
@@ -176,10 +179,13 @@ export default function SkillEditor({
               borderRadius: "4px",
             }}
           />
-          <ButtonsBackSaveDel handleSave={handleSaveSkill} handleDelete={handleDelete}/>
+          <ButtonsBackSaveDel
+            handleSave={handleSaveSkill}
+            handleDelete={handleDelete}
+          />
         </div>
         <div className="tracker__grid-item">
-          <Recommendations isSkillsEditor={true} coursesData={coursesData}/>
+          <Recommendations isSkillsEditor={true} coursesData={coursesData} />
         </div>
       </div>
     </section>

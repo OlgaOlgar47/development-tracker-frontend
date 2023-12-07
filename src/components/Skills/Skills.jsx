@@ -34,8 +34,10 @@ export default function Skills({
     }
   }, [collectionId, collection, collectionData]);
 
+  const collectionSkills = [...collection.skills]
+
   const matchingSkills = userData.filter((skill) => {
-    return skillsData.some((userSkill) => userSkill.name === skill.name);
+    return collectionSkills.some((userSkill) => userSkill.name === skill.name);
   });
 
   const subtitleName = `Навыки ` + collection.name;
@@ -55,7 +57,7 @@ export default function Skills({
             subtitleName={subtitleName}
             handleAddSkill={handleAddSkill}
             // скилы
-            skillsData={skillsData}
+            skillsData={collectionSkills}
             // skillsData={collection.skills}
             // skillsData={skillsData.skills}
           />

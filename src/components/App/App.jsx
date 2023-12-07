@@ -84,7 +84,9 @@ export default function App() {
   }, [location.pathname]);
 
   function handleAddSkill(data) {
-    Api.addSkill(data)
+    console.log('data: ', data.name);
+
+    Api.addSkill(data.name)
       .then((res) => {
         console.log("res при POST:", res);
         setUserData([res, ...userData]);
@@ -162,7 +164,7 @@ export default function App() {
       />
       <InfoTooltip
         isVisible={isVisible}
-        isSuccessfull={isInfoTooltip.isSuccessfull} // Исправлено на isSuccessfull
+        isSuccessfull={isInfoTooltip.isSuccessfull} 
         customMessage={isInfoTooltip.customMessage}
       />
     </div>
