@@ -23,6 +23,8 @@ export default function ButtonTemplate({
       onClick={handleButtonClick}
       size="small"
       sx={{
+        fontSize: "14px", // Добавляем стиль fontSize
+        fontFamily: "YS Text",
         width: width,
         height: height,
         padding: "10px 20px",

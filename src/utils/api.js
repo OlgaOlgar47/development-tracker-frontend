@@ -114,7 +114,6 @@ export const editSkill = (values) => {
     .then((res) => {
       return getResponseData(res);
     })
-    .then((data) => data);
 };
 
 export const deleteSkill = (id) => {

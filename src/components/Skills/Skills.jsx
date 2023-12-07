@@ -8,38 +8,15 @@ import UserSkillsContainer from "../UserSkillsContainer/UserSkillsContainer";
 import { useParams } from "react-router-dom";
 
 export default function Skills({
-  handleAddSkill,
-  userDataToRender,
   coursesDataForCollection,
+  coursesData,
+  skillsData,
+  handleAddSkill,
+  userData,
   collectionData,
   handleDeleteSkill,
 }) {
-  const skillsData = [
-    { id: 1, name: "Анализ рынка" },
-    { id: 2, name: "Продуктовые метрики" },
-    { id: 3, name: "Юнит-экономика" },
-    { id: 4, name: "Product growth" },
-    { id: 5, name: "Стратегия продукта" },
-    { id: 6, name: "Воронка AARRR" },
-    { id: 7, name: "Портфель продуктов" },
-    { id: 8, name: "Гайдлайны Android" },
-    { id: 9, name: "CSS" },
-    { id: 10, name: "HTML" },
-    { id: 11, name: "Grid Layout" },
-    { id: 12, name: "Гайдлайны IOS" },
-    { id: 13, name: "Adobe Photoshop" },
-    { id: 14, name: "Анимация" },
-    { id: 15, name: "Гипотезы" },
-    { id: 16, name: "Анализ ЦА" },
-    { id: 17, name: "Вайрфреймы" },
-    { id: 18, name: "Гайдлайны iOS" },
-    { id: 19, name: "UX-копирайтинг" },
-    { id: 20, name: "Композиция и сетки" },
-    { id: 21, name: "Основы Figma" },
-    { id: 22, name: "Tilda" },
-    { id: 23, name: "Типографика" },
-  ];
-
+  console.log('coursesDataForCollection: ', coursesDataForCollection);
   const { collectionId } = useParams();
   const [collection, setCollection] = useState({});
 
@@ -58,32 +35,41 @@ export default function Skills({
     }
   }, [collectionId, collection, collectionData]);
 
-  const matchingSkills = userDataToRender.filter((skill) => {
+  const matchingSkills = userData.filter((skill) => {
     return skillsData.some((userSkill) => userSkill.name === skill.name);
   });
 
+  const subtitleName = `Навыки ` + collection.name;
+
+  console.log("skills говорит skillsData: ", skillsData);
+  console.log('skills говорит collectionData: ', collectionData);
+  console.log('skills говорит collection: ', collection);
+
   return (
     <section className="skills">
-      <Title text="Дизайнер"/>
-      {/* <Title text={collection.name} /> */}
+      <Title text={collection.name} />
       <div className="skills__container">
         <div className="skills__items">
-          <Paragraph text="Каждый день мы делаем покупки в интернете, заказываем доставку, читаем новости. UX/UI-дизайнеры делают так, чтобы всё это получалось легко и удобно." />
+          <Paragraph text={collection.description} />
           <SkillsContainer
+            // - нет этой записи:
+            subtitleName={subtitleName}
             handleAddSkill={handleAddSkill}
-            subtitleName="Навыки дизайнера интерфейсов"
+            // скилы
             skillsData={skillsData}
+            // skillsData={collection.skills}
+            // skillsData={skillsData.skills}
           />
           <UserSkillsContainer
             subtitleName="В твоих навыках"
+            userData={userData}
             userDataToRender={matchingSkills}
             handleDeleteSkill={handleDeleteSkill}
           />
         </div>
         <div className="tracker__grid-item">
           <Recommendations
-            userDataToRender={userDataToRender}
-            coursesDataForCollection={coursesDataForCollection}
+            coursesData={coursesDataForCollection}
           />
         </div>
       </div>

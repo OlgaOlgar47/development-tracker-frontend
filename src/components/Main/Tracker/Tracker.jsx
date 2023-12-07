@@ -8,8 +8,8 @@ import Recommendations from "../../Recommendations/Recommendations";
 // import { userDataConst } from "../../../utils/constants";
 
 export default function Tracker({
-  userDataToRender,
   serverError,
+  coursesData,
   userData,
   skillsData,
   handleAddSkill,
@@ -17,6 +17,7 @@ export default function Tracker({
   toggleVisibility,
   handleInfoTooltip
 }) {
+  console.log("couirsesData в Трекер пришла:", coursesData)
   return (
     <section className="tracker">
       <Title text="Трекер развития" />
@@ -28,7 +29,7 @@ export default function Tracker({
       изучения."
           />
           <SearchForm
-            userDataToRender={userDataToRender}
+            userData={userData}
             subtitleName="Поиск навыков"
             hasButton={true}
             skillsData={skillsData}
@@ -38,7 +39,6 @@ export default function Tracker({
             handleInfoTooltip={handleInfoTooltip}
           />
           <UserSkillsContainer
-            userDataToRender={userDataToRender}
             hasBlueButons={true}
             handleDeleteSkill={handleDeleteSkill}
             subtitleName="Твои навыки"
@@ -49,9 +49,9 @@ export default function Tracker({
         <div className="tracker__grid-item">
           <Recommendations
             title="Полезные ресурсы"
-            // userData={userData}
-            userDataToRender={userDataToRender}
+            userData={userData}
             serverError={serverError}
+            coursesData={coursesData}
           />
         </div>
       </div>

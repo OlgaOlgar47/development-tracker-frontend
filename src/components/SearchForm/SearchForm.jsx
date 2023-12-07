@@ -13,40 +13,39 @@ export default function SearchForm({
   toggleVisibility,
   handleInfoTooltip
 }) {
-  // const skills={skillsData}
-  const skills = [
-    { name: "HTML" },
-    { name: "CSS" },
-    { name: "JavaScript" },
-    { name: "Python" },
-    { name: "React" },
-    { name: "Node.js" },
-    { name: "SQL" },
-    { name: "Vue.js" },
-    { name: "Angular" },
-    { name: "Типографика" },
-    { name: "Композиция" },
-    { name: "Генерация идей" },
-    { name: "Tilda" },
-    { name: "Figma" },
-    { name: "Adobe Photoshop" },
-    { name: "Анализ ЦА" },
-    { name: "Гипотезы" },
-    { name: "Исследования" },
-    { name: "UX-копирайтинг" },
-    { name: "UX-тестирование" },
-    { name: "Конкурентный анализ" },
-    { name: "JTBD и User Stories" },
-    { name: "Анимация" },
-    { name: "Вайрфреймы" },
-    { name: "UI-Kit" },
-    { name: "Аудит юзабилити" },
-  ];
-
+  // const skills = [
+  //   { name: "HTML" },
+  //   { name: "CSS" },
+  //   { name: "JavaScript" },
+  //   { name: "Python" },
+  //   { name: "React" },
+  //   { name: "Node.js" },
+  //   { name: "SQL" },
+  //   { name: "Vue.js" },
+  //   { name: "Angular" },
+  //   { name: "Типографика" },
+  //   { name: "Композиция" },
+  //   { name: "Генерация идей" },
+  //   { name: "Tilda" },
+  //   { name: "Figma" },
+  //   { name: "Adobe Photoshop" },
+  //   { name: "Анализ ЦА" },
+  //   { name: "Гипотезы" },
+  //   { name: "Исследования" },
+  //   { name: "UX-копирайтинг" },
+  //   { name: "UX-тестирование" },
+  //   { name: "Конкурентный анализ" },
+  //   { name: "JTBD и User Stories" },
+  //   { name: "Анимация" },
+  //   { name: "Вайрфреймы" },
+  //   { name: "UI-Kit" },
+  //   { name: "Аудит юзабилити" },
+  // ];
+  const skills=[...skillsData]
   const [searchText, setSearchText] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
-  
+
   const disabledAdd = searchText.length === 0;
 
   const handleInputChange = (event) => {
@@ -67,13 +66,8 @@ export default function SearchForm({
       skillsToAdd = [{ name: searchText }];
       setSearchText(""); // Очищаем searchText
     }
-    console.log("skills to add:", skillsToAdd);
     handleAddSkill(skillsToAdd);
   };
-
-  // useEffect(() => {
-  //   console.log("skillsToAdd", skillsToAdd);
-  // }, [skillsToAdd]);
 
   const handleResultClick = (index) => {
     const selectedItem = searchResults[index];

@@ -1,93 +1,39 @@
 import React from "react";
 import "./Recommendations.css";
-import resumeCreation from "../../images/resume-creation.svg";
-import english from "../../images/english.svg";
 import CourseCard from "../CourseCard/CourseCard";
 
-export default function Recommendations({isSkillsEditor, userData, serverError, userDataToRender}) {
-  const coursesList = [
-    { name: "Как составить резюме", image: resumeCreation, skills: ["HTML",
-    "CSS",
-    "JavaScript",
-    "Python",
-    "React",
-    "Node.js",
-    "SQL",
-    "Vue.js",
-    "Angular",
-    "Типографика",
-    "Композиция",
-    "Генерация идей",
-    "Tilda"] },
-    { name: "Второй курс", image: resumeCreation, skills: ["HTML",
-    "CSS",
-    "JavaScript",
-    "Python",
-    "React",
-    "Node.js",
-    "SQL",
-    "Vue.js",
-    "Angular",
-    "Типографика",
-    "Композиция",
-    "Генерация идей",
-    "Tilda"] },
-  ];
+export default function Recommendations({ coursesData, isSkillsEditor }) {
 
-  const coursesListEditor = [
-    { name: "Как составить резюме", image: english }
-  ];
-
-  function getRecommendedCourses(userDataToRender, coursesList) {
-    const skillsCount = {};
-  
-    if (Array.isArray(userDataToRender)) {
-      userDataToRender.forEach((skillData) => {
-        const { name } = skillData;
-  
-        coursesList.forEach((course) => {
-          if (course.skills && course.skills.includes(name)) {
-            skillsCount[course.name] = (skillsCount[course.name] || 0) + 1;
-          }
-        });
-      });
-    } else {
-      console.error('userData is not an array.');
-      return []; // Возвращаем пустой массив или обработку ошибки
-    }
-  
-    const sortedCourses = Object.keys(skillsCount).sort(
-      (a, b) => skillsCount[b] - skillsCount[a]
+  // Если coursesData не определен, не является массивом или пуст, отображаем сообщение
+  if (!coursesData || !Array.isArray(coursesData) || coursesData.length === 0) {
+    return (
+      <div className="recommendations">
+        <h3 className="recommendations__title">Нет данных о курсах</h3>
+      </div>
     );
-  
-    const topRecommendedCourses = sortedCourses.slice(0, 2).map((courseName) => {
-      return coursesList.find((course) => course.name === courseName);
-    });
-    return topRecommendedCourses;
   }
-  
-  
 
+  // Если мы в SkillsEditor, показываем только одну рекомендацию
   if (isSkillsEditor) {
+    const singleCourse = coursesData.slice(0, 1); // Получаем только первый элемент
     return (
-        <div className="recommendations">
-          <h3 className="recommendations__title">Как развить</h3>
-          {coursesListEditor.map((course, index) => (
-            <CourseCard key={index} name={course.name} image={course.image} />
-          ))}
-        </div>
-      );
-      
-  } else {
-    const recommendedCourses = getRecommendedCourses(userDataToRender, coursesList);
-    return (
-        <div className="recommendations">
-          <h3 className="recommendations__title">Полезные ресурсы</h3>
-          {recommendedCourses.map((course, index) => (
-            <CourseCard key={index} name={course.name} image={course.image} />
-          ))}
-        </div>
-      );
-      
+      <div className="recommendations">
+        <h3 className="recommendations__title">Как развить</h3>
+        <CourseCard key={0} name={singleCourse[0].name} image={`http://localhost:8000${singleCourse[0].image}`} />
+      </div>
+    );
   }
+
+  // Если isSkillsEditor равно false, показываем первые два элемента coursesData
+  const limitedCoursesData = coursesData.slice(0, 2);
+  return (
+    <div className="recommendations">
+      <h3 className="recommendations__title">Полезные ресурсы</h3>
+      {limitedCoursesData.map((course, index) => (
+        <CourseCard key={index} name={course.name} image={`http://localhost:8000${course.image}`} />
+      ))}
+    </div>
+  );
 }
+
+

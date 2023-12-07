@@ -8,7 +8,6 @@ import { userDataConst } from "../../utils/constants";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 export default function UserSkillsContainer({
-  userDataToRender,
   hasBlueButons,
   subtitleName,
   userData,
@@ -42,8 +41,9 @@ export default function UserSkillsContainer({
   };
 
   useEffect(() => {
-    setSortedSkillsData([...userDataToRender]);
-  }, [userDataToRender]);
+    setSortedSkillsData([...userData]);
+  }, [userData]);
+  
 
   const visibleSkills = showAllSkills
     ? sortedSkillsData
@@ -52,9 +52,9 @@ export default function UserSkillsContainer({
   function sortSkills() {
     let sortedSkills;
     if (isSorted) {
-      sortedSkills = [...userDataToRender].sort((a, b) => a.rate - b.rate);
+      sortedSkills = [...userData].sort((a, b) => a.rate - b.rate);
     } else {
-      sortedSkills = [...userDataToRender].sort((a, b) => b.rate - a.rate);
+      sortedSkills = [...userData].sort((a, b) => b.rate - a.rate);
     }
     setIsSorted(!isSorted);
     setSortedSkillsData(sortedSkills);
@@ -75,7 +75,7 @@ export default function UserSkillsContainer({
 
   function handleDelete() {
     const selectedSkillNumber = parseInt(selectedSkill, 10);
-    handleDeleteSkill(selectedSkillNumber); // Передача числа в функцию обработки удаления
+    handleDeleteSkill(selectedSkillNumber);
   }
 
   if (serverError) {
@@ -91,7 +91,7 @@ export default function UserSkillsContainer({
     <section className="skills-container">
       <div className="skills-container__header">
         <Subtitle subtitleName={subtitleName} />
-        {(hasBlueButons && userDataToRender.length > 0) || userDataConst ? (
+        {(hasBlueButons && userData.length > 0) || userDataConst ? (
           <div
             className={
               pathname === "/"
@@ -123,7 +123,7 @@ export default function UserSkillsContainer({
       {(userData && userData.length > 0) || userDataConst ? (
         <>
           <TransitionGroup className="skills-container__list">
-            {visibleSkills.map((skill, index) => (
+            {visibleSkills.map((skill) => (
               <CSSTransition key={skill.id} timeout={500} classNames="fade">
                 <li
                   className={`skills-container__item ${

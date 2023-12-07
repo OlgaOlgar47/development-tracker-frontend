@@ -10,9 +10,9 @@ import TextField from "@mui/material/TextField";
 // import { userDataConst } from "../../utils/constants";
 
 export default function SkillEditor({
+  coursesData,
   handleEditSkill,
-  userData,
-  userDataToRender,
+  userData
 }) {
   const { skillId } = useParams();
   const [skillInfo, setSkillInfo] = useState({});
@@ -62,17 +62,14 @@ export default function SkillEditor({
 
   function handleSaveSkill() {
     handleEditSkill(skillInfo);
+    console.log('skillInfo: ', skillInfo);
   }
 
   useEffect(() => {
     const id = parseInt(skillId, 10);
-    const foundSkill = userDataToRender.find((skill) => skill.id === id);
+    const foundSkill = userData.find((skill) => skill.id === id);
     setSkillInfo(foundSkill);
-  }, [skillId, userDataToRender]);
-
-  useEffect(() => {
-    console.log("skillinfo:", skillInfo); // Отслеживаем изменения skillInfo
-  }, [skillInfo]);
+  }, [skillId, userData]);
 
   const handleNameChange = (event) => {
     if (skillInfo.editable) {
@@ -176,7 +173,7 @@ export default function SkillEditor({
           <ButtonsBackSaveDel handleSave={handleSaveSkill} />
         </div>
         <div className="tracker__grid-item">
-          <Recommendations isSkillsEditor={true} />
+          <Recommendations isSkillsEditor={true} coursesData={coursesData}/>
         </div>
       </div>
     </section>
