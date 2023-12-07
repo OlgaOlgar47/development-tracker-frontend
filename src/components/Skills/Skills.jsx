@@ -16,6 +16,7 @@ export default function Skills({
   collectionData,
   handleDeleteSkill,
 }) {
+  console.log('coursesDataForCollection: ', coursesDataForCollection);
   const { collectionId } = useParams();
   const [collection, setCollection] = useState({});
 
@@ -42,6 +43,7 @@ export default function Skills({
 
   console.log("skills говорит skillsData: ", skillsData);
   console.log('skills говорит collectionData: ', collectionData);
+  console.log('skills говорит collection: ', collection);
 
   return (
     <section className="skills">
@@ -67,7 +69,7 @@ export default function Skills({
         </div>
         <div className="tracker__grid-item">
           <Recommendations
-            coursesData={coursesData}
+            coursesData={coursesDataForCollection}
           />
         </div>
       </div>

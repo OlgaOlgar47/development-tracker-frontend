@@ -43,13 +43,6 @@ export default function UserSkillsContainer({
   useEffect(() => {
     setSortedSkillsData([...userData]);
   }, [userData]);
-  console.log('userData: ', userData);
-
-  // useEffect(() => {
-  //   if (Array.isArray(userData)) {
-  //     setSortedSkillsData([...userData]);
-  //   }
-  // }, [userData]);
   
 
   const visibleSkills = showAllSkills
@@ -82,7 +75,7 @@ export default function UserSkillsContainer({
 
   function handleDelete() {
     const selectedSkillNumber = parseInt(selectedSkill, 10);
-    handleDeleteSkill(selectedSkillNumber); // Передача числа в функцию обработки удаления
+    handleDeleteSkill(selectedSkillNumber);
   }
 
   if (serverError) {
@@ -130,7 +123,7 @@ export default function UserSkillsContainer({
       {(userData && userData.length > 0) || userDataConst ? (
         <>
           <TransitionGroup className="skills-container__list">
-            {visibleSkills.map((skill, index) => (
+            {visibleSkills.map((skill) => (
               <CSSTransition key={skill.id} timeout={500} classNames="fade">
                 <li
                   className={`skills-container__item ${

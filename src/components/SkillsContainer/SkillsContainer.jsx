@@ -25,7 +25,6 @@ export default function SkillsContainer({ skillsData, handleAddSkill }) {
     if (selectedCards.length > 0) {
       skillsToAdd = selectedCards.slice();
       setSelectedCards([]); // Очищаем selectedCards
-      console.log("skillsToAdd", skillsToAdd);
       handleAddSkill(skillsToAdd);
     }
   }

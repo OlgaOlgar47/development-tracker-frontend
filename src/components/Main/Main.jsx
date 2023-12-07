@@ -65,6 +65,7 @@ export default function Main({
             <SkillEditor
               userData={userData}
               handleEditSkill={handleEditSkill}
+              coursesData={coursesData}
             />
           }
         />
