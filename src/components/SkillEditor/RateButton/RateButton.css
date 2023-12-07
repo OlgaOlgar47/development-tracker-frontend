@@ -17,7 +17,7 @@
   background-color: #c2e5ce;
 }
 
-.skill-editor__rate-button.hovered .tooltip {
+.skill-editor__rate-button:hover .tooltip {
   display: block;
 }
 

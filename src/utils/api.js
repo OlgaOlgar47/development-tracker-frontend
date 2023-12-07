@@ -83,6 +83,21 @@ export const getCoursesForCollection = (id) => {
     .then((data) => data);
 };
 
+export const getCourseForSkillEditor = (id) => {
+  return fetch(`${BASE_URL}/api/v1/recommended-course-skill/${id}/`, {
+    method: "GET",
+    headers: {
+      authorization: "Token 4fec03972264016ae2c6c0070b62f4abe0acace6",
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => {
+      return getResponseData(res);
+    })
+    .then((data) => data);
+};
+
 export const addSkill = (data) => {
   return fetch(`${BASE_URL}/api/v1/skills/`, {
     method: "POST",

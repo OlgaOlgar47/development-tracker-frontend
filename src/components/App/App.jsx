@@ -12,6 +12,7 @@ export default function App() {
   const [skillsData, setSkillsData] = useState([]);
   const [coursesData, setCoursesData] = useState({});
   const [coursesDataForCollection, setCoursesDataForCollection] = useState({});
+  const [courseForSkillEditor, setCourseForSkillEditor] = useState({});
   const [collectionData, setCollectionData] = useState([]);
   const [serverError, setServerError] = useState({});
   const [isVisible, setIsVisible] = useState(false);
@@ -83,8 +84,26 @@ export default function App() {
     }
   }, [location.pathname]);
 
+  useEffect(() => {
+    if (location.pathname.startsWith("/skill-editor/")) {
+      // Разделяем URL, чтобы получить значение параметра skillId
+      const pathParts = location.pathname.split("/");
+      const skillId = pathParts[pathParts.length - 1]; // Получаем последнюю часть URL как skillId
+
+      // Выполняем запрос только если мы находимся на нужном роуте с skillId
+      Api.getCourseForSkillEditor(skillId)
+        .then((res) => {
+          setCourseForSkillEditor(res);
+        })
+        .catch((err) => {
+          setServerError(true);
+          console.log(err);
+        });
+    }
+  }, [location.pathname]);
+
   function handleAddSkill(data) {
-    console.log('data: ', data.name);
+    console.log('name для добавления навыка: ', data.name);
 
     Api.addSkill(data.name)
       .then((res) => {
@@ -129,6 +148,7 @@ export default function App() {
   }
 
   function handleDeleteSkill(id) {
+    console.log("id навыка для удаления:", id)
     Api.deleteSkill(id)
       .then((res) => {
         console.log("res after DELETE: ", res);
@@ -161,6 +181,7 @@ export default function App() {
         handleEditSkill={handleEditSkill}
         toggleVisibility={toggleVisibility}
         handleInfoTooltip={handleInfoTooltip}
+        courseForSkillEditor={courseForSkillEditor}
       />
       <InfoTooltip
         isVisible={isVisible}

@@ -2,21 +2,23 @@ import { useState } from "react";
 import "./SkillsContainer.css";
 import ButtonsBackAdd from "../Buttons/ButtonsBackAdd";
 import { useLocation } from "react-router-dom";
+import Subtitle from "../Subtitle/Subtitle";
 
-export default function SkillsContainer({ skillsData, handleAddSkill }) {
-  console.log('skillsData пришла в SkillsContainer: ', skillsData);
+export default function SkillsContainer({
+  skillsData,
+  handleAddSkill,
+  subtitleName,
+}) {
+  console.log("skillsData пришла в SkillsContainer: ", skillsData);
   const [selectedCards, setSelectedCards] = useState([]);
   const { pathname } = useLocation();
 
-  const skills = skillsData ? skillsData : []; 
-
+  const skills = skillsData ? skillsData : [];
 
   const handleImageClick = (index) => {
     const selectedItem = skills[index];
     setSelectedCards([selectedItem]); // Выбор только одного элемента
   };
-  
-  
 
   function handleAdd() {
     let skillToAdd = [];
@@ -27,9 +29,9 @@ export default function SkillsContainer({ skillsData, handleAddSkill }) {
     }
   }
 
-
   return (
     <section className="skills-container">
+      <Subtitle subtitleName={subtitleName} />
       <ul
         className={
           pathname === "/"

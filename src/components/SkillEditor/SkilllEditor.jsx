@@ -10,6 +10,7 @@ import TextField from "@mui/material/TextField";
 // import { userDataConst } from "../../utils/constants";
 
 export default function SkillEditor({
+  courseForSkillEditor,
   coursesData,
   handleEditSkill,
   handleDeleteSkill,

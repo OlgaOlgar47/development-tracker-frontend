@@ -8,6 +8,7 @@ import { userDataConst } from "../../utils/constants";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 export default function UserSkillsContainer({
+  isSkills,
   hasBlueButons,
   subtitleName,
   userData,
@@ -195,7 +196,7 @@ export default function UserSkillsContainer({
         </>
       ) : (
         <p className="skills-container__text">
-          Ты пока не добавил ни одного навыка
+          {isSkills ? "Ты пока не добавил ни одного навыка из подборки." : "Ты пока не добавил ни одного навыка."}
         </p>
       )}
       <ButtonsDeleteEdit

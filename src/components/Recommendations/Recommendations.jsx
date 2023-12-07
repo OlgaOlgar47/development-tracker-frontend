@@ -3,6 +3,7 @@ import "./Recommendations.css";
 import CourseCard from "../CourseCard/CourseCard";
 
 export default function Recommendations({ coursesData, isSkillsEditor }) {
+  console.log('coursesData в recomendations: ', coursesData);
 
   // Если coursesData не определен, не является массивом или пуст, отображаем сообщение
   if (!coursesData || !Array.isArray(coursesData) || coursesData.length === 0) {
