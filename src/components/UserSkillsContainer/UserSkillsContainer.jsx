@@ -45,7 +45,6 @@ export default function UserSkillsContainer({
   useEffect(() => {
     setSortedSkillsData([...userData]);
   }, [userData]);
-  
 
   const visibleSkills = showAllSkills
     ? sortedSkillsData
@@ -196,7 +195,9 @@ export default function UserSkillsContainer({
         </>
       ) : (
         <p className="skills-container__text">
-          {isSkills ? "Ты пока не добавил ни одного навыка из подборки." : "Ты пока не добавил ни одного навыка."}
+          {isSkills
+            ? "Ты пока не добавил ни одного навыка из подборки."
+            : "Ты пока не добавил ни одного навыка."}
         </p>
       )}
       <ButtonsDeleteEdit

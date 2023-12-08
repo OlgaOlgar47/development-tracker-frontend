@@ -14,44 +14,34 @@ export default function Skills({
   collectionData,
   handleDeleteSkill,
 }) {
-  console.log('coursesDataForCollection: ', coursesDataForCollection);
+  console.log("coursesDataForCollection: ", coursesDataForCollection);
 
   const { collectionId } = useParams();
   const [collection, setCollection] = useState([]);
-  console.log('collectionData пришла в Skills: ', collectionData);
+  console.log("collectionData пришла в Skills: ", collectionData);
 
   useEffect(() => {
-    console.log("useEffect вызван");
-    console.log('collectionData в useEffect: ', collectionData);
-
     if (collectionData && collectionData.length > 0) {
       console.log("useEffect called", collectionData);
       const id = parseInt(collectionId, 10);
       const foundCollection = collectionData.find((item) => item.id === id);
-      
-      console.log('foundCollection: ', foundCollection);
-
       if (foundCollection) {
         setCollection(foundCollection);
       }
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [collectionId]);
-
 
   let collectionSkills = [];
   if (collection && collection.skills) {
     collectionSkills = [...collection.skills];
   }
-  
 
   const matchingSkills = userData.filter((skill) => {
     return collectionSkills.some((userSkill) => userSkill.name === skill.name);
   });
 
-  const subtitleName = `Навыки ` + collection.name;
-  console.log("collection", collection)
-
+  const subtitleName = `Навыки подборки: ` + collection.name;
 
   return (
     <section className="skills">
