@@ -3,18 +3,15 @@ import "./Recommendations.css";
 import CourseCard from "../CourseCard/CourseCard";
 
 export default function Recommendations({ coursesData, isSkillsEditor }) {
-
-  if (!coursesData) {
-    return (
-      <div className="recommendations">
-        <h3 className="recommendations__title">Отсутствуют данные о курсах</h3>
-      </div>
-    );
+  if (
+    !coursesData ||
+    (typeof coursesData === "object" && Object.keys(coursesData).length === 0)
+  ) {
+    return null;
   }
 
-  // Если мы в SkillsEditor и приходит объект, а не массив
   if (isSkillsEditor && !Array.isArray(coursesData)) {
-    console.log('courseForSkillEditor is SkillEditor: ', coursesData);
+    console.log("courseForSkillEditor is SkillEditor: ", coursesData);
 
     return (
       <div className="recommendations">
@@ -23,9 +20,11 @@ export default function Recommendations({ coursesData, isSkillsEditor }) {
       </div>
     );
   }
-  
+
   // Если не находимся в SkillsEditor или приходит массив (по умолчанию)
-  const limitedCoursesData = Array.isArray(coursesData) ? coursesData.slice(0, 2) : [];
+  const limitedCoursesData = Array.isArray(coursesData)
+    ? coursesData.slice(0, 2)
+    : [];
   return (
     <div className="recommendations">
       <h3 className="recommendations__title">Полезные ресурсы</h3>
