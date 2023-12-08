@@ -22,6 +22,16 @@
 3. Установите зависимости: `npm install`
 4. Запустите проект: `npm start`
 
+
+
+## Как запустить бэкенд докером:
+1. Скачиваем докер образ.
+(sudo) docker pull shelepovn/development_tracker_backend:latest
+2. Запускаем докер образ командой
+(sudo) docker run --name development_tracker_backend_container --rm -p 8000:8000 shelepovn/development_tracker_backend
+3. Документация по адресу
+http://localhost:8000/swagger/
+
 ## Скриншоты
 
 ![Screenshot 1](./src/images/ScreenshotTracker.jpg)

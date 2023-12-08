@@ -103,7 +103,7 @@ export default function App() {
   }, [location.pathname]);
 
   useEffect(()=> {
-    console.log("userDagta", userData)
+    console.log("userData", userData)
   },[userData])
 
   function handleAddSkill(data) {
@@ -119,6 +119,10 @@ export default function App() {
       });
   }
 
+  useEffect(()=> {
+    console.log("userData", userData)
+  },[userData])
+
   function handleEditSkill(skillData) {
     Api.editSkill(skillData)
       .then((res) => {
@@ -132,7 +136,6 @@ export default function App() {
           if (skill.id === res.id) {
             return {
               ...skill,
-              name: skillData.name !== undefined ? skillData.name : skill.name,
               rate: skillData.rate !== undefined ? skillData.rate : skill.rate,
               notes:
                 skillData.notes !== undefined ? skillData.notes : skill.notes,
@@ -154,9 +157,7 @@ export default function App() {
   function handleDeleteSkill(id) {
     console.log("id навыка для удаления:", id)
     Api.deleteSkill(id)
-      .then((res) => {
-        console.log("res after DELETE: ", res);
-
+      .then(() => {
         setUserData(
           userData.filter((skill) => {
             return skill.id !== id;

@@ -66,7 +66,7 @@ export default function SkillEditor({
   }
 
   function handleDelete() {
-    console.log("skillInfo for Delete: ", skillInfo);
+    console.log("skillInfo for Delete: ", skillInfo.id);
     handleDeleteSkill(skillInfo.id);
   }
 
@@ -74,17 +74,19 @@ export default function SkillEditor({
     const id = parseInt(skillId, 10);
     const foundSkill = userData.find((skill) => skill.id === id);
     setSkillInfo(foundSkill);
+    console.log("foundSkill:", foundSkill)
   }, [skillId, userData]);
 
-  const handleNameChange = (event) => {
-    if (skillInfo.editable) {
-      const newName = event.target.value.toString();
-      setSkillInfo((prevSkillInfo) => ({
-        ...prevSkillInfo,
-        name: newName,
-      }));
-    }
-  };
+
+  // const handleNameChange = (event) => {
+  //   if (skillInfo.editable) {
+  //     const newName = event.target.value.toString();
+  //     setSkillInfo((prevSkillInfo) => ({
+  //       ...prevSkillInfo,
+  //       name: newName,
+  //     }));
+  //   }
+  // };
 
   // if (!skillInfo) {
   //   return <div>Loading...</div>; // Отобразить загрузку, пока данные не загружены
@@ -210,17 +212,7 @@ export default function SkillEditor({
       <div className="skill-editor__grid-container">
         <div className="skill-editor__grid-item">
           <p className="skill-editor__tag">Навык</p>
-          {/* Условный рендеринг для Subtitle на основе информации о редактируемости */}
-          {skillInfo.editable ? (
-            <input
-              className="skills-editor__subtitle"
-              type="text"
-              value={skillInfo.name}
-              onChange={handleNameChange}
-            />
-          ) : (
-            <Subtitle subtitleName={skillInfo ? skillInfo.name : ""} />
-          )}
+          <Subtitle subtitleName={skillInfo ? skillInfo.name : ""} />        
           <p className="skill-editor__tag">Уровень владения навыком</p>
           <div className="skill-editor__rate">
             <RateButton
