@@ -17,7 +17,7 @@ export default function UserSkillsContainer({
 }) {
   const [sortedSkillsData, setSortedSkillsData] = useState([]);
   const [isSorted, setIsSorted] = useState(false);
-  const [selectedSkill, setSelectedSkills] = useState([]);
+  const [selectedSkill, setSelectedSkill] = useState([]);
   const [showAllSkills, setShowAllSkills] = useState(false);
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -28,20 +28,21 @@ export default function UserSkillsContainer({
   };
 
   function handleEdit() {
-    if (selectedSkill.length === 1) {
-      const skillId = selectedSkill[0];
+    if (selectedSkill !== null) { // Проверяем, выбран ли какой-либо навык
+      const skillId = selectedSkill;
       navigate(`/skill-editor/${skillId}`);
     }
   }
 
   const handleSkillClick = (id) => {
-    if (selectedSkill.includes(id)) {
-      setSelectedSkills([]);
+    if (selectedSkill === id) {
+      setSelectedSkill(null); 
     } else {
-      setSelectedSkills([id]);
+      setSelectedSkill(id);
     }
   };
 
+  
   useEffect(() => {
     setSortedSkillsData([...userData]);
   }, [userData]);
@@ -75,8 +76,8 @@ export default function UserSkillsContainer({
   };
 
   function handleDelete() {
-    const selectedSkillNumber = parseInt(selectedSkill, 10);
-    handleDeleteSkill(selectedSkillNumber);
+    // const selectedSkillNumber = parseInt(selectedSkill, 10);
+    handleDeleteSkill(selectedSkill);
   }
 
   if (serverError) {
@@ -139,7 +140,7 @@ export default function UserSkillsContainer({
               <CSSTransition key={skill.id} timeout={500} classNames="fade">
                 <li
                   className={`skills-container__item ${
-                    selectedSkill.includes(skill.id) ? "selected" : ""
+                    selectedSkill === skill.id ? "selected" : ""
                   }`}
                   onClick={() => handleSkillClick(skill.id)}
                   style={{
