@@ -9,42 +9,14 @@ export default function SearchForm({
   hasButton,
   skillsData,
   handleAddSkill,
-  userDataToRender,
+  userData,
   toggleVisibility,
   handleInfoTooltip
 }) {
-  // const skills = [
-  //   { name: "HTML" },
-  //   { name: "CSS" },
-  //   { name: "JavaScript" },
-  //   { name: "Python" },
-  //   { name: "React" },
-  //   { name: "Node.js" },
-  //   { name: "SQL" },
-  //   { name: "Vue.js" },
-  //   { name: "Angular" },
-  //   { name: "Типографика" },
-  //   { name: "Композиция" },
-  //   { name: "Генерация идей" },
-  //   { name: "Tilda" },
-  //   { name: "Figma" },
-  //   { name: "Adobe Photoshop" },
-  //   { name: "Анализ ЦА" },
-  //   { name: "Гипотезы" },
-  //   { name: "Исследования" },
-  //   { name: "UX-копирайтинг" },
-  //   { name: "UX-тестирование" },
-  //   { name: "Конкурентный анализ" },
-  //   { name: "JTBD и User Stories" },
-  //   { name: "Анимация" },
-  //   { name: "Вайрфреймы" },
-  //   { name: "UI-Kit" },
-  //   { name: "Аудит юзабилити" },
-  // ];
   const skills=[...skillsData]
   const [searchText, setSearchText] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const [selectedItems, setSelectedItems] = useState([]);
+  const [selectedItem, setSelectedItem] = useState([]);
 
   const disabledAdd = searchText.length === 0;
 
@@ -57,38 +29,35 @@ export default function SearchForm({
     setSearchResults(filteredResults);
   };
 
-  const handleButtonClick = () => {
-    let skillsToAdd = [];
-    if (selectedItems.length > 0) {
-      skillsToAdd = selectedItems.slice();
-      setSelectedItems([]); // Очищаем selectedItems
-    } else if (searchText) {
-      skillsToAdd = [{ name: searchText }];
-      setSearchText(""); // Очищаем searchText
-    }
-    handleAddSkill(skillsToAdd);
-  };
-
   const handleResultClick = (index) => {
-    const selectedItem = searchResults[index];
-
-    const isAlreadyAdded = userDataToRender.some(
-      (item) => item.name === selectedItem.name
+    const clickedItem = searchResults[index];
+    const isAlreadyAdded = userData.some(
+      (item) => item.name === clickedItem.name
     );
 
-    if (isAlreadyAdded) {
-   toggleVisibility();
-   handleInfoTooltip(false)
+    if (!isAlreadyAdded) {
+      setSelectedItem(clickedItem);
+    } else {
+      handleInfoTooltip(false, "Такой навык уже добавлен");
     }
-
-    setSelectedItems((prevItems) => {
-      if (prevItems.includes(selectedItem)) {
-        return prevItems.filter((item) => item !== selectedItem);
-      } else {
-        return [...prevItems, selectedItem];
-      }
-    });
   };
+
+  const handleButtonClick = () => {
+    let skillToAdd = null;
+    if (selectedItem) {
+      skillToAdd = selectedItem;
+      setSelectedItem(null); // Очищаем selectedItem
+      setSearchText(''); // Очищаем searchText, если выбран элемент
+    } else if (searchText) {
+      skillToAdd = { name: searchText };
+      setSearchText(''); // Очищаем searchText, если добавляем новый навык
+    }
+    if (skillToAdd) {
+      handleAddSkill(skillToAdd);
+      console.log('skillToAdd', skillToAdd);
+    }
+  };
+  
 
   return (
     <form className="search-form">
@@ -132,12 +101,12 @@ export default function SearchForm({
         <div className="search-form__results">
           {searchResults.map((result, index) => (
             <div
-              key={index}
-              className={`search-form__result ${
-                selectedItems.includes(result) ? "selected" : ""
-              }`}
-              onClick={() => handleResultClick(index)}
-            >
+            key={index}
+            className={`search-form__result ${
+              selectedItem && selectedItem.name === result.name ? 'selected' : ''
+            }`}
+            onClick={() => handleResultClick(index)}
+          >
               {result.name}
             </div>
           ))}

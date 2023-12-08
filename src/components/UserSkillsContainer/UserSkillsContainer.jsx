@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./UserSkillsContainer.css";
 import Subtitle from "../Subtitle/Subtitle";
@@ -8,6 +8,7 @@ import { userDataConst } from "../../utils/constants";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 export default function UserSkillsContainer({
+  isSkills,
   hasBlueButons,
   subtitleName,
   userData,
@@ -20,6 +21,7 @@ export default function UserSkillsContainer({
   const [showAllSkills, setShowAllSkills] = useState(false);
   const { pathname } = useLocation();
   const navigate = useNavigate();
+  const skillItemRef = useRef(null);
 
   const toggleShowAllSkills = () => {
     setShowAllSkills(!showAllSkills);
@@ -43,7 +45,6 @@ export default function UserSkillsContainer({
   useEffect(() => {
     setSortedSkillsData([...userData]);
   }, [userData]);
-  
 
   const visibleSkills = showAllSkills
     ? sortedSkillsData
@@ -86,6 +87,17 @@ export default function UserSkillsContainer({
       </p>
     );
   }
+
+  const handleFocus = (skill) => {
+    const refButton = skillItemRef.current;
+    if (refButton) {
+      refButton.style.background = generateGradient(
+        skill.rate,
+        "#87CC9E",
+        "#F7FFFA"
+      );
+    }
+  };
 
   return (
     <section className="skills-container">
@@ -151,6 +163,7 @@ export default function UserSkillsContainer({
                       "#c2e5ce00"
                     );
                   }}
+                  onFocus={handleFocus(skill)} // Добавляем обработчик фокуса на элементе
                 >
                   {skill.name}
                   {skill.notes && (
@@ -182,7 +195,9 @@ export default function UserSkillsContainer({
         </>
       ) : (
         <p className="skills-container__text">
-          Ты пока не добавил ни одного навыка
+          {isSkills
+            ? "Ты пока не добавил ни одного навыка из подборки."
+            : "Ты пока не добавил ни одного навыка."}
         </p>
       )}
       <ButtonsDeleteEdit

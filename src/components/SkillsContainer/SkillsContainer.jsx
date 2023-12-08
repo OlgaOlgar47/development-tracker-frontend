@@ -1,38 +1,55 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./SkillsContainer.css";
 import ButtonsBackAdd from "../Buttons/ButtonsBackAdd";
 import { useLocation } from "react-router-dom";
+import Subtitle from "../Subtitle/Subtitle";
 
-export default function SkillsContainer({ skillsData, handleAddSkill }) {
-  const [selectedCards, setSelectedCards] = useState([]);
+export default function SkillsContainer({
+  skillsData,
+  handleAddSkill,
+  subtitleName,
+  userData
+}) {
+  console.log("skillsData пришла в SkillsContainer: ", skillsData);
+  const [selectedCard, setSelectedCard] = useState(null);
   const { pathname } = useLocation();
+  const [skills, setSkills] = useState([]);
+  console.log('skillsData в SkillsContainer: ', skillsData);
+
+  
+  useEffect(() => {
+    if (skillsData && Array.isArray(skillsData) && userData && Array.isArray(userData)) {
+      // Фильтрация skillsData: исключаем навыки, которые уже есть у пользователя
+      const filteredSkillsData = skillsData.filter(skill => !userData.some(userSkill => userSkill.name === skill.name));
+      setSkills(filteredSkillsData);
+    }
+  }, [skillsData, userData]);
+
+  if (skillsData === undefined || !Array.isArray(skillsData)) {
+    return <p>СкиллсДата не найдена или имеет неверный формат</p>;
+  }
+
 
   const handleImageClick = (index) => {
-    const selectedItem = skillsData[index];
-    setSelectedCards((prevItems) => {
-      if (prevItems.some((item) => item === selectedItem)) {
-        // Убираем элемент из массива, если он уже был выбран
-        return prevItems.filter((item) => item !== selectedItem);
-      } else {
-        // Добавляем элемент в массив, если он не был выбран
-        return [...prevItems, selectedItem];
-      }
-    });
+    const selectedItem = skills[index];
+    setSelectedCard(selectedItem); 
   };
-
+  
   function handleAdd() {
-    let skillsToAdd = [];
-    if (selectedCards.length > 0) {
-      skillsToAdd = selectedCards.slice();
-      setSelectedCards([]); // Очищаем selectedCards
-      handleAddSkill(skillsToAdd);
+    if (selectedCard) {
+      handleAddSkill(selectedCard);
+      setSkills((prevSkills) =>
+      prevSkills.filter((skill) => skill !== selectedCard)
+    );
+      setSelectedCard(null); 
+      console.log('selectedCard: ', selectedCard);
     }
   }
-  console.log('skillsContainer говорит: ', skillsData);
-
 
   return (
     <section className="skills-container">
+      <Subtitle subtitleName={subtitleName} />
+      {skills && skills.length > 0 ? (
       <ul
         className={
           pathname === "/"
@@ -40,11 +57,13 @@ export default function SkillsContainer({ skillsData, handleAddSkill }) {
             : "skills-container__list skills-container__list_type_all"
         }
       >
-        {skillsData.map((skill, index) => (
+        {skills.map((skill, index) => (
           <li
             key={index}
             className={`skills-container__item-small ${
-              selectedCards.includes(skill) ? "selected" : ""
+              selectedCard && selectedCard.name === skill.name
+                ? "selected"
+                : ""
             }`}
             onClick={() => handleImageClick(index)}
           >
@@ -52,10 +71,13 @@ export default function SkillsContainer({ skillsData, handleAddSkill }) {
           </li>
         ))}
       </ul>
-      <ButtonsBackAdd
-        handleAdd={handleAdd}
-        disabledAdd={selectedCards.length === 0}
-      />
+    ) : (
+      <p className="skills-container__text">Ты добавил все навыки из подборки</p>
+    )}
+    <ButtonsBackAdd
+      handleAdd={handleAdd}
+      disabledAdd={!selectedCard}
+    />
     </section>
   );
 }

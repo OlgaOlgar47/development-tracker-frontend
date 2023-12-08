@@ -6,14 +6,18 @@
   height: 24px;
   border-radius: 24px;
   background-color: #dde0e4;
-}
-
-.skill-editor__rate-button.hovered {
-  background-color: #c2e5ce;
   cursor: pointer;
 }
 
-.skill-editor__rate-button.hovered .tooltip {
+.button-one:hover {
+  background-color: #c2e5ce;
+}
+
+.skill-editor__type-green {
+  background-color: #c2e5ce;
+}
+
+.skill-editor__rate-button:hover .tooltip {
   display: block;
 }
 

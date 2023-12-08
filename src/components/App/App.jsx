@@ -1,37 +1,47 @@
-import { useEffect, useState } from "react";
+import { React, useEffect, useState } from "react";
 import "./App.css";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import * as Api from "../../utils/api";
 import { useLocation } from "react-router-dom";
-import { userDataConst } from "../../utils/constants";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
-// import { useParams } from "react-router-dom";
 
-function App() {
-  // const { collectionId } = useParams();
+export default function App() {
   const location = useLocation();
   const [userData, setUserData] = useState([]);
   const [skillsData, setSkillsData] = useState([]);
   const [coursesData, setCoursesData] = useState({});
   const [coursesDataForCollection, setCoursesDataForCollection] = useState({});
+  const [courseForSkillEditor, setCourseForSkillEditor] = useState({});
   const [collectionData, setCollectionData] = useState([]);
   const [serverError, setServerError] = useState({});
-  const [userDataToRender, setUserDataToRender] = useState(userDataConst);
   const [isVisible, setIsVisible] = useState(false);
-  const [isInfoTooltip, setIsInfoTooltip] = useState({ isSucessfull: false });
+  const [isInfoTooltip, setIsInfoTooltip] = useState({
+    isSuccessfull: false,
+    customMessage: "",
+  });
 
-  // Логика для управления значением isInfoTooltip
-  function handleInfoTooltip(effect) {
-    setIsInfoTooltip({ ...isInfoTooltip, isSucessfull: effect });
+  function handleInfoTooltip(effect, customMessage) {
+    setIsInfoTooltip((prevState) => ({
+      ...prevState,
+      isSuccessfull: effect,
+      customMessage: customMessage,
+    }));
+    toggleVisibility();
   }
+
+  const toggleVisibility = () => {
+    setIsVisible(true); // Показываем элемент
+    setTimeout(() => {
+      setIsVisible(false); // Скрываем элемент через 3 секунды
+    }, 3000);
+  };
 
   useEffect(() => {
     Promise.all([Api.getUserData(), Api.getSkills(), Api.getCourses()])
       .then(([userData, skillsData, coursesData]) => {
         setUserData(userData);
         setCoursesData(coursesData);
-        console.log('coursesData пришли в Апп: ', coursesData);
         setSkillsData(skillsData);
       })
       .catch((err) => {
@@ -45,6 +55,8 @@ function App() {
       // Выполняем запрос только если мы находимся на нужном роуте
       Api.getCollections()
         .then((collectionData) => {
+          console.log('collectionData пришла в App: ', collectionData);
+
           setCollectionData(collectionData);
         })
         .catch((err) => {
@@ -59,11 +71,10 @@ function App() {
       // Разделяем URL, чтобы получить значение параметра collectionId
       const pathParts = location.pathname.split("/");
       const collectionId = pathParts[pathParts.length - 1]; // Получаем последнюю часть URL как collectionId
-  
+
       // Выполняем запрос только если мы находимся на нужном роуте с collectionId
       Api.getCoursesForCollection(collectionId)
         .then((res) => {
-          console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', res);
           setCoursesDataForCollection(res);
         })
         .catch((err) => {
@@ -72,31 +83,36 @@ function App() {
         });
     }
   }, [location.pathname]);
-  
-  const toggleVisibility = () => {
-    setIsVisible(true); // Показываем элемент
-    setTimeout(() => {
-      setIsVisible(false); // Скрываем элемент через 3 секунды
-    }, 3000);
-  };
+
+  useEffect(() => {
+    if (location.pathname.startsWith("/skill-editor/")) {
+      // Разделяем URL, чтобы получить значение параметра skillId
+      const pathParts = location.pathname.split("/");
+      const skillId = pathParts[pathParts.length - 1]; // Получаем последнюю часть URL как skillId
+
+      // Выполняем запрос только если мы находимся на нужном роуте с skillId
+      Api.getCourseForSkillEditor(skillId)
+        .then((res) => {
+          setCourseForSkillEditor(res);
+        })
+        .catch((err) => {
+          setServerError(true);
+          console.log(err);
+        });
+    }
+  }, [location.pathname]);
+
+  useEffect(()=> {
+    console.log("userDagta", userData)
+  },[userData])
 
   function handleAddSkill(data) {
-    const newSkills = data.map((item) => {
-      let idRandom = Math.floor(Math.random() * 1000) + 1;
-      return {
-        id: idRandom,
-        name: item.name,
-        rate: 0,
-        notes: "",
-        editable: true,
-      };
-    });
+    console.log('data для добавления навыка: ', data);
 
-    setUserDataToRender((prevData) => [...newSkills, ...prevData]);
-
-    Api.addSkill(data)
+    Api.addSkill(data.name)
       .then((res) => {
-        setUserData([...userData, res]);
+        console.log("res при POST:", res);
+        setUserData([res, ...userData]);
       })
       .catch((err) => {
         console.log(err);
@@ -104,73 +120,55 @@ function App() {
   }
 
   function handleEditSkill(skillData) {
-    console.log("handleEditSkill работает");
-    const updatedUserDataToRender = userData.map((skill) => {
-      if (skill.id === skillData.id) {
-        return {
-          ...skill,
-          name: skillData.name !== undefined ? skillData.name : skill.name,
-          rate: skillData.rate !== undefined ? skillData.rate : skill.rate,
-          notes: skillData.notes !== undefined ? skillData.notes : skill.notes,
-        };
-      }
-      return skill;
-    });
-
-    setUserDataToRender(updatedUserDataToRender);
-    toggleVisibility();
-    handleInfoTooltip(true);
-
     Api.editSkill(skillData)
-    .then((res) => {
-      console.log('res After Edit: ', res);
-      const updatedUserDataToRender = userData.map((skill) => {
-        if (skill.id === skillData.id) {
-          return {
-            ...skill,
-            name: skillData.name !== undefined ? skillData.name : skill.name,
-            rate: skillData.rate !== undefined ? skillData.rate : skill.rate,
-            notes: skillData.notes !== undefined ? skillData.notes : skill.notes,
-          };
-        }
-        return skill;
+      .then((res) => {
+        console.log("res After Edit: ", res);
+
+        const updatedUserData = userData.map((skill) => {
+          console.log("res PATCH: ", res);
+          console.log("skill id: ", skill.id);
+          console.log("skillData id: ", skillData);
+
+          if (skill.id === res.id) {
+            return {
+              ...skill,
+              name: skillData.name !== undefined ? skillData.name : skill.name,
+              rate: skillData.rate !== undefined ? skillData.rate : skill.rate,
+              notes:
+                skillData.notes !== undefined ? skillData.notes : skill.notes,
+            };
+          }
+          return skill;
+        });
+
+        setUserData(updatedUserData);
+        handleInfoTooltip(true, "Проверь на главном экране");
+        console.log("userData After Edit: ", updatedUserData);
+      })
+      .catch((err) => {
+        handleInfoTooltip(false, "Попробуй сохранить еще раз");
+        console.log(err);
       });
-  
-      // Обновляем только измененный навык в состоянии userData
-      setUserData(updatedUserDataToRender);
-      console.log('userData After Edit: ', updatedUserDataToRender); // Печатаем обновленные данные
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  
-  
   }
 
   function handleDeleteSkill(id) {
-    setUserDataToRender(
-      userDataToRender.filter((skill) => {
-        return skill.id !== id;
-      })
-    );
-
+    console.log("id навыка для удаления:", id)
     Api.deleteSkill(id)
-      .then(() => {
+      .then((res) => {
+        console.log("res after DELETE: ", res);
+
         setUserData(
           userData.filter((skill) => {
             return skill.id !== id;
           })
         );
+        handleInfoTooltip(true, "Навык удалён");
       })
       .catch((err) => {
         console.log(err);
+        handleInfoTooltip(false, "Попробуй удалить ещё раз");
       });
   }
-
-
-  //   useEffect(() => {
-  //   console.log("userDataApp", userData);
-  // }, [userData]);
 
   return (
     <div className="page">
@@ -187,10 +185,13 @@ function App() {
         handleEditSkill={handleEditSkill}
         toggleVisibility={toggleVisibility}
         handleInfoTooltip={handleInfoTooltip}
+        courseForSkillEditor={courseForSkillEditor}
       />
-      <InfoTooltip effect={isInfoTooltip} isVisible={isVisible} />
+      <InfoTooltip
+        isVisible={isVisible}
+        isSuccessfull={isInfoTooltip.isSuccessfull} 
+        customMessage={isInfoTooltip.customMessage}
+      />
     </div>
   );
 }
-
-export default App;

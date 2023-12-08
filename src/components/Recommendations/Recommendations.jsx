@@ -3,6 +3,7 @@ import "./Recommendations.css";
 import CourseCard from "../CourseCard/CourseCard";
 
 export default function Recommendations({ coursesData, isSkillsEditor }) {
+  console.log('coursesData в recomendations: ', coursesData);
 
   // Если coursesData не определен, не является массивом или пуст, отображаем сообщение
   if (!coursesData || !Array.isArray(coursesData) || coursesData.length === 0) {
@@ -19,7 +20,7 @@ export default function Recommendations({ coursesData, isSkillsEditor }) {
     return (
       <div className="recommendations">
         <h3 className="recommendations__title">Как развить</h3>
-        <CourseCard key={0} name={singleCourse[0].name} image={`http://localhost:8000${singleCourse[0].image}`} />
+        <CourseCard key={0} name={singleCourse[0].name} image={singleCourse[0].image} />
       </div>
     );
   }
@@ -30,7 +31,7 @@ export default function Recommendations({ coursesData, isSkillsEditor }) {
     <div className="recommendations">
       <h3 className="recommendations__title">Полезные ресурсы</h3>
       {limitedCoursesData.map((course, index) => (
-        <CourseCard key={index} name={course.name} image={`http://localhost:8000${course.image}`} />
+        <CourseCard key={index} name={course.name} image={course.image} />
       ))}
     </div>
   );
