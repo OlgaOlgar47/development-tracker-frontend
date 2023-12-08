@@ -5,7 +5,6 @@ import Paragraph from "../../Paragraph/Paragraph";
 import SearchForm from "../../SearchForm/SearchForm";
 import UserSkillsContainer from "../../UserSkillsContainer/UserSkillsContainer";
 import Recommendations from "../../Recommendations/Recommendations";
-// import { userDataConst } from "../../../utils/constants";
 
 export default function Tracker({
   serverError,

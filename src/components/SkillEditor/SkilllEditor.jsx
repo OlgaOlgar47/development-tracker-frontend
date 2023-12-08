@@ -7,6 +7,7 @@ import RateButton from "./RateButton/RateButton";
 import Recommendations from "../Recommendations/Recommendations";
 import ButtonsBackSaveDel from "../Buttons/ButtonsBackSaveDel";
 import TextField from "@mui/material/TextField";
+import { useNavigate } from 'react-router-dom';
 
 export default function SkillEditor({
   courseForSkillEditor,
@@ -18,6 +19,25 @@ export default function SkillEditor({
   const [skillInfo, setSkillInfo] = useState({});
   const [selectedPercentage, setSelectedPercentage] = useState(0);
   const [notes, setNotes] = useState(skillInfo.notes || "");
+  const navigate = useNavigate();
+
+
+  console.log('userData: ', userData);
+  console.log('skillId: ', skillId);
+  console.log("foundSkill:", skillInfo)
+  
+
+  useEffect(() => {
+    const id = parseInt(skillId, 10);
+  
+    if (userData && userData.length > 0) {
+      const foundSkill = userData.find((skill) => skill.id === id);
+      if (foundSkill) {
+        setSkillInfo(foundSkill);
+        console.log("foundSkill:", foundSkill);
+      }
+    }
+  }, [skillId, userData]);
 
   useEffect(() => {
     setSelectedPercentage(skillInfo.rate || 0);
@@ -66,14 +86,8 @@ export default function SkillEditor({
   function handleDelete() {
     console.log("skillInfo for Delete: ", skillInfo.id);
     handleDeleteSkill(skillInfo.id);
+    navigate('/'); 
   }
-
-  useEffect(() => {
-    const id = parseInt(skillId, 10);
-    const foundSkill = userData.find((skill) => skill.id === id);
-    setSkillInfo(foundSkill);
-    console.log("foundSkill:", foundSkill)
-  }, [skillId, userData]);
 
 
   // const handleNameChange = (event) => {
@@ -210,7 +224,7 @@ export default function SkillEditor({
       <div className="skill-editor__grid-container">
         <div className="skill-editor__grid-item">
           <p className="skill-editor__tag">Навык</p>
-          <Subtitle subtitleName={skillInfo ? skillInfo.name : ""} />        
+          <Subtitle subtitleName={skillInfo.name} />        
           <p className="skill-editor__tag">Уровень владения навыком</p>
           <div className="skill-editor__rate">
             <RateButton

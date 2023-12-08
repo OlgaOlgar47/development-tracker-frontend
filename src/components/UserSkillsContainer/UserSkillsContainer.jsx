@@ -4,7 +4,6 @@ import "./UserSkillsContainer.css";
 import Subtitle from "../Subtitle/Subtitle";
 import ButtonsDeleteEdit from "../../components/Buttons/ButtonsDeleteEdit";
 import iconLink from "../../images/link.svg";
-import { userDataConst } from "../../utils/constants";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 export default function UserSkillsContainer({
@@ -76,7 +75,6 @@ export default function UserSkillsContainer({
   };
 
   function handleDelete() {
-    // const selectedSkillNumber = parseInt(selectedSkill, 10);
     handleDeleteSkill(selectedSkill);
   }
 
@@ -104,7 +102,7 @@ export default function UserSkillsContainer({
     <section className="skills-container">
       <div className="skills-container__header">
         <Subtitle subtitleName={subtitleName} />
-        {(hasBlueButons && userData.length > 0) || userDataConst ? (
+        {(hasBlueButons && userData.length > 0) ? (
           <div
             className={
               pathname === "/"
@@ -133,7 +131,7 @@ export default function UserSkillsContainer({
           ""
         )}
       </div>
-      {(userData && userData.length > 0) || userDataConst ? (
+      {(userData && userData.length > 0) ? (
         <>
           <TransitionGroup className="skills-container__list">
             {visibleSkills.map((skill) => (
