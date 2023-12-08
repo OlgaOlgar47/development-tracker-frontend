@@ -156,6 +156,7 @@ export default function App() {
 
   function handleDeleteSkill(id) {
     console.log("id навыка для удаления:", id)
+    
     Api.deleteSkill(id)
       .then(() => {
         setUserData(
