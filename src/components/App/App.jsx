@@ -21,6 +21,14 @@ export default function App() {
     customMessage: "",
   });
 
+  const toggleVisibility = () => {
+    setIsVisible(true); // Показываем элемент
+    setTimeout(() => {
+      setIsVisible(false); // Скрываем элемент через 3 секунды
+    }, 3000);
+  };
+
+
   function handleInfoTooltip(effect, customMessage) {
     setIsInfoTooltip((prevState) => ({
       ...prevState,
@@ -29,14 +37,7 @@ export default function App() {
     }));
     toggleVisibility();
   }
-
-  const toggleVisibility = () => {
-    setIsVisible(true); // Показываем элемент
-    setTimeout(() => {
-      setIsVisible(false); // Скрываем элемент через 3 секунды
-    }, 3000);
-  };
-
+  
   useEffect(() => {
     Promise.all([Api.getUserData(), Api.getSkills(), Api.getCourses()])
       .then(([userData, skillsData, coursesData]) => {

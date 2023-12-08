@@ -5,9 +5,6 @@ import iconX from "../../images/RedX.svg";
 export default function InfoTooltip({ isVisible, isSuccessfull, customMessage }) {
 
   let messageTitle = isSuccessfull ? "Изменения сохранены" : "Ошибка сохранения";
-  let messageText = isSuccessfull
-    ? "Проверь на главном экране"
-    : customMessage || "Такой навык уже добавлен";
 
   return (
     <section
@@ -37,7 +34,7 @@ export default function InfoTooltip({ isVisible, isSuccessfull, customMessage })
               : "info-tooltip__paragraph-false"
           }`}
         >
-          {messageText}
+          {customMessage}
         </p>
       </div>
     </section>
