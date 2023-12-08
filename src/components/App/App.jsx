@@ -102,6 +102,10 @@ export default function App() {
     }
   }, [location.pathname]);
 
+  useEffect(()=> {
+    console.log("userDagta", userData)
+  },[userData])
+
   function handleAddSkill(data) {
     console.log('data для добавления навыка: ', data);
 

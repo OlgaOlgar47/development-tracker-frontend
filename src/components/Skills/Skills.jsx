@@ -50,6 +50,7 @@ export default function Skills({
         <div className="skills__items">
           <Paragraph text={collection.description} />
           <SkillsContainer
+            userData={userData}
             subtitleName={subtitleName}
             handleAddSkill={handleAddSkill}
             skillsData={collection.skills}

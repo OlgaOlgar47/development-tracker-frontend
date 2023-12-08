@@ -136,7 +136,6 @@ export const deleteSkill = (id) => {
     method: "DELETE",
     headers: {
       authorization: "Token 4fec03972264016ae2c6c0070b62f4abe0acace6",
-      Accept: "application/json",
       "Content-Type": "application/json",
     },
   }).then((res) => {

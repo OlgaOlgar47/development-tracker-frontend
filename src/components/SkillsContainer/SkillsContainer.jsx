@@ -8,6 +8,7 @@ export default function SkillsContainer({
   skillsData,
   handleAddSkill,
   subtitleName,
+  userData
 }) {
   console.log("skillsData пришла в SkillsContainer: ", skillsData);
   const [selectedCard, setSelectedCard] = useState(null);
@@ -17,10 +18,12 @@ export default function SkillsContainer({
 
   
   useEffect(() => {
-    if (skillsData && Array.isArray(skillsData)) {
-      setSkills(skillsData);
+    if (skillsData && Array.isArray(skillsData) && userData && Array.isArray(userData)) {
+      // Фильтрация skillsData: исключаем навыки, которые уже есть у пользователя
+      const filteredSkillsData = skillsData.filter(skill => !userData.some(userSkill => userSkill.name === skill.name));
+      setSkills(filteredSkillsData);
     }
-  }, [skillsData]);
+  }, [skillsData, userData]);
 
   if (skillsData === undefined || !Array.isArray(skillsData)) {
     return <p>СкиллсДата не найдена или имеет неверный формат</p>;
