@@ -103,7 +103,7 @@ export default function App() {
   }, [location.pathname]);
 
   function handleAddSkill(data) {
-    console.log('name для добавления навыка: ', data.name);
+    console.log('data для добавления навыка: ', data);
 
     Api.addSkill(data.name)
       .then((res) => {

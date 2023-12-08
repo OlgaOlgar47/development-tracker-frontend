@@ -10,28 +10,34 @@ export default function SkillsContainer({
   subtitleName,
 }) {
   console.log("skillsData пришла в SkillsContainer: ", skillsData);
-  const [selectedCards, setSelectedCards] = useState([]);
+  const [selectedCard, setSelectedCard] = useState(null);
   const { pathname } = useLocation();
+  const [skills, setSkills] = useState(skillsData)
 
-  const skills = skillsData ? skillsData : [];
+  // const skills = skillsData ? skillsData : [];
+
+
 
   const handleImageClick = (index) => {
     const selectedItem = skills[index];
-    setSelectedCards([selectedItem]); // Выбор только одного элемента
+    setSelectedCard(selectedItem); 
   };
-
+  
   function handleAdd() {
-    let skillToAdd = [];
-    if (selectedCards.length > 0) {
-      skillToAdd = selectedCards.slice();
-      setSelectedCards([]);
-      handleAddSkill(skillToAdd);
+    if (selectedCard) {
+      handleAddSkill(selectedCard);
+      setSkills((prevSkills) =>
+      prevSkills.filter((skill) => skill !== selectedCard)
+    );
+      setSelectedCard(null); 
+      console.log('selectedCard: ', selectedCard);
     }
   }
 
   return (
     <section className="skills-container">
       <Subtitle subtitleName={subtitleName} />
+      {skills.length > 0 ? (
       <ul
         className={
           pathname === "/"
@@ -43,7 +49,9 @@ export default function SkillsContainer({
           <li
             key={index}
             className={`skills-container__item-small ${
-              selectedCards.includes(skill) ? "selected" : ""
+              selectedCard && selectedCard.name === skill.name
+                ? "selected"
+                : ""
             }`}
             onClick={() => handleImageClick(index)}
           >
@@ -51,10 +59,13 @@ export default function SkillsContainer({
           </li>
         ))}
       </ul>
-      <ButtonsBackAdd
-        handleAdd={handleAdd}
-        disabledAdd={selectedCards.length === 0}
-      />
+    ) : (
+      <p className="skills-container__text">Ты добавил все навыки из подборки</p>
+    )}
+    <ButtonsBackAdd
+      handleAdd={handleAdd}
+      disabledAdd={!selectedCard}
+    />
     </section>
   );
 }

@@ -43,4 +43,12 @@
   border-color: #1D6BF3;
 }
 
+.skills-container__text {
+  font-family: 'YS Text';
+  color: #797981;
+  font-size: 14px;
+  line-height: 20px;
+
+}
+
 
