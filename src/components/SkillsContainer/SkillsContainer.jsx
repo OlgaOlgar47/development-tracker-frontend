@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./SkillsContainer.css";
 import ButtonsBackAdd from "../Buttons/ButtonsBackAdd";
 import { useLocation } from "react-router-dom";
@@ -12,10 +12,19 @@ export default function SkillsContainer({
   console.log("skillsData пришла в SkillsContainer: ", skillsData);
   const [selectedCard, setSelectedCard] = useState(null);
   const { pathname } = useLocation();
-  const [skills, setSkills] = useState(skillsData)
+  const [skills, setSkills] = useState([]);
+  console.log('skillsData в SkillsContainer: ', skillsData);
 
-  // const skills = skillsData ? skillsData : [];
+  
+  useEffect(() => {
+    if (skillsData && Array.isArray(skillsData)) {
+      setSkills(skillsData);
+    }
+  }, [skillsData]);
 
+  if (skillsData === undefined || !Array.isArray(skillsData)) {
+    return <p>СкиллсДата не найдена или имеет неверный формат</p>;
+  }
 
 
   const handleImageClick = (index) => {
@@ -37,7 +46,7 @@ export default function SkillsContainer({
   return (
     <section className="skills-container">
       <Subtitle subtitleName={subtitleName} />
-      {skills.length > 0 ? (
+      {skills && skills.length > 0 ? (
       <ul
         className={
           pathname === "/"
