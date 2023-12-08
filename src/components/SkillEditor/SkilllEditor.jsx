@@ -7,11 +7,9 @@ import RateButton from "./RateButton/RateButton";
 import Recommendations from "../Recommendations/Recommendations";
 import ButtonsBackSaveDel from "../Buttons/ButtonsBackSaveDel";
 import TextField from "@mui/material/TextField";
-// import { userDataConst } from "../../utils/constants";
 
 export default function SkillEditor({
   courseForSkillEditor,
-  coursesData,
   handleEditSkill,
   handleDeleteSkill,
   userData,
@@ -22,9 +20,9 @@ export default function SkillEditor({
   const [notes, setNotes] = useState(skillInfo.notes || "");
 
   useEffect(() => {
-    setSelectedPercentage(skillInfo.rate);
-    setNotes(skillInfo.notes);
-  }, [skillInfo.rate, skillInfo.notes]);
+    setSelectedPercentage(skillInfo.rate || 0);
+    setNotes(skillInfo.notes || "");
+  }, [skillInfo]);
 
   useEffect(() => {
     setSkillInfo((prevSkillInfo) => ({
@@ -292,7 +290,7 @@ export default function SkillEditor({
           />
         </div>
         <div className="tracker__grid-item">
-          <Recommendations isSkillsEditor={true} coursesData={coursesData} />
+          <Recommendations isSkillsEditor={true} coursesData={courseForSkillEditor} />
         </div>
       </div>
     </section>

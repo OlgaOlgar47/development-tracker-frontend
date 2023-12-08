@@ -84,7 +84,7 @@ export const getCoursesForCollection = (id) => {
 };
 
 export const getCourseForSkillEditor = (id) => {
-  return fetch(`${BASE_URL}/api/v1/recommended-course-skill/${id}/`, {
+  return fetch(`${BASE_URL}/api/v1/recommended-courses-skill/${id}/`, {
     method: "GET",
     headers: {
       authorization: "Token 4fec03972264016ae2c6c0070b62f4abe0acace6",
