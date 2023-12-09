@@ -146,6 +146,7 @@ const UserSkillsContainer: React.FC<Props> = ({
   const allZeroRates = allRatesAreZero();
 
   const shouldAddGreyClass = visibleSkills.length === sortedSkillsData.length;
+  console.log("shouldAddGreyClass: ", shouldAddGreyClass);
 
   return (
     <section className="skills-container">
@@ -174,7 +175,9 @@ const UserSkillsContainer: React.FC<Props> = ({
             <button className="skills-container__button" onClick={showAll}>
               <p
                 className={
-                  shouldAddGreyClass
+                  showAllSkills
+                    ? "skills-container__button-text"
+                    : shouldAddGreyClass
                     ? "skills-container__button-text skills-container__button-text_grey"
                     : "skills-container__button-text"
                 }
@@ -187,7 +190,7 @@ const UserSkillsContainer: React.FC<Props> = ({
                     ? "skills-container__arrow-icon-up"
                     : shouldAddGreyClass
                     ? "skills-container__arrow-icon skills-container__arrow-icon_grey"
-                    : "skills-container__arrow-icon"
+                    : "skills-container__arrow-icon-up"
                 }
               ></div>
             </button>
