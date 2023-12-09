@@ -45,11 +45,9 @@ export default function SearchForm({
     let skillToAdd = null;
     if (selectedItem) {
       skillToAdd = selectedItem;
-      setSelectedItem(null); // Очищаем selectedItem
-      // setSearchText('');  Очищаем searchText, если выбран элемент
+      setSelectedItem(null);
     } else if (searchText) {
       skillToAdd = { name: searchText };
-      // setSearchText(''); Очищаем searchText, если добавляем новый навык
     }
     if (skillToAdd) {
       handleAddSkill(skillToAdd);

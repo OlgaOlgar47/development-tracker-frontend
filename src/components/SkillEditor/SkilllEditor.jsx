@@ -238,15 +238,15 @@ export default function SkillEditor({
           </div>
           <p className="skill-editor__tag">Заметки</p>
           <TextField
-            multiline // Разрешить многострочный ввод
-            rows={4} // Количество строк в поле ввода
+            multiline
+            rows={4}
             value={notes}
             onChange={handleInputChange}
             variant="outlined"
             placeholder="Например, ссылка на туториал или статью"
             sx={{
               width: "608px",
-              height: "124px", // Установка высоты поля ввода
+              height: "124px",
               borderRadius: "4px",
             }}
           />

@@ -23,7 +23,7 @@ export default function ButtonTemplate({
       onClick={handleButtonClick}
       size="small"
       sx={{
-        fontSize: "11px", // Добавляем стиль fontSize
+        fontSize: "11px",
         fontFamily: "YS Text",
         fontWeight: 500,
         width: width,
@@ -45,12 +45,11 @@ export default function ButtonTemplate({
           color:textColor,
         },
         "&:hover": {
-          // Стили для hover
           background: hoverBackground,
           color: hoverTextColor,
         },
       }}
-      disabled={disabled} // Устанавливаем значение disabled
+      disabled={disabled}
     >
       {buttonText}
     </Button>

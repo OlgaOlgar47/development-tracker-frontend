@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import './RateButton.css'; 
 
 export default function RateButton({ text, isSelected, onRate, className, onMouseEnter, onMouseLeave}) {
-  // const [isHovered, setIsHovered] = useState(false);
   const [content, setContent] = useState('');
 
   const handleMouseEnter = () => {
@@ -19,9 +18,9 @@ export default function RateButton({ text, isSelected, onRate, className, onMous
       className={`${className} skill-editor__rate-button ${isSelected ? 'selected' : ''}`}
       onMouseEnter={(event) => {
         if (onMouseEnter) {
-          onMouseEnter(event); // Вызов обработчика onMouseEnter, переданного через пропсы
+          onMouseEnter(event);
         }
-        handleMouseEnter(); // Ваш локальный обработчик onMouseEnter
+        handleMouseEnter();
       }}
       onMouseLeave={(event) => {
         if  (onMouseLeave)  {
