@@ -28,7 +28,7 @@ export default function SearchFormCollection({ subtitleName }) {
       <Subtitle subtitleName={subtitleName} />
       <div className="search-form-collection__container">
         <TextField
-          label="Например, юзабилити тестирование"
+          label="Например, аналитик"
           variant="outlined"
           value={searchText}
           onChange={handleInputChange}

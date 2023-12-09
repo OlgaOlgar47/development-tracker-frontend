@@ -17,7 +17,6 @@ export default function SkillsContainer({
   
   useEffect(() => {
     if (skillsData && Array.isArray(skillsData) && userData && Array.isArray(userData)) {
-      // Фильтрация skillsData: исключаем навыки, которые уже есть у пользователя
       const filteredSkillsData = skillsData.filter(skill => !userData.some(userSkill => userSkill.name === skill.name));
       setSkills(filteredSkillsData);
     }
