@@ -14,23 +14,19 @@ export default function Skills({
   collectionData,
   handleDeleteSkill,
 }) {
-  console.log("coursesDataForCollection: ", coursesDataForCollection);
 
   const { collectionId } = useParams();
   const [collection, setCollection] = useState([]);
-  console.log("collectionData пришла в Skills: ", collectionData);
 
   useEffect(() => {
     if (collectionData && collectionData.length > 0) {
-      console.log("useEffect called", collectionData);
       const id = parseInt(collectionId, 10);
       const foundCollection = collectionData.find((item) => item.id === id);
       if (foundCollection) {
         setCollection(foundCollection);
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [collectionId]);
+  }, [collectionData, collectionId]);
 
   let collectionSkills = [];
   if (collection && collection.skills) {

@@ -11,8 +11,6 @@ export default function Recommendations({ coursesData, isSkillsEditor }) {
   }
 
   if (isSkillsEditor && !Array.isArray(coursesData)) {
-    console.log("courseForSkillEditor is SkillEditor: ", coursesData);
-
     return (
       <div className="recommendations">
         <h3 className="recommendations__title">Как развить</h3>
@@ -21,7 +19,6 @@ export default function Recommendations({ coursesData, isSkillsEditor }) {
     );
   }
 
-  // Если не находимся в SkillsEditor или приходит массив (по умолчанию)
   const limitedCoursesData = Array.isArray(coursesData)
     ? coursesData.slice(0, 2)
     : [];

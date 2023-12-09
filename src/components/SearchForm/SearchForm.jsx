@@ -54,7 +54,6 @@ export default function SearchForm({
     }
     if (skillToAdd) {
       handleAddSkill(skillToAdd);
-      console.log('skillToAdd', skillToAdd);
     }
   };
   

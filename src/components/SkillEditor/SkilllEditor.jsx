@@ -23,30 +23,22 @@ export default function SkillEditor({
   const [buttonThreeHover, setButtonThreeHover] = useState(false);
   const [buttonFourHover, setButtonFourHover] = useState(false);
   const [buttonFiveHover, setButtonFiveHover] = useState(false);
-  const [skillName, setSkillName] = useState('');
+  const [skillName, setSkillName] = useState("");
   const [notes, setNotes] = useState(skillInfo.notes || "");
   const navigate = useNavigate();
 
-  console.log("userData: ", userData);
-  console.log("skillId: ", skillId);
-  console.log("foundSkill:", skillInfo);
-
   useEffect(() => {
     const id = parseInt(skillId, 10);
-
     if (userData && userData.length > 0) {
       const foundSkill = userData.find((skill) => skill.id === id);
       if (foundSkill) {
         setSkillInfo(foundSkill);
-        console.log("foundSkill:", foundSkill);
+        setSkillName(foundSkill.name);
+        setSelectedPercentage(foundSkill.rate);
+        setNotes(foundSkill.notes || "");
       }
     }
   }, [skillId, userData]);
-
-  useEffect(() => {
-    setSelectedPercentage(skillInfo.rate || 0);
-    setNotes(skillInfo.notes || "");
-  }, [skillInfo]);
 
   useEffect(() => {
     setSkillInfo((prevSkillInfo) => ({
@@ -56,12 +48,6 @@ export default function SkillEditor({
       notes: skillInfo.notes,
     }));
   }, [skillInfo.name, skillInfo.rate, skillInfo.notes]);
-
-  useEffect(() => {
-    if (skillInfo && skillInfo.name) {
-      setSkillName(skillInfo.name);
-    }
-  }, [skillInfo]);
 
   const handleRateButtonClick = (rate) => {
     if (rate === 20 && selectedPercentage === rate) {
@@ -90,15 +76,12 @@ export default function SkillEditor({
 
   function handleSaveSkill() {
     handleEditSkill(skillInfo);
-    console.log("skillInfo: ", skillInfo);
   }
 
   function handleDelete() {
-    console.log("skillInfo for Delete: ", skillInfo.id);
     handleDeleteSkill(skillInfo.id);
     navigate("/");
   }
-
 
   const handleButtonOneHover = () => setButtonOneHover(true);
   const handleButtonOneLeave = () => setButtonOneHover(false);
@@ -167,9 +150,7 @@ export default function SkillEditor({
             <RateButton
               onMouseEnter={handleButtonOneHover}
               onMouseLeave={handleButtonOneLeave}
-              className={`${
-                buttonOneHover ? "skill-editor__type-green" : ""
-              }`}
+              className={`${buttonOneHover ? "skill-editor__type-green" : ""}`}
               text={
                 <>
                   Только начинаю разбираться
