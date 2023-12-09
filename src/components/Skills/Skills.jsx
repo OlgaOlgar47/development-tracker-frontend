@@ -4,7 +4,7 @@ import Recommendations from "../Recommendations/Recommendations";
 import SkillsContainer from "../SkillsContainer/SkillsContainer";
 import Title from "../Title/Title";
 import "./Skills.css";
-import UserSkillsContainer from "../UserSkillsContainer/UserSkillsContainer";
+import UserSkillsContainer from "../UserSkillsContainer/UserSkillsContainer.tsx";
 import { useParams } from "react-router-dom";
 
 export default function Skills({
@@ -14,23 +14,19 @@ export default function Skills({
   collectionData,
   handleDeleteSkill,
 }) {
-  console.log("coursesDataForCollection: ", coursesDataForCollection);
 
   const { collectionId } = useParams();
   const [collection, setCollection] = useState([]);
-  console.log("collectionData пришла в Skills: ", collectionData);
 
   useEffect(() => {
     if (collectionData && collectionData.length > 0) {
-      console.log("useEffect called", collectionData);
       const id = parseInt(collectionId, 10);
       const foundCollection = collectionData.find((item) => item.id === id);
       if (foundCollection) {
         setCollection(foundCollection);
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [collectionId]);
+  }, [collectionData, collectionId]);
 
   let collectionSkills = [];
   if (collection && collection.skills) {
@@ -60,6 +56,7 @@ export default function Skills({
             subtitleName="В твоих навыках"
             userData={matchingSkills}
             handleDeleteSkill={handleDeleteSkill}
+            hasBlueButons={false}
           />
         </div>
         <div className="tracker__grid-item">

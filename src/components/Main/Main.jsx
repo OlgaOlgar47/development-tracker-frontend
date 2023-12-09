@@ -6,7 +6,6 @@ import Tracker from "./Tracker/Tracker.jsx";
 import Collections from "../Collections/Collections.jsx";
 import Skills from "../Skills/Skills.jsx";
 import SkillEditor from "../SkillEditor/SkilllEditor";
-// import { userDataConst } from "../../utils/constants";
 
 export default function Main({
   serverError,

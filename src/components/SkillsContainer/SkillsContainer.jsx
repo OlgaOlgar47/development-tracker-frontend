@@ -10,11 +10,9 @@ export default function SkillsContainer({
   subtitleName,
   userData
 }) {
-  console.log("skillsData пришла в SkillsContainer: ", skillsData);
   const [selectedCard, setSelectedCard] = useState(null);
   const { pathname } = useLocation();
   const [skills, setSkills] = useState([]);
-  console.log('skillsData в SkillsContainer: ', skillsData);
 
   
   useEffect(() => {
@@ -42,7 +40,6 @@ export default function SkillsContainer({
       prevSkills.filter((skill) => skill !== selectedCard)
     );
       setSelectedCard(null); 
-      console.log('selectedCard: ', selectedCard);
     }
   }
 

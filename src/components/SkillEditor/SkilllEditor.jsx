@@ -7,11 +7,10 @@ import RateButton from "./RateButton/RateButton";
 import Recommendations from "../Recommendations/Recommendations";
 import ButtonsBackSaveDel from "../Buttons/ButtonsBackSaveDel";
 import TextField from "@mui/material/TextField";
-// import { userDataConst } from "../../utils/constants";
+import { useNavigate } from "react-router-dom";
 
 export default function SkillEditor({
   courseForSkillEditor,
-  coursesData,
   handleEditSkill,
   handleDeleteSkill,
   userData,
@@ -19,12 +18,27 @@ export default function SkillEditor({
   const { skillId } = useParams();
   const [skillInfo, setSkillInfo] = useState({});
   const [selectedPercentage, setSelectedPercentage] = useState(0);
+  const [buttonOneHover, setButtonOneHover] = useState(false);
+  const [buttonTwoHover, setButtonTwoHover] = useState(false);
+  const [buttonThreeHover, setButtonThreeHover] = useState(false);
+  const [buttonFourHover, setButtonFourHover] = useState(false);
+  const [buttonFiveHover, setButtonFiveHover] = useState(false);
+  const [skillName, setSkillName] = useState("");
   const [notes, setNotes] = useState(skillInfo.notes || "");
+  const navigate = useNavigate();
 
   useEffect(() => {
-    setSelectedPercentage(skillInfo.rate);
-    setNotes(skillInfo.notes);
-  }, [skillInfo.rate, skillInfo.notes]);
+    const id = parseInt(skillId, 10);
+    if (userData && userData.length > 0) {
+      const foundSkill = userData.find((skill) => skill.id === id);
+      if (foundSkill) {
+        setSkillInfo(foundSkill);
+        setSkillName(foundSkill.name);
+        setSelectedPercentage(foundSkill.rate);
+        setNotes(foundSkill.notes || "");
+      }
+    }
+  }, [skillId, userData]);
 
   useEffect(() => {
     setSkillInfo((prevSkillInfo) => ({
@@ -62,149 +76,67 @@ export default function SkillEditor({
 
   function handleSaveSkill() {
     handleEditSkill(skillInfo);
-    console.log("skillInfo: ", skillInfo);
   }
 
   function handleDelete() {
-    console.log("skillInfo for Delete: ", skillInfo.id);
     handleDeleteSkill(skillInfo.id);
+    navigate("/");
   }
 
-  useEffect(() => {
-    const id = parseInt(skillId, 10);
-    const foundSkill = userData.find((skill) => skill.id === id);
-    setSkillInfo(foundSkill);
-    console.log("foundSkill:", foundSkill)
-  }, [skillId, userData]);
+  const handleButtonOneHover = () => setButtonOneHover(true);
+  const handleButtonOneLeave = () => setButtonOneHover(false);
 
+  const handleButtonTwoHover = () => {
+    setButtonTwoHover(true);
+    setButtonOneHover(true);
+  };
 
-  // const handleNameChange = (event) => {
-  //   if (skillInfo.editable) {
-  //     const newName = event.target.value.toString();
-  //     setSkillInfo((prevSkillInfo) => ({
-  //       ...prevSkillInfo,
-  //       name: newName,
-  //     }));
-  //   }
-  // };
+  const handleButtonTwoLeave = () => {
+    setButtonTwoHover(false);
+    setButtonOneHover(false);
+  };
 
-  // if (!skillInfo) {
-  //   return <div>Loading...</div>; // Отобразить загрузку, пока данные не загружены
-  // }
+  const handleButtonThreeHover = () => {
+    setButtonTwoHover(true);
+    setButtonOneHover(true);
+    setButtonThreeHover(true);
+  };
 
-  // для кнопки 5
-  useEffect(() => {
-    const buttonFive = document.querySelector(".button-five");
-    const buttonFour = document.querySelector(".button-four");
-    const buttonThree = document.querySelector(".button-three");
-    const buttonTwo = document.querySelector(".button-two");
-    const buttonOne = document.querySelector(".button-one");
+  const handleButtonThreeLeave = () => {
+    setButtonTwoHover(false);
+    setButtonOneHover(false);
+    setButtonThreeHover(false);
+  };
 
-    const handleHover = () => {
-      buttonFive.classList.add("skill-editor__type-green");
-      buttonFour.classList.add("skill-editor__type-green");
-      buttonThree.classList.add("skill-editor__type-green");
-      buttonTwo.classList.add("skill-editor__type-green");
-      buttonOne.classList.add("skill-editor__type-green");
-    };
+  const handleButtonFourHover = () => {
+    setButtonOneHover(true);
+    setButtonTwoHover(true);
+    setButtonThreeHover(true);
+    setButtonFourHover(true);
+  };
 
-    const handleMouseLeave = () => {
-      buttonFive.classList.remove("skill-editor__type-green");
-      buttonFour.classList.remove("skill-editor__type-green");
-      buttonThree.classList.remove("skill-editor__type-green");
-      buttonTwo.classList.remove("skill-editor__type-green");
-      buttonOne.classList.remove("skill-editor__type-green");
-    };
+  const handleButtonFourLeave = () => {
+    setButtonTwoHover(false);
+    setButtonOneHover(false);
+    setButtonThreeHover(false);
+    setButtonFourHover(false);
+  };
 
-    buttonFive.addEventListener("mouseenter", handleHover);
-    buttonFive.addEventListener("mouseleave", handleMouseLeave);
+  const handleButtonFiveHover = () => {
+    setButtonOneHover(true);
+    setButtonTwoHover(true);
+    setButtonThreeHover(true);
+    setButtonFourHover(true);
+    setButtonFiveHover(true);
+  };
 
-    return () => {
-      buttonFive.removeEventListener("mouseenter", handleHover);
-      buttonFive.removeEventListener("mouseleave", handleMouseLeave);
-    };
-  }, []);
-
-  // для кнопки 4
-  useEffect(() => {
-    const buttonFour = document.querySelector(".button-four");
-    const buttonThree = document.querySelector(".button-three");
-    const buttonTwo = document.querySelector(".button-two");
-    const buttonOne = document.querySelector(".button-one");
-
-    const handleHover = () => {
-      buttonFour.classList.add("skill-editor__type-green");
-      buttonThree.classList.add("skill-editor__type-green");
-      buttonTwo.classList.add("skill-editor__type-green");
-      buttonOne.classList.add("skill-editor__type-green");
-    };
-
-    const handleMouseLeave = () => {
-      buttonFour.classList.remove("skill-editor__type-green");
-      buttonThree.classList.remove("skill-editor__type-green");
-      buttonTwo.classList.remove("skill-editor__type-green");
-      buttonOne.classList.remove("skill-editor__type-green");
-    };
-
-    buttonFour.addEventListener("mouseenter", handleHover);
-    buttonFour.addEventListener("mouseleave", handleMouseLeave);
-
-    return () => {
-      buttonFour.removeEventListener("mouseenter", handleHover);
-      buttonFour.removeEventListener("mouseleave", handleMouseLeave);
-    };
-  }, []);
-
-  // для кнопки 3
-  useEffect(() => {
-    const buttonThree = document.querySelector(".button-three");
-    const buttonTwo = document.querySelector(".button-two");
-    const buttonOne = document.querySelector(".button-one");
-
-    const handleHover = () => {
-      buttonThree.classList.add("skill-editor__type-green");
-      buttonTwo.classList.add("skill-editor__type-green");
-      buttonOne.classList.add("skill-editor__type-green");
-    };
-
-    const handleMouseLeave = () => {
-      buttonThree.classList.remove("skill-editor__type-green");
-      buttonTwo.classList.remove("skill-editor__type-green");
-      buttonOne.classList.remove("skill-editor__type-green");
-    };
-
-    buttonThree.addEventListener("mouseenter", handleHover);
-    buttonThree.addEventListener("mouseleave", handleMouseLeave);
-
-    return () => {
-      buttonThree.removeEventListener("mouseenter", handleHover);
-      buttonThree.removeEventListener("mouseleave", handleMouseLeave);
-    };
-  }, []);
-
-  // для кнопки 2
-  useEffect(() => {
-    const buttonTwo = document.querySelector(".button-two");
-    const buttonOne = document.querySelector(".button-one");
-
-    const handleHover = () => {
-      buttonTwo.classList.add("skill-editor__type-green");
-      buttonOne.classList.add("skill-editor__type-green");
-    };
-
-    const handleMouseLeave = () => {
-      buttonTwo.classList.remove("skill-editor__type-green");
-      buttonOne.classList.remove("skill-editor__type-green");
-    };
-
-    buttonTwo.addEventListener("mouseenter", handleHover);
-    buttonTwo.addEventListener("mouseleave", handleMouseLeave);
-
-    return () => {
-      buttonTwo.removeEventListener("mouseenter", handleHover);
-      buttonTwo.removeEventListener("mouseleave", handleMouseLeave);
-    };
-  }, []);
+  const handleButtonFiveLeave = () => {
+    setButtonTwoHover(false);
+    setButtonOneHover(false);
+    setButtonThreeHover(false);
+    setButtonFourHover(false);
+    setButtonFiveHover(false);
+  };
 
   return (
     <section className="skill-editor">
@@ -212,11 +144,13 @@ export default function SkillEditor({
       <div className="skill-editor__grid-container">
         <div className="skill-editor__grid-item">
           <p className="skill-editor__tag">Навык</p>
-          <Subtitle subtitleName={skillInfo ? skillInfo.name : ""} />        
+          <Subtitle subtitleName={skillName} />
           <p className="skill-editor__tag">Уровень владения навыком</p>
           <div className="skill-editor__rate">
             <RateButton
-              className="button-one"
+              onMouseEnter={handleButtonOneHover}
+              onMouseLeave={handleButtonOneLeave}
+              className={`${buttonOneHover ? "skill-editor__type-green" : ""}`}
               text={
                 <>
                   Только начинаю разбираться
@@ -228,13 +162,19 @@ export default function SkillEditor({
               onRate={() => handleRateButtonClick(20)}
             />
             <RateButton
-              className="button-two"
+              className={`${buttonTwoHover ? "skill-editor__type-green" : ""}`}
+              onMouseEnter={handleButtonTwoHover}
+              onMouseLeave={handleButtonTwoLeave}
               text="Могу выполнить простую задачу"
               isSelected={selectedPercentage >= 40}
               onRate={() => handleRateButtonClick(40)}
             />
             <RateButton
-              className="button-three"
+              className={`${
+                buttonThreeHover ? "skill-editor__type-green" : ""
+              }`}
+              onMouseEnter={handleButtonThreeHover}
+              onMouseLeave={handleButtonThreeLeave}
               text={
                 <>
                   Решаю с&nbsp;подсказкой и&nbsp;ошибками
@@ -246,7 +186,9 @@ export default function SkillEditor({
               onRate={() => handleRateButtonClick(60)}
             />
             <RateButton
-              className="button-four"
+              className={`${buttonFourHover ? "skill-editor__type-green" : ""}`}
+              onMouseEnter={handleButtonFourHover}
+              onMouseLeave={handleButtonFourLeave}
               text={
                 <>
                   Решаю сложные задачи,
@@ -258,7 +200,9 @@ export default function SkillEditor({
               onRate={() => handleRateButtonClick(80)}
             />
             <RateButton
-              className="button-five"
+              className={`${buttonFiveHover ? "skill-editor__type-green" : ""}`}
+              onMouseEnter={handleButtonFiveHover}
+              onMouseLeave={handleButtonFiveLeave}
               text={
                 <>
                   Владею на&nbsp;отлично, решаю сложные
@@ -292,7 +236,10 @@ export default function SkillEditor({
           />
         </div>
         <div className="tracker__grid-item">
-          <Recommendations isSkillsEditor={true} coursesData={coursesData} />
+          <Recommendations
+            isSkillsEditor={true}
+            coursesData={courseForSkillEditor}
+          />
         </div>
       </div>
     </section>
