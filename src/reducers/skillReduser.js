@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   skills: [],
-  // другие начальные значения
+
 };
 
 const skillSlice = createSlice({
@@ -12,7 +12,7 @@ const skillSlice = createSlice({
     addSkill(state, action) {
       state.skills.push(action.payload);
     },
-    // другие actions и reducers
+
   },
 });
 

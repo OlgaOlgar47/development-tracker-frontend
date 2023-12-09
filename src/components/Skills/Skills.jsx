@@ -4,7 +4,7 @@ import Recommendations from "../Recommendations/Recommendations";
 import SkillsContainer from "../SkillsContainer/SkillsContainer";
 import Title from "../Title/Title";
 import "./Skills.css";
-import UserSkillsContainer from "../UserSkillsContainer/UserSkillsContainer";
+import UserSkillsContainer from "../UserSkillsContainer/UserSkillsContainer.tsx";
 import { useParams } from "react-router-dom";
 
 export default function Skills({
@@ -60,6 +60,7 @@ export default function Skills({
             subtitleName="В твоих навыках"
             userData={matchingSkills}
             handleDeleteSkill={handleDeleteSkill}
+            hasBlueButons={false}
           />
         </div>
         <div className="tracker__grid-item">

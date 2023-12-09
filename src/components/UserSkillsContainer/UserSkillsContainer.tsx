@@ -1,54 +1,72 @@
-import { useState, useEffect, useRef } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+} from "react";
+import { useNavigate } from "react-router-dom";
 import "./UserSkillsContainer.css";
 import Subtitle from "../Subtitle/Subtitle";
-import ButtonsDeleteEdit from "../../components/Buttons/ButtonsDeleteEdit";
+import ButtonsDeleteEdit from "../Buttons/ButtonsDeleteEdit";
 import iconLink from "../../images/link.svg";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 
-export default function UserSkillsContainer({
+type Skill = {
+  id: number;
+  name: string;
+  rate: number;
+  notes?: string;
+};
+
+type Props = {
+  isSkills: boolean;
+  hasBlueButons: boolean;
+  subtitleName: string;
+  userData: Skill[];
+  handleDeleteSkill: (id: number | null) => void;
+  serverError: boolean;
+};
+
+const UserSkillsContainer: React.FC<Props> = ({
   isSkills,
   hasBlueButons,
   subtitleName,
   userData,
   handleDeleteSkill,
   serverError,
-}) {
-  const [sortedSkillsData, setSortedSkillsData] = useState([]);
-  const [isSorted, setIsSorted] = useState(false);
-  const [selectedSkill, setSelectedSkill] = useState([]);
-  const [showAllSkills, setShowAllSkills] = useState(false);
-  const { pathname } = useLocation();
+}: Props) => {
+  const [sortedSkillsData, setSortedSkillsData] = useState<Skill[]>([]);
+  const [isSorted, setIsSorted] = useState<boolean>(false);
+  const [selectedSkill, setSelectedSkill] = useState<number | null>(null);
+  const [showAllSkills, setShowAllSkills] = useState<boolean>(false);
   const navigate = useNavigate();
-  const skillItemRef = useRef(null);
+  const skillItemRef = useRef<HTMLLIElement>(null);
 
   const toggleShowAllSkills = () => {
     setShowAllSkills(!showAllSkills);
   };
 
   function handleEdit() {
-    if (selectedSkill !== null) { // Проверяем, выбран ли какой-либо навык
+    if (selectedSkill !== null) {
       const skillId = selectedSkill;
       navigate(`/skill-editor/${skillId}`);
     }
   }
 
-  const handleSkillClick = (id) => {
+  const handleSkillClick = (id: number) => {
     if (selectedSkill === id) {
-      setSelectedSkill(null); 
+      setSelectedSkill(null);
     } else {
       setSelectedSkill(id);
     }
   };
 
-  
   useEffect(() => {
     setSortedSkillsData([...userData]);
   }, [userData]);
 
   const visibleSkills = showAllSkills
     ? sortedSkillsData
-    : sortedSkillsData.slice(0, 15); // покажем только 15 навыков
+    : sortedSkillsData.slice(0, 15);
 
   function sortSkills() {
     let sortedSkills;
@@ -65,7 +83,11 @@ export default function UserSkillsContainer({
     toggleShowAllSkills();
   };
 
-  const generateGradient = (rate, colorStart, colorEnd) => {
+  const generateGradient = (
+    rate: number,
+    colorStart: string,
+    colorEnd: string
+  ) => {
     if (rate) {
       return `linear-gradient(90deg, ${colorStart} ${rate}%, ${colorEnd} ${
         rate + 0.01
@@ -75,7 +97,9 @@ export default function UserSkillsContainer({
   };
 
   function handleDelete() {
-    handleDeleteSkill(selectedSkill);
+    if (selectedSkill !== null) {
+      handleDeleteSkill(selectedSkill);
+    }
   }
 
   if (serverError) {
@@ -87,7 +111,7 @@ export default function UserSkillsContainer({
     );
   }
 
-  const handleFocus = (skill) => {
+  const handleFocus = (skill: Skill) => {
     const refButton = skillItemRef.current;
     if (refButton) {
       refButton.style.background = generateGradient(
@@ -98,18 +122,34 @@ export default function UserSkillsContainer({
     }
   };
 
+  const handleMouseEnter = (skill: Skill) => {
+    const refButton = skillItemRef.current;
+    if (refButton) {
+      refButton.style.background = generateGradient(
+        skill.rate,
+        "#87CC9E",
+        "#F7FFFA"
+      );
+    }
+  };
+
+  const handleMouseLeave = (skill: Skill) => {
+    const refButton = skillItemRef.current;
+    if (refButton) {
+      refButton.style.background = generateGradient(
+        skill.rate,
+        "#c2e5ce",
+        "#c2e5ce00"
+      );
+    }
+  };
+
   return (
     <section className="skills-container">
       <div className="skills-container__header">
         <Subtitle subtitleName={subtitleName} />
-        {(hasBlueButons && userData.length > 0) ? (
-          <div
-            className={
-              pathname === "/"
-                ? "skills-container__buttons"
-                : "skills-container__buttons_type_none"
-            }
-          >
+        {hasBlueButons && userData.length > 0 ? (
+          <div className="skills-container__buttons">
             <button className="skills-container__button" onClick={sortSkills}>
               <p className="skills-container__button-text">Сортировка</p>
               <div className="skills-container__sort-icon"></div>
@@ -131,12 +171,13 @@ export default function UserSkillsContainer({
           ""
         )}
       </div>
-      {(userData && userData.length > 0) ? (
+      {userData && userData.length > 0 ? (
         <>
           <TransitionGroup className="skills-container__list">
             {visibleSkills.map((skill) => (
               <CSSTransition key={skill.id} timeout={500} classNames="fade">
                 <li
+                  ref={skillItemRef}
                   className={`skills-container__item ${
                     selectedSkill === skill.id ? "selected" : ""
                   }`}
@@ -148,21 +189,9 @@ export default function UserSkillsContainer({
                       "#c2e5ce00"
                     ),
                   }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = generateGradient(
-                      skill.rate,
-                      "#87CC9E",
-                      "#F7FFFA"
-                    );
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = generateGradient(
-                      skill.rate,
-                      "#c2e5ce",
-                      "#c2e5ce00"
-                    );
-                  }}
-                  onFocus={handleFocus(skill)} // Добавляем обработчик фокуса на элементе
+                  onMouseEnter={() => handleMouseEnter(skill)}
+                  onMouseLeave={() => handleMouseLeave(skill)}
+                  onFocus={() => handleFocus(skill)}
                 >
                   {skill.name}
                   {skill.notes && (
@@ -200,11 +229,13 @@ export default function UserSkillsContainer({
         </p>
       )}
       <ButtonsDeleteEdit
-        disabledDelete={selectedSkill.length === 0}
-        disabledEdit={selectedSkill.length === 0}
+        disabledDelete={selectedSkill === null}
+        disabledEdit={selectedSkill === null}
         handleDelete={handleDelete}
         handleEdit={handleEdit}
       />
     </section>
   );
-}
+};
+
+export default UserSkillsContainer;

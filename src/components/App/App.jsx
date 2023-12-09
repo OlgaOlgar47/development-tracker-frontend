@@ -22,9 +22,9 @@ export default function App() {
   });
 
   const toggleVisibility = () => {
-    setIsVisible(true); // Показываем элемент
+    setIsVisible(true); 
     setTimeout(() => {
-      setIsVisible(false); // Скрываем элемент через 3 секунды
+      setIsVisible(false); // Скрываем окно через 3 секунды
     }, 3000);
   };
 
@@ -37,7 +37,7 @@ export default function App() {
     }));
     toggleVisibility();
   }
-  
+
   useEffect(() => {
     Promise.all([Api.getUserData(), Api.getSkills(), Api.getCourses()])
       .then(([userData, skillsData, coursesData]) => {
@@ -53,7 +53,7 @@ export default function App() {
 
   useEffect(() => {
     if (location.pathname === "/collections") {
-      // Выполняем запрос только если мы находимся на нужном роуте
+      // Выполняем запрос только если мы находимся роуте /collections
       Api.getCollections()
         .then((collectionData) => {
           console.log('collectionData пришла в App: ', collectionData);
@@ -73,7 +73,7 @@ export default function App() {
       const pathParts = location.pathname.split("/");
       const collectionId = pathParts[pathParts.length - 1]; // Получаем последнюю часть URL как collectionId
 
-      // Выполняем запрос только если мы находимся на нужном роуте с collectionId
+      // Выполняем запрос только если мы находимся на ../skills роуте с collectionId
       Api.getCoursesForCollection(collectionId)
         .then((res) => {
           setCoursesDataForCollection(res);
@@ -91,7 +91,7 @@ export default function App() {
       const pathParts = location.pathname.split("/");
       const skillId = pathParts[pathParts.length - 1]; // Получаем последнюю часть URL как skillId
 
-      // Выполняем запрос только если мы находимся на нужном роуте с skillId
+      // Выполняем запрос только если мы находимся на /skill-editor роуте с skillId
       Api.getCourseForSkillEditor(skillId)
         .then((res) => {
           setCourseForSkillEditor(res);
