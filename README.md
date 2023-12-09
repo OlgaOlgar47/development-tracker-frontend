@@ -13,8 +13,7 @@
 - ⚙️[Material-UI](https://material-ui.com/)
 - 🪝[React Hook Form](https://react-hook-form.com/) (для работы с формами)
 - ✔️[Yup](https://github.com/jquense/yup) (для валидации)
-- ![TypeScript Logo](https://example.com/path/to/typescript-logo.png)
-[TypeScript](https://www.typescriptlang.org/)
+- TS [TypeScript](https://www.typescriptlang.org/)
 
 ## Инструкции по установке и запуску
 
