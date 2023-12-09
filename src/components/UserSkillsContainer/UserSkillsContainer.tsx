@@ -1,8 +1,4 @@
-import React, {
-  useState,
-  useEffect,
-  useRef,
-} from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "./UserSkillsContainer.css";
 import Subtitle from "../Subtitle/Subtitle";
@@ -144,6 +140,14 @@ const UserSkillsContainer: React.FC<Props> = ({
     }
   };
 
+  const allRatesAreZero = () => {
+    return userData.every((item) => item.rate === 0);
+  };
+  const allZeroRates = allRatesAreZero();
+
+  const shouldAddGreyClass = visibleSkills.length === sortedSkillsData.length;
+  console.log("shouldAddGreyClass: ", shouldAddGreyClass);
+
   return (
     <section className="skills-container">
       <div className="skills-container__header">
@@ -151,18 +155,42 @@ const UserSkillsContainer: React.FC<Props> = ({
         {hasBlueButons && userData.length > 0 ? (
           <div className="skills-container__buttons">
             <button className="skills-container__button" onClick={sortSkills}>
-              <p className="skills-container__button-text">Сортировка</p>
-              <div className="skills-container__sort-icon"></div>
+              <p
+                className={
+                  allZeroRates
+                    ? "skills-container__button-text skills-container__button-text_grey"
+                    : "skills-container__button-text"
+                }
+              >
+                Сортировка
+              </p>
+              <div
+                className={
+                  allZeroRates
+                    ? "skills-container__sort-icon-grey"
+                    : "skills-container__sort-icon"
+                }
+              ></div>
             </button>
             <button className="skills-container__button" onClick={showAll}>
-              <p className="skills-container__button-text">
+              <p
+                className={
+                  showAllSkills
+                    ? "skills-container__button-text"
+                    : shouldAddGreyClass
+                    ? "skills-container__button-text skills-container__button-text_grey"
+                    : "skills-container__button-text"
+                }
+              >
                 {showAllSkills ? "Свернуть" : "Смотреть все"}
               </p>
               <div
                 className={
                   showAllSkills
                     ? "skills-container__arrow-icon-up"
-                    : "skills-container__arrow-icon"
+                    : shouldAddGreyClass
+                    ? "skills-container__arrow-icon skills-container__arrow-icon_grey"
+                    : "skills-container__arrow-icon-up"
                 }
               ></div>
             </button>

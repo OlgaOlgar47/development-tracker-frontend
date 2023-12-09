@@ -25,6 +25,7 @@ export default function ButtonTemplate({
       sx={{
         fontSize: "11px", // Добавляем стиль fontSize
         fontFamily: "YS Text",
+        fontWeight: 500,
         width: width,
         height: height,
         padding: "10px 20px",

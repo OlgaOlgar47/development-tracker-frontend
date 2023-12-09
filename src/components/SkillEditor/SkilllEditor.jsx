@@ -74,6 +74,16 @@ export default function SkillEditor({
     }));
   };
 
+  const handleNameChange = (event) => {
+    if (skillInfo.editable) {
+      const newName = event.target.value.toString();
+      setSkillInfo((prevSkillInfo) => ({
+        ...prevSkillInfo,
+        name: newName,
+      }));
+    }
+  };
+
   function handleSaveSkill() {
     handleEditSkill(skillInfo);
   }
@@ -144,7 +154,17 @@ export default function SkillEditor({
       <div className="skill-editor__grid-container">
         <div className="skill-editor__grid-item">
           <p className="skill-editor__tag">Навык</p>
-          <Subtitle subtitleName={skillName} />
+                 {/* Условный рендеринг для Subtitle на основе информации о редактируемости */}
+                 {skillInfo.editable ? (
+            <input
+              className="skills-editor__subtitle"
+              type="text"
+              value={skillName}
+              onChange={handleNameChange}
+            />
+          ) : (
+            <Subtitle subtitleName={skillName} />
+          )}
           <p className="skill-editor__tag">Уровень владения навыком</p>
           <div className="skill-editor__rate">
             <RateButton

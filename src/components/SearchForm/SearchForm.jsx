@@ -10,10 +10,9 @@ export default function SearchForm({
   skillsData,
   handleAddSkill,
   userData,
-  toggleVisibility,
-  handleInfoTooltip
+  handleInfoTooltip,
 }) {
-  const skills=[...skillsData]
+  const skills = [...skillsData];
   const [searchText, setSearchText] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [selectedItem, setSelectedItem] = useState([]);
@@ -56,7 +55,6 @@ export default function SearchForm({
       handleAddSkill(skillToAdd);
     }
   };
-  
 
   return (
     <form className="search-form">
@@ -98,14 +96,16 @@ export default function SearchForm({
       </div>
       {searchText && (
         <div className="search-form__results">
-          {searchResults.map((result, index) => (
+          {searchResults.slice(0, 9).map((result, index) => (
             <div
-            key={index}
-            className={`search-form__result ${
-              selectedItem && selectedItem.name === result.name ? 'selected' : ''
-            }`}
-            onClick={() => handleResultClick(index)}
-          >
+              key={index}
+              className={`search-form__result ${
+                selectedItem && selectedItem.name === result.name
+                  ? "selected"
+                  : ""
+              }`}
+              onClick={() => handleResultClick(index)}
+            >
               {result.name}
             </div>
           ))}
