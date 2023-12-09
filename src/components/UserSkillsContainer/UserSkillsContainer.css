@@ -108,11 +108,21 @@
   white-space: nowrap;
 }
 
+.skills-container__button-text_grey {
+  color: #B5B5B7;
+}
+
 /* Изображение по умолчанию для иконки */
 .skills-container__sort-icon {
   width: 24px;
   height: 24px;
   background-image: url("../../images/sortblue.svg");
+}
+
+.skills-container__sort-icon-grey {
+  width: 24px;
+  height: 24px;
+  background-image: url("../../images/sort-grey.svg");
 }
 
 .skills-container__arrow-icon {
@@ -124,10 +134,14 @@
   background-position: center;
 }
 
+.skills-container__arrow-icon_grey {
+  background-image: url("../../images/arrow-down-grey.svg");
+}
+
 .skills-container__arrow-icon-up {
   width: 24px;
   height: 24px;
-  background-image: url("../../images/arrow_up_blue.svg");
+  background-image: url("../../images/arrow-down-blue.svg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
