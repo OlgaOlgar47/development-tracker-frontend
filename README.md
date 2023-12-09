@@ -11,9 +11,7 @@
 - ⚛️[React](https://ru.reactjs.org/)
 - 🔧[Redux Toolkit](https://redux-toolkit.js.org/)
 - ⚙️[Material-UI](https://material-ui.com/)
-- 🪝[React Hook Form](https://react-hook-form.com/) (для работы с формами)
-- ✔️[Yup](https://github.com/jquense/yup) (для валидации)
-- TS [TypeScript](https://www.typescriptlang.org/)
+- ![TS](./src/images/TS.png) [TypeScript](https://www.typescriptlang.org/)
 
 ## Инструкции по установке и запуску
 
