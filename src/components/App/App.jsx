@@ -83,11 +83,11 @@ export default function App() {
 
   useEffect(() => {
     if (location.pathname.startsWith("/skill-editor/")) {
-      // Разделяем URL, чтобы получить значение параметра skillId
       const pathParts = location.pathname.split("/");
-      const skillId = pathParts[pathParts.length - 1]; // Получаем последнюю часть URL как skillId
+      const skillId = parseInt(pathParts[pathParts.length - 1]);
       const foundSkill = userData.find((skill) => skill.id === skillId);
       
+
       if (foundSkill) {
         const skill = foundSkill.skill;
 
