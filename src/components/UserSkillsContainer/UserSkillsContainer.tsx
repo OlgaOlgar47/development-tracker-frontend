@@ -124,23 +124,36 @@ const UserSkillsContainer: React.FC<Props> = ({
   //   }
   // };
 
-  const handleMouseEnter = (event: React.MouseEvent<HTMLLIElement, MouseEvent>, skill: Skill) => {
+  const handleMouseEnter = (
+    event: React.MouseEvent<HTMLLIElement, MouseEvent>,
+    skill: Skill,
+    selectedSkill: number | null
+  ) => {
     const refButton = event.currentTarget;
+    const isSkillSelected = selectedSkill === skill.id;
+  
     refButton.style.background = generateGradient(
       skill.rate,
-      "#87CC9E",
-      "#F7FFFA"
+      isSkillSelected ? "#87CC9E" : "#c2e5ce",
+      isSkillSelected ? "#F7FFFA" : "#c2e5ce00"
     );
   };
-
-  const handleMouseLeave = (event: React.MouseEvent<HTMLLIElement, MouseEvent>, skill: Skill) => {
+  
+  const handleMouseLeave = (
+    event: React.MouseEvent<HTMLLIElement, MouseEvent>,
+    skill: Skill,
+    selectedSkill: number | null
+  ) => {
     const refButton = event.currentTarget;
+    const isSkillSelected = selectedSkill === skill.id;
+  
     refButton.style.background = generateGradient(
       skill.rate,
-      "#c2e5ce",
-      "#c2e5ce00"
+      isSkillSelected ? "#87CC9E" : "#c2e5ce",
+      isSkillSelected ? "#F7FFFA" : "#c2e5ce00"
     );
   };
+  
 
   const allRatesAreZero = () => {
     return userData.every((item) => item.rate === 0);
@@ -215,12 +228,12 @@ const UserSkillsContainer: React.FC<Props> = ({
                   style={{
                     background: generateGradient(
                       skill.rate,
-                      "#c2e5ce",
-                      "#c2e5ce00"
+                      selectedSkill === skill.id ?  "#87CC9E" : "#c2e5ce", 
+                      selectedSkill === skill.id ? "#F7FFFA" : "#c2e5ce00"
                     ),
                   }}
-                  onMouseEnter={(event) => handleMouseEnter(event, skill)}
-                  onMouseLeave={(event) => handleMouseLeave(event, skill)}
+                  onMouseEnter={(event) => handleMouseEnter(event, skill, selectedSkill)}
+                  onMouseLeave={(event) => handleMouseLeave(event, skill, selectedSkill)}
                   // onFocus={() => handleFocus(skill)}
                 >
                   {skill.name}
