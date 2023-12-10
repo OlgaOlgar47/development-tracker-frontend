@@ -2,24 +2,17 @@ import React, { useState } from "react";
 import "./SearchFormCollection.css";
 import Subtitle from "../Subtitle/Subtitle";
 import TextField from "@mui/material/TextField";
-import { useNavigate } from "react-router-dom";
 
-export default function SearchFormCollection({ collectionData, subtitleName }) {
+export default function SearchFormCollection({ collectionData, subtitleName, handleSearchResults }) {
   const [searchText, setSearchText] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
-  const navigate = useNavigate();
 
   const handleInputChange = (event) => {
     const { value } = event.target;
     const filteredResults = collectionData.filter((card) =>
-    card.name.toLowerCase().includes(value.toLowerCase())
+      card.name.toLowerCase().includes(value.toLowerCase())
     );
     setSearchText(value);
-    setSearchResults(filteredResults);
-  };
-
-   const handleResultClick = (card) => {
-    navigate(`/collections/skills/${card.id}`);
+    handleSearchResults(filteredResults); 
   };
 
   return (
@@ -43,19 +36,6 @@ export default function SearchFormCollection({ collectionData, subtitleName }) {
           }}
         />
       </div>
-      {searchText && (
-        <div className="search-form-collection__results">
-          {searchResults.map((result, index) => (
-            <div
-              key={index}
-              className="search-form-collection__result"
-              onClick={() => handleResultClick(result)}
-            >
-               {result.name}
-            </div>
-          ))}
-        </div>
-      )}
-    </form>
+  </form>
   );
 }

@@ -42,7 +42,11 @@ export default function Main({
         />
         <Route
           path="/collections"
-          element={<Collections collectionData={collectionData} />}
+          element={
+            <Collections
+              collectionData={collectionData}
+            />
+          }
         />
         <Route
           path="/collections/skills/:collectionId"
