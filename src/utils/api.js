@@ -1,5 +1,5 @@
 export const BASE_URL = "http://localhost:8000";
-export const TOKEN = "4fec03972264016ae2c6c0070b62f4abe0acace6";
+export const TOKEN = "189f4d6080c2816da4de7ea51ac8dbbccae66958";
 
 const headers = {
   authorization: `Token ${TOKEN}`,

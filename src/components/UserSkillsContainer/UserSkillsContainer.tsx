@@ -36,6 +36,12 @@ const UserSkillsContainer: React.FC<Props> = ({
   const [showAllSkills, setShowAllSkills] = useState<boolean>(false);
   const navigate = useNavigate();
   const skillItemRef = useRef<HTMLLIElement>(null);
+  const skillItemRefs = useRef<Array<HTMLLIElement | null>>([]);
+
+  useEffect(() => {
+    // Инициализация массива рефов
+    skillItemRefs.current = userData.map(() => null);
+  }, [userData]);
 
   const toggleShowAllSkills = () => {
     setShowAllSkills(!showAllSkills);
@@ -107,37 +113,33 @@ const UserSkillsContainer: React.FC<Props> = ({
     );
   }
 
-  const handleFocus = (skill: Skill) => {
-    const refButton = skillItemRef.current;
-    if (refButton) {
-      refButton.style.background = generateGradient(
-        skill.rate,
-        "#87CC9E",
-        "#F7FFFA"
-      );
-    }
+  // const handleFocus = (skill: Skill) => {
+  //   const refButton = skillItemRef.current;
+  //   if (refButton) {
+  //     refButton.style.background = generateGradient(
+  //       skill.rate,
+  //       "#87CC9E",
+  //       "#F7FFFA"
+  //     );
+  //   }
+  // };
+
+  const handleMouseEnter = (event: React.MouseEvent<HTMLLIElement, MouseEvent>, skill: Skill) => {
+    const refButton = event.currentTarget;
+    refButton.style.background = generateGradient(
+      skill.rate,
+      "#87CC9E",
+      "#F7FFFA"
+    );
   };
 
-  const handleMouseEnter = (skill: Skill) => {
-    const refButton = skillItemRef.current;
-    if (refButton) {
-      refButton.style.background = generateGradient(
-        skill.rate,
-        "#87CC9E",
-        "#F7FFFA"
-      );
-    }
-  };
-
-  const handleMouseLeave = (skill: Skill) => {
-    const refButton = skillItemRef.current;
-    if (refButton) {
-      refButton.style.background = generateGradient(
-        skill.rate,
-        "#c2e5ce",
-        "#c2e5ce00"
-      );
-    }
+  const handleMouseLeave = (event: React.MouseEvent<HTMLLIElement, MouseEvent>, skill: Skill) => {
+    const refButton = event.currentTarget;
+    refButton.style.background = generateGradient(
+      skill.rate,
+      "#c2e5ce",
+      "#c2e5ce00"
+    );
   };
 
   const allRatesAreZero = () => {
@@ -190,7 +192,7 @@ const UserSkillsContainer: React.FC<Props> = ({
                     ? "skills-container__arrow-icon-up"
                     : shouldAddGreyClass
                     ? "skills-container__arrow-icon skills-container__arrow-icon_grey"
-                    : "skills-container__arrow-icon-up"
+                    : "skills-container__arrow-icon"
                 }
               ></div>
             </button>
@@ -202,7 +204,7 @@ const UserSkillsContainer: React.FC<Props> = ({
       {userData && userData.length > 0 ? (
         <>
           <TransitionGroup className="skills-container__list">
-            {visibleSkills.map((skill) => (
+            {visibleSkills.map((skill, index) => (
               <CSSTransition key={skill.id} timeout={500} classNames="fade">
                 <li
                   ref={skillItemRef}
@@ -217,9 +219,9 @@ const UserSkillsContainer: React.FC<Props> = ({
                       "#c2e5ce00"
                     ),
                   }}
-                  onMouseEnter={() => handleMouseEnter(skill)}
-                  onMouseLeave={() => handleMouseLeave(skill)}
-                  onFocus={() => handleFocus(skill)}
+                  onMouseEnter={(event) => handleMouseEnter(event, skill)}
+                  onMouseLeave={(event) => handleMouseLeave(event, skill)}
+                  // onFocus={() => handleFocus(skill)}
                 >
                   {skill.name}
                   {skill.notes && (

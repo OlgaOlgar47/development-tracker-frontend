@@ -141,7 +141,7 @@
 .skills-container__arrow-icon-up {
   width: 24px;
   height: 24px;
-  background-image: url("../../images/arrow-down-blue.svg");
+  background-image: url("../../images/arrow_up_blue.svg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
