@@ -2,17 +2,16 @@ import React, { useState } from "react";
 import "./SearchFormCollection.css";
 import Subtitle from "../Subtitle/Subtitle";
 import TextField from "@mui/material/TextField";
-import { cards } from "../../utils/constants"
 import { useNavigate } from "react-router-dom";
 
-export default function SearchFormCollection({ subtitleName }) {
+export default function SearchFormCollection({ collectionData, subtitleName }) {
   const [searchText, setSearchText] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const navigate = useNavigate();
 
   const handleInputChange = (event) => {
     const { value } = event.target;
-    const filteredResults = cards.filter((card) =>
+    const filteredResults = collectionData.filter((card) =>
     card.name.toLowerCase().includes(value.toLowerCase())
     );
     setSearchText(value);
