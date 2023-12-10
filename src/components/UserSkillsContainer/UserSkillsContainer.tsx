@@ -190,7 +190,7 @@ const UserSkillsContainer: React.FC<Props> = ({
                     ? "skills-container__arrow-icon-up"
                     : shouldAddGreyClass
                     ? "skills-container__arrow-icon skills-container__arrow-icon_grey"
-                    : "skills-container__arrow-icon-up"
+                    : "skills-container__arrow-icon"
                 }
               ></div>
             </button>

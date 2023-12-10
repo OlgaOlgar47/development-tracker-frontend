@@ -86,18 +86,23 @@ export default function App() {
       // Разделяем URL, чтобы получить значение параметра skillId
       const pathParts = location.pathname.split("/");
       const skillId = pathParts[pathParts.length - 1]; // Получаем последнюю часть URL как skillId
+      const foundSkill = userData.find((skill) => skill.id === skillId);
+      
+      if (foundSkill) {
+        const skill = foundSkill.skill;
 
-      // Выполняем запрос только если мы находимся на /skill-editor роуте с skillId
-      Api.getCourseForSkillEditor(skillId)
-        .then((res) => {
-          setCourseForSkillEditor(res);
-        })
-        .catch((err) => {
-          setServerError(true);
-          console.log(err);
-        });
+        Api.getCourseForSkillEditor(skill)
+          .then((res) => {
+            setCourseForSkillEditor(res);
+          })
+          .catch((err) => {
+            setServerError(true);
+            console.log(err);
+          });
+      }
     }
-  }, [location.pathname]);
+  }, [location.pathname, userData]);
+  
 
   function handleAddSkill(data) {
     Api.addSkill(data.name)
