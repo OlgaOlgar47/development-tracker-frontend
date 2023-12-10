@@ -134,8 +134,8 @@ const UserSkillsContainer: React.FC<Props> = ({
   
     refButton.style.background = generateGradient(
       skill.rate,
-      isSkillSelected ? "#87CC9E" : "#c2e5ce",
-      isSkillSelected ? "#F7FFFA" : "#c2e5ce00"
+      isSkillSelected ? "#87CC9E" : "#87CC9E",
+      isSkillSelected ? "#F7FFFA" : "#F7FFFA"
     );
   };
   
