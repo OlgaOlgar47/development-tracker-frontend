@@ -161,7 +161,6 @@ const UserSkillsContainer: React.FC<Props> = ({
   const allZeroRates = allRatesAreZero();
 
   const shouldAddGreyClass = visibleSkills.length === sortedSkillsData.length;
-  console.log("shouldAddGreyClass: ", shouldAddGreyClass);
 
   return (
     <section className="skills-container">
