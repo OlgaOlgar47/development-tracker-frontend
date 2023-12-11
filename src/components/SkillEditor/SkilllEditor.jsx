@@ -47,7 +47,8 @@ export default function SkillEditor({
       rate: skillInfo.rate,
       notes: skillInfo.notes,
     }));
-  }, [skillInfo.name, skillInfo.rate, skillInfo.notes]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [skillInfo]);
 
   const handleRateButtonClick = (rate) => {
     if (rate === 20 && selectedPercentage === rate) {
@@ -81,6 +82,9 @@ export default function SkillEditor({
         ...prevSkillInfo,
         name: newName,
       }));
+      setSkillName(newName);
+    } else {
+      setSkillName(skillInfo.name)
     }
   };
 
