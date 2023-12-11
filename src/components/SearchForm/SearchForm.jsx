@@ -30,16 +30,19 @@ export default function SearchForm({
 
   const handleResultClick = (index) => {
     const clickedItem = searchResults[index];
-    const isAlreadyAdded = userData.some(
-      (item) => item.name === clickedItem.name
-    );
-
+    const isAlreadyAdded = userData.some((item) => item.name === clickedItem.name);
+  
     if (!isAlreadyAdded) {
-      setSelectedItem(clickedItem);
+      if (selectedItem && selectedItem.name === clickedItem.name) {
+        setSelectedItem(null);
+      } else {
+        setSelectedItem(clickedItem);
+      }
     } else {
       handleInfoTooltip(false, "Такой навык уже добавлен");
     }
   };
+  
 
   const handleButtonClick = () => {
     let skillToAdd = null;
