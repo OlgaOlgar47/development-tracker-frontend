@@ -3,7 +3,6 @@ import "./Recommendations.css";
 import CourseCard from "../CourseCard/CourseCard";
 
 export default function Recommendations({ coursesData, isSkillsEditor }) {
-  console.log("coursesData: ", coursesData);
 
   if (Array.isArray(coursesData) && coursesData.length === 0) {
     return (

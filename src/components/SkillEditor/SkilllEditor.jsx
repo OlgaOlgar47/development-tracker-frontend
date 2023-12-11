@@ -154,8 +154,8 @@ export default function SkillEditor({
       <div className="skill-editor__grid-container">
         <div className="skill-editor__grid-item">
           <p className="skill-editor__tag">Навык</p>
-                 {/* Условный рендеринг для Subtitle на основе информации о редактируемости */}
-                 {skillInfo.editable ? (
+          {/* Условный рендеринг для Subtitle на основе информации о редактируемости */}
+          {skillInfo.editable ? (
             <input
               className="skills-editor__subtitle"
               type="text"
